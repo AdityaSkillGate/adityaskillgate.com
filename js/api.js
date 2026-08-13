@@ -28,50 +28,263 @@ const DEMO_DATA = {
     { id: 's3', title: 'Non-IT Training', category: 'Training', icon: 'fa-users-cog', description: 'Professional training in Accounting, HR, Banking, Office Admin, and Soft Skills.', status: 'Active' },
     { id: 's4', title: 'Abroad Study', category: 'Consulting', icon: 'fa-graduation-cap', description: 'End-to-end admission guidance, scholarship assistance, and visa support for international universities.', status: 'Active' },
     { id: 's5', title: 'Abroad Jobs', category: 'Consulting', icon: 'fa-plane-departure', description: 'Global career opportunities with visa sponsorship in top companies across the world.', status: 'Active' }
-  ],
-  partners: [
-    { id: 'pt1', name: 'Infosys', type: 'Hiring Company', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg', website: '#', status: 'Active' },
-    { id: 'pt2', name: 'TCS', type: 'Hiring Company', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg', website: '#', status: 'Active' },
-    { id: 'pt3', name: 'University of London', type: 'University', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/University_of_London_logo.svg/200px-University_of_London_logo.svg.png', website: '#', status: 'Active' },
-    { id: 'pt4', name: 'Toronto College', type: 'Study Abroad College', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/53/University_of_Toronto_crest.svg/200px-University_of_Toronto_crest.svg.png', website: '#', status: 'Active' }
-  ],
-  courses: [
-    { id: 'c1', title: 'Full Stack Web Development', type: 'IT', category: 'Full Stack', duration: '6 Months', fee: '₹25,000', originalFee: '₹35,000', trainer: 'Mr. Aditya Kumar', imageUrl: '', status: 'Active', badge: 'Popular', description: 'Master HTML, CSS, JavaScript, React, Node.js, and MongoDB.' },
-    { id: 'c2', title: 'Python & AI/ML', type: 'IT', category: 'AI', duration: '4 Months', fee: '₹22,000', originalFee: '₹30,000', trainer: 'Ms. Priya Sharma', imageUrl: '', status: 'Active', badge: 'Trending', description: 'Learn Python, machine learning, and AI model deployment.' },
-    { id: 'c3', title: 'Advanced Java SpringBoot', type: 'IT', category: 'Java', duration: '5 Months', fee: '₹20,000', originalFee: '₹28,000', trainer: 'Mr. Ravi S.', imageUrl: '', status: 'Active', badge: 'New', description: 'Build enterprise applications using Java and SpringBoot.' },
-    { id: 'c4', title: 'Tally & Accounting', type: 'Non-IT', category: 'Accounting', duration: '3 Months', fee: '₹12,000', originalFee: '₹18,000', trainer: 'Ms. Kavitha R.', imageUrl: '', status: 'Active', badge: 'Hot', description: 'Professional accounting, GST, and Tally Prime training.' },
-    { id: 'c5', title: 'Spoken English Mastery', type: 'Non-IT', category: 'Spoken English', duration: '2 Months', fee: '₹8,000', originalFee: '₹12,000', trainer: 'Mr. Suresh K.', imageUrl: '', status: 'Active', badge: 'In Demand', description: 'Improve your communication and fluency with daily practice.' },
-    { id: 'c6', title: 'HR Management', type: 'Non-IT', category: 'HR', duration: '3 Months', fee: '₹15,000', originalFee: '₹22,000', trainer: 'Ms. Anita J.', imageUrl: '', status: 'Active', badge: 'Creative', description: 'Payroll, recruitment, employee relations, and compliance.' }
-  ],
-  jobs: [
-    { id: 'j1', title: 'React Developer', type: 'Domestic', category: 'IT Jobs', department: 'Engineering', location: 'Remote', country: 'India', experience: '1-3 Years', salary: '₹4-8 LPA', benefits: 'Health Insurance, Flexible Hours', skills: ['React', 'JavaScript', 'Redux'], status: 'Open' },
-    { id: 'j2', title: 'Python Backend Developer', type: 'Abroad', category: 'IT Jobs', department: 'Engineering', location: 'On-site', country: 'Germany', experience: '3-5 Years', salary: '€50k-€70k', benefits: 'Visa Sponsorship, Relocation', skills: ['Python', 'Django', 'Docker'], status: 'Open' },
-    { id: 'j3', title: 'Accountant', type: 'Domestic', category: 'Non-IT Jobs', department: 'Finance', location: 'Chennai', country: 'India', experience: '0-2 Years', salary: '₹2-4 LPA', benefits: 'Paid Time Off', skills: ['Tally', 'GST', 'Excel'], status: 'Open' },
-    { id: 'j4', title: 'HR Manager', type: 'Abroad', category: 'Non-IT Jobs', department: 'HR', location: 'Hybrid', country: 'UAE', experience: '5+ Years', salary: 'AED 12k-15k', benefits: 'Housing Allowance, Flight Tickets', skills: ['Recruitment', 'Payroll', 'Compliance'], status: 'Open' }
-  ],
-  employees: [
-    { id: 'e1', name: 'Aditya Kumar', role: 'Founder & CEO', department: 'Management', bio: 'Passionate about bridging the skill gap in IT industry with quality education and placement support.', photoUrl: '', linkedin: '#', status: 'Active' },
-    { id: 'e2', name: 'Priya Sharma', role: 'Lead Trainer', department: 'Training', bio: 'Python & AI expert with 5+ years of industry and teaching experience.', photoUrl: '', linkedin: '#', status: 'Active' },
-    { id: 'e3', name: 'Ravi Suresh', role: 'Sr. Web Developer', department: 'Training', bio: 'Full-stack developer specializing in React and Node.js ecosystems.', photoUrl: '', linkedin: '#', status: 'Active' },
-    { id: 'e4', name: 'Kavitha R.', role: 'HR & Placements', department: 'HR', bio: 'Connecting talented graduates with top companies for 4+ years.', photoUrl: '', linkedin: '#', status: 'Active' }
-  ],
+     ],
+     partners: [
+       { id: 'pt1', name: 'Infosys', type: 'Hiring Company', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg', website: '#', status: 'Active' },
+       { id: 'pt2', name: 'TCS', type: 'Hiring Company', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg', website: '#', status: 'Active' },
+       { id: 'pt3', name: 'University of London', type: 'University', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/University_of_London_logo.svg/200px-University_of_London_logo.svg.png', website: '#', status: 'Active' },
+       { id: 'pt4', name: 'Toronto College', type: 'Study Abroad College', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/53/University_of_Toronto_crest.svg/200px-University_of_Toronto_crest.svg.png', website: '#', status: 'Active' }
+     ],
+     courses: [
+       { id: 'c1', title: 'Full Stack Web Development', type: 'IT', category: 'Full Stack', duration: '6 Months', fee: '₹48,000', originalFee: '₹72,000', trainer: 'Mr. Marimuthu', imageUrl: '', status: 'Active', badge: 'Popular', description: 'Master HTML, CSS, JavaScript, Angular/React, Python/Java/Dot Ner, and Sql Server.' },
+       { id: 'c2', title: 'Python & AI/ML', type: 'IT', category: 'AI', duration: '3 Months', fee: '₹24,000', originalFee: '₹30,000', trainer: 'Mr. Marimuthu', imageUrl: '', status: 'Active', badge: 'Trending', description: 'Learn Python, machine learning, and AI model deployment.' },
+       { id: 'c3', title: 'Advanced Java SpringBoot', type: 'IT', category: 'Java', duration: '3 Months', fee: '₹24,000', originalFee: '₹30,000', trainer: 'Mr. Marimuthu.', imageUrl: '', status: 'Active', badge: 'New', description: 'Build enterprise applications using Java and SpringBoot.' },
+       {
+        id: 'c4',
+        title: 'Advanced .NET with C#',
+        type: 'IT',
+        category: '.NET',
+        duration: '3 Months',
+        fee: '₹24,000',
+        originalFee: '₹30,000',
+        trainer: 'Mr. Marimuthu.',
+        imageUrl: '',
+        status: 'Active',
+        badge: 'New',
+        description: 'Build enterprise web applications using C#, .NET, ASP.NET Core, Entity Framework Core and SQL Server.'
+      },
+       {
+        id: 'c5',
+        title: 'Advanced Angular Development',
+        type: 'IT',
+        category: 'Angular',
+        duration: '3 Months',
+        fee: '₹24,000',
+        originalFee: '₹30,000',
+        trainer: 'Mr. Marimuthu.',
+        imageUrl: '',
+        status: 'Active',
+        badge: 'In Demand',
+        description: 'Build modern, responsive web applications using Angular, TypeScript, HTML, CSS, Angular Material and REST APIs.'
+      },
+      
+      {
+        id: 'c6',
+        title: 'Advanced React Development',
+        type: 'IT',
+        category: 'React',
+        duration: '3 Months',
+        fee: '₹24,000',
+        originalFee: '₹30,000',
+        trainer: 'Mr. Marimuthu.',
+        imageUrl: '',
+        status: 'Active',
+        badge: 'New',
+        description: 'Develop modern and scalable web applications using React, JavaScript, JSX, React Hooks, APIs and modern UI technologies.'
+      }
+     ],
+     jobs: [
+        {
+          id: 'j1',
+          title: 'React Developer',
+          type: 'Domestic',
+          category: 'IT Jobs',
+          department: 'Engineering',
+          location: 'Remote',
+          country: 'India',
+          experience: '1-3 Years',
+          salary: '₹4-8 LPA',
+          benefits: 'Health Insurance, Flexible Hours',
+          skills: ['React', 'JavaScript', 'Redux'],
+          status: 'Open'
+        },
+        {
+          id: 'j2',
+          title: 'Python Developer',
+          type: 'Domestic',
+          category: 'IT Jobs',
+          department: 'Engineering',
+          location: 'Chennai',
+          country: 'India',
+          experience: '1-3 Years',
+          salary: '₹4-8 LPA',
+          benefits: 'Health Insurance, Flexible Hours',
+          skills: ['Python', 'Django', 'REST API'],
+          status: 'Open'
+        },
+        {
+          id: 'j3',
+          title: 'Angular Developer',
+          type: 'Domestic',
+          category: 'IT Jobs',
+          department: 'Engineering',
+          location: 'Bangalore',
+          country: 'India',
+          experience: '1-3 Years',
+          salary: '₹4-9 LPA',
+          benefits: 'Health Insurance, Flexible Hours',
+          skills: ['Angular', 'TypeScript', 'HTML', 'CSS'],
+          status: 'Open'
+        },
+        {
+          id: 'j4',
+          title: 'SQL Developer',
+          type: 'Domestic',
+          category: 'IT Jobs',
+          department: 'Database',
+          location: 'Chennai',
+          country: 'India',
+          experience: '1-3 Years',
+          salary: '₹4-8 LPA',
+          benefits: 'Health Insurance, Paid Time Off',
+          skills: ['SQL Server', 'T-SQL', 'Stored Procedures'],
+          status: 'Open'
+        }
+      ],
+     employees: [
+     {
+       id: 'e1',
+       name: 'Padma Marimuthu',
+       role: 'Founder & CEO',
+       department: 'Management',
+       bio: 'Passionate about bridging the skill gap in the IT industry through quality education and placement support.',
+       photoUrl: '',
+       linkedin: '#',
+       status: 'Active'
+     },
+     {
+       id: 'e2',
+       name: 'Marimuthu',
+       role: 'Lead Trainer',
+       department: 'Training',
+       bio: 'Experienced IT trainer specializing in full-stack development and industry-oriented technical training.',
+       photoUrl: '',
+       linkedin: '#',
+       status: 'Active'
+     },
+     {
+       id: 'e3',
+       name: 'Mugesh',
+       role: 'Sr. Web Developer',
+       department: 'Training',
+       bio: 'Full-stack developer specializing in modern web technologies and application development.',
+       photoUrl: '',
+       linkedin: '#',
+       status: 'Active'
+     },
+     {
+       id: 'e4',
+       name: 'Vanitha',
+       role: 'HR & Placements',
+       department: 'HR',
+       bio: 'Focused on connecting talented students and graduates with suitable career opportunities.',
+       photoUrl: '',
+       linkedin: '#',
+       status: 'Active'
+     }
+   ],
   projects: [
-    { id: 'p1', title: 'E-Commerce Platform', clientName: 'RetailMax', category: 'Web Development', description: 'Full-featured e-commerce solution with payment gateway, inventory management, and admin dashboard.', techStack: ['React', 'Node.js', 'MongoDB', 'Stripe'], imageUrl: '', liveUrl: '#', status: 'Completed' },
-    { id: 'p2', title: 'Hospital Management System', clientName: 'MedCare Hospitals', category: 'Enterprise Software', description: 'Patient records, appointment scheduling, billing, and staff management system.', techStack: ['Python', 'Django', 'PostgreSQL', 'React'], imageUrl: '', liveUrl: '#', status: 'Completed' },
-    { id: 'p3', title: 'Food Delivery App', clientName: 'QuickBite', category: 'Mobile App', description: 'Cross-platform food delivery application with real-time tracking and payment integration.', techStack: ['Flutter', 'Firebase', 'Google Maps', 'Razorpay'], imageUrl: '', liveUrl: '#', status: 'Completed' },
-    { id: 'p4', title: 'AI-Powered Chatbot', clientName: 'TechSupport Co.', category: 'AI/ML', description: 'Customer support chatbot with NLP, trained on company-specific knowledge base.', techStack: ['Python', 'BERT', 'FastAPI', 'React'], imageUrl: '', liveUrl: '#', status: 'Completed' },
-    { id: 'p5', title: 'Learning Management System', clientName: 'EduPro', category: 'EdTech', description: 'Complete LMS with video courses, quizzes, certificates, and student analytics.', techStack: ['Next.js', 'Node.js', 'MySQL', 'AWS S3'], imageUrl: '', liveUrl: '#', status: 'Completed' },
-    { id: 'p6', title: 'Real Estate Portal', clientName: 'PropFinder', category: 'Web Development', description: 'Property listing and search portal with virtual tours, maps integration, and agent management.', techStack: ['React', 'Express', 'MongoDB', 'Mapbox'], imageUrl: '', liveUrl: '#', status: 'Completed' }
-  ],
+     {
+       id: 'p1',
+       title: 'Kurunji Fun World Management System',
+       clientName: 'Kurunji Fun World',
+       category: 'Web Development',
+       description: 'Modern web-based management system for managing activities, customer information, bookings, and day-to-day operations.',
+       techStack: ['Angular', '.NET Core', 'C#', 'SQL Server'],
+       imageUrl: '',
+       liveUrl: '#',
+       status: 'Completed'
+     },
+   
+     {
+       id: 'p2',
+       title: 'Smart Mind IAS Academy Website',
+       clientName: 'Smart Mind IAS Academy',
+       category: 'Education',
+       description: 'Professional educational website for course information, student enquiries, academy details, and online presence.',
+       techStack: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
+       imageUrl: '',
+       liveUrl: '#',
+       status: 'Completed'
+     },
+   
+     {
+       id: 'p3',
+       title: 'Vetrivel Electricals Business Management System',
+       clientName: 'Vetrivel Electricals',
+       category: 'Business Management',
+       description: 'Business management solution for handling products, customers, sales, billing, and daily business operations.',
+       techStack: ['Angular', '.NET Core', 'C#', 'SQL Server'],
+       imageUrl: '',
+       liveUrl: '#',
+       status: 'Completed'
+     },
+   
+     {
+       id: 'p4',
+       title: '18 Village People Trust Website',
+       clientName: '18 Village People Trust',
+       category: 'Web Development',
+       description: 'Professional trust website showcasing the organization, activities, community initiatives, events, and contact information.',
+       techStack: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
+       imageUrl: '',
+       liveUrl: '#',
+       status: 'Completed'
+     },
+   
+     {
+       id: 'p5',
+       title: 'TN Painter Community Portal',
+       clientName: 'TN Painter Community',
+       category: 'Community Platform',
+       description: 'Community platform designed to connect painters, showcase services, manage member information, and support business enquiries.',
+       techStack: ['Angular', 'Node.js', 'MongoDB'],
+       imageUrl: '',
+       liveUrl: '#',
+       status: 'Completed'
+     },
+   
+     {
+       id: 'p6',
+       title: 'Nanyang Asia College Website',
+       clientName: 'Nanyang Asia College, Singapore',
+       category: 'Education',
+       description: 'Professional college website presenting academic programs, courses, admissions, student information, and institutional details.',
+       techStack: ['React', 'Node.js', 'MySQL', 'AWS'],
+       imageUrl: '',
+       liveUrl: '#',
+       status: 'Completed'
+     },
+   
+     {
+       id: 'p7',
+       title: 'Client Project',
+       clientName: '7th Client',
+       category: 'Web Development',
+       description: 'Custom software solution developed according to the client requirements and business needs.',
+       techStack: ['Angular', '.NET Core', 'C#', 'SQL Server'],
+       imageUrl: '',
+       liveUrl: '#',
+       status: 'Completed'
+     }
+   
+   ],
   placements: [
     { id: 'pl1', studentName: 'Arjun M.', courseName: 'Full Stack Web Development', companyName: 'Infosys', designation: 'Junior Developer', package: '4.5 LPA', photoUrl: '', testimonial: 'Aditya Skill Gate transformed my career! The hands-on training and placement support were incredible.', placementDate: '2024-05-15', galleryUrls: [], year: '2024', status: 'Published' },
     { id: 'pl2', studentName: 'Sneha T.', courseName: 'Python & AI/ML', companyName: 'TCS', designation: 'ML Engineer', package: '5.2 LPA', photoUrl: '', testimonial: 'The AI course curriculum was industry-relevant and the mentors were always supportive.', placementDate: '2024-04-20', galleryUrls: [], year: '2024', status: 'Published' },
     { id: 'pl3', studentName: 'Kiran P.', courseName: 'Java SpringBoot', companyName: 'Wipro', designation: 'Java Developer', package: '3.8 LPA', photoUrl: '', testimonial: 'From zero coding knowledge to landing a job at Wipro — thank you Aditya Skill Gate!', placementDate: '2023-11-10', galleryUrls: [], year: '2023', status: 'Published' }
   ],
   abroadUniversities: [
-    { id: 'au1', name: 'Toronto College of Technology', country: 'Canada', programs: ['Computer Science', 'Business Admin'], scholarship: 'Up to $5,000', logoUrl: '', status: 'Active' },
-    { id: 'au2', name: 'University of London', country: 'UK', programs: ['Data Science', 'Marketing'], scholarship: 'Up to £3,000', logoUrl: '', status: 'Active' }
-  ],
+  {
+    id: 'au1',
+    name: 'Nanyang Asia College',
+    country: 'Singapore',
+    programs: ['Applied AI and Data Science', 'Project Management'],
+    scholarship: 'Available',
+    logoUrl: '',
+    status: 'Active'
+  }
+],
   testimonials: [
     { id: 't1', name: 'Arjun M.', role: 'Student', company: 'Placed at Infosys', message: 'The best IT training institute I have attended. Practical projects and personal mentorship made all the difference. Highly recommend!', rating: 5, status: 'Active' },
     { id: 't2', name: 'Prabhakaran V.', role: 'Client', company: 'RetailMax', message: 'Aditya Skill Gate developed our e-commerce platform on time and within budget. Professional team with excellent communication.', rating: 5, status: 'Active' },
