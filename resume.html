@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Resume | Apply for Jobs | Aditya Skill Gate IT Solution</title>
+  <meta name="description" content="Upload your resume for placement support. Aditya Skill Gate helps freshers and experienced IT professionals land jobs at top companies.">
+  <link rel="icon" href="assets/logos/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .resume-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:start}
+    .benefit-steps{display:grid;grid-template-columns:1fr;gap:20px;margin-bottom:40px}
+    .benefit-step{display:flex;gap:16px;align-items:flex-start;padding:20px;background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-lg)}
+    .benefit-step-icon{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+    .upload-zone{border:2px dashed var(--gray-300);border-radius:var(--border-radius-lg);padding:40px;text-align:center;cursor:pointer;transition:var(--transition);background:var(--light-gray)}
+    .upload-zone:hover,.upload-zone.dragover{border-color:var(--tech-blue);background:rgba(0,150,214,0.04)}
+    .upload-icon{font-size:3rem;margin-bottom:12px;display:block}
+    .upload-text{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:6px}
+    .upload-hint{font-size:0.8rem;color:var(--gray-400)}
+    .next-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .next-step-card{text-align:center;padding:28px 20px;background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-lg)}
+    .next-step-num{width:48px;height:48px;border-radius:50%;background:var(--gradient-primary);color:white;font-size:1.2rem;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+    @media(max-width:991px){.resume-grid{grid-template-columns:1fr}.next-steps{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div id="page-loader"><img src="assets/logos/logo-icon.png" class="loader-logo" alt=""><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<nav class="navbar" id="navbar"><div class="container"><div class="navbar-inner">
+  <a href="index.html" class="navbar-logo"><img src="assets/logos/logo-icon.png" alt="ASG">
+    <div class="navbar-logo-text">ADITYA SKILL GATE<br><span>IT SOLUTION</span></div></a>
+        <ul class="navbar-nav">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="courses.html" class="nav-link">Courses</a></li>
+        <li><a href="jobs.html" class="nav-link">Careers</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="placements.html" class="nav-link">Placements</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+  <div class="navbar-actions"><button class="theme-toggle"><i class="fas fa-moon"></i></button><a href="resume.html" class="btn-nav-cta active">Upload Resume</a><button class="hamburger" id="hamburger"><span></span><span></span><span></span></button></div>
+</div></div></nav>
+<div class="mobile-menu" id="mobile-menu" style="display: none;">  <nav class="mobile-nav">
+    <a href="index.html" class="mobile-nav-link">🏠 Home</a>
+    <a href="about.html" class="mobile-nav-link">ℹ️ About Us</a>
+    <a href="services.html" class="mobile-nav-link">⚙️ Services</a>
+    <a href="courses.html" class="mobile-nav-link">🎓 Courses</a>
+    <a href="jobs.html" class="mobile-nav-link">💼 Careers</a>
+    <a href="projects.html" class="mobile-nav-link">🎨 Projects</a>
+    <a href="placements.html" class="mobile-nav-link">🎯 Placements</a>
+    <a href="contact.html" class="mobile-nav-link">📞 Contact Us</a>
+  </nav></div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="section-badge"><i class="fas fa-upload"></i> Get Placed</div>
+    <h1>Upload Your Resume</h1>
+    <p>Submit your profile and get placement support from our expert HR team. 100+ students placed in top companies.</p>
+  </div>
+</section>
+
+<section class="section section-light">
+  <div class="container">
+    <div class="resume-grid">
+      <div>
+        <div class="section-badge"><i class="fas fa-check-circle"></i> Benefits</div>
+        <h2 class="section-title" style="margin-bottom:24px">Why Apply <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">With Us?</span></h2>
+        <div class="benefit-steps">
+          <div class="benefit-step" data-animate><div class="benefit-step-icon" style="background:rgba(0,150,214,0.1)">🔍</div><div><div style="font-weight:700;color:var(--navy);margin-bottom:4px">Expert Resume Review</div><div style="font-size:0.85rem;color:var(--gray-500)">Our HR team personally reviews your resume and suggests improvements to maximize your chances.</div></div></div>
+          <div class="benefit-step" data-animate data-delay="100"><div class="benefit-step-icon" style="background:rgba(108,203,47,0.1)">🤝</div><div><div style="font-weight:700;color:var(--navy);margin-bottom:4px">Direct Placement Support</div><div style="font-size:0.85rem;color:var(--gray-500)">We connect you directly with our network of 50+ hiring companies for job interviews.</div></div></div>
+          <div class="benefit-step" data-animate data-delay="200"><div class="benefit-step-icon" style="background:rgba(245,158,11,0.1)">⚡</div><div><div style="font-weight:700;color:var(--navy);margin-bottom:4px">Quick Response</div><div style="font-size:0.85rem;color:var(--gray-500)">Our team reviews all applications within 24-48 hours and will contact you promptly.</div></div></div>
+        </div>
+
+        <!-- Company Logos -->
+        <div style="padding:24px;background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-lg)">
+          <div style="font-size:0.8rem;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px">We've placed students at</div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <span style="padding:6px 14px;background:var(--light-gray);border-radius:100px;font-size:0.8rem;font-weight:600;color:var(--navy)">TCS</span>
+            <span style="padding:6px 14px;background:var(--light-gray);border-radius:100px;font-size:0.8rem;font-weight:600;color:var(--navy)">Infosys</span>
+            <span style="padding:6px 14px;background:var(--light-gray);border-radius:100px;font-size:0.8rem;font-weight:600;color:var(--navy)">Wipro</span>
+            <span style="padding:6px 14px;background:var(--light-gray);border-radius:100px;font-size:0.8rem;font-weight:600;color:var(--navy)">Zoho</span>
+            <span style="padding:6px 14px;background:var(--light-gray);border-radius:100px;font-size:0.8rem;font-weight:600;color:var(--navy)">HCL</span>
+            <span style="padding:6px 14px;background:var(--light-gray);border-radius:100px;font-size:0.8rem;font-weight:600;color:var(--navy)">Cognizant</span>
+            <span style="padding:6px 14px;background:var(--light-gray);border-radius:100px;font-size:0.8rem;font-weight:600;color:var(--navy)">Accenture</span>
+            <span style="padding:6px 14px;background:var(--light-gray);border-radius:100px;font-size:0.8rem;font-weight:600;color:var(--navy)">Capgemini</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resume Form -->
+      <div style="background:white;border:1px solid var(--gray-200);border-radius:24px;padding:40px;box-shadow:var(--shadow-sm)">
+        <h3 style="color:var(--navy);margin-bottom:6px">Submit Your Application</h3>
+        <p style="color:var(--gray-400);font-size:0.875rem;margin-bottom:28px">Fill in your details and upload your resume. Our team will contact you within 24-48 hours.</p>
+        <form id="resume-form">
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Full Name *</label><input type="text" class="form-control" name="name" placeholder="Your full name" required><span class="form-error"></span></div>
+            <div class="form-group"><label class="form-label">Email *</label><input type="email" class="form-control" name="email" placeholder="your@email.com" required><span class="form-error"></span></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Phone *</label><input type="tel" class="form-control" name="phone" placeholder="10-digit phone" required><span class="form-error"></span></div>
+            <div class="form-group"><label class="form-label">Current Location</label><input type="text" class="form-control" name="location" placeholder="City, State"></div>
+          </div>
+          <div class="form-group"><label class="form-label">Key Skills / Technologies *</label><textarea class="form-control" name="skills" rows="2" placeholder="e.g., Python, JavaScript, React, SQL, AWS..." required></textarea><span class="form-error"></span></div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Experience Level</label>
+              <select class="form-control" name="experience">
+                <option value="Fresher">Fresher (0 years)</option>
+                <option value="0-1 Year">0-1 Year</option>
+                <option value="1-3 Years">1-3 Years</option>
+                <option value="3-5 Years">3-5 Years</option>
+                <option value="5+ Years">5+ Years</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Preferred Role</label>
+              <select class="form-control" name="preferredRole">
+                <option value="">Select a role...</option>
+                <option>Full Stack Developer</option>
+                <option>Python / Backend Developer</option>
+                <option>Android Developer</option>
+                <option>UI/UX Designer</option>
+                <option>Digital Marketer</option>
+                <option>Cloud / DevOps Engineer</option>
+                <option>Data Analyst</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group"><label class="form-label">Cover Note</label><textarea class="form-control" name="coverNote" rows="2" placeholder="Tell us about yourself and your career goals..."></textarea></div>
+
+          <!-- Resume Upload Zone -->
+          <div class="form-group">
+            <label class="form-label">Upload Resume * <span style="font-size:0.75rem;font-weight:400;color:var(--gray-400)">(PDF, DOC, DOCX - Max 5MB)</span></label>
+            <div class="upload-zone" id="resume-upload-zone">
+              <span class="upload-icon">📎</span>
+              <div class="upload-text">Drop your resume here</div>
+              <div class="upload-hint">or click to browse your files</div>
+              <input type="file" id="resume-file" accept=".pdf,.doc,.docx" style="display:none">
+            </div>
+            <div id="file-preview" style="display:none;margin-top:12px;padding:14px;background:rgba(0,150,214,0.06);border:1px solid rgba(0,150,214,0.2);border-radius:var(--border-radius);display:flex;align-items:center;gap:12px">
+              <span id="file-icon" style="font-size:1.8rem">📄</span>
+              <div style="flex:1"><div id="file-name" style="font-weight:600;font-size:0.9rem;color:var(--navy)"></div><div id="file-size" style="font-size:0.775rem;color:var(--gray-400)"></div></div>
+              <button type="button" onclick="clearFile()" style="background:rgba(239,68,68,0.1);border:none;color:#dc2626;border-radius:50%;width:28px;height:28px;cursor:pointer">✕</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="resume-submit" style="width:100%;justify-content:center"><i class="fas fa-paper-plane"></i> Submit Application</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Next Steps -->
+<section class="section section-gray">
+  <div class="container">
+    <div class="section-header" data-animate><div class="section-badge"><i class="fas fa-list-ol"></i> What Happens Next</div><h2 class="section-title">After You <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Submit</span></h2></div>
+    <div class="next-steps">
+      <div class="next-step-card" data-animate data-delay="100"><div class="next-step-num">1</div><div style="font-size:1.5rem;margin-bottom:10px">🔍</div><h3 style="font-size:1rem;color:var(--navy);margin-bottom:8px">We Review</h3><p style="font-size:0.85rem;color:var(--gray-500)">Our HR team reviews your profile within 24-48 hours and identifies matching opportunities.</p></div>
+      <div class="next-step-card" data-animate data-delay="200"><div class="next-step-num">2</div><div style="font-size:1.5rem;margin-bottom:10px">📞</div><h3 style="font-size:1rem;color:var(--navy);margin-bottom:8px">We Contact You</h3><p style="font-size:0.85rem;color:var(--gray-500)">If your profile matches, our placement officer calls you to discuss opportunities and next steps.</p></div>
+      <div class="next-step-card" data-animate data-delay="300"><div class="next-step-num">3</div><div style="font-size:1.5rem;margin-bottom:10px">🏆</div><h3 style="font-size:1rem;color:var(--navy);margin-bottom:8px">You Get Placed</h3><p style="font-size:0.85rem;color:var(--gray-500)">We schedule your interviews, prepare you thoroughly, and support you until you land the job.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Success Modal -->
+<div class="modal-overlay" id="success-modal">
+  <div class="modal" style="text-align:center;max-width:420px">
+    <div class="modal-body" style="padding:50px 40px">
+      <div style="font-size:4rem;margin-bottom:20px">🎉</div>
+      <h2 style="color:var(--navy);margin-bottom:12px">Application Submitted!</h2>
+      <p style="color:var(--gray-500);margin-bottom:32px;line-height:1.7">Thank you for applying! Our HR team will review your profile and contact you within <strong>24-48 hours</strong>.</p>
+      <a href="index.html" class="btn btn-primary" style="margin-right:12px">Back to Home</a>
+      <button class="btn btn-outline" onclick="closeModal('success-modal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<footer class="footer"><div class="container"><div class="footer-grid">
+  <div class="footer-brand"><div class="footer-logo"><img src="assets/logos/logo-icon.png" alt=""><div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2">ADITYA<br><span style="color:#6CCB2F">SKILL GATE IT</span></div></div><p>Empowering careers through IT training and placement support.</p></div>
+  <div class="footer-col"><h4>Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="courses.html">Courses</a><a href="jobs.html">Careers</a><a href="contact.html">Contact</a></div></div>
+  <div class="footer-col"><h4>Resources</h4><div class="footer-links"><a href="placements.html">Placements</a><a href="faq.html">FAQ</a></div></div>
+  <div class="footer-col"><h4>Contact</h4><div class="footer-links"><a href="tel:+916382604808">📞 +91 63826 04808</a><a href="mailto:Adityaskillgateitsolution@gmail.com">📧 Email</a><a href="https://wa.me/916382604808" target="_blank">💬 WhatsApp</a></div></div>
+</div><div class="footer-bottom"><p>© 2024 Aditya Skill Gate IT Solution.</p></div></div></footer>
+<div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808?text=Hi!%20I%20submitted%20my%20resume" target="_blank" class="whatsapp-option">💬 Chat Now</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
+<div id="back-to-top"><i class="fas fa-arrow-up"></i></div><div id="toast-container"></div>
+
+<script src="js/api.js?v=4"></script><script src="js/main.js"></script>
+<script src="js/uploader.js"></script>
+<script>
+// File upload handling
+const zone=document.getElementById('resume-upload-zone');
+const fileInput=document.getElementById('resume-file');
+const preview=document.getElementById('file-preview');
+let selectedFile=null;
+
+zone?.addEventListener('click',()=>fileInput.click());
+zone?.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('dragover');});
+zone?.addEventListener('dragleave',()=>zone.classList.remove('dragover'));
+zone?.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('dragover');if(e.dataTransfer.files[0])handleFile(e.dataTransfer.files[0]);});
+fileInput?.addEventListener('change',()=>{if(fileInput.files[0])handleFile(fileInput.files[0]);});
+
+function handleFile(file){
+  const ext='.'+file.name.split('.').pop().toLowerCase();
+  if(!['.pdf','.doc','.docx'].includes(ext)){showToast('Invalid file. Use PDF, DOC, or DOCX.','warning');return;}
+  if(file.size>5*1024*1024){showToast('File too large. Max 5MB.','warning');return;}
+  selectedFile=file;
+  document.getElementById('file-name').textContent=file.name;
+  document.getElementById('file-size').textContent=(file.size/1024).toFixed(1)+' KB';
+  document.getElementById('file-icon').textContent=ext==='.pdf'?'📄':'📝';
+  preview.style.display='flex';
+  zone.querySelector('.upload-icon').style.opacity='0.3';
+  zone.querySelector('.upload-text').textContent='File selected ✓';
+}
+
+window.clearFile=function(){selectedFile=null;fileInput.value='';preview.style.display='none';zone.querySelector('.upload-icon').style.opacity='1';zone.querySelector('.upload-text').textContent='Drop your resume here';};
+
+document.getElementById('resume-form')?.addEventListener('submit',async(e)=>{
+  e.preventDefault();if(!validateForm(e.target))return;
+  if(!selectedFile){showToast('Please upload your resume (PDF/DOC/DOCX)','warning');return;}
+  const btn=document.getElementById('resume-submit');const orig=btn.innerHTML;
+  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Submitting...';btn.disabled=true;
+  const data=Object.fromEntries(new FormData(e.target));
+  // Convert file to base64
+  const reader=new FileReader();
+  reader.readAsDataURL(selectedFile);
+  reader.onload=async()=>{
+    data.fileData={filename:selectedFile.name,mimeType:selectedFile.type,base64:reader.result.split(',')[1],size:selectedFile.size};
+    const res=await API.submitResume(data);
+    btn.innerHTML=orig;btn.disabled=false;
+    if(res?.success!==false){e.target.reset();clearFile();openModal('success-modal');}
+    else showToast(res?.message||'Submission error. Try again.','error');
+  };
+});
+</script>
+</body></html>

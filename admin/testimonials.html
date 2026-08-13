@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Testimonials | Admin Panel</title><meta name="robots" content="noindex">
+  <link rel="icon" href="../assets/logos/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+<div class="admin-sidebar" id="admin-sidebar">
+  <div class="sidebar-brand"><img src="../assets/logos/logo-icon.png" alt="" onerror="this.style.display='none'"><div><div class="sidebar-brand-name">ASG Admin</div><div class="sidebar-brand-sub">Control Panel</div></div><button class="sidebar-collapse-btn" id="sidebar-toggle"><i class="fas fa-bars"></i></button></div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section-title">Main</div>
+    <a href="dashboard.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-chart-pie"></i></div><span>Dashboard</span></a>
+    <a href="reports.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-file-pdf"></i></div><span>Report Center</span></a>
+    <div class="sidebar-section-title">Content</div>
+    <a href="services.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-cog"></i></div><span>Services</span></a>
+    <a href="courses.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-graduation-cap"></i></div><span>Courses</span></a>
+    <a href="abroad.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-plane-departure"></i></div><span>Study Abroad</span></a>
+    <a href="partners.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-handshake"></i></div><span>Partners</span></a>
+    <a href="jobs.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-briefcase"></i></div><span>Job Openings</span></a>
+    <a href="employees.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-users"></i></div><span>Team / Employees</span></a>
+    <a href="projects.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-laptop-code"></i></div><span>Projects</span></a>
+    <a href="placements.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-trophy"></i></div><span>Placements</span></a>
+    <a href="testimonials.html" class="sidebar-link" class="sidebar-link active"><div class="sidebar-icon"><i class="fas fa-star"></i></div><span>Testimonials</span></a>
+    <a href="blog.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-blog"></i></div><span>Blog Posts</span></a>
+    <div class="sidebar-section-title">Submissions</div>
+    <a href="crm.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-users-cog"></i></div><span>CRM / Leads</span></a>
+    <a href="resumes.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-file-pdf"></i></div><span>Resumes</span></a>
+    <a href="contacts.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-envelope"></i></div><span>Contact Forms</span></a>
+    <a href="chatbot.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-robot"></i></div><span>Chatbot KB</span></a>
+    <div class="sidebar-section-title">Settings</div>
+    <a href="settings.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-cog"></i></div><span>Settings</span></a>
+  </nav>
+</div>
+<div class="admin-main" id="admin-main">
+  <div class="admin-topbar">
+    <div class="topbar-left"><button class="topbar-toggle" id="topbar-toggle"><i class="fas fa-bars"></i></button></div>
+    <div class="topbar-right"><button class="theme-btn" id="admin-theme-btn"><i class="fas fa-moon"></i></button><a href="../index.html" target="_blank" class="btn-admin-sm"><i class="fas fa-external-link-alt"></i> View Site</a><div class="admin-user-menu"><div class="admin-avatar">A</div><div class="admin-user-info"><div class="admin-user-name">Admin</div><div class="admin-user-role">Administrator</div></div><div class="user-dropdown"><a href="#" onclick="sessionStorage.clear();location.href='login.html'"><i class="fas fa-sign-out-alt"></i> Logout</a></div></div></div>
+  </div>
+  <div class="admin-content">
+    <div class="admin-page-header">
+      <div><h1 class="admin-page-title">⭐ Manage Testimonials</h1><p class="admin-page-sub">Approve, add, and manage student and client reviews shown on the website.</p></div>
+      <button class="btn-admin-primary" onclick="openModal('test-modal')"><i class="fas fa-plus"></i> Add Testimonial</button>
+    </div>
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead><tr><th>Name</th><th>Role</th><th>Company</th><th>Rating</th><th>Type</th><th>Review</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="test-tbody"><tr><td colspan="8" class="admin-table-empty">Loading testimonials...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="test-modal">
+  <div class="modal" style="max-width:580px">
+    <div class="modal-header"><div class="modal-title" id="test-modal-title">Add Testimonial</div><button class="modal-close" onclick="closeAdminModal('test-modal')"><i class="fas fa-times"></i></button></div>
+    <div class="modal-body">
+      <form id="test-form">
+        <input type="hidden" name="id" id="test-id">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Name *</label><input type="text" class="form-control" name="name" required></div>
+          <div class="form-group"><label class="form-label">Role</label><input type="text" class="form-control" name="role" placeholder="e.g. Student, Software Engineer"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Company</label><input type="text" class="form-control" name="company" placeholder="e.g. TCS, Self"></div>
+          <div class="form-group"><label class="form-label">Type</label>
+            <select class="form-control" name="type"><option>Student</option><option>Client</option></select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Rating (1-5)</label>
+            <select class="form-control" name="rating"><option value="5">⭐⭐⭐⭐⭐ 5</option><option value="4">⭐⭐⭐⭐ 4</option><option value="3">⭐⭐⭐ 3</option></select>
+          </div>
+          <div class="form-group"><label class="form-label">Status</label><select class="form-control" name="status"><option value="Active">Active</option><option value="Draft">Draft</option></select></div>
+        </div>
+        <div class="form-group"><label class="form-label">Testimonial Message *</label><textarea class="form-control" name="message" rows="4" required></textarea></div>
+        <div style="display:flex;gap:12px;margin-top:8px">
+          <button type="submit" class="btn-admin-primary"><i class="fas fa-save"></i> Save</button>
+          <button type="button" class="btn-admin-outline" onclick="closeAdminModal('test-modal')">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="delete-modal"><div class="modal" style="max-width:400px;text-align:center"><div class="modal-body" style="padding:40px"><div style="font-size:3rem;margin-bottom:16px">⚠️</div><h3 style="margin-bottom:10px;color:var(--a-navy)">Delete Testimonial?</h3><p style="color:var(--a-gray4);margin-bottom:24px">This action cannot be undone.</p><div style="display:flex;gap:12px;justify-content:center"><button class="btn-admin-danger" id="confirm-delete-btn">Delete</button><button class="btn-admin-outline" onclick="closeAdminModal('delete-modal')">Cancel</button></div></div></div></div>
+<div id="toast-container"></div>
+<script src="../js/api.js"></script><script src="../js/admin.js"></script>
+<script>
+let allTests=[];let deleteId=null;
+function renderTests(list){
+  const tb=document.getElementById('test-tbody');
+  if(!list.length){tb.innerHTML='<tr><td colspan="8" class="admin-table-empty">No testimonials yet.</td></tr>';return;}
+  tb.innerHTML=list.map(t=>`<tr>
+    <td style="font-weight:600">${t.name}</td>
+    <td>${t.role||'—'}</td><td>${t.company||'—'}</td>
+    <td>${'★'.repeat(parseInt(t.rating)||5)}</td>
+    <td><span class="status-badge ${t.type==='Client'?'status-pending':'status-active'}">${t.type||'Student'}</span></td>
+    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.message||'—'}</td>
+    <td><span class="status-badge status-${(t.status||'Active').toLowerCase()}">${t.status||'Active'}</span></td>
+    <td><div class="action-btns"><button class="btn-icon btn-icon-edit" onclick="editTest('${t.id}')"><i class="fas fa-pencil"></i></button><button class="btn-icon btn-icon-delete" onclick="confirmDelete('${t.id}')"><i class="fas fa-trash"></i></button></div></td>
+  </tr>`).join('');
+}
+window.editTest=function(id){
+  const t=allTests.find(x=>x.id===id);if(!t)return;
+  document.getElementById('test-modal-title').textContent='Edit Testimonial';
+  const f=document.getElementById('test-form');
+  document.getElementById('test-id').value=t.id;
+  ['name','role','company','type','rating','message','status'].forEach(k=>{if(f[k])f[k].value=t[k]||'';});
+  openModal('test-modal');
+};
+window.confirmDelete=function(id){deleteId=id;openModal('delete-modal');};
+document.getElementById('confirm-delete-btn')?.addEventListener('click',async()=>{
+  const res=await API.deleteTestimonial(deleteId);closeAdminModal('delete-modal');
+  if(res?.success!==false){showAdminToast('Testimonial deleted','success');allTests=allTests.filter(t=>t.id!==deleteId);renderTests(allTests);}
+  else showAdminToast('Delete failed','error');deleteId=null;
+});
+document.getElementById('test-form')?.addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  const data=Object.fromEntries(new FormData(e.target));
+  const res=data.id?await API.updateTestimonial(data):await API.addTestimonial(data);
+  if(res?.success!==false){showAdminToast(`Testimonial ${data.id?'updated':'added'}`,'success');closeAdminModal('test-modal');e.target.reset();document.getElementById('test-id').value='';API.adminGet('Testimonials').then(ts=>{allTests=ts;renderTests(ts);});}
+  else showAdminToast(res?.message||'Error','error');
+});
+window.openModal=function(id){document.getElementById(id)?.classList.add('active');};
+window.closeAdminModal=function(id){document.getElementById(id)?.classList.remove('active');};
+API.adminGet('Testimonials').then(ts=>{allTests=ts;renderTests(ts);});
+</script>
+</body></html>

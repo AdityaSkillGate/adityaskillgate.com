@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Job Openings & Careers | Aditya Skill Gate IT Solution</title>
+  <meta name="description" content="Explore IT job openings at Aditya Skill Gate IT Solution. React Developer, Python Developer, Digital Marketing, UI/UX Designer positions available.">
+  <link rel="icon" href="assets/logos/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .benefits-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:50px}
+    .benefit-card{text-align:center;padding:28px 20px;background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-lg);transition:var(--transition)}
+    .benefit-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+    .benefit-icon{font-size:2.2rem;margin-bottom:12px}
+    .jobs-list{display:flex;flex-direction:column;gap:20px}
+    .job-detail-card{background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-lg);padding:28px;transition:var(--transition)}
+    .job-detail-card:hover{box-shadow:var(--shadow-md);border-color:var(--tech-blue-light)}
+    .job-header-row{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    @media(max-width:991px){.benefits-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:576px){.benefits-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div id="page-loader"><img src="assets/logos/logo-icon.png" class="loader-logo" alt=""><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<nav class="navbar" id="navbar"><div class="container"><div class="navbar-inner">
+  <a href="index.html" class="navbar-logo"><img src="assets/logos/logo-icon.png" alt="ASG">
+    <div class="navbar-logo-text">ADITYA SKILL GATE<br><span>IT SOLUTION</span></div></a>
+        <ul class="navbar-nav">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="courses.html" class="nav-link">Courses</a></li>
+        <li><a href="jobs.html" class="nav-link active">Careers</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="placements.html" class="nav-link">Placements</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+  <div class="navbar-actions"><button class="theme-toggle"><i class="fas fa-moon"></i></button><a href="resume.html" class="btn-nav-cta">Upload Resume</a><button class="hamburger" id="hamburger"><span></span><span></span><span></span></button></div>
+</div></div></nav>
+<div class="mobile-menu" id="mobile-menu" style="display: none;">  <nav class="mobile-nav">
+    <a href="index.html" class="mobile-nav-link active">🏠 Home</a>
+    <a href="about.html" class="mobile-nav-link">ℹ️ About Us</a>
+    <a href="services.html" class="mobile-nav-link">⚙️ Services</a>
+    <a href="courses.html" class="mobile-nav-link">🎓 Courses</a>
+    <a href="jobs.html" class="mobile-nav-link">💼 Careers</a>
+    <a href="projects.html" class="mobile-nav-link">🎨 Projects</a>
+    <a href="placements.html" class="mobile-nav-link">🎯 Placements</a>
+    <a href="contact.html" class="mobile-nav-link">📞 Contact Us</a>
+  </nav><div class="mobile-menu-footer"><a href="resume.html" class="btn btn-primary">📄 Upload Resume</a></div></div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="section-badge"><i class="fas fa-briefcase"></i> Join Our Team</div>
+    <h1>Careers & Job Openings</h1>
+    <p>Be part of a fast-growing IT company. We offer exciting roles, flexible work, and great growth opportunities.</p>
+  </div>
+</section>
+
+<section class="section section-light">
+  <div class="container">
+    <div class="section-header" data-animate><div class="section-badge"><i class="fas fa-star"></i> Why Join Us?</div><h2 class="section-title">Why Work With <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Us?</span></h2></div>
+    <div class="benefits-grid">
+      <div class="benefit-card" data-animate data-delay="100"><div class="benefit-icon">🚀</div><h3 style="font-size:1rem;margin-bottom:8px;color:var(--navy)">Career Growth</h3><p style="font-size:0.85rem;color:var(--gray-500)">Fast-track your career with continuous learning, mentorship, and skill development opportunities.</p></div>
+      <div class="benefit-card" data-animate data-delay="200"><div class="benefit-icon">🌐</div><h3 style="font-size:1rem;margin-bottom:8px;color:var(--navy)">Remote & Hybrid</h3><p style="font-size:0.85rem;color:var(--gray-500)">Flexible work arrangements — remote, hybrid, or on-site — to suit your lifestyle and work preferences.</p></div>
+      <div class="benefit-card" data-animate data-delay="300"><div class="benefit-icon">💰</div><h3 style="font-size:1rem;margin-bottom:8px;color:var(--navy)">Competitive Pay</h3><p style="font-size:0.85rem;color:var(--gray-500)">Market-competitive salaries with performance bonuses and regular appraisals every 6 months.</p></div>
+      <div class="benefit-card" data-animate data-delay="400"><div class="benefit-icon">🤝</div><h3 style="font-size:1rem;margin-bottom:8px;color:var(--navy)">Great Culture</h3><p style="font-size:0.85rem;color:var(--gray-500)">Collaborative, innovative work environment where your ideas are heard and contributions are recognized.</p></div>
+    </div>
+
+    <!-- Filter -->
+    <div style="display:flex;gap:20px;margin-bottom:28px;flex-wrap:wrap;align-items:center">
+      <div class="filter-chips" id="job-filters" style="margin-bottom:0">
+        <div class="chip active" data-filter="All">All Departments</div>
+        <div class="chip" data-filter="Engineering">Engineering</div>
+        <div class="chip" data-filter="Marketing">Marketing</div>
+        <div class="chip" data-filter="Design">Design</div>
+        <div class="chip" data-filter="HR">HR</div>
+      </div>
+    </div>
+
+    <div class="jobs-list" id="jobs-list"><!-- JS --></div>
+  </div>
+</section>
+
+<!-- Internship -->
+<section class="section section-gray">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center">
+      <div data-animate>
+        <div class="section-badge"><i class="fas fa-graduation-cap"></i> Internships</div>
+        <h2 class="section-title" style="margin-bottom:16px">Internship <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Opportunities</span></h2>
+        <p style="color:var(--gray-600);line-height:1.8;margin-bottom:24px">We offer 3-6 month internships for students and freshers. Work on real projects, learn from experts, and get a chance to be absorbed as a full-time employee.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px">
+          <li style="display:flex;gap:10px;color:var(--gray-600);font-size:0.9rem"><span style="color:var(--accent-green-dark)">✅</span>Real project experience</li>
+          <li style="display:flex;gap:10px;color:var(--gray-600);font-size:0.9rem"><span style="color:var(--accent-green-dark)">✅</span>Mentorship from industry experts</li>
+          <li style="display:flex;gap:10px;color:var(--gray-600);font-size:0.9rem"><span style="color:var(--accent-green-dark)">✅</span>Internship certificate on completion</li>
+          <li style="display:flex;gap:10px;color:var(--gray-600);font-size:0.9rem"><span style="color:var(--accent-green-dark)">✅</span>Possibility of full-time offer</li>
+        </ul>
+        <a href="resume.html" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Apply for Internship</a>
+      </div>
+      <div data-animate data-delay="200">
+        <div style="background:var(--gradient-primary);border-radius:24px;padding:40px;color:white">
+          <h3 style="color:white;margin-bottom:20px">Current Internship Roles</h3>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="padding:14px;background:rgba(255,255,255,0.08);border-radius:10px"><div style="font-weight:700">Web Development Intern</div><div style="font-size:0.8rem;color:rgba(255,255,255,0.6);margin-top:4px">3-6 months · Remote · React + Node.js</div></div>
+            <div style="padding:14px;background:rgba(255,255,255,0.08);border-radius:10px"><div style="font-weight:700">Python/AI Intern</div><div style="font-size:0.8rem;color:rgba(255,255,255,0.6);margin-top:4px">3 months · Remote · Python + ML</div></div>
+            <div style="padding:14px;background:rgba(255,255,255,0.08);border-radius:10px"><div style="font-weight:700">Digital Marketing Intern</div><div style="font-size:0.8rem;color:rgba(255,255,255,0.6);margin-top:4px">3 months · Remote · SEO + Social Media</div></div>
+            <div style="padding:14px;background:rgba(255,255,255,0.08);border-radius:10px"><div style="font-weight:700">UI/UX Design Intern</div><div style="font-size:0.8rem;color:rgba(255,255,255,0.6);margin-top:4px">3 months · Remote · Figma + User Research</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Apply Modal -->
+<div class="modal-overlay" id="apply-modal">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title" id="apply-modal-title">💼 Apply for Position</div><button class="modal-close" onclick="closeModal('apply-modal')"><i class="fas fa-times"></i></button></div>
+    <div class="modal-body">
+      <form id="apply-form">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Full Name *</label><input type="text" class="form-control" name="name" required><span class="form-error"></span></div>
+          <div class="form-group"><label class="form-label">Email *</label><input type="email" class="form-control" name="email" required><span class="form-error"></span></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Phone *</label><input type="tel" class="form-control" name="phone" required><span class="form-error"></span></div>
+          <div class="form-group"><label class="form-label">Position</label><input type="text" class="form-control" name="position" id="apply-position" readonly></div>
+        </div>
+        <div class="form-group"><label class="form-label">Skills / Technologies</label><input type="text" class="form-control" name="skills" placeholder="e.g., React, JavaScript, Node.js"></div>
+        <div class="form-group"><label class="form-label">Cover Note</label><textarea class="form-control" name="coverNote" rows="3" placeholder="Tell us why you're a great fit for this role..."></textarea></div>
+        <div style="margin-bottom:20px;padding:14px;background:var(--light-gray);border-radius:var(--border-radius)">
+          <p style="font-size:0.85rem;color:var(--gray-600)">📎 For resume upload, please visit our <a href="resume.html" style="color:var(--tech-blue)">Resume Upload Page</a> after submitting this form.</p>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center"><i class="fas fa-paper-plane"></i> Submit Application</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section style="background:var(--gradient-primary);padding:70px 0;text-align:center">
+  <div class="container" data-animate>
+    <h2 style="color:white;margin-bottom:12px">Can't Find a Matching Role?</h2>
+    <p style="color:rgba(255,255,255,0.75);margin-bottom:32px">Send us your resume anyway! We'll keep you in mind for future openings.</p>
+    <a href="resume.html" class="btn btn-primary" style="background:white;color:var(--navy)"><i class="fas fa-upload"></i> Upload Your Resume</a>
+  </div>
+</section>
+
+<footer class="footer"><div class="container"><div class="footer-grid">
+  <div class="footer-brand"><div class="footer-logo"><img src="assets/logos/logo-icon.png" alt=""><div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2">ADITYA<br><span style="color:#6CCB2F">SKILL GATE IT</span></div></div><p>Empowering careers through IT training and placement support.</p><div class="footer-socials"><a href="https://www.instagram.com/adityaskillgate.official/" target="_blank" class="footer-social"><i class="fab fa-instagram"></i></a><a href="https://wa.me/916382604808" target="_blank" class="footer-social"><i class="fab fa-whatsapp"></i></a></div></div>
+  <div class="footer-col"><h4>Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="courses.html">Courses</a><a href="jobs.html">Careers</a><a href="contact.html">Contact</a></div></div>
+  <div class="footer-col"><h4>Resources</h4><div class="footer-links"><a href="placements.html">Placements</a><a href="faq.html">FAQ</a><a href="resume.html">Upload Resume</a></div></div>
+  <div class="footer-col"><h4>Contact</h4><div class="footer-links"><a href="tel:+916382604808">📞 +91 63826 04808</a><a href="mailto:Adityaskillgateitsolution@gmail.com">📧 Email</a><a href="https://wa.me/916382604808" target="_blank">💬 WhatsApp</a></div></div>
+</div><div class="footer-bottom"><p>© 2024 Aditya Skill Gate IT Solution.</p><p><a href="privacy.html" style="color:rgba(255,255,255,0.5)">Privacy</a> · <a href="terms.html" style="color:rgba(255,255,255,0.5)">Terms</a></p></div></div></footer>
+<div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808?text=Hi!%20I%27m%20interested%20in%20a%20job" target="_blank" class="whatsapp-option">💼 Job Enquiry</a><a href="https://wa.me/916382604808" target="_blank" class="whatsapp-option">💬 Quick Chat</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
+<div class="chatbot-widget"><div class="chatbot-window" id="chatbot-window"><div class="chatbot-header"><div class="chatbot-avatar">🤖</div><div class="chatbot-info"><h4>ASG Assistant</h4><span>Online</span></div></div><div class="chatbot-messages" id="chat-messages"><div class="chat-msg bot">Hi! Looking for a job? 💼 I can help!</div></div><div class="chatbot-suggestions"><span class="chat-suggestion">Jobs</span><span class="chat-suggestion">Contact</span></div><div class="chatbot-input"><input type="text" placeholder="Ask..." id="chat-input"><button class="chatbot-send" id="chat-send"><i class="fas fa-paper-plane"></i></button></div></div><div class="chatbot-toggle" id="chatbot-toggle"><i class="fas fa-robot"></i></div></div>
+<div id="back-to-top"><i class="fas fa-arrow-up"></i></div><div id="toast-container"></div>
+
+<script src="js/api.js?v=4"></script><script src="js/main.js"></script>
+<script>
+const TYPE_COLORS={'Full-time':'badge-fulltime','Remote':'badge-remote','Hybrid':'badge-hybrid'};
+function renderJobs(jobs){
+  const list=document.getElementById('jobs-list');if(!list)return;
+  list.innerHTML=jobs.map(j=>`
+    <div class="job-detail-card" data-animate data-dept="${j.department}">
+      <div class="job-header-row">
+        <div>
+          <div style="font-size:1.2rem;font-weight:800;color:var(--navy);margin-bottom:6px">${j.title}</div>
+          <div style="color:var(--gray-500);font-size:0.875rem;margin-bottom:12px"><i class="fas fa-building" style="margin-right:6px;color:var(--tech-blue)"></i>${j.department} · <i class="fas fa-map-marker-alt" style="margin-left:8px;margin-right:6px;color:var(--accent-green-dark)"></i>${j.location}</div>
+        </div>
+        <span class="job-type-badge ${TYPE_COLORS[j.type]||'badge-fulltime'}">${j.type}</span>
+      </div>
+      <div class="job-meta" style="margin-bottom:14px">
+        <div class="job-meta-item"><i class="fas fa-briefcase"></i>${j.experience}</div>
+        <div class="job-meta-item"><i class="fas fa-rupee-sign"></i>${j.salary}</div>
+      </div>
+      <div class="job-skills" style="margin-bottom:20px">${(Array.isArray(j.skills) ? j.skills : String(j.skills||'').split(',')).map(s=>`<span class="skill-tag">${s.trim()}</span>`).join('')}</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="applyJob('${j.title}')"><i class="fas fa-paper-plane"></i> Apply Now</button>
+        <a href="resume.html" class="btn btn-outline"><i class="fas fa-upload"></i> Upload Resume</a>
+      </div>
+    </div>`).join('');
+  document.querySelectorAll('[data-animate]').forEach(el=>{const obs=new IntersectionObserver(e=>{e.forEach(e=>e.isIntersecting&&(e.target.classList.add('animated'),obs.unobserve(e.target)))},{threshold:0.1});obs.observe(el);});
+}
+
+window.applyJob=function(title){
+  document.getElementById('apply-position').value=title;
+  document.getElementById('apply-modal-title').textContent='💼 Apply for ' + title;
+  openModal('apply-modal');
+};
+
+document.getElementById('job-filters')?.addEventListener('filterChange',e=>{
+  const val=e.detail.value;
+  document.querySelectorAll('.job-detail-card').forEach(card=>{
+    card.style.display=(val==='All'||card.dataset.dept===val)?'':'none';
+  });
+});
+
+document.getElementById('apply-form')?.addEventListener('submit',async(e)=>{
+  e.preventDefault();if(!validateForm(e.target))return;
+  const btn=e.target.querySelector('[type=submit]');const orig=btn.innerHTML;
+  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending...';btn.disabled=true;
+  const data=Object.fromEntries(new FormData(e.target));
+  const res=await API.submitJobApplication(data);
+  btn.innerHTML=orig;btn.disabled=false;
+  if(res?.success!==false){showToast('Application submitted! We\'ll contact you soon.','success');e.target.reset();closeModal('apply-modal');}
+  else showToast(res?.message||'Error. Please try again.','error');
+});
+
+API.getJobs().then(renderJobs);
+</script>
+</body></html>

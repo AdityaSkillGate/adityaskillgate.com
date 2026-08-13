@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Profile Generator | ASG Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #f0f2f5; margin: 0; padding: 0; display:flex; flex-direction:column; align-items:center; }
+    .toolbar { width: 100%; background: #0D1B4C; padding: 20px; color: white; display:flex; justify-content: space-between; align-items:center; position:sticky; top:0; z-index:100; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
+    .btn { padding: 10px 20px; border-radius: 8px; border:none; cursor:pointer; font-weight:600; display:flex; align-items:center; gap:8px; font-family:'Outfit'; font-size:1rem; }
+    .btn-primary { background: #6CCB2F; color: white; }
+    .btn-outline { background: transparent; border: 1px solid white; color: white; }
+
+    /* A4 Size Paper Preview */
+    .document-preview {
+      width: 210mm;
+      min-height: 297mm;
+      background: white;
+      margin: 40px auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    /* PDF Content Styling */
+    .pdf-page {
+      width: 210mm;
+      height: 297mm;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      background: white;
+    }
+    
+    /* Cover Page */
+    .cover-page {
+      background: linear-gradient(135deg, #0D1B4C 0%, #060e29 100%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px;
+    }
+    .cover-logo { width: 180px; margin-bottom: 40px; }
+    .cover-title { font-family: 'Outfit', sans-serif; font-size: 5rem; font-weight: 800; margin: 0; line-height: 1.1; }
+    .cover-subtitle { font-size: 1.5rem; color: #0096D6; margin-top: 20px; font-weight: 600; }
+    .cover-footer { position: absolute; bottom: 60px; font-size: 1.1rem; color: rgba(255,255,255,0.6); }
+
+    /* Standard Pages */
+    .page-header { background: #f8fafc; padding: 40px 60px; border-bottom: 4px solid #0096D6; display: flex; justify-content: space-between; align-items: center; }
+    .page-title { font-family: 'Outfit', sans-serif; font-size: 2.5rem; color: #0D1B4C; margin: 0; }
+    .page-content { padding: 60px; }
+    
+    .text-block { font-size: 1.1rem; line-height: 1.8; color: #4b5563; margin-bottom: 24px; }
+    
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; }
+
+    .card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; }
+    .card-icon { font-size: 2rem; color: #0096D6; margin-bottom: 16px; }
+    .card-title { font-family: 'Outfit', sans-serif; font-size: 1.25rem; color: #0D1B4C; margin: 0 0 10px 0; }
+    .card-text { font-size: 0.95rem; color: #64748b; line-height: 1.6; margin: 0; }
+
+    .placement-row { display: flex; gap: 20px; padding: 20px; border-bottom: 1px solid #e2e8f0; align-items: center; }
+    .placement-name { font-weight: 700; color: #0D1B4C; font-size: 1.1rem; width: 25%; }
+    .placement-company { font-weight: 600; color: #0096D6; width: 25%; }
+    .placement-package { font-weight: 700; color: #6CCB2F; width: 20%; }
+    .placement-role { color: #64748b; font-size: 0.9rem; width: 30%; }
+
+  </style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div style="display:flex;align-items:center;gap:16px;">
+    <a href="reports.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back</a>
+    <h2 style="margin:0;font-family:'Outfit'">Company Profile Generator</h2>
+  </div>
+  <button class="btn btn-primary" onclick="generatePDF()"><i class="fas fa-file-pdf"></i> Download PDF</button>
+</div>
+
+<div id="loading" style="margin-top:100px;font-size:1.2rem;color:#0D1B4C;"><i class="fas fa-spinner fa-spin"></i> Fetching live data...</div>
+
+<div class="document-preview" id="pdf-content" style="display:none;">
+  
+  <!-- PAGE 1: COVER -->
+  <div class="pdf-page cover-page">
+    <div style="font-size:64px;font-weight:900;letter-spacing:-2px;margin-bottom:20px;color:white;">ASG</div>
+    <h1 class="cover-title">COMPANY<br>PROFILE</h1>
+    <div class="cover-subtitle">Aditya Skill Gate IT Solution</div>
+    <div class="cover-footer" id="cover-date">2024</div>
+  </div>
+
+  <!-- PAGE 2: ABOUT -->
+  <div class="pdf-page">
+    <div class="page-header">
+      <h2 class="page-title">About Us</h2>
+      <div style="font-size:32px;font-weight:900;color:white;">ASG</div>
+    </div>
+    <div class="page-content">
+      <div class="text-block">
+        Aditya Skill Gate IT Solution is a premier technology company based in Tamil Nadu, specializing in cutting-edge IT services and industry-aligned technical training. Founded with the mission to bridge the gap between academic learning and industry requirements, we have established ourselves as a trusted partner for both corporate clients and aspiring professionals.
+      </div>
+      <div class="text-block">
+        Our dual-pronged approach allows us to deliver high-quality software solutions while simultaneously building the next generation of tech talent through hands-on, project-based training programs.
+      </div>
+      
+      <div class="grid-2" style="margin-top:60px;">
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-bullseye"></i></div>
+          <h3 class="card-title">Our Mission</h3>
+          <p class="card-text">To empower individuals through premium skills training and deliver innovative IT solutions that drive business growth for our partners globally.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-eye"></i></div>
+          <h3 class="card-title">Our Vision</h3>
+          <p class="card-text">To be the most trusted technology partner and leading educational institution shaping the future of the IT ecosystem in India.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 3: SERVICES -->
+  <div class="pdf-page">
+    <div class="page-header">
+      <h2 class="page-title">Our Services</h2>
+      <div style="font-size:32px;font-weight:900;color:white;">ASG</div>
+    </div>
+    <div class="page-content">
+      <div class="grid-2" id="services-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 4: PLACEMENTS -->
+  <div class="pdf-page">
+    <div class="page-header">
+      <h2 class="page-title">Placement Record</h2>
+      <div style="font-size:32px;font-weight:900;color:white;">ASG</div>
+    </div>
+    <div class="page-content">
+      <div class="text-block" style="margin-bottom:40px;font-weight:600;font-size:1.3rem;color:#0096D6;">
+        We take pride in our 90%+ placement success rate. Here are some of our recent star performers.
+      </div>
+      <div style="background:#0D1B4C;color:white;padding:15px 20px;display:flex;gap:20px;font-weight:bold;border-radius:8px 8px 0 0;">
+        <div style="width:25%">Student</div>
+        <div style="width:25%">Company</div>
+        <div style="width:20%">Package</div>
+        <div style="width:30%">Role</div>
+      </div>
+      <div id="placements-list" style="border:1px solid #e2e8f0;border-top:none;border-radius:0 0 8px 8px;">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="../js/api.js?v=2"></script>
+<script src="../js/admin.js"></script>
+<script>
+document.getElementById('cover-date').innerText = new Date().getFullYear();
+
+async function init() {
+  try {
+    const services = await API.getServices();
+    const placements = await API.getPlacements();
+
+    // Render Services
+    const sGrid = document.getElementById('services-grid');
+    if (services && services.length) {
+      sGrid.innerHTML = services.slice(0, 6).map(s => `
+        <div class="card">
+          <div class="card-icon"><i class="fas ${s.icon}"></i></div>
+          <h3 class="card-title">${s.title}</h3>
+          <p class="card-text">${s.description}</p>
+        </div>
+      `).join('');
+    }
+
+    // Render Placements
+    const pList = document.getElementById('placements-list');
+    if (placements && placements.length) {
+      pList.innerHTML = placements.slice(0, 10).map(p => `
+        <div class="placement-row">
+          <div class="placement-name">${p.studentName}</div>
+          <div class="placement-company"><i class="fas fa-building" style="margin-right:6px"></i> ${p.companyName}</div>
+          <div class="placement-package">${p.package}</div>
+          <div class="placement-role">${p.designation}</div>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('pdf-content').style.display = 'block';
+
+  } catch (err) {
+    console.error(err);
+    document.getElementById('loading').innerText = 'Error loading data. Please check connection.';
+  }
+}
+
+init();
+
+async function generatePDF() {
+  const element = document.getElementById('pdf-content');
+  const opt = {
+    margin:       0,
+    filename:     `Company_Profile_ASG_${new Date().getFullYear()}.pdf`,
+    image:        { type: 'jpeg', quality: 1 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+  
+  // Show a loading overlay or change button text
+  const btn = document.querySelector('.btn-primary');
+  const orig = btn.innerHTML;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+  
+  html2pdf().set(opt).from(element).save().then(() => {
+    btn.innerHTML = orig;
+  }).catch(err => {
+    console.error(err);
+    alert('Error generating PDF');
+    btn.innerHTML = orig;
+  });
+}
+</script>
+</body>
+</html>

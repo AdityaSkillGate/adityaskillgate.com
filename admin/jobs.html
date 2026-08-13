@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Jobs | Admin Panel</title><meta name="robots" content="noindex">
+  <link rel="icon" href="../assets/logos/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+<div class="admin-sidebar" id="admin-sidebar">
+  <div class="sidebar-brand"><img src="../assets/logos/logo-icon.png" alt="ASG" onerror="this.style.display='none'"><div><div class="sidebar-brand-name">ASG Admin</div><div class="sidebar-brand-sub">Control Panel</div></div><button class="sidebar-collapse-btn" id="sidebar-toggle"><i class="fas fa-bars"></i></button></div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section-title">Main</div>
+    <a href="dashboard.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-chart-pie"></i></div><span>Dashboard</span></a>
+    <a href="reports.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-file-pdf"></i></div><span>Report Center</span></a>
+    <div class="sidebar-section-title">Content</div>
+    <a href="services.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-cog"></i></div><span>Services</span></a>
+    <a href="courses.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-graduation-cap"></i></div><span>Courses</span></a>
+    <a href="abroad.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-plane-departure"></i></div><span>Study Abroad</span></a>
+    <a href="partners.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-handshake"></i></div><span>Partners</span></a>
+    <a href="jobs.html" class="sidebar-link" class="sidebar-link active"><div class="sidebar-icon"><i class="fas fa-briefcase"></i></div><span>Job Openings</span></a>
+    <a href="employees.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-users"></i></div><span>Team / Employees</span></a>
+    <a href="projects.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-laptop-code"></i></div><span>Projects</span></a>
+    <a href="placements.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-trophy"></i></div><span>Placements</span></a>
+    <a href="testimonials.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-star"></i></div><span>Testimonials</span></a>
+    <a href="blog.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-blog"></i></div><span>Blog Posts</span></a>
+    <div class="sidebar-section-title">Submissions</div>
+    <a href="crm.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-users-cog"></i></div><span>CRM / Leads</span></a>
+    <a href="resumes.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-file-pdf"></i></div><span>Resumes</span></a>
+    <a href="contacts.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-envelope"></i></div><span>Contact Forms</span></a>
+    <a href="chatbot.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-robot"></i></div><span>Chatbot KB</span></a>
+    <div class="sidebar-section-title">Settings</div>
+    <a href="settings.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-cog"></i></div><span>Settings</span></a>
+  </nav>
+</div>
+<div class="admin-main" id="admin-main">
+  <div class="admin-topbar">
+    <div class="topbar-left"><button class="topbar-toggle" id="topbar-toggle"><i class="fas fa-bars"></i></button></div>
+    <div class="topbar-right"><button class="theme-btn" id="admin-theme-btn"><i class="fas fa-moon"></i></button><a href="../index.html" target="_blank" class="btn-admin-sm"><i class="fas fa-external-link-alt"></i> View Site</a><div class="admin-user-menu"><div class="admin-avatar">A</div><div class="admin-user-info"><div class="admin-user-name">Admin</div><div class="admin-user-role">Administrator</div></div><div class="user-dropdown"><a href="#" onclick="sessionStorage.clear();location.href='login.html'"><i class="fas fa-sign-out-alt"></i> Logout</a></div></div></div>
+  </div>
+  <div class="admin-content">
+    <div class="admin-page-header">
+      <div><h1 class="admin-page-title">💼 Manage Job Openings</h1><p class="admin-page-sub">Post and manage job openings displayed on the Careers page.</p></div>
+      <button class="btn-admin-primary" onclick="openModal('job-modal')"><i class="fas fa-plus"></i> Add Job Posting</button>
+    </div>
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead><tr><th>Job Title</th><th>Department</th><th>Location</th><th>Type</th><th>Salary</th><th>Experience</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="jobs-tbody"><tr><td colspan="8" class="admin-table-empty">Loading jobs...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="job-modal">
+  <div class="modal" style="max-width:640px">
+    <div class="modal-header"><div class="modal-title" id="job-modal-title">Add Job Opening</div><button class="modal-close" onclick="closeAdminModal('job-modal')"><i class="fas fa-times"></i></button></div>
+    <div class="modal-body">
+      <form id="job-form">
+        <input type="hidden" name="id" id="job-id">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Job Title *</label><input type="text" class="form-control" name="title" required></div>
+          <div class="form-group"><label class="form-label">Department</label><input type="text" class="form-control" name="department" placeholder="e.g. Engineering"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Location</label><input type="text" class="form-control" name="location" placeholder="e.g. Remote, Chennai"></div>
+          <div class="form-group"><label class="form-label">Job Type</label>
+            <select class="form-control" name="type"><option>Full-time</option><option>Part-time</option><option>Remote</option><option>Hybrid</option><option>Contract</option></select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Salary Range</label><input type="text" class="form-control" name="salary" placeholder="e.g. ₹3-6 LPA"></div>
+          <div class="form-group"><label class="form-label">Experience</label><input type="text" class="form-control" name="experience" placeholder="e.g. 0-2 Years, Fresher"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Required Skills</label><input type="text" class="form-control" name="skills" placeholder="Comma-separated: React, JavaScript, Node.js"></div>
+          <div class="form-group"><label class="form-label">Status</label><select class="form-control" name="status"><option value="Open">Open</option><option value="Draft">Draft</option><option value="Closed">Closed</option></select></div>
+        </div>
+        <div class="form-group"><label class="form-label">Job Description</label><textarea class="form-control" name="description" rows="3"></textarea></div>
+        <div style="display:flex;gap:12px;margin-top:8px">
+          <button type="submit" class="btn-admin-primary"><i class="fas fa-save"></i> Save Job</button>
+          <button type="button" class="btn-admin-outline" onclick="closeAdminModal('job-modal')">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="delete-modal"><div class="modal" style="max-width:400px;text-align:center"><div class="modal-body" style="padding:40px"><div style="font-size:3rem;margin-bottom:16px">⚠️</div><h3 style="margin-bottom:10px;color:var(--a-navy)">Delete Job?</h3><p style="color:var(--a-gray4);margin-bottom:24px">This cannot be undone.</p><div style="display:flex;gap:12px;justify-content:center"><button class="btn-admin-danger" id="confirm-delete-btn">Delete</button><button class="btn-admin-outline" onclick="closeAdminModal('delete-modal')">Cancel</button></div></div></div></div>
+<div id="toast-container"></div>
+<script src="../js/api.js"></script><script src="../js/admin.js"></script>
+<script>
+let allJobs=[];let deleteId=null;
+const TYPE_MAP={'Full-time':'status-active','Remote':'status-inactive','Hybrid':'status-pending'};
+function renderJobs(list){
+  const tb=document.getElementById('jobs-tbody');
+  if(!list.length){tb.innerHTML='<tr><td colspan="8" class="admin-table-empty">No jobs found.</td></tr>';return;}
+  tb.innerHTML=list.map(j=>`<tr>
+    <td><div style="font-weight:600">${j.title}</div></td>
+    <td>${j.department||'—'}</td><td>${j.location||'Remote'}</td>
+    <td><span class="status-badge ${TYPE_MAP[j.type]||'status-active'}">${j.type}</span></td>
+    <td>${j.salary||'—'}</td><td>${j.experience||'—'}</td>
+    <td><span class="status-badge status-${(j.status||'Open').toLowerCase()}">${j.status||'Open'}</span></td>
+    <td><div class="action-btns"><button class="btn-icon btn-icon-edit" onclick="editJob('${j.id}')"><i class="fas fa-pencil"></i></button><button class="btn-icon btn-icon-delete" onclick="confirmDelete('${j.id}')"><i class="fas fa-trash"></i></button></div></td>
+  </tr>`).join('');
+}
+window.editJob=function(id){
+  const j=allJobs.find(x=>x.id===id);if(!j)return;
+  document.getElementById('job-modal-title').textContent='Edit Job';
+  const f=document.getElementById('job-form');
+  document.getElementById('job-id').value=j.id;
+  ['title','department','location','type','salary','experience','skills','description','status'].forEach(k=>{if(f[k])f[k].value=j[k]||'';});
+  openModal('job-modal');
+};
+window.confirmDelete=function(id){deleteId=id;openModal('delete-modal');};
+document.getElementById('confirm-delete-btn')?.addEventListener('click',async()=>{
+  const res=await API.deleteJob(deleteId);closeAdminModal('delete-modal');
+  if(res?.success!==false){showAdminToast('Job deleted','success');allJobs=allJobs.filter(j=>j.id!==deleteId);renderJobs(allJobs);}
+  else showAdminToast('Delete failed','error');deleteId=null;
+});
+document.getElementById('job-form')?.addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  const data=Object.fromEntries(new FormData(e.target));
+  const res=data.id?await API.updateJob(data):await API.addJob(data);
+  if(res?.success!==false){showAdminToast(`Job ${data.id?'updated':'added'}`,'success');closeAdminModal('job-modal');e.target.reset();document.getElementById('job-id').value='';API.adminGet('Jobs').then(js=>{allJobs=js;renderJobs(js);});}
+  else showAdminToast(res?.message||'Error','error');
+});
+window.openModal=function(id){document.getElementById(id)?.classList.add('active');};
+window.closeAdminModal=function(id){document.getElementById(id)?.classList.remove('active');};
+API.adminGet('Jobs').then(js=>{allJobs=js;renderJobs(js);});
+</script>
+</body></html>

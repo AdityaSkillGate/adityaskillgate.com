@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | Aditya Skill Gate IT Solution</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="../assets/logos/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="icon" href="../assets/logos/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    *,::before,::after{box-sizing:border-box;margin:0;padding:0}
+    body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--gradient-hero);font-family:'Inter',sans-serif;position:relative;overflow:hidden}
+    .login-particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+    .login-wrap{position:relative;z-index:1;width:100%;max-width:460px;padding:20px}
+    .login-card{background:white;border-radius:24px;padding:48px 40px;box-shadow:0 40px 80px rgba(0,0,0,0.25)}
+    .login-logo{text-align:center;margin-bottom:32px}
+    .login-logo img{width:64px;height:64px;object-fit:contain;margin-bottom:12px}
+    .login-logo h1{font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:800;color:var(--navy);line-height:1.2}
+    .login-logo p{color:var(--gray-400);font-size:0.875rem;margin-top:6px}
+    .admin-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--light-gray);border-radius:100px;font-size:0.75rem;font-weight:600;color:var(--navy);margin-bottom:24px}
+    .form-group{margin-bottom:20px}
+    .form-label{display:block;font-size:0.8rem;font-weight:600;color:var(--gray-700);margin-bottom:7px;text-transform:uppercase;letter-spacing:0.5px}
+    .input-wrap{position:relative}
+    .input-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:0.9rem}
+    .input-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--gray-400);cursor:pointer;font-size:0.9rem;background:none;border:none;padding:4px}
+    .login-input{width:100%;padding:12px 40px;border:1.5px solid var(--gray-200);border-radius:var(--border-radius);font-size:0.95rem;font-family:'Inter',sans-serif;transition:var(--transition);background:var(--light-gray);color:var(--navy)}
+    .login-input:focus{outline:none;border-color:var(--tech-blue);background:white;box-shadow:0 0 0 3px rgba(0,150,214,0.1)}
+    .login-input.error{border-color:#ef4444}
+    .login-btn{width:100%;padding:14px;background:var(--gradient-primary);color:white;border:none;border-radius:var(--border-radius);font-size:1rem;font-weight:700;cursor:pointer;transition:var(--transition);font-family:'Outfit',sans-serif;margin-top:4px}
+    .login-btn:hover{opacity:0.9;transform:translateY(-1px)}
+    .login-error{display:none;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#dc2626;padding:12px 16px;border-radius:var(--border-radius);font-size:0.875rem;margin-bottom:20px;text-align:center}
+    .login-footer{text-align:center;margin-top:24px}
+    .login-footer a{color:var(--gray-400);font-size:0.8rem;text-decoration:none}
+    .login-footer a:hover{color:var(--tech-blue)}
+    .demo-hint{margin-top:20px;padding:12px 16px;background:rgba(0,150,214,0.06);border:1px dashed rgba(0,150,214,0.3);border-radius:var(--border-radius);font-size:0.8rem;color:var(--gray-500);text-align:center}
+    .demo-hint code{background:var(--gray-100);padding:2px 6px;border-radius:4px;font-family:monospace;color:var(--navy)}
+    .remember-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;font-size:0.85rem}
+    .remember-check{display:flex;align-items:center;gap:8px;color:var(--gray-600);cursor:pointer}
+    .remember-check input{accent-color:var(--tech-blue)}
+    :root{--light-gray:#F5F7FA;--gray-100:#f3f4f6;--gray-200:#e5e7eb;--gray-400:#9ca3af;--gray-500:#6b7280;--gray-600:#4b5563;--gray-700:#374151;--navy:#0D1B4C;--tech-blue:#0096D6;--accent-green-dark:#5ab225;--gradient-primary:linear-gradient(135deg,#0D1B4C 0%,#0a3a6e 50%,#0096D6 100%);--gradient-hero:linear-gradient(135deg,#0D1B4C 0%,#0a3a6e 60%,#0096D6 100%);--border-radius:10px;--transition:all 0.3s ease}
+  </style>
+</head>
+<body>
+<div class="login-particles" id="particles"></div>
+<div class="login-wrap">
+  <div class="login-card">
+    <div class="login-logo">
+      <img src="../assets/logos/logo-icon.png" alt="Aditya Skill Gate" onerror="this.style.display='none'">
+      <h1>ADITYA<br><span style="color:var(--tech-blue)">SKILL GATE</span></h1>
+      <p>IT Solution Admin Panel</p>
+    </div>
+    <div style="text-align:center"><div class="admin-badge"><i class="fas fa-shield-alt" style="color:var(--tech-blue)"></i> Secure Admin Access</div></div>
+    <div class="login-error" id="login-error"><i class="fas fa-exclamation-circle"></i> <span id="error-msg">Invalid username or password.</span></div>
+    <form id="login-form" autocomplete="off">
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <div class="input-wrap">
+          <i class="fas fa-user input-icon"></i>
+          <input type="text" class="login-input" id="username" name="username" placeholder="Enter your username" autocomplete="username" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <div class="input-wrap">
+          <i class="fas fa-lock input-icon"></i>
+          <input type="password" class="login-input" id="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
+          <button type="button" class="input-eye" id="eye-toggle"><i class="fas fa-eye" id="eye-icon"></i></button>
+        </div>
+      </div>
+      <div class="remember-row">
+        <label class="remember-check"><input type="checkbox" id="remember"> Remember me</label>
+        <a href="mailto:Adityaskillgateitsolution@gmail.com" style="color:var(--tech-blue);font-size:0.8rem">Forgot password?</a>
+      </div>
+      <button type="submit" class="login-btn" id="login-btn"><i class="fas fa-sign-in-alt"></i> Login to Dashboard</button>
+    </form>
+    <!-- <div class="demo-hint">
+      Default credentials: <code>admin</code> / <code>Aditya@2026</code>
+    </div> -->
+    <div class="login-footer">
+      <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Website</a>
+    </div>
+  </div>
+</div>
+
+<script src="../js/api.js"></script>
+<script>
+// Particles
+(function(){const c=document.getElementById('particles');if(!c)return;for(let i=0;i<25;i++){const d=document.createElement('div');d.style.cssText=`position:absolute;width:${Math.random()*4+1}px;height:${Math.random()*4+1}px;border-radius:50%;background:rgba(108,203,47,${Math.random()*0.4+0.1});top:${Math.random()*100}%;left:${Math.random()*100}%;animation:pf ${Math.random()*15+10}s linear infinite;animation-delay:${Math.random()*5}s`;c.appendChild(d);}const s=document.createElement('style');s.textContent='@keyframes pf{0%{transform:translateY(0) scale(1);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-100vh) scale(0.5);opacity:0}}';document.head.appendChild(s);})();
+
+// Eye toggle
+document.getElementById('eye-toggle')?.addEventListener('click',function(){const p=document.getElementById('password'),i=document.getElementById('eye-icon');const isPass=p.type==='password';p.type=isPass?'text':'password';i.className=isPass?'fas fa-eye-slash':'fas fa-eye';});
+
+// Login form
+document.getElementById('login-form')?.addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  const username=document.getElementById('username').value.trim();
+  const password=document.getElementById('password').value;
+  const btn=document.getElementById('login-btn');
+  const err=document.getElementById('login-error');
+  const errMsg=document.getElementById('error-msg');
+  err.style.display='none';
+  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Logging in...';btn.disabled=true;
+
+  // Local fallback auth
+  const isValid=username==='admin'&&password==='Aditya@2026';
+  let success=false;
+  let authToken='asg_admin_demo_token';
+  
+  try{
+    const res=await API.adminLogin({username,password});
+    if(res?.success){
+      // Use the real server token if provided, else fallback
+      authToken=res.token||'asg_admin_demo_token';
+      success=true;
+    } else if(isValid){success=true;}
+  } catch(ex){if(isValid)success=true;}
+
+  if(success){
+    sessionStorage.setItem('admin_token',authToken);
+    sessionStorage.setItem('admin_user',username);
+    btn.innerHTML='<i class="fas fa-check"></i> Login Successful!';
+    btn.style.background='linear-gradient(135deg,#5ab225,#6CCB2F)';
+    setTimeout(()=>{window.location.href='dashboard.html';},500);
+  } else {
+    err.style.display='block';errMsg.textContent='Invalid username or password. Please try again.';
+    document.getElementById('username').classList.add('error');document.getElementById('password').classList.add('error');
+    document.getElementById('password').value='';
+    btn.innerHTML='<i class="fas fa-sign-in-alt"></i> Login to Dashboard';btn.disabled=false;
+  }
+
+});
+</script>
+</body></html>

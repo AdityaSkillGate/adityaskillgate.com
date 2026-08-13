@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ | Aditya Skill Gate IT Solution</title>
+  <meta name="description" content="Frequently asked questions about IT courses, placements, fees, and services at Aditya Skill Gate IT Solution.">
+  <link rel="icon" href="assets/logos/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .faq-item{background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-lg);overflow:hidden;transition:var(--transition)}
+    .faq-item.open{box-shadow:var(--shadow-md);border-color:var(--tech-blue)}
+    .faq-q{display:flex;align-items:center;justify-content:space-between;padding:22px 24px;cursor:pointer;gap:16px}
+    .faq-q-text{font-weight:700;color:var(--navy);font-size:0.95rem;line-height:1.4}
+    .faq-icon{width:32px;height:32px;border-radius:50%;background:var(--light-gray);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:var(--transition)}
+    .faq-item.open .faq-icon{background:var(--tech-blue);color:white;transform:rotate(45deg)}
+    .faq-a{padding:0 24px;max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.3s}
+    .faq-item.open .faq-a{max-height:400px;padding:0 24px 24px}
+    @media(max-width:768px){.faq-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div id="page-loader"><img src="assets/logos/logo-icon.png" class="loader-logo" alt=""><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<nav class="navbar" id="navbar"><div class="container"><div class="navbar-inner">
+  <a href="index.html" class="navbar-logo"><img src="assets/logos/logo-icon.png" alt="ASG">
+    <div class="navbar-logo-text">ADITYA SKILL GATE<br><span>IT SOLUTION</span></div></a>
+        <ul class="navbar-nav">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="courses.html" class="nav-link">Courses</a></li>
+        <li><a href="jobs.html" class="nav-link">Careers</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="placements.html" class="nav-link">Placements</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+  <div class="navbar-actions"><button class="theme-toggle"><i class="fas fa-moon"></i></button><a href="resume.html" class="btn-nav-cta">Upload Resume</a><button class="hamburger" id="hamburger"><span></span><span></span><span></span></button></div>
+</div></div></nav>
+<div class="mobile-menu" id="mobile-menu" style="display: none;">  <nav class="mobile-nav">
+    <a href="index.html" class="mobile-nav-link">🏠 Home</a>
+    <a href="about.html" class="mobile-nav-link">ℹ️ About Us</a>
+    <a href="services.html" class="mobile-nav-link">⚙️ Services</a>
+    <a href="courses.html" class="mobile-nav-link">🎓 Courses</a>
+    <a href="jobs.html" class="mobile-nav-link">💼 Careers</a>
+    <a href="projects.html" class="mobile-nav-link">🎨 Projects</a>
+    <a href="placements.html" class="mobile-nav-link">🎯 Placements</a>
+    <a href="contact.html" class="mobile-nav-link">📞 Contact Us</a>
+  </nav></div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="section-badge"><i class="fas fa-question-circle"></i> Help Center</div>
+    <h1>Frequently Asked Questions</h1>
+    <p>Everything you need to know about our courses, placements, and services. Can't find the answer? Just ask us!</p>
+  </div>
+</section>
+
+<section class="section section-light">
+  <div class="container">
+
+    <div class="section-header" data-animate><div class="section-badge"><i class="fas fa-graduation-cap"></i> Courses & Training</div><h2 class="section-title">About <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Our Courses</span></h2></div>
+    <div class="faq-grid" style="margin-bottom:48px">
+      <div class="faq-item" data-animate>
+        <div class="faq-q"><span class="faq-q-text">What courses do you offer?</span><div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+        <div class="faq-a"><p style="color:var(--gray-600);line-height:1.8;font-size:0.9rem">We offer job-oriented IT courses including Full Stack Web Development (React + Node.js), Python & AI/ML, Android Development, Cloud Computing (AWS/Azure), Digital Marketing, and UI/UX Design. All courses come with hands-on projects and placement support.</p></div>
+      </div>
+      <div class="faq-item" data-animate data-delay="100">
+        <div class="faq-q"><span class="faq-q-text">Are the courses available online or only offline?</span><div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+        <div class="faq-a"><p style="color:var(--gray-600);line-height:1.8;font-size:0.9rem">We offer both online (live classes via Zoom/Google Meet) and offline (in-center) training. You can choose the mode that best suits your schedule and preference. Recorded sessions are also available for revision.</p></div>
+      </div>
+      <div class="faq-item" data-animate data-delay="200">
+        <div class="faq-q"><span class="faq-q-text">What are the course fees and duration?</span><div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+        <div class="faq-a"><p style="color:var(--gray-600);line-height:1.8;font-size:0.9rem">Course fees range from ₹8,000 to ₹20,000 depending on the program. Duration varies from 1 to 6 months. We also offer EMI options and scholarship discounts for deserving students. Visit our Courses page for current pricing.</p></div>
+      </div>
+      <div class="faq-item" data-animate data-delay="300">
+        <div class="faq-q"><span class="faq-q-text">Do I get a certificate after completing the course?</span><div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+        <div class="faq-a"><p style="color:var(--gray-600);line-height:1.8;font-size:0.9rem">Yes! Upon completing the course and projects, you receive an industry-recognized certificate from Aditya Skill Gate IT Solution. This certificate is valued by our hiring partner companies during recruitment.</p></div>
+      </div>
+      <div class="faq-item" data-animate data-delay="100">
+        <div class="faq-q"><span class="faq-q-text">What is the minimum qualification to enroll?</span><div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+        <div class="faq-a"><p style="color:var(--gray-600);line-height:1.8;font-size:0.9rem">Most courses are open to anyone with basic computer knowledge. No prior coding experience is required for beginner courses. For advanced programs (AI/ML, Cloud), a basic understanding of programming is helpful but not mandatory.</p></div>
+      </div>
+      <div class="faq-item" data-animate data-delay="200">
+        <div class="faq-q"><span class="faq-q-text">How are classes scheduled?</span><div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+        <div class="faq-a"><p style="color:var(--gray-600);line-height:1.8;font-size:0.9rem">We offer flexible batch timings: Morning (9 AM – 12 PM), Afternoon (2 PM – 5 PM), and Evening (6 PM – 9 PM) batches. Weekend-only batches are also available for working professionals.</p></div>
+      </div>
+    </div>
+
+    <div class="section-header" data-animate><div class="section-badge"><i class="fas fa-trophy"></i> Placement Support</div><h2 class="section-title">Jobs & <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Placements</span></h2></div>
+    <div class="faq-grid" style="margin-bottom:48px">
+      <div class="faq-item" data-animate>
+        <div class="faq-q"><span class="faq-q-text">Do you guarantee 100% placement?</span><div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+        <div class="faq-a"><p style="color:var(--gray-600);line-height:1.8;font-size:0.9rem">We have a 90%+ placement rate and provide dedicated placement support for all students who complete the course. While no institute can guarantee placement (it depends on individual performance), we do everything possible to help you get placed — including resume building, mock interviews, and direct referrals to 50+ companies.</p></div>
+      </div>
+      <div class="faq-item" data-animate data-delay="100">
+        <div class="faq-q"><span class="faq-q-text">Which companies have hired your students?</span><div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+        <div class="faq-a"><p style="color:var(--gray-600);line-height:1.8;font-size:0.9rem">Our students have been placed at TCS, Infosys, Wipro, Zoho, HCL, Cognizant, Accenture, Capgemini, IBM, Tech Mahindra, Hexaware, Mphasis, and many other top IT companies across India.</p></div>
+      </div>
+      <div class="faq-item" data-animate data-delay="200">
+        <div class="faq-q"><span class="faq-q-text">What is the highest salary package offered?</span><div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+        <div class="faq-a"><p style="color:var(--gray-600);line-height:1.8;font-size:0.9rem">The highest package received by our students is ₹6 LPA. The average starting salary is ₹3–4 LPA for freshers. With 1-2 years of experience and continuous skill development, our alumni typically grow to ₹6–10+ LPA.</p></div>
+      </div>
+      <div class="faq-item" data-animate data-delay="300">
+        <div class="faq-q"><span class="faq-q-text">Can I upload my resume even if I haven't taken a course?</span><div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+        <div class="faq-a"><p style="color:var(--gray-600);line-height:1.8;font-size:0.9rem">Yes! You can upload your resume on our Resume Upload page and our HR team will review it. If your profile matches our partner companies' requirements, we'll contact you. However, priority placement support is given to students who complete our courses.</p></div>
+      </div>
+    </div>
+
+    <div class="section-header" data-animate><div class="section-badge"><i class="fas fa-cog"></i> IT Services</div><h2 class="section-title">Our <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">IT Services</span></h2></div>
+    <div class="faq-grid">
+      <div class="faq-item" data-animate>
+        <div class="faq-q"><span class="faq-q-text">What IT services does Aditya Skill Gate provide?</span><div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+        <div class="faq-a"><p style="color:var(--gray-600);line-height:1.8;font-size:0.9rem">We provide Web Development, Mobile App Development, AI/ML Solutions, Cloud Services (AWS/Azure), Digital Marketing (SEO, Google Ads, Social Media), and IT Consulting for startups and businesses.</p></div>
+      </div>
+      <div class="faq-item" data-animate data-delay="100">
+        <div class="faq-q"><span class="faq-q-text">How can I get a quote for a project?</span><div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+        <div class="faq-a"><p style="color:var(--gray-600);line-height:1.8;font-size:0.9rem">Fill out the quote form on our Services page or Contact page. Include your project requirements, timeline, and budget. We'll get back to you within 24 hours with a detailed proposal. First consultation is completely free!</p></div>
+      </div>
+      <div class="faq-item" data-animate data-delay="200">
+        <div class="faq-q"><span class="faq-q-text">How do I contact support?</span><div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+        <div class="faq-a"><p style="color:var(--gray-600);line-height:1.8;font-size:0.9rem">You can reach us through:<br>📞 Phone: +91 63826 04808<br>💬 WhatsApp: +91 63826 04808<br>📧 Email: Adityaskillgateitsolution@gmail.com<br>⏰ Available: Monday – Saturday, 9 AM – 6 PM</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Still have questions CTA -->
+<section style="background:var(--gradient-primary);padding:70px 0;text-align:center">
+  <div class="container" data-animate>
+    <h2 style="color:white;margin-bottom:12px">Still Have Questions?</h2>
+    <p style="color:rgba(255,255,255,0.75);margin-bottom:32px">Our team is ready to help you. Reach out anytime!</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="https://wa.me/916382604808" target="_blank" class="btn btn-primary" style="background:white;color:var(--navy)"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+      <a href="contact.html" class="btn btn-secondary"><i class="fas fa-envelope"></i> Send a Message</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="container"><div class="footer-grid">
+  <div class="footer-brand"><div class="footer-logo"><img src="assets/logos/logo-icon.png" alt=""><div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2">ADITYA<br><span style="color:#6CCB2F">SKILL GATE IT</span></div></div><p>Empowering careers through IT training.</p><div class="footer-socials"><a href="https://www.instagram.com/adityaskillgate.official/" target="_blank" class="footer-social"><i class="fab fa-instagram"></i></a><a href="https://wa.me/916382604808" target="_blank" class="footer-social"><i class="fab fa-whatsapp"></i></a></div></div>
+  <div class="footer-col"><h4>Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="courses.html">Courses</a><a href="placements.html">Placements</a><a href="contact.html">Contact</a></div></div>
+  <div class="footer-col"><h4>Resources</h4><div class="footer-links"><a href="faq.html">FAQ</a><a href="blog.html">Blog</a><a href="resume.html">Upload Resume</a></div></div>
+  <div class="footer-col"><h4>Contact</h4><div class="footer-links"><a href="tel:+916382604808">📞 +91 63826 04808</a><a href="mailto:Adityaskillgateitsolution@gmail.com">📧 Email</a><a href="https://wa.me/916382604808" target="_blank">💬 WhatsApp</a></div></div>
+</div><div class="footer-bottom"><p>© 2024 Aditya Skill Gate IT Solution.</p><p><a href="privacy.html" style="color:rgba(255,255,255,0.5)">Privacy</a> · <a href="terms.html" style="color:rgba(255,255,255,0.5)">Terms</a></p></div></div></footer>
+<div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808" target="_blank" class="whatsapp-option">💬 Chat Now</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
+<div id="back-to-top"><i class="fas fa-arrow-up"></i></div><div id="toast-container"></div>
+<script src="js/api.js?v=4"></script><script src="js/main.js"></script>
+<script>
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.parentElement;
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el=>el.classList.remove('open'));
+    if(!isOpen)item.classList.add('open');
+  });
+});
+// Open first FAQ
+document.querySelector('.faq-item')?.classList.add('open');
+</script>
+</body></html>

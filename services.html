@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Services | Aditya Skill Gate IT Solution</title>
+  <meta name="description" content="Professional IT services: Web Development, App Development, AI Solutions, Cloud Computing, Digital Marketing, IT Consulting in Tamil Nadu.">
+  <link rel="icon" href="assets/logos/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .services-detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
+    .service-detail-card{padding:40px;background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-xl);transition:var(--transition)}
+    .service-detail-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-xl);border-color:transparent}
+    .service-detail-icon{width:72px;height:72px;border-radius:var(--border-radius);display:flex;align-items:center;justify-content:center;font-size:2.2rem;margin-bottom:24px}
+    .service-sub-list{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:8px}
+    .service-sub-list li{display:flex;gap:10px;font-size:0.875rem;color:var(--gray-600);align-items:center}
+    .service-sub-list li::before{content:'→';color:var(--tech-blue);font-weight:700;flex-shrink:0}
+    .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+    .process-steps::before{content:'';position:absolute;top:36px;left:12%;right:12%;height:2px;background:var(--gradient-accent);z-index:0}
+    .process-step{text-align:center;padding:20px;position:relative;z-index:1}
+    .process-step-num{width:72px;height:72px;border-radius:50%;background:var(--gradient-primary);color:white;font-size:1.6rem;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:4px solid white;box-shadow:var(--shadow-md)}
+    .tech-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+    .tech-chip{padding:10px 20px;background:white;border:1px solid var(--gray-200);border-radius:100px;font-size:0.875rem;font-weight:600;color:var(--navy);transition:var(--transition)}
+    .tech-chip:hover{background:var(--gradient-primary);color:white;border-color:transparent;transform:translateY(-2px)}
+    @media(max-width:768px){.services-detail-grid{grid-template-columns:1fr}.process-steps{grid-template-columns:repeat(2,1fr)}.process-steps::before{display:none}}
+  </style>
+</head>
+<body>
+<div id="page-loader"><img src="assets/logos/logo-icon.png" class="loader-logo" alt=""><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<nav class="navbar" id="navbar"><div class="container"><div class="navbar-inner">
+  <a href="index.html" class="navbar-logo"><img src="assets/logos/logo-icon.png" alt="ASG">
+    <div class="navbar-logo-text">ADITYA SKILL GATE<br><span>IT SOLUTION</span></div></a>
+        <ul class="navbar-nav">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="services.html" class="nav-link active">Services</a></li>
+        <li><a href="courses.html" class="nav-link">Courses</a></li>
+        <li><a href="jobs.html" class="nav-link">Careers</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="placements.html" class="nav-link">Placements</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+  <div class="navbar-actions"><button class="theme-toggle"><i class="fas fa-moon"></i></button><a href="resume.html" class="btn-nav-cta">Upload Resume</a><button class="hamburger" id="hamburger"><span></span><span></span><span></span></button></div>
+</div></div></nav>
+<div class="mobile-menu" id="mobile-menu" style="display: none;">  <nav class="mobile-nav">
+    <a href="index.html" class="mobile-nav-link active">🏠 Home</a>
+    <a href="about.html" class="mobile-nav-link">ℹ️ About Us</a>
+    <a href="services.html" class="mobile-nav-link">⚙️ Services</a>
+    <a href="courses.html" class="mobile-nav-link">🎓 Courses</a>
+    <a href="jobs.html" class="mobile-nav-link">💼 Careers</a>
+    <a href="projects.html" class="mobile-nav-link">🎨 Projects</a>
+    <a href="placements.html" class="mobile-nav-link">🎯 Placements</a>
+    <a href="contact.html" class="mobile-nav-link">📞 Contact Us</a>
+  </nav><div class="mobile-menu-footer"><a href="contact.html" class="btn btn-primary">📩 Get a Quote</a></div></div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="section-badge"><i class="fas fa-cog"></i> What We Build</div>
+    <h1>Our IT Services</h1>
+    <p>From startups to enterprises — we deliver end-to-end technology solutions that drive business growth.</p>
+  </div>
+</section>
+
+<section class="section section-light">
+  <div class="container">
+    <div class="section-header" data-animate><h2 class="section-title">What We <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Offer</span></h2><p class="section-subtitle">Comprehensive IT solutions tailored to your business needs, delivered by experienced professionals.</p></div>
+    <div class="services-detail-grid" id="services-page-grid">
+      <!-- Loaded by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="section section-gray">
+  <div class="container">
+    <div class="section-header" data-animate><div class="section-badge"><i class="fas fa-list-ol"></i> How We Work</div><h2 class="section-title">Our <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Process</span></h2></div>
+    <div class="process-steps">
+      <div class="process-step" data-animate data-delay="100"><div class="process-step-num">1</div><h4 style="color:var(--navy);margin-bottom:8px">Discovery</h4><p style="font-size:0.85rem;color:var(--gray-500)">We understand your requirements, goals, and target audience thoroughly.</p></div>
+      <div class="process-step" data-animate data-delay="200"><div class="process-step-num">2</div><h4 style="color:var(--navy);margin-bottom:8px">Planning</h4><p style="font-size:0.85rem;color:var(--gray-500)">Create detailed roadmap, architecture design, and project timeline.</p></div>
+      <div class="process-step" data-animate data-delay="300"><div class="process-step-num">3</div><h4 style="color:var(--navy);margin-bottom:8px">Development</h4><p style="font-size:0.85rem;color:var(--gray-500)">Agile development with regular updates and transparent communication.</p></div>
+      <div class="process-step" data-animate data-delay="400"><div class="process-step-num">4</div><h4 style="color:var(--navy);margin-bottom:8px">Delivery</h4><p style="font-size:0.85rem;color:var(--gray-500)">Deploy, test, and launch with ongoing support and maintenance.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Technologies -->
+<section class="section section-light">
+  <div class="container">
+    <div class="section-header" data-animate><div class="section-badge"><i class="fas fa-code"></i> Tech Stack</div><h2 class="section-title">Technologies We <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Master</span></h2></div>
+    <div class="tech-grid" data-animate>
+      <div class="tech-chip">⚛️ React.js</div><div class="tech-chip">🟢 Node.js</div><div class="tech-chip">🐍 Python</div><div class="tech-chip">📱 Flutter</div>
+      <div class="tech-chip">☁️ AWS</div><div class="tech-chip">🔵 Azure</div><div class="tech-chip">🐳 Docker</div><div class="tech-chip">☸️ Kubernetes</div>
+      <div class="tech-chip">🍃 MongoDB</div><div class="tech-chip">🐬 MySQL</div><div class="tech-chip">🐘 PostgreSQL</div><div class="tech-chip">🔥 Firebase</div>
+      <div class="tech-chip">📊 TensorFlow</div><div class="tech-chip">🤖 PyTorch</div><div class="tech-chip">⚡ Next.js</div><div class="tech-chip">🎨 Figma</div>
+      <div class="tech-chip">🔧 Django</div><div class="tech-chip">💡 Express.js</div><div class="tech-chip">📦 Redux</div><div class="tech-chip">🌐 GraphQL</div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section style="background:var(--gradient-primary);padding:70px 0">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">💼</div><div class="stat-number counter" data-target="50">0</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Projects Completed</div></div>
+      <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">😊</div><div class="stat-number counter" data-target="30">0</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Happy Clients</div></div>
+      <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">⏰</div><div class="stat-number" style="color:white;font-size:2.5rem;font-weight:900">100%</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">On-Time Delivery</div></div>
+      <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">🌐</div><div class="stat-number counter" data-target="5">0</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Industries Served</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Quote Form -->
+<section class="section section-light">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
+      <div data-animate>
+        <div class="section-badge"><i class="fas fa-paper-plane"></i> Get Started</div>
+        <h2 class="section-title" style="margin-bottom:16px">Request a <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Free Quote</span></h2>
+        <p style="color:var(--gray-600);line-height:1.8;margin-bottom:28px">Tell us about your project and we'll send you a detailed proposal within 24 hours.</p>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;gap:14px;align-items:center"><div style="width:42px;height:42px;background:rgba(0,150,214,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0">⚡</div><div><strong style="color:var(--navy)">Quick Response</strong><p style="font-size:0.85rem;color:var(--gray-500);margin:0">We respond to all quotes within 24 hours</p></div></div>
+          <div style="display:flex;gap:14px;align-items:center"><div style="width:42px;height:42px;background:rgba(108,203,47,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0">💰</div><div><strong style="color:var(--navy)">Transparent Pricing</strong><p style="font-size:0.85rem;color:var(--gray-500);margin:0">No hidden costs. Clear project estimates.</p></div></div>
+          <div style="display:flex;gap:14px;align-items:center"><div style="width:42px;height:42px;background:rgba(13,27,76,0.08);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0">🤝</div><div><strong style="color:var(--navy)">Free Consultation</strong><p style="font-size:0.85rem;color:var(--gray-500);margin:0">First consultation call is completely free.</p></div></div>
+        </div>
+      </div>
+      <div style="background:white;border:1px solid var(--gray-200);border-radius:24px;padding:40px" data-animate>
+        <form id="quote-form">
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Name *</label><input type="text" class="form-control" name="name" placeholder="Your name" required><span class="form-error"></span></div>
+            <div class="form-group"><label class="form-label">Email *</label><input type="email" class="form-control" name="email" placeholder="your@email.com" required><span class="form-error"></span></div>
+          </div>
+          <div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-control" name="phone" placeholder="10-digit phone number"></div>
+          <div class="form-group">
+            <label class="form-label">Service Needed</label>
+            <select class="form-control" name="subject">
+              <option value="Web Development">Web Development</option>
+              <option value="Mobile App">Mobile App Development</option>
+              <option value="AI/ML">AI / ML Solutions</option>
+              <option value="Cloud">Cloud & DevOps</option>
+              <option value="Digital Marketing">Digital Marketing</option>
+              <option value="IT Consulting">IT Consulting</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Project Details *</label><textarea class="form-control" name="message" rows="3" placeholder="Describe your project requirements..." required></textarea><span class="form-error"></span></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center"><i class="fas fa-paper-plane"></i> Request Free Quote</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="container"><div class="footer-grid">
+  <div class="footer-brand"><div class="footer-logo"><img src="assets/logos/logo-icon.png" alt=""><div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2">ADITYA<br><span style="color:#6CCB2F">SKILL GATE IT</span></div></div><p>Premium IT services & training from Tamil Nadu.</p><div class="footer-socials"><a href="https://www.instagram.com/adityaskillgate.official/" target="_blank" class="footer-social"><i class="fab fa-instagram"></i></a><a href="https://wa.me/916382604808" target="_blank" class="footer-social"><i class="fab fa-whatsapp"></i></a></div></div>
+  <div class="footer-col"><h4>Services</h4><div class="footer-links"><a href="services.html">Web Development</a><a href="services.html">App Development</a><a href="services.html">AI Solutions</a><a href="services.html">Cloud & DevOps</a><a href="services.html">Digital Marketing</a></div></div>
+  <div class="footer-col"><h4>Company</h4><div class="footer-links"><a href="about.html">About Us</a><a href="projects.html">Projects</a><a href="courses.html">Courses</a><a href="contact.html">Contact</a></div></div>
+  <div class="footer-col"><h4>Contact</h4><div class="footer-links"><a href="tel:+916382604808">📞 +91 63826 04808</a><a href="mailto:Adityaskillgateitsolution@gmail.com">📧 Email</a><a href="https://wa.me/916382604808" target="_blank">💬 WhatsApp</a></div></div>
+</div><div class="footer-bottom"><p>© 2024 Aditya Skill Gate IT Solution.</p></div></div></footer>
+<div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808?text=Hi!%20I%20need%20IT%20services" target="_blank" class="whatsapp-option">🛠️ IT Services</a><a href="https://wa.me/916382604808" target="_blank" class="whatsapp-option">💬 Quick Chat</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
+<div id="back-to-top"><i class="fas fa-arrow-up"></i></div><div id="toast-container"></div>
+<script src="js/api.js?v=4"></script><script src="js/main.js"></script>
+<script>
+(async()=>{
+  const services = await API.getServices();
+  const g = document.getElementById('services-page-grid');
+  if(g && services && services.length) {
+    g.innerHTML = services.map((s,i)=>`
+      <div class="service-detail-card" data-animate data-delay="${(i+1)*100}">
+        <div class="service-detail-icon" style="background:rgba(0,150,214,0.1)"><i class="fas ${s.icon}"></i></div>
+        <h3 style="color:var(--navy);margin-bottom:8px">${s.title}</h3>
+        <p style="color:var(--gray-500);font-size:0.875rem;margin-bottom:16px">${s.description}</p>
+        <a href="contact.html?service=${encodeURIComponent(s.title)}" class="btn btn-outline btn-sm" style="margin-top:20px">Get Quote <i class="fas fa-arrow-right"></i></a>
+      </div>`).join('');
+    // Trigger animations
+    document.querySelectorAll('[data-animate]').forEach(el=>{
+      const obs=new IntersectionObserver(e=>{e.forEach(e=>e.isIntersecting&&(e.target.classList.add('animated'),obs.unobserve(e.target)))},{threshold:0.1});
+      obs.observe(el);
+    });
+  }
+})();
+
+document.getElementById('quote-form')?.addEventListener('submit',async(e)=>{
+  e.preventDefault();if(!validateForm(e.target))return;
+  const btn=e.target.querySelector('[type=submit]');const orig=btn.innerHTML;
+  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending...';btn.disabled=true;
+  const res=await API.submitContact(Object.fromEntries(new FormData(e.target)));
+  btn.innerHTML=orig;btn.disabled=false;
+  if(res?.success!==false){showToast('Quote request sent! We\'ll contact you within 24 hours.','success');e.target.reset();}
+  else showToast(res?.message||'Error. Please try again.','error');
+});
+</script>
+</body></html>

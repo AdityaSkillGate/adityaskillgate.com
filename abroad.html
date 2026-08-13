@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Abroad | Aditya Skill Gate IT Solution</title>
+  <meta name="description" content="End-to-end admission guidance, scholarship assistance, and visa support for international universities.">
+  <link rel="icon" href="assets/logos/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .abroad-hero {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      color: white; padding: 100px 0 60px; text-align: center; position: relative;
+    }
+    .feature-card {
+      background: white; border-radius: var(--border-radius-lg); padding: 30px;
+      box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid var(--gray-200);
+      text-align: center; height: 100%;
+    }
+    .feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--tech-blue); }
+    .feature-icon {
+      width: 60px; height: 60px; border-radius: 50%; background: rgba(0,150,214,0.1);
+      color: var(--tech-blue); font-size: 1.5rem; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .university-card {
+      background: white; border-radius: var(--border-radius-lg); overflow: hidden;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200); display: flex; flex-direction: column;
+    }
+    .university-img { height: 160px; background: var(--gray-100); display: flex; align-items: center; justify-content: center; position: relative; }
+    .university-badge { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.9); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; color: var(--navy); backdrop-filter: blur(4px); }
+    .university-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .university-name { font-size: 1.25rem; font-family: var(--font-primary); font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .university-meta { font-size: 0.85rem; color: var(--gray-500); margin-bottom: 12px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .university-meta-item { display: flex; align-items: center; gap: 6px; }
+    .program-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+    .program-tag { background: var(--gray-100); color: var(--gray-600); font-size: 0.75rem; padding: 4px 8px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+<div id="page-loader"><img src="assets/logos/logo-icon.png" class="loader-logo" alt="Loading"><div class="loader-bar"><div class="loader-progress"></div></div></div>
+
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo">
+        <img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate">
+        <div class="navbar-logo-text"><center>ADITYA SKILL GATE<br><span>IT SOLUTION</span></center></div>
+      </a>
+      <ul class="navbar-nav">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+        <li class="nav-item-dropdown">
+          <a href="services.html" class="nav-link">Services <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="services.html" class="dropdown-item">Web & App Development</a>
+            <a href="services.html" class="dropdown-item">AI & Cloud Solutions</a>
+            <a href="services.html" class="dropdown-item">Digital Marketing</a>
+          </div>
+        </li>
+        <li><a href="courses.html" class="nav-link">Courses</a></li>
+        <li><a href="placements.html" class="nav-link">Placements</a></li>
+        <li><a href="abroad.html" class="nav-link active">Study Abroad</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <a href="contact.html" class="btn btn-primary btn-sm">Get in Touch</a>
+        <button class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></button>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu"><div class="mobile-menu-header"><div class="navbar-logo"><img src="assets/logos/logo-icon.png" alt="Logo"><div class="navbar-logo-text">ADITYA<br><span>SKILL GATE IT</span></div></div><button class="mobile-close" id="mobile-close"><i class="fas fa-times"></i></button></div><nav class="mobile-nav-links"><a href="index.html" class="mobile-nav-link">🏠 Home</a><a href="about.html" class="mobile-nav-link">🏢 About Us</a><a href="services.html" class="mobile-nav-link">⚙️ Services</a><a href="courses.html" class="mobile-nav-link">🎓 Courses</a><a href="abroad.html" class="mobile-nav-link active">✈️ Study Abroad</a><a href="jobs.html" class="mobile-nav-link">💼 Careers</a><a href="projects.html" class="mobile-nav-link">🎨 Projects</a><a href="placements.html" class="mobile-nav-link">🎯 Placements</a><a href="contact.html" class="mobile-nav-link">📞 Contact Us</a></nav><div class="mobile-menu-footer"><a href="contact.html" class="btn btn-primary">📩 Get a Quote</a></div></div>
+
+<section class="abroad-hero">
+  <div class="container">
+    <div class="section-badge"><i class="fas fa-plane-departure"></i> Global Education</div>
+    <h1 style="font-size:clamp(2.5rem,5vw,4rem);margin-bottom:16px;">Study Abroad with Confidence</h1>
+    <p style="font-size:1.1rem;color:rgba(255,255,255,0.8);max-width:600px;margin:0 auto 30px;">End-to-end guidance for international admissions, scholarships, and visas to make your global dream a reality.</p>
+    <a href="#universities" class="btn btn-primary btn-lg">Explore Universities</a>
+  </div>
+</section>
+
+<section class="section section-light">
+  <div class="container">
+    <div class="section-header" data-animate><h2 class="section-title">Our <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Services</span></h2><p class="section-subtitle">We provide complete support from counseling to pre-departure.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:24px;">
+      <div class="feature-card" data-animate data-delay="100">
+        <div class="feature-icon"><i class="fas fa-user-graduate"></i></div>
+        <h3 style="color: green;">Admission Support</h3>
+        <p style="color:var(--gray-500);font-size:0.875rem">Profile evaluation, university selection, and application processing for top global institutions.</p>
+      </div>
+      <div class="feature-card" data-animate data-delay="200">
+        <div class="feature-icon" style="background:rgba(108,203,47,0.1);color:var(--accent-green-dark)"><i class="fas fa-award"></i></div>
+        <h3 style="color: green;">Scholarships</h3>
+        <p style="color:var(--gray-500);font-size:0.875rem">Guidance on securing merit-based and need-based scholarships to reduce financial burden.</p>
+      </div>
+      <div class="feature-card" data-animate data-delay="300">
+        <div class="feature-icon" style="background:rgba(245,158,11,0.1);color:#d97706"><i class="fas fa-passport"></i></div>
+        <h3 style="color: green;">Visa Assistance</h3>
+        <p style="color:var(--gray-500);font-size:0.875rem">Expert visa counseling, mock interviews, and documentation support for a hassle-free process.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-gray" id="universities">
+  <div class="container">
+    <div class="section-header" data-animate><h2 class="section-title">Top <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Universities & Colleges</span></h2><p class="section-subtitle">Partner institutions across the globe offering world-class education.</p></div>
+    
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:30px;" id="universities-grid">
+      <!-- JS Rendered -->
+      <div style="text-align:center;padding:40px;color:var(--gray-500);width:100%">Loading universities...</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:var(--gradient-primary);padding:70px 0;text-align:center">
+  <div class="container" data-animate>
+    <h2 style="color:white;margin-bottom:12px">Ready to start your global journey?</h2>
+    <p style="color:rgba(255,255,255,0.75);margin-bottom:32px">Talk to our study abroad experts for free counseling today.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="https://wa.me/916382604808?text=Hi! I am interested in Study Abroad" target="_blank" class="btn btn-primary" style="background:white;color:var(--navy)"><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp Us</a>
+      <a href="contact.html" class="btn btn-secondary"><i class="fas fa-paper-plane"></i> Book Appointment</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="container"><div class="footer-grid">
+  <div class="footer-brand"><div class="footer-logo"><img src="assets/logos/logo-icon.png" alt=""><div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2">ADITYA<br><span style="color:#6CCB2F">SKILL GATE IT</span></div></div><p>Empowering careers through premium IT training and global education.</p><div class="footer-socials"><a href="https://www.instagram.com/adityaskillgate.official/" target="_blank" class="footer-social"><i class="fab fa-instagram"></i></a><a href="https://www.youtube.com/@thoduvaanamyt1867" target="_blank" class="footer-social"><i class="fab fa-youtube"></i></a><a href="https://wa.me/916382604808" target="_blank" class="footer-social"><i class="fab fa-whatsapp"></i></a></div></div>
+  <div class="footer-col"><h4>Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="courses.html">Courses</a></div></div>
+  <div class="footer-col"><h4>Resources</h4><div class="footer-links"><a href="placements.html">Placements</a><a href="abroad.html">Study Abroad</a><a href="jobs.html">Careers</a><a href="contact.html">Contact</a></div></div>
+  <div class="footer-col"><h4>Contact</h4><div class="footer-links"><a href="tel:+916382604808">📞 +91 63826 04808</a><a href="mailto:Adityaskillgateitsolution@gmail.com">📧 Email Us</a><a href="https://wa.me/916382604808" target="_blank">💬 WhatsApp</a></div></div>
+</div><div class="footer-bottom"><p>© 2024 Aditya Skill Gate IT Solution.</p><p><a href="privacy.html" style="color:rgba(255,255,255,0.5)">Privacy</a> · <a href="terms.html" style="color:rgba(255,255,255,0.5)">Terms</a></p></div></div></footer>
+
+<div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808?text=Hi!%20I'm%20interested%20in%20Study%20Abroad" target="_blank" class="whatsapp-option">✈️ Study Abroad</a><a href="https://wa.me/916382604808" target="_blank" class="whatsapp-option">💬 Quick Chat</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
+<div id="back-to-top"><i class="fas fa-arrow-up"></i></div><div id="toast-container"></div>
+
+<script src="js/api.js?v=4"></script>
+<script src="js/main.js"></script>
+<script>
+(async()=>{
+  const unis = await API.getAbroadUniversities();
+  const g = document.getElementById('universities-grid');
+  if(!g) return;
+  if(unis && unis.length) {
+    g.innerHTML = unis.map((u,i)=>`
+      <div class="university-card" data-animate data-delay="${(i%3+1)*100}">
+        <div class="university-img">
+          ${u.logoUrl ? `<img src="${u.logoUrl}" alt="${u.name}" style="max-width:140px;max-height:80px">` : `<i class="fas fa-university" style="font-size:3rem;color:var(--gray-400)"></i>`}
+          <div class="university-badge"><i class="fas fa-map-marker-alt" style="color:var(--accent-green-dark)"></i> ${u.country}</div>
+        </div>
+        <div class="university-body">
+          <div class="university-name">${u.name}</div>
+          <div class="university-meta">
+            ${u.scholarship ? `<div class="university-meta-item"><i class="fas fa-award" style="color:#d97706"></i> <span>Scholarship: <strong>${u.scholarship}</strong></span></div>` : ''}
+          </div>
+          <div style="font-size:0.8rem;color:var(--navy);font-weight:600;margin-bottom:8px">Top Programs:</div>
+          <div class="program-tags">
+            ${(Array.isArray(u.programs)?u.programs:(u.programs||'').split(',')).map(p=>`<span class="program-tag">${p.trim()}</span>`).join('')}
+          </div>
+          <div style="margin-top:auto">
+            <a href="https://wa.me/916382604808?text=Hi! I want to know more about ${u.name} in ${u.country}" target="_blank" class="btn btn-outline btn-sm" style="width:100%;justify-content:center"><i class="fab fa-whatsapp"></i> Get Details</a>
+          </div>
+        </div>
+      </div>
+    `).join('');
+    
+    document.querySelectorAll('[data-animate]').forEach(el=>{
+      const obs=new IntersectionObserver(e=>{e.forEach(e=>e.isIntersecting&&(e.target.classList.add('animated'),obs.unobserve(e.target)))},{threshold:0.1});
+      obs.observe(el);
+    });
+  } else {
+    g.innerHTML = '<div style="text-align:center;padding:40px;color:var(--gray-500);width:100%">No universities listed yet.</div>';
+  }
+})();
+</script>
+</body>
+</html>

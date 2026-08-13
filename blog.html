@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Blog & IT News | Aditya Skill Gate IT Solution</title>
+  <meta name="description" content="Read our latest tech blog posts on web development, AI/ML, cloud computing, career tips, and IT industry news.">
+  <link rel="icon" href="assets/logos/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .featured-post{background:var(--gradient-primary);border-radius:24px;padding:48px;color:white;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-bottom:48px}
+    .featured-post-img{border-radius:var(--border-radius-lg);height:260px;display:flex;align-items:center;justify-content:center;font-size:7rem;background:rgba(255,255,255,0.08)}
+    .blog-card{background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-xl);overflow:hidden;transition:var(--transition)}
+    .blog-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-xl)}
+    .blog-img{height:180px;display:flex;align-items:center;justify-content:center;font-size:5rem}
+    .blog-badge{display:inline-flex;padding:4px 12px;border-radius:100px;font-size:0.75rem;font-weight:700;margin-bottom:10px}
+    .blog-body{padding:24px}
+    .blog-author{display:flex;gap:10px;align-items:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-100)}
+    .author-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.9rem;font-weight:700;color:white;flex-shrink:0}
+    .newsletter-card{background:var(--gradient-primary);border-radius:24px;padding:60px;text-align:center;color:white}
+    @media(max-width:768px){.featured-post{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div id="page-loader"><img src="assets/logos/logo-icon.png" class="loader-logo" alt=""><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<nav class="navbar" id="navbar"><div class="container"><div class="navbar-inner">
+  <a href="index.html" class="navbar-logo"><img src="assets/logos/logo-icon.png" alt="ASG">
+    <div class="navbar-logo-text">ADITYA SKILL GATE<br><span>IT SOLUTION</span></div></a>
+        <ul class="navbar-nav">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="courses.html" class="nav-link">Courses</a></li>
+        <li><a href="jobs.html" class="nav-link">Careers</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="placements.html" class="nav-link">Placements</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+  <div class="navbar-actions"><button class="theme-toggle"><i class="fas fa-moon"></i></button><a href="resume.html" class="btn-nav-cta">Upload Resume</a><button class="hamburger" id="hamburger"><span></span><span></span><span></span></button></div>
+</div></div></nav>
+<div class="mobile-menu" id="mobile-menu" style="display: none;">  <nav class="mobile-nav">
+    <a href="index.html" class="mobile-nav-link">🏠 Home</a>
+    <a href="about.html" class="mobile-nav-link">ℹ️ About Us</a>
+    <a href="services.html" class="mobile-nav-link">⚙️ Services</a>
+    <a href="courses.html" class="mobile-nav-link">🎓 Courses</a>
+    <a href="jobs.html" class="mobile-nav-link">💼 Careers</a>
+    <a href="projects.html" class="mobile-nav-link">🎨 Projects</a>
+    <a href="placements.html" class="mobile-nav-link">🎯 Placements</a>
+    <a href="contact.html" class="mobile-nav-link">📞 Contact Us</a>
+  </nav></div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="section-badge"><i class="fas fa-newspaper"></i> Knowledge Hub</div>
+    <h1>Tech Blog & Updates</h1>
+    <p>Expert articles on web development, AI, cloud computing, career tips, and IT industry trends.</p>
+  </div>
+</section>
+
+<section class="section section-light">
+  <div class="container">
+    <!-- Search + Filter -->
+    <div style="display:flex;gap:20px;margin-bottom:28px;flex-wrap:wrap;align-items:center">
+      <div class="search-bar" style="margin-bottom:0;flex:1;min-width:200px"><div class="search-input-wrap" style="width:100%"><i class="fas fa-search"></i><input type="text" class="search-input" id="blog-search" placeholder="Search articles..."></div></div>
+    </div>
+    <div class="filter-chips" id="blog-filters" style="margin-bottom:32px">
+      <div class="chip active" data-filter="All">All Topics</div>
+      <div class="chip" data-filter="Web Dev">Web Dev</div>
+      <div class="chip" data-filter="AI/ML">AI & ML</div>
+      <div class="chip" data-filter="Career">Career Tips</div>
+      <div class="chip" data-filter="Placement">Placements</div>
+      <div class="chip" data-filter="Technology">Technology</div>
+    </div>
+
+    <!-- Featured Post Placeholder -->
+    <div class="featured-post" id="featured-post">
+      <div>
+        <span style="display:inline-flex;padding:4px 14px;background:rgba(108,203,47,0.2);border-radius:100px;font-size:0.8rem;font-weight:700;color:#6CCB2F;margin-bottom:12px">⭐ Featured</span>
+        <h2 style="color:white;font-size:1.8rem;margin-bottom:12px">Top 10 IT Skills to Learn in 2024 for Maximum Employability</h2>
+        <p style="color:rgba(255,255,255,0.75);margin-bottom:20px;line-height:1.7">Discover the most in-demand IT skills employers are looking for in 2024. From AI/ML to cloud computing, here's what you need to master.</p>
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:20px;font-size:0.85rem;color:rgba(255,255,255,0.55)">
+          <span>📅 June 10, 2024</span><span>·</span><span>⏱️ 5 min read</span><span>·</span><span>🏷️ Career Tips</span>
+        </div>
+        <a href="#" class="btn btn-primary" style="background:white;color:var(--navy)">Read Full Article →</a>
+      </div>
+      <div class="featured-post-img">🚀</div>
+    </div>
+
+    <!-- Blog Grid -->
+    <div class="courses-grid" id="blog-grid" style="grid-template-columns:repeat(3,1fr)"><!-- JS / static --></div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section class="section section-gray">
+  <div class="container">
+    <div class="newsletter-card" data-animate>
+      <div class="section-badge" style="background:rgba(108,203,47,0.15);border-color:rgba(108,203,47,0.4);color:#6CCB2F;margin-bottom:16px"><i class="fas fa-envelope"></i> Newsletter</div>
+      <h2 style="color:white;margin-bottom:12px">Stay Updated with Our Latest Articles</h2>
+      <p style="color:rgba(255,255,255,0.7);margin-bottom:32px">Get the best tech insights, career tips, and course updates delivered to your inbox.</p>
+      <form id="newsletter-form" style="display:flex;gap:12px;max-width:480px;margin:0 auto;flex-wrap:wrap">
+        <input type="email" name="email" class="form-control" placeholder="your@email.com" required style="flex:1;min-width:200px">
+        <button type="submit" class="btn btn-primary" style="white-space:nowrap"><i class="fas fa-paper-plane"></i> Subscribe</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="container"><div class="footer-grid">
+  <div class="footer-brand"><div class="footer-logo"><img src="assets/logos/logo-icon.png" alt=""><div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2">ADITYA<br><span style="color:#6CCB2F">SKILL GATE IT</span></div></div><p>Empowering careers through IT training.</p><div class="footer-socials"><a href="https://www.instagram.com/adityaskillgate.official/" target="_blank" class="footer-social"><i class="fab fa-instagram"></i></a><a href="https://www.youtube.com/@thoduvaanamyt1867" target="_blank" class="footer-social"><i class="fab fa-youtube"></i></a><a href="https://wa.me/916382604808" target="_blank" class="footer-social"><i class="fab fa-whatsapp"></i></a></div></div>
+  <div class="footer-col"><h4>Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="courses.html">Courses</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div></div>
+  <div class="footer-col"><h4>Topics</h4><div class="footer-links"><a href="#">Web Development</a><a href="#">AI & Machine Learning</a><a href="#">Career Tips</a><a href="#">Cloud Computing</a></div></div>
+  <div class="footer-col"><h4>Contact</h4><div class="footer-links"><a href="tel:+916382604808">📞 +91 63826 04808</a><a href="mailto:Adityaskillgateitsolution@gmail.com">📧 Email</a><a href="https://wa.me/916382604808" target="_blank">💬 WhatsApp</a></div></div>
+</div><div class="footer-bottom"><p>© 2024 Aditya Skill Gate IT Solution.</p></div></div></footer>
+<div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808" target="_blank" class="whatsapp-option">💬 Chat Now</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
+<div id="back-to-top"><i class="fas fa-arrow-up"></i></div><div id="toast-container"></div>
+<script src="js/api.js?v=4"></script><script src="js/main.js"></script>
+<script>
+const COLORS=['#0096D6','#0D1B4C','#6CCB2F','#f59e0b','#8b5cf6','#ef4444'];
+const CAT_COLORS={'Web Dev':'#0096D6','AI/ML':'#8b5cf6','Career':'#6CCB2F','Placement':'#f59e0b','Technology':'#ef4444'};
+const BLOG_ICONS={'Web Dev':'🌐','AI/ML':'🤖','Career':'💼','Placement':'🏆','Technology':'⚡'};
+
+const STATIC_BLOGS=[
+  {id:'b1',title:'Getting Started with React in 2024',category:'Web Dev',excerpt:'A comprehensive beginner\'s guide to React.js — from hooks to state management.',author:'Priya Sharma',date:'Jun 10, 2024',readTime:'6 min read'},
+  {id:'b2',title:'How to Break into AI/ML as a Fresher',category:'AI/ML',excerpt:'Step-by-step roadmap for beginners to enter the exciting world of Artificial Intelligence.',author:'Rahul Kumar',date:'Jun 5, 2024',readTime:'8 min read'},
+  {id:'b3',title:'Top 5 Resume Mistakes IT Freshers Make',category:'Career',excerpt:'Avoid these common resume pitfalls to maximize your chances of getting shortlisted.',author:'Meena Raj',date:'Jun 1, 2024',readTime:'4 min read'},
+  {id:'b4',title:'AWS vs Azure: Which Cloud Should You Learn?',category:'Technology',excerpt:'A detailed comparison of the two biggest cloud platforms to help you make the right choice.',author:'Arun Dev',date:'May 28, 2024',readTime:'7 min read'},
+  {id:'b5',title:'How Our Student Got Placed at Zoho in 3 Months',category:'Placement',excerpt:'Read the inspiring success story of how Karthik transformed from fresher to Zoho employee.',author:'HR Team',date:'May 22, 2024',readTime:'3 min read'},
+  {id:'b6',title:'Flutter vs React Native: Best Mobile Framework 2024',category:'Web Dev',excerpt:'A side-by-side comparison to help you choose the right cross-platform mobile framework.',author:'Dev Team',date:'May 18, 2024',readTime:'5 min read'},
+];
+
+function renderBlogs(blogs){
+  const g=document.getElementById('blog-grid');if(!g)return;
+  const list=blogs||STATIC_BLOGS;
+  g.innerHTML=list.map((b,i)=>`
+    <div class="blog-card" data-animate data-delay="${(i%3+1)*80}" data-category="${b.category}">
+      <div class="blog-img" style="background:linear-gradient(135deg,${COLORS[i%COLORS.length]}cc,${COLORS[(i+2)%COLORS.length]}cc)">${BLOG_ICONS[b.category]||'📝'}</div>
+      <div class="blog-body">
+        <div class="blog-badge" style="background:${CAT_COLORS[b.category]||'#0096D6'}18;color:${CAT_COLORS[b.category]||'#0096D6'}">${b.category}</div>
+        <div style="font-size:0.75rem;color:var(--gray-400);margin-bottom:8px">📅 ${b.date||'Jun 2024'} · ⏱️ ${b.readTime||'5 min read'}</div>
+        <h3 style="font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:8px;line-height:1.4">${b.title}</h3>
+        <p style="font-size:0.85rem;color:var(--gray-500);line-height:1.6;margin-bottom:12px">${(b.excerpt||b.content||'').substring(0,100)}...</p>
+        <a href="#" class="service-link">Read More <i class="fas fa-arrow-right"></i></a>
+        <div class="blog-author">
+          <div class="author-avatar" style="background:${COLORS[i%COLORS.length]}">${(b.author||'A')[0]}</div>
+          <div style="font-size:0.8rem"><div style="font-weight:600;color:var(--navy)">${b.author||'Author'}</div><div style="color:var(--gray-400)">Author</div></div>
+        </div>
+      </div>
+    </div>`).join('');
+  document.querySelectorAll('[data-animate]').forEach(el=>{const obs=new IntersectionObserver(e=>{e.forEach(e=>e.isIntersecting&&(e.target.classList.add('animated'),obs.unobserve(e.target)))},{threshold:0.1});obs.observe(el);});
+}
+
+document.getElementById('blog-filters')?.addEventListener('filterChange',e=>{
+  const val=e.detail.value;
+  document.querySelectorAll('.blog-card').forEach(card=>{
+    card.style.display=(val==='All'||card.dataset.category===val)?'':'none';
+  });
+});
+
+document.getElementById('blog-search')?.addEventListener('input',function(){
+  const q=this.value.toLowerCase();
+  document.querySelectorAll('.blog-card').forEach(card=>{card.style.display=card.textContent.toLowerCase().includes(q)?'':'none';});
+});
+
+document.getElementById('newsletter-form')?.addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  const res=await API.submitContact({name:'Newsletter',email:e.target.email.value,subject:'Newsletter Subscription',message:'Subscribe'});
+  if(res?.success!==false)showToast('Subscribed! Welcome to our newsletter.','success');
+  else showToast('Already subscribed or error. Please try again.','error');
+  e.target.reset();
+});
+
+// Try API first, then fall back to static
+API.getBlogs().then(blogs=>{
+  if(blogs&&blogs.length>0)renderBlogs(blogs);else renderBlogs(STATIC_BLOGS);
+}).catch(()=>renderBlogs(STATIC_BLOGS));
+</script>
+</body></html>

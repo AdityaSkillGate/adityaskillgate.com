@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aditya Skill Gate IT Solution | IT Training & Services in Tenkasi, Tamil Nadu</title>
+  <meta name="description" content="Premium IT training institute and software development company in Tenkasi. Learn React, Python, Full Stack, AI, or hire us for Web & App Development. 100% placement support.">
+  <meta name="keywords" content="IT training Tenkasi, software company Tamil Nadu, web development, full stack course, python training, AI ML course, aditya skill gate">
+  <meta name="author" content="Aditya Skill Gate IT Solution">
+  <link rel="canonical" href="https://adityaskillgate.com/">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://adityaskillgate.com/">
+  <meta property="og:title" content="Aditya Skill Gate IT Solution | Premium IT Training & Services">
+  <meta property="og:description" content="Master in-demand IT skills or get top-tier web development services. Join 500+ successful students.">
+  <meta property="og:image" content="https://adityaskillgate.com/assets/logos/logo-full.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="Aditya Skill Gate IT Solution">
+  <meta property="twitter:description" content="Leading IT Training and Software Services in Tamil Nadu.">
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Aditya Skill Gate IT Solution",
+    "url": "https://adityaskillgate.com/",
+    "logo": "https://adityaskillgate.com/assets/logos/logo-icon.png",
+    "description": "Premium IT training institute offering courses in Full Stack Web Development, Python, AI, and comprehensive IT services.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Tenkasi",
+      "addressRegion": "Tamil Nadu",
+      "addressCountry": "IN"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-6382604808",
+      "contactType": "customer service"
+    }
+  }
+  </script>
+
+  <link rel="icon" href="assets/logos/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    /* ---- Hero Tech Grid ---- */
+    .hero-grid { display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center; }
+    .hero-visual-wrap { position:relative; }
+    .hero-main-card {
+      background:var(--glass-bg);backdrop-filter:var(--glass-blur);
+      border:1px solid var(--glass-border);border-radius:24px;padding:32px;color:white;
+    }
+    .hero-tech-row { display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px; }
+    .hero-tech-chip {
+      padding:6px 14px;background:rgba(255,255,255,0.1);border-radius:100px;
+      font-size:0.8rem;font-weight:600;color:rgba(255,255,255,0.85);
+      border:1px solid rgba(255,255,255,0.15);
+    }
+    .hero-stats-mini { display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px; }
+    .hero-stat-item { text-align:center;padding:16px;background:rgba(255,255,255,0.07);border-radius:12px; }
+    .hero-stat-item .num { font-size:1.8rem;font-weight:900;background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1; }
+    .hero-stat-item .lbl { font-size:0.75rem;color:rgba(255,255,255,0.6);margin-top:4px; }
+    /* Why Choose Section */
+    .why-grid { display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center; }
+    .why-list { display:flex;flex-direction:column;gap:16px; }
+    .why-item { display:flex;gap:14px;align-items:flex-start; }
+    .why-icon { width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;background:linear-gradient(135deg,rgba(0,150,214,0.1),rgba(108,203,47,0.1)); }
+    .why-item h4 { font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:4px; }
+    .why-item p { font-size:0.85rem;color:var(--gray-500);line-height:1.6; }
+    .why-card { background:var(--gradient-primary);border-radius:24px;padding:40px;color:white;position:relative;overflow:hidden; }
+    .why-card::before { content:'';position:absolute;bottom:-40px;right:-40px;width:200px;height:200px;background:rgba(108,203,47,0.15);border-radius:50%; }
+    .why-card-stat { margin-bottom:20px; }
+    .why-card-stat .n { font-size:3rem;font-weight:900;background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1; }
+    .why-card-stat .l { font-size:0.9rem;color:rgba(255,255,255,0.7); }
+    /* Contact strip */
+    .contact-strip { background:var(--gradient-primary);padding:60px 0; }
+    .contact-strip-grid { display:grid;grid-template-columns:repeat(3,1fr) auto;gap:40px;align-items:center; }
+    .contact-strip-item { display:flex;align-items:center;gap:14px;color:white; }
+    .contact-strip-icon { width:50px;height:50px;background:rgba(255,255,255,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0; }
+    .contact-strip-text strong { display:block;font-size:0.8rem;opacity:.6;margin-bottom:4px; }
+    .contact-strip-text a { color:white;font-weight:700;font-size:1rem; }
+    @media(max-width:991px){.why-grid{grid-template-columns:1fr}.contact-strip-grid{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr}}
+    @media(max-width:576px){.contact-strip-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<!-- Loader -->
+<div id="page-loader">
+  <img src="assets/logos/logo-icon.png" class="loader-logo" alt="Loading Aditya Skill Gate">
+  <div class="loader-bar"><div class="loader-progress"></div></div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo">
+        <img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate IT Solution">
+        <div class="navbar-logo-text"><center>ADITYA SKILL GATE<br><span>IT SOLUTION</span></div></center>
+      </a>
+            <ul class="navbar-nav">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="courses.html" class="nav-link">Courses</a></li>
+        <li><a href="jobs.html" class="nav-link">Careers</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="placements.html" class="nav-link">Placements</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <button class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+        <a href="resume.html" class="btn-nav-cta"><i class="fas fa-upload"></i> Upload Resume</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu" style="display: none;">
+    <nav class="mobile-nav">
+    <a href="index.html" class="mobile-nav-link active">🏠 Home</a>
+    <a href="about.html" class="mobile-nav-link">ℹ️ About Us</a>
+    <a href="services.html" class="mobile-nav-link">⚙️ Services</a>
+    <a href="courses.html" class="mobile-nav-link">🎓 Courses</a>
+    <a href="jobs.html" class="mobile-nav-link">💼 Careers</a>
+    <a href="projects.html" class="mobile-nav-link">🎨 Projects</a>
+    <a href="placements.html" class="mobile-nav-link">🎯 Placements</a>
+    <a href="contact.html" class="mobile-nav-link">📞 Contact Us</a>
+  </nav>
+  <div class="mobile-menu-footer">
+    <a href="resume.html" class="btn btn-primary" style="max-width:100%">📄 Upload Resume</a>
+    <a href="admin/login.html" style="color:rgba(255,255,255,0.4);font-size:0.8rem;text-align:center">🔐 Admin Login</a>
+  </div>
+</div>
+
+<!-- HERO SECTION -->
+<section class="hero" id="home">
+  <div class="hero-particles" id="particles"></div>
+  <div class="container hero-content">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="hero-badge"><i class="fas fa-star"></i> #1 IT Training Institute in Tenkasi</div>
+        <h1 class="hero-title">
+          Empowering Skills<br>Through <span class="highlight typing-text" data-words='["Technology","Innovation","Excellence","AI & ML","Web Dev"]'>Technology</span>
+        </h1>
+        <p class="hero-subtitle">Premium IT training courses, cutting-edge IT services, and guaranteed placement support. Join 500+ students who transformed their careers with us.</p>
+        <div class="hero-buttons">
+          <a href="courses.html" class="btn btn-primary btn-lg"><i class="fas fa-graduation-cap"></i> Explore Courses</a>
+          <a href="services.html" class="btn btn-secondary btn-lg"><i class="fas fa-cog"></i> Our Services</a>
+          <a href="resume.html" class="btn btn-green btn-lg"><i class="fas fa-upload"></i> Upload Resume</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;margin-top:36px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:-6px">
+            <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#0096D6,#6CCB2F);border:2px solid white;display:flex;align-items:center;justify-content:center;color:white;font-size:0.8rem;font-weight:700;margin-right:-8px">A</div>
+            <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#0D1B4C,#0096D6);border:2px solid white;display:flex;align-items:center;justify-content:center;color:white;font-size:0.8rem;font-weight:700;margin-right:-8px">S</div>
+            <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#6CCB2F,#0096D6);border:2px solid white;display:flex;align-items:center;justify-content:center;color:white;font-size:0.8rem;font-weight:700">K</div>
+          </div>
+          <div style="color:rgba(255,255,255,0.8);font-size:0.875rem"><span style="color:#6CCB2F;font-weight:700">500+</span> students already enrolled</div>
+          <div style="display:flex;gap:2px;color:#f59e0b">★★★★★</div>
+          <span style="color:rgba(255,255,255,0.6);font-size:0.8rem">4.9/5 Rating</span>
+        </div>
+      </div>
+      <div class="hero-visual-wrap" style="animation:fadeInRight 1s ease 0.3s both">
+        <div class="hero-main-card">
+          <div style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px">Technologies We Teach</div>
+          <div class="hero-tech-row">
+            <span class="hero-tech-chip">⚛️ React</span>
+            <span class="hero-tech-chip">🐍 Python</span>
+            <span class="hero-tech-chip">🤖 AI/ML</span>
+            <span class="hero-tech-chip">📱 Flutter</span>
+            <span class="hero-tech-chip">☁️ AWS</span>
+            <span class="hero-tech-chip">🛠️ Node.js</span>
+            <span class="hero-tech-chip">🎨 UI/UX</span>
+            <span class="hero-tech-chip">📊 MongoDB</span>
+          </div>
+          <div class="hero-stats-mini">
+            <div class="hero-stat-item"><div class="num">500<span style="font-size:1.2rem">+</span></div><div class="lbl">Students Trained</div></div>
+            <div class="hero-stat-item"><div class="num">100<span style="font-size:1.2rem">+</span></div><div class="lbl">Placements</div></div>
+            <div class="hero-stat-item"><div class="num">50<span style="font-size:1.2rem">+</span></div><div class="lbl">Projects Done</div></div>
+            <div class="hero-stat-item"><div class="num">90<span style="font-size:1.2rem">%+</span></div><div class="lbl">Placement Rate</div></div>
+          </div>
+        </div>
+        <!-- Float cards -->
+        <div class="hero-float-card hero-float-card-1" style="animation:float 3s ease-in-out infinite">
+          <div class="hero-float-icon">🏆</div>
+          <div><div class="hero-float-value">100+</div><div class="hero-float-text">Placements</div></div>
+        </div>
+        <div class="hero-float-card hero-float-card-2" style="animation:float 3s ease-in-out infinite;animation-delay:1.5s">
+          <div class="hero-float-icon">🎓</div>
+          <div><div class="hero-float-value">6</div><div class="hero-float-text">Job-Ready Courses</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS SECTION -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">🎓</div>
+        <div class="stat-number counter" data-target="500">0</div>
+        <div class="stat-label">Students Trained</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏆</div>
+        <div class="stat-number counter" data-target="100">0</div>
+        <div class="stat-label">Placements</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">💻</div>
+        <div class="stat-number counter" data-target="50">0</div>
+        <div class="stat-label">Projects Delivered</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-number counter" data-target="20">0</div>
+        <div class="stat-label">IT Professionals</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⚡</div>
+        <div class="stat-number counter" data-target="15">0</div>
+        <div class="stat-label">Technologies</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="color:var(--navy)">⭐</div>
+        <div class="stat-number" style="color:var(--navy)">4.9/5</div>
+        <div class="stat-label" style="color:var(--navy)">Google Rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES SECTION -->
+<section class="section section-light" id="services">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <div class="section-badge"><i class="fas fa-cog"></i> What We Do</div>
+      <h2 class="section-title">Our IT <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Services</span></h2>
+      <p class="section-subtitle">From custom software development to AI solutions — we help businesses and students grow in the digital world.</p>
+    </div>
+    <div class="services-grid" id="services-grid">
+      <!-- Loaded by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- COURSES SECTION -->
+<section class="section section-gray" id="courses">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <div class="section-badge"><i class="fas fa-graduation-cap"></i> Learn & Grow</div>
+      <h2 class="section-title">Popular <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Courses</span></h2>
+      <p class="section-subtitle">Industry-designed courses that make you job-ready in 3-6 months with real-world projects.</p>
+    </div>
+    <div class="courses-grid" id="courses-grid">
+      <!-- Loaded by JS -->
+    </div>
+    <div style="text-align:center;margin-top:48px" data-animate>
+      <a href="courses.html" class="btn btn-primary btn-lg"><i class="fas fa-th-large"></i> View All Courses</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABROAD BANNERS SECTION -->
+<section class="section section-light">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px">
+      <!-- Abroad Study -->
+      <div style="background:var(--gradient-primary);border-radius:24px;padding:40px;color:white;position:relative;overflow:hidden" data-animate="fade-up">
+        <div style="position:absolute;top:-20px;right:-20px;font-size:10rem;opacity:0.05">🎓</div>
+        <div style="position:relative;z-index:1">
+          <div style="display:inline-block;padding:6px 16px;background:rgba(255,255,255,0.1);border-radius:100px;font-size:0.875rem;font-weight:700;margin-bottom:20px;color:#0096D6;border:1px solid rgba(0,150,214,0.3)">Global Education</div>
+          <h3 style="font-family:'Outfit';font-size:2rem;margin-bottom:16px">Study Abroad</h3>
+          <p style="color:rgba(255,255,255,0.8);margin-bottom:30px;line-height:1.6">Get admission in top universities across USA, UK, Canada, and Australia with up to 100% scholarships and visa assistance.</p>
+          <a href="abroad.html" class="btn btn-primary" style="background:white;color:var(--navy)"><i class="fas fa-plane"></i> Explore Universities</a>
+        </div>
+      </div>
+      <!-- Abroad Jobs -->
+      <div style="background:var(--gradient-accent);border-radius:24px;padding:40px;color:white;position:relative;overflow:hidden" data-animate="fade-up" data-delay="100">
+        <div style="position:absolute;top:-20px;right:-20px;font-size:10rem;opacity:0.1">💼</div>
+        <div style="position:relative;z-index:1">
+          <div style="display:inline-block;padding:6px 16px;background:rgba(255,255,255,0.2);border-radius:100px;font-size:0.875rem;font-weight:700;margin-bottom:20px;color:var(--navy);border:1px solid rgba(13,27,76,0.2)">Global Careers</div>
+          <h3 style="font-family:'Outfit';font-size:2rem;margin-bottom:16px;color:var(--navy)">Abroad Jobs</h3>
+          <p style="color:rgba(13,27,76,0.8);margin-bottom:30px;line-height:1.6;font-weight:500">Unlock international career opportunities. We connect skilled professionals with leading global employers.</p>
+          <a href="jobs.html" class="btn btn-secondary"><i class="fas fa-briefcase"></i> View Global Jobs</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOBS SECTION -->
+<section class="section section-light" id="jobs">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <div class="section-badge"><i class="fas fa-briefcase"></i> Now Hiring</div>
+      <h2 class="section-title">Open <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Job Positions</span></h2>
+      <p class="section-subtitle">Join our growing team or connect with our partner companies through our placement network.</p>
+    </div>
+    <div class="jobs-grid" id="jobs-grid">
+      <!-- Loaded by JS -->
+    </div>
+    <div style="text-align:center;margin-top:48px" data-animate>
+      <a href="jobs.html" class="btn btn-outline btn-lg"><i class="fas fa-briefcase"></i> View All Openings</a>
+    </div>
+  </div>
+</section>
+
+<!-- PLACEMENTS SECTION -->
+<section class="section" style="background:var(--gradient-hero)" id="placements">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <div class="section-badge" style="background:rgba(108,203,47,0.15);border-color:rgba(108,203,47,0.4);color:#6CCB2F"><i class="fas fa-trophy"></i> Success Stories</div>
+      <h2 class="section-title" style="color:white">Student <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Placements</span></h2>
+      <p class="section-subtitle" style="color:rgba(255,255,255,0.7)">Our graduates are working at top companies across India. Here are their stories.</p>
+    </div>
+    <div class="placement-slider">
+      <div class="placement-track" id="placement-track"><!-- JS --></div>
+    </div>
+    <div class="slider-controls">
+      <button class="slider-btn slider-prev" id="placement-prev"><i class="fas fa-chevron-left"></i></button>
+      <div class="slider-dots" id="placement-dots"></div>
+      <button class="slider-btn slider-next" id="placement-next"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <a href="placements.html" class="btn btn-secondary btn-lg"><i class="fas fa-trophy"></i> View All Placements</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS SECTION -->
+<section class="section section-gray" id="projects-sec">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <div class="section-badge"><i class="fas fa-code"></i> Our Work</div>
+      <h2 class="section-title">Featured <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Projects</span></h2>
+      <p class="section-subtitle">Delivering high-quality software solutions across industries.</p>
+    </div>
+    <div class="projects-grid" id="projects-grid"><!-- JS --></div>
+    <div style="text-align:center;margin-top:48px" data-animate>
+      <a href="projects.html" class="btn btn-outline btn-lg"><i class="fas fa-laptop-code"></i> View All Projects</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="section section-light">
+  <div class="container">
+    <div class="why-grid">
+      <div data-animate="fade-left">
+        <div class="section-badge"><i class="fas fa-star"></i> Why Us?</div>
+        <h2 class="section-title" style="margin-bottom:32px">Why Choose <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Aditya Skill Gate?</span></h2>
+        <div class="why-list">
+          <div class="why-item"><div class="why-icon">👨‍🏫</div><div><h4>Expert Industry Trainers</h4><p>Learn from professionals with 5+ years of real-world IT industry experience.</p></div></div>
+          <div class="why-item"><div class="why-icon">🏆</div><div><h4>90%+ Placement Rate</h4><p>Our dedicated placement team ensures you land your dream job after course completion.</p></div></div>
+          <div class="why-item"><div class="why-icon">💻</div><div><h4>Hands-On Real Projects</h4><p>Build an industry-ready portfolio with live projects during your training.</p></div></div>
+          <div class="why-item"><div class="why-icon">🕐</div><div><h4>Flexible Batch Timings</h4><p>Morning, evening, and weekend batches to fit your schedule and lifestyle.</p></div></div>
+          <div class="why-item"><div class="why-icon">📜</div><div><h4>Industry Certificates</h4><p>Earn recognized certificates that boost your resume and credibility with employers.</p></div></div>
+          <div class="why-item"><div class="why-icon">♾️</div><div><h4>Lifetime Support</h4><p>Even after placement, our community and mentors are always available to help you.</p></div></div>
+        </div>
+      </div>
+      <div data-animate="fade-right">
+        <div class="why-card">
+          <div style="color:rgba(255,255,255,0.5);font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:24px">Our Track Record</div>
+          <div class="why-card-stat"><div class="n">500<span style="font-size:2rem">+</span></div><div class="l">Students Successfully Trained</div></div>
+          <div class="why-card-stat"><div class="n">90<span style="font-size:2rem">%+</span></div><div class="l">Placement Rate</div></div>
+          <div class="why-card-stat"><div class="n">₹6<span style="font-size:2rem">L</span></div><div class="l">Highest Package Achieved</div></div>
+          <div style="margin-top:32px">
+            <a href="courses.html" class="btn btn-primary" style="width:100%;justify-content:center">🚀 Start Your Journey</a>
+          </div>
+          <div style="position:absolute;top:20px;right:20px;font-size:4rem;opacity:0.1">🏆</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM SECTION -->
+<section class="section section-gray" id="team-sec">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <div class="section-badge"><i class="fas fa-users"></i> Meet the Team</div>
+      <h2 class="section-title">Our <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Expert Team</span></h2>
+      <p class="section-subtitle">Passionate professionals dedicated to your success in the IT world.</p>
+    </div>
+    <div class="team-grid" id="team-grid"><!-- JS --></div>
+    <div style="text-align:center;margin-top:40px" data-animate>
+      <a href="team.html" class="btn btn-outline btn-lg"><i class="fas fa-users"></i> Meet Full Team</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials-section" id="testimonials-sec">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <div class="section-badge"><i class="fas fa-star"></i> Reviews</div>
+      <h2 class="section-title">What Our <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Students Say</span></h2>
+      <p class="section-subtitle">Don't just take our word for it — hear from the students and clients who've experienced it.</p>
+    </div>
+    <div class="testimonials-slider">
+      <div class="testimonials-track" id="testimonials-track"><!-- JS --></div>
+    </div>
+    <div class="slider-controls">
+      <button class="slider-btn" id="test-prev"><i class="fas fa-chevron-left"></i></button>
+      <div class="slider-dots" id="test-dots"></div>
+      <button class="slider-btn" id="test-next"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT STRIP -->
+<section class="contact-strip">
+  <div class="container">
+    <div class="contact-strip-grid">
+      <div class="contact-strip-item">
+        <div class="contact-strip-icon">📞</div>
+        <div class="contact-strip-text"><strong>Call Us</strong><a href="tel:+916382604808">+91 63826 04808</a></div>
+      </div>
+      <div class="contact-strip-item">
+        <div class="contact-strip-icon">📧</div>
+        <div class="contact-strip-text"><strong>Email Us</strong><a href="mailto:Adityaskillgateitsolution@gmail.com" style="font-size:0.85rem">Adityaskillgateitsolution@gmail.com</a></div>
+      </div>
+      <div class="contact-strip-item">
+        <div class="contact-strip-icon">💬</div>
+        <div class="contact-strip-text"><strong>WhatsApp</strong><a href="https://wa.me/916382604808" target="_blank">+91 63826 04808</a></div>
+      </div>
+      <a href="contact.html" class="btn btn-primary btn-lg" style="white-space:nowrap"><i class="fas fa-paper-plane"></i> Contact Us Now</a>
+    </div>
+  </div>
+</section>
+<!-- PARTNERS SECTION -->
+<section class="section section-light" id="partners" style="padding: 40px 0; border-top: 1px solid var(--gray-200);">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:20px;">
+      <h3 style="color:var(--gray-500);font-size:1rem;text-transform:uppercase;letter-spacing:2px;">Our Partners & Hiring Companies</h3>
+    </div>
+    <div style="overflow:hidden;white-space:nowrap;position:relative;width:100%;padding:20px 0;">
+      <div id="partners-track" style="display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;">
+        <!-- Loaded by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate">
+          <div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2">ADITYA<br><span style="color:#6CCB2F">SKILL GATE IT</span></div>
+        </div>
+        <p>Empowering careers through premium IT training, services, and guaranteed placement support. Your success is our mission.</p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/adityaskillgate.official/" target="_blank" class="footer-social"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@thoduvaanamyt1867" target="_blank" class="footer-social"><i class="fab fa-youtube"></i></a>
+          <a href="https://wa.me/916382604808" target="_blank" class="footer-social"><i class="fab fa-whatsapp"></i></a>
+          <a href="mailto:Adityaskillgateitsolution@gmail.com" class="footer-social"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About Us</a>
+          <a href="services.html">Services</a>
+          <a href="courses.html">Courses</a>
+          <a href="jobs.html">Careers</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <div class="footer-links">
+          <a href="projects.html">Projects</a>
+          <a href="placements.html">Placements</a>
+          <a href="blog.html">Blog</a>
+          <a href="faq.html">FAQ</a>
+          <a href="resume.html">Resume Upload</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-links">
+          <a href="tel:+916382604808">📞 +91 63826 04808</a>
+          <a href="mailto:Adityaskillgateitsolution@gmail.com">📧 Email Us</a>
+          <a href="https://wa.me/916382604808" target="_blank">💬 WhatsApp</a>
+          <a href="contact.html">📍 Sankarankovil, Tamil Nadu, India</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Aditya Skill Gate IT Solution. All rights reserved. Made with ❤️ in Tamil Nadu.</p>
+      <p><a href="privacy.html" style="color:rgba(255,255,255,0.5)">Privacy Policy</a> · <a href="terms.html" style="color:rgba(255,255,255,0.5)">Terms</a> · 
+        <a href="admin/login.html" style="color:rgba(255,255,255,0.4);font-size:0.8rem;text-align:center">🔐 Admin Login</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<div class="whatsapp-float">
+  <div class="whatsapp-menu" id="wa-menu">
+    <a href="https://wa.me/916382604808?text=Hi!%20I'm%20interested%20in%20your%20courses" target="_blank" class="whatsapp-option">🎓 Course Enquiry</a>
+    <a href="https://wa.me/916382604808?text=Hi!%20I%20need%20IT%20services" target="_blank" class="whatsapp-option">🛠️ IT Services</a>
+    <a href="https://wa.me/916382604808" target="_blank" class="whatsapp-option">💬 Quick Chat</a>
+  </div>
+  <div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div>
+</div>
+
+<!-- Chatbot -->
+<div class="chatbot-widget">
+  <div class="chatbot-window" id="chatbot-window">
+    <div class="chatbot-header">
+      <div class="chatbot-avatar">🤖</div>
+      <div class="chatbot-info"><h4>ASG Assistant</h4><span>Online · Replies instantly</span></div>
+      <div class="chatbot-status"></div>
+    </div>
+    <div class="chatbot-messages" id="chat-messages">
+      <div class="chat-msg bot">Hi! 👋 I'm the ASG Bot. Ask me about courses, fees, placements, or jobs!</div>
+    </div>
+    <div class="chatbot-suggestions">
+      <span class="chat-suggestion">Courses</span>
+      <span class="chat-suggestion">Fees</span>
+      <span class="chat-suggestion">Placement</span>
+      <span class="chat-suggestion">Contact</span>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" placeholder="Ask a question..." id="chat-input">
+      <button class="chatbot-send" id="chat-send"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+  <div class="chatbot-toggle" id="chatbot-toggle"><i class="fas fa-robot"></i></div>
+</div>
+
+<div id="back-to-top"><i class="fas fa-arrow-up"></i></div>
+<div id="toast-container"></div>
+<div class="notification-popup"><h4></h4><p></p></div>
+
+<script src="js/api.js?v=4"></script>
+<script src="js/main.js"></script>
+<script>
+const COLORS = ['#0096D6','#0D1B4C','#6CCB2F','#f59e0b','#8b5cf6','#ef4444'];
+const PROJECT_ICONS = {'Web Development':'🌐','Enterprise Software':'🏢','Mobile App':'📱','AI/ML':'🤖','EdTech':'🎓','Real Estate':'🏠'};
+
+function initials(name){ return name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase(); }
+function avatarBg(name){ return COLORS[name.charCodeAt(0)%COLORS.length]; }
+
+function renderCourses(courses){
+  const g=document.getElementById('courses-grid');if(!g)return;
+  g.innerHTML=courses.slice(0,6).map((c,i)=>`
+    <div class="course-card" data-animate data-delay="${(i%3+1)*100}" data-search="${c.title} ${c.category} ${c.trainer}">
+      <div class="course-img" style="${c.imageUrl ? `background:url('${c.imageUrl}') center/cover;` : `background:linear-gradient(135deg,${COLORS[i%COLORS.length]}cc,${COLORS[(i+2)%COLORS.length]}cc)`}">
+        ${c.imageUrl ? '' : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4rem">${{Web:'🌐',Mobile:'📱','AI':'🤖',Cloud:'☁️',Marketing:'📣',Design:'🎨'}[c.category?.split(' ')[0]]||'💻'}</div>`}
+        <div class="course-badge">${c.badge||c.category}</div>
+      </div>
+      <div class="course-body">
+        <h3>${c.title}</h3>
+        <div class="course-meta">
+          <div class="course-meta-item"><i class="fas fa-clock" style="color:var(--tech-blue)"></i>${c.duration}</div>
+          <div class="course-meta-item"><i class="fas fa-signal" style="color:var(--accent-green-dark)"></i>Beginner+</div>
+        </div>
+        <div class="course-trainer">
+          <div class="trainer-avatar">${initials(c.trainer||'T')}</div>
+          <div><div style="font-size:0.8rem;color:var(--gray-500)">Trainer</div><div style="font-size:0.875rem;font-weight:600;color:var(--navy)">${c.trainer||'Expert Trainer'}</div></div>
+        </div>
+        <div class="course-footer">
+          <div class="course-fee">${c.fee}<small>${c.originalFee||''}</small></div>
+          <a href="courses.html" class="btn btn-primary btn-sm">Enroll Now</a>
+        </div>
+      </div>
+    </div>`).join('');
+  document.querySelectorAll('[data-animate]').forEach(el=>{const obs=new IntersectionObserver(e=>{e.forEach(e=>e.isIntersecting&&(e.target.classList.add('animated'),obs.unobserve(e.target)))},{threshold:0.1});obs.observe(el);});
+  document.querySelectorAll('[data-animate]').forEach(el=>{const obs=new IntersectionObserver(e=>{e.forEach(e=>e.isIntersecting&&(e.target.classList.add('animated'),obs.unobserve(e.target)))},{threshold:0.1});obs.observe(el);});
+}
+
+function renderServices(services){
+  const g=document.getElementById('services-grid');if(!g)return;
+  g.innerHTML=services.map((s,i)=>`
+    <div class="service-card" data-animate data-delay="${(i+1)*100}">
+      <div class="service-icon-wrap service-icon-blue"><i class="fas ${s.icon} fa-2x"></i></div>
+      <h3>${s.title}</h3>
+      <p>${s.description}</p>
+      <a href="services.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+    </div>`).join('');
+}
+
+function renderPartners(partners){
+  const track=document.getElementById('partners-track');if(!track)return;
+  if(!partners || !partners.length) { track.innerHTML=''; return; }
+  track.innerHTML=partners.map(p=>`
+    <div class="partner-logo" style="padding:0 20px;">
+      ${p.logoUrl ? `<img src="${p.logoUrl}" alt="${p.name}" style="max-height:60px;filter:grayscale(100%);opacity:0.6;transition:var(--transition);cursor:pointer;" onmouseover="this.style.filter='grayscale(0%)';this.style.opacity='1';" onmouseout="this.style.filter='grayscale(100%)';this.style.opacity='0.6';">` : `<div style="font-weight:700;color:var(--gray-500);font-size:1.2rem;">${p.name}</div>`}
+    </div>`).join('');
+}
+
+function renderJobs(jobs){
+  const g=document.getElementById('jobs-grid');if(!g)return;
+  const typeMap={'Full-time':'badge-fulltime','Remote':'badge-remote','Hybrid':'badge-hybrid'};
+  g.innerHTML=jobs.slice(0,4).map(j=>`
+    <div class="job-card" data-animate>
+      <div class="job-header">
+        <div><div class="job-title">${j.title}</div><div class="job-dept">${j.department} · ${j.location}</div></div>
+        <span class="job-type-badge ${typeMap[j.type]||'badge-fulltime'}">${j.type}</span>
+      </div>
+      <div class="job-meta">
+        <div class="job-meta-item"><i class="fas fa-briefcase"></i>${j.experience}</div>
+        <div class="job-meta-item"><i class="fas fa-rupee-sign"></i>${j.salary}</div>
+      </div>
+      <div class="job-skills">${(Array.isArray(j.skills) ? j.skills : String(j.skills||'').split(',')).slice(0,4).map(s=>`<span class="skill-tag">${s.trim()}</span>`).join('')}</div>
+      <div class="job-footer">
+        <span class="job-salary">${j.salary}</span>
+        <a href="jobs.html" class="btn btn-primary btn-sm">Apply Now</a>
+      </div>
+    </div>`).join('');
+}
+
+function renderPlacements(placements){
+  const track=document.getElementById('placement-track');if(!track)return;
+  track.innerHTML=placements.map(p=>`
+    <div class="placement-card">
+      <div class="placement-card-header">
+        <div class="placement-avatar" style="${p.imageUrl ? `background:url('${p.imageUrl}') center/cover;` : `background:${avatarBg(p.studentName||'S')};display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:white;font-weight:700`}">${p.imageUrl ? '' : initials(p.studentName||'S')}</div>
+        <div class="placement-info">
+          <div class="placement-name">${p.studentName}</div>
+          <div class="placement-role">${p.courseName}</div>
+        </div>
+      </div>
+      <div class="placement-card-body">
+        <div class="placement-company">
+          <div style="width:36px;height:36px;background:var(--gradient-primary);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem">🏢</div>
+          <div><div class="placement-company-name">${p.companyName}</div><div class="placement-package">${p.designation} · ${p.package}/yr</div></div>
+        </div>
+        <p class="placement-testimonial">"${p.testimonial}"</p>
+      </div>
+    </div>`).join('');
+  setTimeout(()=>{
+    const prev=document.getElementById('placement-prev'),next=document.getElementById('placement-next'),dots=document.getElementById('placement-dots');
+    const items=track.children;let cur=0;
+    const n=items.length;
+    if(dots)dots.innerHTML=Array.from({length:n},(_,i)=>`<div class="slider-dot ${i===0?'active':''}" data-i="${i}"></div>`).join('');
+    function go(i){cur=Math.max(0,Math.min(i,n-1));const w=items[0]?.offsetWidth||340;const gap=24;track.style.transform=`translateX(-${cur*(w+gap)}px)`;dots?.querySelectorAll('.slider-dot').forEach((d,j)=>d.classList.toggle('active',j===cur));}
+    prev?.addEventListener('click',()=>go(cur<=0?n-1:cur-1));
+    next?.addEventListener('click',()=>go(cur>=n-1?0:cur+1));
+    dots?.querySelectorAll('.slider-dot').forEach(d=>d.addEventListener('click',()=>go(parseInt(d.dataset.i))));
+    const timer=setInterval(()=>go(cur>=n-1?0:cur+1),4000);
+  },100);
+}
+
+function renderProjects(projects){
+  const g=document.getElementById('projects-grid');if(!g)return;
+  g.innerHTML=projects.slice(0,3).map((p,i)=>`
+    <div class="project-card" data-animate data-delay="${(i+1)*100}">
+      <div class="project-img" style="background:linear-gradient(135deg,${COLORS[i%COLORS.length]}cc,${COLORS[(i+2)%COLORS.length]}cc)">
+        <div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:5rem">${PROJECT_ICONS[p.category]||'💻'}</div>
+        <div class="project-overlay">
+          <a href="projects.html" class="btn btn-primary btn-sm">View Details</a>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-category">${p.category}</div>
+        <h3>${p.title}</h3>
+        <p>${p.description?.substring(0,100)}...</p>
+        <div class="project-tech">${(Array.isArray(p.techStack)?p.techStack:(p.techStack||'').split(',')).slice(0,4).map(t=>`<span class="tech-tag">${t.trim()}</span>`).join('')}</div>
+      </div>
+    </div>`).join('');
+}
+
+function renderTeam(employees){
+  const g=document.getElementById('team-grid');if(!g)return;
+  g.innerHTML=employees.slice(0,4).map((e,i)=>`
+    <div class="team-card" data-animate data-delay="${(i+1)*100}">
+      <div class="team-img" style="background:linear-gradient(135deg,${COLORS[i%COLORS.length]},${COLORS[(i+2)%COLORS.length]})">
+        <div class="team-img-placeholder" style="font-size:4rem">${initials(e.name)}</div>
+      </div>
+      <div class="team-card-body">
+        <div class="team-name">${e.name}</div>
+        <div class="team-role">${e.role}</div>
+        <div class="team-bio">${e.bio?.substring(0,80)||'Expert trainer and mentor.'}</div>
+        <div class="team-socials">
+          ${e.linkedin?`<a href="${e.linkedin}" class="social-btn social-btn-linkedin"><i class="fab fa-linkedin-in"></i></a>`:''}
+          ${e.email?`<a href="mailto:${e.email}" class="social-btn social-btn-email"><i class="fas fa-envelope"></i></a>`:''}
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function renderTestimonials(testimonials){
+  const track=document.getElementById('testimonials-track');if(!track)return;
+  if(!testimonials || !testimonials.length){
+    track.innerHTML='<div style="text-align:center;padding:60px 20px;color:var(--gray-500)"><div style="font-size:3rem;margin-bottom:16px">💬</div><p>No reviews yet. Add testimonials in the Admin Panel with <strong>Active</strong> status.</p></div>';
+    return;
+  }
+  track.innerHTML=testimonials.map(t=>`
+    <div class="testimonial-card" style="min-width:calc(33.333% - 16px)">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">${t.message}</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar" style="background:${avatarBg(t.name)}">${initials(t.name)}</div>
+        <div>
+          <div class="testimonial-name">${t.name}</div>
+          <div class="testimonial-role">${t.role} · ${t.company}</div>
+          <div class="testimonial-stars">${'★'.repeat(parseInt(t.rating)||5)}</div>
+        </div>
+      </div>
+    </div>`).join('');
+  setTimeout(()=>{
+    const prev=document.getElementById('test-prev'),next=document.getElementById('test-next'),dots=document.getElementById('test-dots');
+    const items=track.children;let cur=0;const visible=window.innerWidth<768?1:window.innerWidth<992?2:3;
+    const max=Math.max(0,items.length-visible);
+    if(dots)dots.innerHTML=Array.from({length:max+1},(_,i)=>`<div class="slider-dot ${i===0?'active':''}" data-i="${i}"></div>`).join('');
+    function go(i){cur=Math.max(0,Math.min(i,max));const w=items[0]?.offsetWidth||0;const gap=24;track.style.transform=`translateX(-${cur*(w+gap)}px)`;dots?.querySelectorAll('.slider-dot').forEach((d,j)=>d.classList.toggle('active',j===cur));}
+    prev?.addEventListener('click',()=>go(cur<=0?max:cur-1));
+    next?.addEventListener('click',()=>go(cur>=max?0:cur+1));
+    dots?.querySelectorAll('.slider-dot').forEach(d=>d.addEventListener('click',()=>go(parseInt(d.dataset.i))));
+    setInterval(()=>go(cur>=max?0:cur+1),4500);
+  },100);
+}
+
+(async()=>{
+  const [courses,jobs,placements,testimonials,employees,projects,services,partners]=await Promise.all([
+    API.getCourses(),API.getJobs(),API.getPlacements(),API.getTestimonials(),API.getEmployees(),API.getProjects(),API.getServices(),API.getPartners()
+  ]);
+  renderCourses(courses);
+  renderJobs(jobs);
+  renderPlacements(placements);
+  renderTestimonials(testimonials);
+  renderTeam(employees);
+  renderProjects(projects);
+  renderServices(services);
+  renderPartners(partners);
+  // Re-trigger scroll animations for newly added elements
+  document.querySelectorAll('[data-animate]').forEach(el=>{
+    const obs=new IntersectionObserver(e=>{e.forEach(e=>e.isIntersecting&&(e.target.classList.add('animated'),obs.unobserve(e.target)))},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+    obs.observe(el);
+  });
+})();
+</script>
+</body>
+</html>

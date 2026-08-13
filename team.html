@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Team | Aditya Skill Gate IT Solution</title>
+  <meta name="description" content="Meet the expert team at Aditya Skill Gate IT Solution - passionate trainers, developers, and HR professionals dedicated to your success.">
+  <link rel="icon" href="assets/logos/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .culture-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .culture-card{padding:36px;background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-xl);text-align:center;transition:var(--transition)}
+    .culture-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-xl)}
+    @media(max-width:768px){.culture-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div id="page-loader"><img src="assets/logos/logo-icon.png" class="loader-logo" alt=""><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<nav class="navbar" id="navbar"><div class="container"><div class="navbar-inner">
+  <a href="index.html" class="navbar-logo"><img src="assets/logos/logo-icon.png" alt="ASG">
+    <div class="navbar-logo-text">ADITYA SKILL GATE<br><span>IT SOLUTION</span></div></a>
+        <ul class="navbar-nav">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="courses.html" class="nav-link">Courses</a></li>
+        <li><a href="jobs.html" class="nav-link">Careers</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="placements.html" class="nav-link">Placements</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+  <div class="navbar-actions"><button class="theme-toggle"><i class="fas fa-moon"></i></button><a href="resume.html" class="btn-nav-cta">Upload Resume</a><button class="hamburger" id="hamburger"><span></span><span></span><span></span></button></div>
+</div></div></nav>
+<div class="mobile-menu" id="mobile-menu" style="display: none;">  <nav class="mobile-nav">
+    <a href="index.html" class="mobile-nav-link active">🏠 Home</a>
+    <a href="about.html" class="mobile-nav-link">ℹ️ About Us</a>
+    <a href="services.html" class="mobile-nav-link">⚙️ Services</a>
+    <a href="courses.html" class="mobile-nav-link">🎓 Courses</a>
+    <a href="jobs.html" class="mobile-nav-link">💼 Careers</a>
+    <a href="projects.html" class="mobile-nav-link">🎨 Projects</a>
+    <a href="placements.html" class="mobile-nav-link">🎯 Placements</a>
+    <a href="contact.html" class="mobile-nav-link">📞 Contact Us</a>
+  </nav><div class="mobile-menu-footer"><a href="jobs.html" class="btn btn-primary">💼 Join Us</a></div></div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="section-badge"><i class="fas fa-users"></i> The People Behind It</div>
+    <h1>Our Expert Team</h1>
+    <p>A passionate group of IT professionals, educators, and mentors committed to your success.</p>
+  </div>
+</section>
+
+<section class="section section-light">
+  <div class="container">
+    <div class="section-header" data-animate><h2 class="section-title">Meet the <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Team</span></h2><p class="section-subtitle">Each member brings unique expertise and a shared passion for technology and education.</p></div>
+    <div class="team-grid" id="team-grid"><!-- JS --></div>
+  </div>
+</section>
+
+<!-- Culture -->
+<section class="section section-gray">
+  <div class="container">
+    <div class="section-header" data-animate><div class="section-badge"><i class="fas fa-heart"></i> Our Culture</div><h2 class="section-title">Life at <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Aditya Skill Gate</span></h2></div>
+    <div class="culture-grid">
+      <div class="culture-card" data-animate data-delay="100">
+        <div style="font-size:3rem;margin-bottom:16px">📚</div>
+        <h3 style="color:var(--navy);margin-bottom:10px">Continuous Learning</h3>
+        <p style="color:var(--gray-500);font-size:0.875rem;line-height:1.7">We invest in our team's growth through regular workshops, certifications, and knowledge sharing sessions.</p>
+      </div>
+      <div class="culture-card" data-animate data-delay="200">
+        <div style="font-size:3rem;margin-bottom:16px">🤝</div>
+        <h3 style="color:var(--navy);margin-bottom:10px">Collaboration First</h3>
+        <p style="color:var(--gray-500);font-size:0.875rem;line-height:1.7">Open communication, teamwork, and a supportive environment where every voice matters and ideas are welcomed.</p>
+      </div>
+      <div class="culture-card" data-animate data-delay="300">
+        <div style="font-size:3rem;margin-bottom:16px">🚀</div>
+        <h3 style="color:var(--navy);margin-bottom:10px">Career Growth</h3>
+        <p style="color:var(--gray-500);font-size:0.875rem;line-height:1.7">Clear career paths, regular performance reviews, and leadership opportunities for every team member.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Join Us CTA -->
+<section style="background:var(--gradient-primary);padding:70px 0;text-align:center">
+  <div class="container" data-animate>
+    <h2 style="color:white;margin-bottom:12px">Want to Join Our Team?</h2>
+    <p style="color:rgba(255,255,255,0.75);margin-bottom:32px">We're always looking for passionate, talented individuals who love technology and teaching.</p>
+    <a href="jobs.html" class="btn btn-primary" style="background:white;color:var(--navy)"><i class="fas fa-briefcase"></i> View Open Positions</a>
+  </div>
+</section>
+
+<footer class="footer"><div class="container"><div class="footer-grid">
+  <div class="footer-brand"><div class="footer-logo"><img src="assets/logos/logo-icon.png" alt=""><div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2">ADITYA<br><span style="color:#6CCB2F">SKILL GATE IT</span></div></div><p>Empowering careers through IT training.</p><div class="footer-socials"><a href="https://www.instagram.com/adityaskillgate.official/" target="_blank" class="footer-social"><i class="fab fa-instagram"></i></a><a href="https://wa.me/916382604808" target="_blank" class="footer-social"><i class="fab fa-whatsapp"></i></a></div></div>
+  <div class="footer-col"><h4>Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="courses.html">Courses</a><a href="jobs.html">Careers</a></div></div>
+  <div class="footer-col"><h4>Resources</h4><div class="footer-links"><a href="placements.html">Placements</a><a href="testimonials.html">Reviews</a><a href="contact.html">Contact</a></div></div>
+  <div class="footer-col"><h4>Contact</h4><div class="footer-links"><a href="tel:+916382604808">📞 +91 63826 04808</a><a href="mailto:Adityaskillgateitsolution@gmail.com">📧 Email</a></div></div>
+</div><div class="footer-bottom"><p>© 2024 Aditya Skill Gate IT Solution.</p></div></div></footer>
+<div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808" target="_blank" class="whatsapp-option">💬 Chat Now</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
+<div id="back-to-top"><i class="fas fa-arrow-up"></i></div><div id="toast-container"></div>
+<script src="js/api.js?v=4"></script><script src="js/main.js"></script>
+<script>
+const COLORS=['#0096D6','#0D1B4C','#6CCB2F','#f59e0b','#8b5cf6','#ef4444'];
+function initials(n){return(n||'T').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase()}
+function renderTeam(employees){
+  const g=document.getElementById('team-grid');if(!g)return;
+  g.innerHTML=employees.map((e,i)=>`
+    <div class="team-card" data-animate data-delay="${(i%4+1)*80}">
+      <div class="team-img" style="background:linear-gradient(135deg,${COLORS[i%COLORS.length]},${COLORS[(i+2)%COLORS.length]})">
+        <div class="team-img-placeholder" style="font-size:4rem;font-weight:900;color:white">${initials(e.name)}</div>
+      </div>
+      <div class="team-card-body">
+        <div class="team-name">${e.name}</div>
+        <div class="team-role">${e.role}</div>
+        <div class="team-bio" style="font-size:0.825rem;color:var(--gray-500);margin-bottom:16px">${e.bio?.substring(0,90)||'Expert trainer and mentor.'}</div>
+        <div class="team-socials">
+          ${e.linkedin&&e.linkedin!='#'?`<a href="${e.linkedin}" target="_blank" class="social-btn social-btn-linkedin"><i class="fab fa-linkedin-in"></i></a>`:''}
+          ${e.email?`<a href="mailto:${e.email}" class="social-btn" style="background:rgba(0,150,214,0.1);color:var(--tech-blue)"><i class="fas fa-envelope"></i></a>`:''}
+        </div>
+      </div>
+    </div>`).join('');
+  document.querySelectorAll('[data-animate]').forEach(el=>{const obs=new IntersectionObserver(e=>{e.forEach(e=>e.isIntersecting&&(e.target.classList.add('animated'),obs.unobserve(e.target)))},{threshold:0.1});obs.observe(el);});
+}
+API.getEmployees().then(renderTeam);
+</script>
+</body></html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Placements | Aditya Skill Gate IT Solution</title>
+  <meta name="description" content="100+ students placed at TCS, Infosys, Wipro, Zoho, HCL and more. 90%+ placement rate. Join Aditya Skill Gate IT Solution today.">
+  <link rel="icon" href="assets/logos/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .placements-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .placement-full-card{background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-xl);padding:28px;transition:var(--transition);position:relative;overflow:hidden}
+    .placement-full-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--gradient-accent)}
+    .placement-full-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-xl);border-color:transparent}
+    .placement-avatar-lg{width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:900;color:white;flex-shrink:0;border:3px solid white;box-shadow:var(--shadow-sm)}
+    .placement-package-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:linear-gradient(135deg,rgba(108,203,47,0.1),rgba(90,178,37,0.15));border:1px solid rgba(108,203,47,0.3);border-radius:100px;font-size:0.875rem;font-weight:700;color:var(--accent-green-dark)}
+    .company-pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:50px}
+    .company-pill{padding:10px 22px;background:white;border:1px solid var(--gray-200);border-radius:100px;font-size:0.875rem;font-weight:700;color:var(--navy);transition:var(--transition)}
+    .company-pill:hover{background:var(--gradient-primary);color:white;border-color:transparent}
+    .process-row{display:flex;align-items:center;gap:0;overflow:hidden}
+    .process-arrow{font-size:1.5rem;color:var(--gray-300);margin:0 8px;flex-shrink:0}
+    .process-box{flex:1;text-align:center;padding:24px 16px;background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-lg);transition:var(--transition)}
+    .process-box:hover{border-color:var(--tech-blue);box-shadow:var(--shadow-md)}
+    @media(max-width:991px){.placements-grid{grid-template-columns:repeat(2,1fr)}.process-row{flex-direction:column}.process-arrow{transform:rotate(90deg)}}
+    @media(max-width:576px){.placements-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div id="page-loader"><img src="assets/logos/logo-icon.png" class="loader-logo" alt=""><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<nav class="navbar" id="navbar"><div class="container"><div class="navbar-inner">
+  <a href="index.html" class="navbar-logo"><img src="assets/logos/logo-icon.png" alt="ASG">
+    <div class="navbar-logo-text">ADITYA SKILL GATE<br><span>IT SOLUTION</span></div></a>
+        <ul class="navbar-nav">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="courses.html" class="nav-link">Courses</a></li>
+        <li><a href="jobs.html" class="nav-link">Careers</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="placements.html" class="nav-link active">Placements</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+  <div class="navbar-actions"><button class="theme-toggle"><i class="fas fa-moon"></i></button><a href="resume.html" class="btn-nav-cta">Upload Resume</a><button class="hamburger" id="hamburger"><span></span><span></span><span></span></button></div>
+</div></div></nav>
+<div class="mobile-menu" id="mobile-menu" style="display: none;">  <nav class="mobile-nav">
+    <a href="index.html" class="mobile-nav-link active">🏠 Home</a>
+    <a href="about.html" class="mobile-nav-link">ℹ️ About Us</a>
+    <a href="services.html" class="mobile-nav-link">⚙️ Services</a>
+    <a href="courses.html" class="mobile-nav-link">🎓 Courses</a>
+    <a href="jobs.html" class="mobile-nav-link">💼 Careers</a>
+    <a href="projects.html" class="mobile-nav-link">🎨 Projects</a>
+    <a href="placements.html" class="mobile-nav-link">🎯 Placements</a>
+    <a href="contact.html" class="mobile-nav-link">📞 Contact Us</a>
+  </nav><div class="mobile-menu-footer"><a href="resume.html" class="btn btn-primary">📄 Upload Resume</a></div></div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="section-badge"><i class="fas fa-trophy"></i> Success Stories</div>
+    <h1>Student Placements</h1>
+    <p>100+ students placed in top IT companies. Your dream job is just a course away.</p>
+  </div>
+</section>
+
+<!-- Stats -->
+<section style="background:var(--gradient-primary);padding:55px 0">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">🏆</div><div class="stat-number counter" data-target="100">0</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Total Placements</div></div>
+      <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">🏢</div><div class="stat-number counter" data-target="50">0</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Partner Companies</div></div>
+      <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">💰</div><div class="stat-number" style="color:white;font-size:2.5rem;font-weight:900">₹6L</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Highest Package</div></div>
+      <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">📈</div><div class="stat-number" style="color:white;font-size:2.5rem;font-weight:900">90%+</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Placement Rate</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-light">
+  <div class="container">
+    <!-- Company Pills -->
+    <div class="section-header" data-animate><div class="section-badge"><i class="fas fa-building"></i> Hiring Partners</div><h2 class="section-title">Our Students Work at <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Top Companies</span></h2></div>
+    <div class="company-pills">
+      <div class="company-pill">TCS</div><div class="company-pill">Infosys</div><div class="company-pill">Wipro</div>
+      <div class="company-pill">Zoho</div><div class="company-pill">HCL</div><div class="company-pill">Cognizant</div>
+      <div class="company-pill">Accenture</div><div class="company-pill">Capgemini</div><div class="company-pill">IBM</div>
+      <div class="company-pill">Hexaware</div><div class="company-pill">Mphasis</div><div class="company-pill">Tech Mahindra</div>
+    </div>
+
+    <!-- Placements Grid -->
+    <div class="section-header" data-animate><div class="section-badge"><i class="fas fa-star"></i> Student Stories</div><h2 class="section-title">Our <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Placed Students</span></h2></div>
+    <div class="placements-grid" id="placements-grid"><!-- JS --></div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="section section-gray">
+  <div class="container">
+    <div class="section-header" data-animate><div class="section-badge"><i class="fas fa-list-ol"></i> How It Works</div><h2 class="section-title">Our <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Placement Process</span></h2></div>
+    <div class="process-row" data-animate>
+      <div class="process-box"><div style="font-size:2.5rem;margin-bottom:12px">🎓</div><h4 style="color:var(--navy);margin-bottom:8px;font-size:0.95rem">Course Completion</h4><p style="font-size:0.8rem;color:var(--gray-500)">Complete your course with hands-on projects and earn your certificate.</p></div>
+      <div class="process-arrow">→</div>
+      <div class="process-box"><div style="font-size:2.5rem;margin-bottom:12px">📄</div><h4 style="color:var(--navy);margin-bottom:8px;font-size:0.95rem">Resume Building</h4><p style="font-size:0.8rem;color:var(--gray-500)">Our HR team crafts a professional resume that highlights your skills and projects.</p></div>
+      <div class="process-arrow">→</div>
+      <div class="process-box"><div style="font-size:2.5rem;margin-bottom:12px">🎯</div><h4 style="color:var(--navy);margin-bottom:8px;font-size:0.95rem">Mock Interviews</h4><p style="font-size:0.8rem;color:var(--gray-500)">Rigorous mock interviews, aptitude tests, and technical preparation.</p></div>
+      <div class="process-arrow">→</div>
+      <div class="process-box"><div style="font-size:2.5rem;margin-bottom:12px">🏆</div><h4 style="color:var(--navy);margin-bottom:8px;font-size:0.95rem">Job Placement</h4><p style="font-size:0.8rem;color:var(--gray-500)">We schedule interviews with partner companies and support you until you're placed.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Timeline -->
+<section class="section section-light">
+  <div class="container">
+    <div class="section-header" data-animate><div class="section-badge"><i class="fas fa-calendar-alt"></i> Journey</div><h2 class="section-title">Placement <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Timeline</span></h2></div>
+    <div style="position:relative;max-width:800px;margin:0 auto">
+      <div style="border-left:2px solid var(--tech-blue);padding-left:20px;margin-bottom:20px" data-animate>
+        <h4 style="color:var(--navy)">1. Pre-Placement Training (Month 1-2)</h4>
+        <p style="color:var(--gray-500);font-size:0.9rem">Skill building, aptitude training, and technical fundamentals.</p>
+      </div>
+      <div style="border-left:2px solid var(--tech-blue);padding-left:20px;margin-bottom:20px" data-animate data-delay="100">
+        <h4 style="color:var(--navy)">2. Project Development (Month 3-4)</h4>
+        <p style="color:var(--gray-500);font-size:0.9rem">Live projects, portfolio creation, and hackathons.</p>
+      </div>
+      <div style="border-left:2px solid var(--tech-blue);padding-left:20px;margin-bottom:20px" data-animate data-delay="200">
+        <h4 style="color:var(--navy)">3. Interview Prep (Month 5)</h4>
+        <p style="color:var(--gray-500);font-size:0.9rem">Mock interviews, resume polishing, and group discussions.</p>
+      </div>
+      <div style="border-left:2px solid var(--accent-green);padding-left:20px;margin-bottom:20px" data-animate data-delay="300">
+        <h4 style="color:var(--navy)">4. Placement Drives (Month 6+)</h4>
+        <p style="color:var(--gray-500);font-size:0.9rem">Interviews with partner companies, offer letters, and onboarding.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Student Gallery -->
+<section class="section section-gray">
+  <div class="container">
+    <div class="section-header" data-animate><div class="section-badge"><i class="fas fa-images"></i> Memories</div><h2 class="section-title">Student <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Gallery</span></h2></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px">
+      <div style="background:var(--gray-200);height:200px;border-radius:var(--border-radius-lg);display:flex;align-items:center;justify-content:center"><i class="fas fa-image" style="font-size:3rem;color:var(--gray-400)"></i></div>
+      <div style="background:var(--gray-200);height:200px;border-radius:var(--border-radius-lg);display:flex;align-items:center;justify-content:center"><i class="fas fa-image" style="font-size:3rem;color:var(--gray-400)"></i></div>
+      <div style="background:var(--gray-200);height:200px;border-radius:var(--border-radius-lg);display:flex;align-items:center;justify-content:center"><i class="fas fa-image" style="font-size:3rem;color:var(--gray-400)"></i></div>
+      <div style="background:var(--gray-200);height:200px;border-radius:var(--border-radius-lg);display:flex;align-items:center;justify-content:center"><i class="fas fa-image" style="font-size:3rem;color:var(--gray-400)"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:var(--gradient-primary);padding:70px 0;text-align:center">
+  <div class="container" data-animate>
+    <h2 style="color:white;margin-bottom:12px">Ready to Get Placed?</h2>
+    <p style="color:rgba(255,255,255,0.75);margin-bottom:32px">Enroll in a course today and let us guide you to your dream IT job.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="courses.html" class="btn btn-primary" style="background:white;color:var(--navy)"><i class="fas fa-graduation-cap"></i> Enroll Now</a>
+      <a href="resume.html" class="btn btn-secondary"><i class="fas fa-upload"></i> Upload Resume</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="container"><div class="footer-grid">
+  <div class="footer-brand"><div class="footer-logo"><img src="assets/logos/logo-icon.png" alt=""><div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2">ADITYA<br><span style="color:#6CCB2F">SKILL GATE IT</span></div></div><p>Empowering careers through IT training and placement support.</p><div class="footer-socials"><a href="https://www.instagram.com/adityaskillgate.official/" target="_blank" class="footer-social"><i class="fab fa-instagram"></i></a><a href="https://wa.me/916382604808" target="_blank" class="footer-social"><i class="fab fa-whatsapp"></i></a></div></div>
+  <div class="footer-col"><h4>Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="courses.html">Courses</a><a href="placements.html">Placements</a><a href="contact.html">Contact</a></div></div>
+  <div class="footer-col"><h4>Resources</h4><div class="footer-links"><a href="team.html">Our Team</a><a href="testimonials.html">Testimonials</a><a href="faq.html">FAQ</a><a href="resume.html">Upload Resume</a></div></div>
+  <div class="footer-col"><h4>Contact</h4><div class="footer-links"><a href="tel:+916382604808">📞 +91 63826 04808</a><a href="mailto:Adityaskillgateitsolution@gmail.com">📧 Email</a><a href="https://wa.me/916382604808" target="_blank">💬 WhatsApp</a></div></div>
+</div><div class="footer-bottom"><p>© 2024 Aditya Skill Gate IT Solution.</p></div></div></footer>
+<div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808?text=Hi!%20I%20need%20placement%20support" target="_blank" class="whatsapp-option">🏆 Placement Support</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
+<div id="back-to-top"><i class="fas fa-arrow-up"></i></div><div id="toast-container"></div>
+<script src="js/api.js?v=4"></script><script src="js/main.js"></script>
+<script>
+const COLORS=['#0096D6','#0D1B4C','#6CCB2F','#f59e0b','#8b5cf6','#ef4444'];
+function initials(n){return(n||'S').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase()}
+function renderPlacements(list){
+  const g=document.getElementById('placements-grid');if(!g)return;
+  g.innerHTML=list.map((p,i)=>`
+    <div class="placement-full-card" data-animate data-delay="${(i%3+1)*80}">
+      <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:16px">
+        <div class="placement-avatar-lg" style="${p.imageUrl ? `background:url('${p.imageUrl}') center/cover;` : `background:${COLORS[i%COLORS.length]}; display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;`}">${p.imageUrl ? '' : initials(p.studentName)}</div>
+        <div><div style="font-weight:800;font-size:1rem;color:var(--navy)">${p.studentName}</div><div style="font-size:0.8rem;color:var(--gray-400);margin-top:2px">${p.courseName}</div></div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px;padding:12px;background:var(--light-gray);border-radius:var(--border-radius)">
+        <div style="width:36px;height:36px;background:var(--gradient-primary);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0">🏢</div>
+        <div><div style="font-weight:700;color:var(--navy);font-size:0.9rem">${p.companyName}</div><div style="font-size:0.775rem;color:var(--gray-500)">${p.designation}</div></div>
+      </div>
+      <div style="margin-bottom:14px"><div class="placement-package-badge">💰 ${p.package} / year</div></div>
+      <p style="font-size:0.85rem;color:var(--gray-500);line-height:1.7;font-style:italic">"${p.testimonial?.substring(0,100)||'Great placement support!'}"</p>
+    </div>`).join('');
+  document.querySelectorAll('[data-animate]').forEach(el=>{const obs=new IntersectionObserver(e=>{e.forEach(e=>e.isIntersecting&&(e.target.classList.add('animated'),obs.unobserve(e.target)))},{threshold:0.1});obs.observe(el);});
+}
+API.getPlacements().then(renderPlacements);
+</script>
+</body></html>
