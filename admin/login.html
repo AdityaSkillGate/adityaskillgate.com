@@ -87,66 +87,45 @@
 
 <script src="../js/api.js"></script>
 <script>
-// Particles
-(function(){const c=document.getElementById('particles');if(!c)return;for(let i=0;i<25;i++){const d=document.createElement('div');d.style.cssText=`position:absolute;width:${Math.random()*4+1}px;height:${Math.random()*4+1}px;border-radius:50%;background:rgba(108,203,47,${Math.random()*0.4+0.1});top:${Math.random()*100}%;left:${Math.random()*100}%;animation:pf ${Math.random()*15+10}s linear infinite;animation-delay:${Math.random()*5}s`;c.appendChild(d);}const s=document.createElement('style');s.textContent='@keyframes pf{0%{transform:translateY(0) scale(1);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-100vh) scale(0.5);opacity:0}}';document.head.appendChild(s);})();
-
-// Eye toggle
-document.getElementById('eye-toggle')?.addEventListener('click',function(){const p=document.getElementById('password'),i=document.getElementById('eye-icon');const isPass=p.type==='password';p.type=isPass?'text':'password';i.className=isPass?'fas fa-eye-slash':'fas fa-eye';});
-
-// Login form
-document.getElementById('login-form')?.addEventListener('submit',async(e)=>{
-    e.preventDefault();
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value;
-    const btn = document.getElementById('login-btn');
-    const err = document.getElementById('login-error');
-    const errMsg = document.getElementById('error-msg');
-    
-    err.style.display = 'none';
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
-    btn.disabled = true;
-
-    try {
-      const res = await API.adminLogin({ username, password });
-      if (res && res.success && res.token) {
-        sessionStorage.setItem('admin_token', res.token);
-        sessionStorage.setItem('admin_user', username);
-        btn.innerHTML = '<i class="fas fa-check"></i> Login Successful!';
-        btn.style.background = 'linear-gradient(135deg, #5ab225, #6CCB2F)';
-        setTimeout(() => { window.location.href = 'dashboard.html'; }, 500);
-      } else {
-        throw new Error(res?.error || 'Invalid credentials');
+  // Particles
+  (function(){const c=document.getElementById('particles');if(!c)return;for(let i=0;i<25;i++){const d=document.createElement('div');d.style.cssText=`position:absolute;width:${Math.random()*4+1}px;height:${Math.random()*4+1}px;border-radius:50%;background:rgba(108,203,47,${Math.random()*0.4+0.1});top:${Math.random()*100}%;left:${Math.random()*100}%;animation:pf ${Math.random()*15+10}s linear infinite;animation-delay:${Math.random()*5}s`;c.appendChild(d);}const s=document.createElement('style');s.textContent='@keyframes pf{0%{transform:translateY(0) scale(1);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-100vh) scale(0.5);opacity:0}}';document.head.appendChild(s);})();
+  
+  // Eye toggle
+  document.getElementById('eye-toggle')?.addEventListener('click',function(){const p=document.getElementById('password'),i=document.getElementById('eye-icon');const isPass=p.type==='password';p.type=isPass?'text':'password';i.className=isPass?'fas fa-eye-slash':'fas fa-eye';});
+  
+  // Login form
+  document.getElementById('login-form')?.addEventListener('submit',async(e)=>{
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      const btn = document.getElementById('login-btn');
+      const err = document.getElementById('login-error');
+      const errMsg = document.getElementById('error-msg');
+      
+      err.style.display = 'none';
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+      btn.disabled = true;
+  
+      try {
+        const res = await API.adminLogin({ username, password });
+        if (res && res.success && res.token) {
+          sessionStorage.setItem('admin_token', res.token);
+          sessionStorage.setItem('admin_user', username);
+          btn.innerHTML = '<i class="fas fa-check"></i> Login Successful!';
+          btn.style.background = 'linear-gradient(135deg, #5ab225, #6CCB2F)';
+          setTimeout(() => { window.location.href = 'dashboard.html'; }, 500);
+        } else {
+          throw new Error(res?.error || 'Invalid credentials');
+        }
+      } catch(ex) {
+        err.style.display = 'block';
+        errMsg.textContent = 'Invalid username or password. Please try again.';
+        document.getElementById('username').classList.add('error');
+        document.getElementById('password').classList.add('error');
+        document.getElementById('password').value = '';
+        btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Dashboard';
+        btn.disabled = false;
       }
-    } catch(ex) {
-      err.style.display = 'block';
-      errMsg.textContent = 'Invalid username or password. Please try again.';
-      document.getElementById('username').classList.add('error');
-      document.getElementById('password').classList.add('error');
-      document.getElementById('password').value = '';
-      btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Dashboard';
-      btn.disabled = false;
-    }
-});
-    if(res?.success){
-      // Use the real server token if provided, else fallback
-      authToken=res.token||'asg_admin_demo_token';
-      success=true;
-    } else if(isValid){success=true;}
-  } catch(ex){if(isValid)success=true;}
-
-  if(success){
-    sessionStorage.setItem('admin_token',authToken);
-    sessionStorage.setItem('admin_user',username);
-    btn.innerHTML='<i class="fas fa-check"></i> Login Successful!';
-    btn.style.background='linear-gradient(135deg,#5ab225,#6CCB2F)';
-    setTimeout(()=>{window.location.href='dashboard.html';},500);
-  } else {
-    err.style.display='block';errMsg.textContent='Invalid username or password. Please try again.';
-    document.getElementById('username').classList.add('error');document.getElementById('password').classList.add('error');
-    document.getElementById('password').value='';
-    btn.innerHTML='<i class="fas fa-sign-in-alt"></i> Login to Dashboard';btn.disabled=false;
-  }
-
-});
+  });
 </script>
 </body></html>
