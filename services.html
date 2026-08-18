@@ -4,6 +4,10 @@
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IT Services | Aditya Skill Gate IT Solution</title>
   <meta name="description" content="Professional IT services: Web Development, App Development, AI Solutions, Cloud Computing, Digital Marketing, IT Consulting in Tamil Nadu.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://script.google.com">
   <link rel="icon" href="assets/logos/favicon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -174,7 +178,7 @@
 </section>
 
 <footer class="footer"><div class="container"><div class="footer-grid">
-  <div class="footer-brand"><div class="footer-logo"><img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate IT Solution Logo"><div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2">ADITYA<br><span style="color:#6CCB2F">SKILL GATE IT</span></div></div><p>Premium IT services & training from Tamil Nadu.</p><div class="footer-socials"><a href="https://www.instagram.com/adityaskillgate.official/" target="_blank" class="footer-social"><i class="fab fa-instagram"></i></a><a href="https://wa.me/916382604808" target="_blank" class="footer-social"><i class="fab fa-whatsapp"></i></a></div></div>
+  <div class="footer-brand"><div class="footer-logo"><img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate IT Solution Logo"><div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2">ADITYA<br><span style="color:#6CCB2F">SKILL GATE IT</span></div></div><p>Premium IT services & training from Tamil Nadu.</p><div class="footer-socials"><a href="https://www.instagram.com/adityaskillgate.official/" target="_blank" class="footer-social" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="https://wa.me/916382604808" target="_blank" class="footer-social" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></div></div>
   <div class="footer-col"><h4>Services</h4><div class="footer-links"><a href="services.html">Web Development</a><a href="services.html">App Development</a><a href="services.html">AI Solutions</a><a href="services.html">Cloud & DevOps</a><a href="services.html">Digital Marketing</a></div></div>
   <div class="footer-col"><h4>Company</h4><div class="footer-links"><a href="about.html">About Us</a><a href="projects.html">Projects</a><a href="courses.html">Courses</a><a href="contact.html">Contact</a></div></div>
   <div class="footer-col">
@@ -192,15 +196,49 @@
 <script>
 (async()=>{
   const services = await API.getServices();
-  const g = document.getElementById('services-page-grid');
-  if(g && services && services.length) {
-    g.innerHTML = services.map((s,i)=>`
-      <div class="service-detail-card" data-animate data-delay="${(i+1)*100}">
-        <div class="service-detail-icon" style="background:rgba(0,150,214,0.1)"><i class="fas ${s.icon}"></i></div>
-        <h3 style="color:var(--navy);margin-bottom:8px">${s.title}</h3>
-        <p style="color:var(--gray-500);font-size:0.875rem;margin-bottom:16px">${s.description}</p>
-        <a href="contact.html?service=${encodeURIComponent(s.title)}" class="btn btn-outline btn-sm" style="margin-top:20px">Get Quote <i class="fas fa-arrow-right"></i></a>
-      </div>`).join('');
+  const categories = await API.getCategories();
+  const container = document.getElementById('services-page-grid');
+  
+  if(container && services && categories) {
+    container.innerHTML = '';
+    container.style.display = 'block'; // Remove grid from container, apply it inside category blocks
+    
+    // Group services
+    const grouped = {};
+    categories.forEach(c => grouped[c.name] = []);
+    
+    services.forEach(s => {
+      // If service category exists
+      if (s.category && grouped[s.category]) {
+         grouped[s.category].push(s);
+      } else {
+         // Fallback
+         if (!grouped['Other']) grouped['Other'] = [];
+         grouped['Other'].push(s);
+      }
+    });
+
+    let html = '';
+    for (const [catName, catServices] of Object.entries(grouped)) {
+      if (catServices.length === 0) continue;
+      
+      html += `<div style="margin-bottom: 50px;">
+        <h3 style="color:var(--gray-900); font-size:1.8rem; margin-bottom:20px; border-bottom:2px solid var(--gray-200); padding-bottom:10px;">${catName}</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:30px;">
+          ${catServices.map((s,i) => `
+            <div class="service-detail-card" data-animate data-delay="${(i%3+1)*100}">
+              <div class="service-detail-icon" style="background:rgba(0,150,214,0.1); color:var(--tech-blue);"><i class="fas ${s.icon || 'fa-cog'}"></i></div>
+              <h4 style="color:var(--gray-900);margin-bottom:8px;font-size:1.1rem;font-weight:700;">${s.title}</h4>
+              ${s.parentCategory ? `<span style="display:inline-block; margin-bottom:10px; font-size:0.75rem; background:var(--gray-200); padding:2px 8px; border-radius:4px; font-weight:600; color:var(--gray-600);">${s.parentCategory}</span>` : ''}
+              <p style="color:var(--gray-600);font-size:0.875rem;margin-bottom:16px">${s.description}</p>
+              <a href="contact.html?service=${encodeURIComponent(s.title)}" class="btn btn-outline btn-sm" style="margin-top:auto">Get Quote <i class="fas fa-arrow-right"></i></a>
+            </div>
+          `).join('')}
+        </div>
+      </div>`;
+    }
+    container.innerHTML = html;
+
     // Trigger animations
     document.querySelectorAll('[data-animate]').forEach(el=>{
       const obs=new IntersectionObserver(e=>{e.forEach(e=>e.isIntersecting&&(e.target.classList.add('animated'),obs.unobserve(e.target)))},{threshold:0.1});

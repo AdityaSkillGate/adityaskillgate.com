@@ -1,0 +1,117 @@
+[
+  {
+    "file": "about.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "abroad-job-detail.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "abroad-jobs.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "abroad.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "blog.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "contact.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "course-detail.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "courses.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "faq.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "index.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "it-training-sankarankovil.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "jobs.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "partners.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "placements.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "privacy.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "projects.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "resume.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "services.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "software-company-sankarankovil.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "team.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "terms.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "testimonials.html",
+    "status": "PASS",
+    "issues": []
+  },
+  {
+    "file": "university-detail.html",
+    "status": "PASS",
+    "issues": []
+  }
+]
