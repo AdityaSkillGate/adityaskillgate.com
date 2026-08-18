@@ -12,12 +12,12 @@
 </head>
 <body>
 <div class="admin-sidebar" id="admin-sidebar">
-  <div class="sidebar-brand"><img src="../assets/logos/logo-icon.png" alt="ASG" onerror="this.style.display='none'"><div><div class="sidebar-brand-name">ASG Admin</div><div class="sidebar-brand-sub">Control Panel</div></div>
+  <div class="sidebar-brand"><div style="font-weight:900;color:var(--tech-blue);font-size:1.5rem">ASG</div><div><div class="sidebar-brand-name">ASG Admin</div><div class="sidebar-brand-sub">Control Panel</div></div>
   <button class="sidebar-collapse-btn" id="sidebar-toggle"><i class="fas fa-bars"></i></button></div>
   <nav class="sidebar-nav">
     <div class="sidebar-section-title">Main</div>
     <a href="dashboard.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-chart-pie"></i></div><span>Dashboard</span></a>
-    <a href="reports.html" class="sidebar-link" class="sidebar-link active"><div class="sidebar-icon"><i class="fas fa-file-pdf"></i></div><span>Report Center</span></a>
+    <a href="reports.html" class="sidebar-link active"><div class="sidebar-icon"><i class="fas fa-file-pdf"></i></div><span>Report Center</span></a>
     <div class="sidebar-section-title">Content</div>
     <a href="services.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-cog"></i></div><span>Services</span></a>
     <a href="courses.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-graduation-cap"></i></div><span>Courses</span></a>
@@ -29,13 +29,6 @@
     <a href="placements.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-trophy"></i></div><span>Placements</span></a>
     <a href="testimonials.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-star"></i></div><span>Testimonials</span></a>
     <a href="blog.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-blog"></i></div><span>Blog Posts</span></a>
-    <div class="sidebar-section-title">Submissions</div>
-    <a href="crm.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-users-cog"></i></div><span>CRM / Leads</span></a>
-    <a href="resumes.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-file-pdf"></i></div><span>Resumes</span></a>
-    <a href="contacts.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-envelope"></i></div><span>Contact Forms</span></a>
-    <a href="chatbot.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-robot"></i></div><span>Chatbot KB</span></a>
-    <div class="sidebar-section-title">Settings</div>
-    <a href="settings.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-cog"></i></div><span>Settings</span></a>
   </nav>
 </div>
 <div class="admin-main" id="admin-main">
@@ -48,48 +41,78 @@
   </div>
   <div class="admin-content">
     <div class="admin-page-header">
-      <div><h1 class="admin-page-title">Report Center</h1><p class="admin-page-sub">Generate formatted PDF reports for company data.</p></div>
+      <div><h1 class="admin-page-title">Report Center</h1><p class="admin-page-sub">Generate branded A4 PDF reports.</p></div>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
       
-      <!-- Premium Company Profile -->
-      <div class="admin-card" style="border:2px solid var(--tech-blue);background:var(--a-bg)">
+      <!-- 1. Company Profile -->
+      <div class="admin-card">
         <div class="admin-card-header" style="border-bottom:none">
-          <div style="font-size:2.5rem;color:var(--tech-blue);margin-bottom:12px"><i class="fas fa-building"></i></div>
-          <h3 style="color:var(--a-navy);margin-bottom:8px">Premium Company Profile</h3>
-          <p style="font-size:0.85rem;color:var(--a-gray4);margin-bottom:20px">Generate a beautiful, multi-page company profile PDF with latest projects, placements, and services.</p>
-          <a href="company-profile-gen.html" target="_blank" class="btn-admin-primary" style="width:100%;justify-content:center"><i class="fas fa-magic"></i> Open Generator</a>
+          <div style="font-size:2rem;color:var(--a-gray4);margin-bottom:12px"><i class="fas fa-building"></i></div>
+          <h3 style="color:var(--a-navy);margin-bottom:8px">1. Company Profile</h3>
+          <p style="font-size:0.85rem;color:var(--a-gray4);margin-bottom:20px">Overview of services and key metrics.</p>
+          <button class="btn-admin-primary" onclick="generateReport('CompanyProfile')" style="width:100%;justify-content:center"><i class="fas fa-download"></i> Generate PDF</button>
         </div>
       </div>
 
-      <!-- Placements Report -->
+      <!-- 2. Project Portfolio -->
+      <div class="admin-card">
+        <div class="admin-card-header" style="border-bottom:none">
+          <div style="font-size:2rem;color:var(--a-gray4);margin-bottom:12px"><i class="fas fa-laptop-code"></i></div>
+          <h3 style="color:var(--a-navy);margin-bottom:8px">2. Project Portfolio</h3>
+          <p style="font-size:0.85rem;color:var(--a-gray4);margin-bottom:20px">List of completed tech projects.</p>
+          <button class="btn-admin-primary" onclick="generateReport('ProjectPortfolio')" style="width:100%;justify-content:center"><i class="fas fa-download"></i> Generate PDF</button>
+        </div>
+      </div>
+
+      <!-- 3. Placement Report -->
       <div class="admin-card">
         <div class="admin-card-header" style="border-bottom:none">
           <div style="font-size:2rem;color:var(--a-gray4);margin-bottom:12px"><i class="fas fa-trophy"></i></div>
-          <h3 style="color:var(--a-navy);margin-bottom:8px">Placements Report</h3>
-          <p style="font-size:0.85rem;color:var(--a-gray4);margin-bottom:20px">Export a tabular list of all successfully placed students.</p>
-          <button class="btn-admin-outline" onclick="generateReport('Placements')" style="width:100%;justify-content:center"><i class="fas fa-download"></i> Generate PDF</button>
+          <h3 style="color:var(--a-navy);margin-bottom:8px">3. Placement Report</h3>
+          <p style="font-size:0.85rem;color:var(--a-gray4);margin-bottom:20px">Successfully placed students.</p>
+          <button class="btn-admin-primary" onclick="generateReport('PlacementReport')" style="width:100%;justify-content:center"><i class="fas fa-download"></i> Generate PDF</button>
         </div>
       </div>
 
-      <!-- Courses Report -->
+      <!-- 4. Course Report -->
       <div class="admin-card">
         <div class="admin-card-header" style="border-bottom:none">
           <div style="font-size:2rem;color:var(--a-gray4);margin-bottom:12px"><i class="fas fa-graduation-cap"></i></div>
-          <h3 style="color:var(--a-navy);margin-bottom:8px">Courses Report</h3>
-          <p style="font-size:0.85rem;color:var(--a-gray4);margin-bottom:20px">Export a tabular list of all active IT and Non-IT courses.</p>
-          <button class="btn-admin-outline" onclick="generateReport('Courses')" style="width:100%;justify-content:center"><i class="fas fa-download"></i> Generate PDF</button>
+          <h3 style="color:var(--a-navy);margin-bottom:8px">4. Course Report</h3>
+          <p style="font-size:0.85rem;color:var(--a-gray4);margin-bottom:20px">Active courses and batches.</p>
+          <button class="btn-admin-primary" onclick="generateReport('CourseReport')" style="width:100%;justify-content:center"><i class="fas fa-download"></i> Generate PDF</button>
         </div>
       </div>
 
-      <!-- Resumes/Applications Report -->
+      <!-- 5. Employee Report -->
+      <div class="admin-card">
+        <div class="admin-card-header" style="border-bottom:none">
+          <div style="font-size:2rem;color:var(--a-gray4);margin-bottom:12px"><i class="fas fa-users"></i></div>
+          <h3 style="color:var(--a-navy);margin-bottom:8px">5. Employee Report</h3>
+          <p style="font-size:0.85rem;color:var(--a-gray4);margin-bottom:20px">Team members and roles.</p>
+          <button class="btn-admin-primary" onclick="generateReport('EmployeeReport')" style="width:100%;justify-content:center"><i class="fas fa-download"></i> Generate PDF</button>
+        </div>
+      </div>
+
+      <!-- 6. Job Application Report -->
       <div class="admin-card">
         <div class="admin-card-header" style="border-bottom:none">
           <div style="font-size:2rem;color:var(--a-gray4);margin-bottom:12px"><i class="fas fa-file-pdf"></i></div>
-          <h3 style="color:var(--a-navy);margin-bottom:8px">Applications Report</h3>
-          <p style="font-size:0.85rem;color:var(--a-gray4);margin-bottom:20px">Export recent job applications and submitted resumes.</p>
-          <button class="btn-admin-outline" onclick="generateReport('Resumes')" style="width:100%;justify-content:center"><i class="fas fa-download"></i> Generate PDF</button>
+          <h3 style="color:var(--a-navy);margin-bottom:8px">6. Application Report</h3>
+          <p style="font-size:0.85rem;color:var(--a-gray4);margin-bottom:20px">Recent job resumes & applications.</p>
+          <button class="btn-admin-primary" onclick="generateReport('JobApplicationReport')" style="width:100%;justify-content:center"><i class="fas fa-download"></i> Generate PDF</button>
+        </div>
+      </div>
+
+      <!-- 7. Monthly Business Report -->
+      <div class="admin-card">
+        <div class="admin-card-header" style="border-bottom:none">
+          <div style="font-size:2rem;color:var(--a-gray4);margin-bottom:12px"><i class="fas fa-chart-line"></i></div>
+          <h3 style="color:var(--a-navy);margin-bottom:8px">7. Monthly Business</h3>
+          <p style="font-size:0.85rem;color:var(--a-gray4);margin-bottom:20px">Aggregated stats and metrics.</p>
+          <button class="btn-admin-primary" onclick="generateReport('MonthlyBusinessReport')" style="width:100%;justify-content:center"><i class="fas fa-download"></i> Generate PDF</button>
         </div>
       </div>
 
@@ -97,79 +120,218 @@
   </div>
 </div>
 
-<!-- Hidden template for tabular reports -->
-<div id="tabular-report-template" style="display:none;padding:40px;background:white;color:#333;font-family:sans-serif;width:800px">
-  <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #0D1B4C;padding-bottom:20px;margin-bottom:30px">
-    <div style="display:flex;align-items:center;gap:15px">
-      <div style="font-size:32px;font-weight:900;color:#0D1B4C;letter-spacing:-1px">ASG</div>
-      <div>
-        <div style="font-size:20px;font-weight:bold;color:#0D1B4C">ADITYA SKILL GATE IT SOLUTION</div>
-        <div style="font-size:12px;color:#666">Tenkasi, Tamil Nadu</div>
+<!-- ================= HIDDEN A4 TEMPLATE ================= -->
+<div id="pdf-container" style="display:none; width:794px; background:white; color:#333; font-family:'Outfit', sans-serif;">
+  
+  <!-- A4 Page Structure -->
+  <div style="padding:40px;">
+    
+    <!-- BRANDED HEADER -->
+    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:4px solid #0096D6; padding-bottom:20px; margin-bottom:30px;">
+      <div style="display:flex; align-items:center; gap:15px;">
+        <!-- CSS Logo to prevent html2canvas CORS crashes -->
+        <div style="font-size:36px; font-weight:900; color:#0D1B4C; letter-spacing:-1px;">ASG</div>
+        <div>
+          <div style="font-size:20px; font-weight:800; color:#0D1B4C;">ADITYA SKILL GATE</div>
+          <div style="font-size:12px; color:#6CCB2F; font-weight:600; letter-spacing:1px;">IT SOLUTION</div>
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:22px; font-weight:bold; color:#0D1B4C;" id="pdf-title">Report Title</div>
+        <div style="font-size:12px; color:#666;" id="pdf-date">Date</div>
       </div>
     </div>
-    <div style="text-align:right">
-      <div style="font-size:24px;font-weight:bold;color:#0D1B4C" id="tr-title">Report Title</div>
-      <div style="font-size:12px;color:#666" id="tr-date">Date</div>
+
+    <!-- DYNAMIC CONTENT -->
+    <div id="pdf-content" style="min-height:700px;"></div>
+
+    <!-- BRANDED FOOTER -->
+    <div style="margin-top:30px; padding-top:20px; border-top:1px solid #eee; display:flex; justify-content:space-between; font-size:10px; color:#999;">
+      <div>Generated automatically via ASG Admin Portal</div>
+      <div>www.adityaskillgate.com | Tenkasi, TN</div>
     </div>
-  </div>
-  <table style="width:100%;border-collapse:collapse;font-size:14px" id="tr-table">
-    <thead style="background:#f4f4f5;color:#0D1B4C;text-align:left">
-      <tr id="tr-thead"></tr>
-    </thead>
-    <tbody id="tr-tbody"></tbody>
-  </table>
-  <div style="margin-top:40px;font-size:10px;color:#999;text-align:center;border-top:1px solid #eee;padding-top:20px">
-    Generated automatically via ASG Admin Portal
+
   </div>
 </div>
 
 <div id="toast-container"></div>
-<script src="../js/api.js?v=2"></script>
+<script src="../js/api.js?v=4"></script>
 <script src="../js/admin.js"></script>
 <script>
-async function generateReport(type) {
-  showToast(`Fetching ${type} data...`);
-  const data = await API.adminGet(type);
-  if(!data || !data.length) { showToast('No data available', 'error'); return; }
+  async function generateReport(reportType) {
+    showAdminToast('Fetching data and generating PDF...', 'info');
+    
+    // Set Header
+    document.getElementById('pdf-title').innerText = reportType.replace(/([A-Z])/g, ' $1').trim();
+    document.getElementById('pdf-date').innerText = new Date().toLocaleDateString('en-GB');
+    
+    const contentDiv = document.getElementById('pdf-content');
+    contentDiv.innerHTML = ''; // Clear previous
 
-  const template = document.getElementById('tabular-report-template');
-  template.style.display = 'block';
-  document.getElementById('tr-title').innerText = `${type} Report`;
-  document.getElementById('tr-date').innerText = new Date().toLocaleDateString();
+    try {
+      if (reportType === 'CompanyProfile') {
+        const set = await API.getSettings();
+        contentDiv.innerHTML = `
+          <h2 style="color:#0096D6; margin-bottom:15px;">Executive Summary</h2>
+          <p style="font-size:14px; line-height:1.6; margin-bottom:30px;">Aditya Skill Gate IT Solution is a premier technology training and services company operating from Tamil Nadu. We bridge the gap between academia and industry by providing world-class IT solutions and high-end tech education.</p>
+          
+          <h2 style="color:#0096D6; margin-bottom:15px;">Key Metrics</h2>
+          <div style="display:flex; justify-content:space-between; margin-bottom:40px;">
+            <div style="text-align:center; padding:20px; background:#f8fafc; border-radius:8px; width:22%;">
+              <div style="font-size:28px; font-weight:800; color:#0D1B4C;">${set.studentsTrained || '500+'}</div>
+              <div style="font-size:12px; color:#666;">Students Trained</div>
+            </div>
+            <div style="text-align:center; padding:20px; background:#f8fafc; border-radius:8px; width:22%;">
+              <div style="font-size:28px; font-weight:800; color:#0D1B4C;">${set.placements || '100+'}</div>
+              <div style="font-size:12px; color:#666;">Placements</div>
+            </div>
+            <div style="text-align:center; padding:20px; background:#f8fafc; border-radius:8px; width:22%;">
+              <div style="font-size:28px; font-weight:800; color:#0D1B4C;">${set.projectsCompleted || '50+'}</div>
+              <div style="font-size:12px; color:#666;">Projects Delivered</div>
+            </div>
+            <div style="text-align:center; padding:20px; background:#f8fafc; border-radius:8px; width:22%;">
+              <div style="font-size:28px; font-weight:800; color:#0D1B4C;">${set.placementRate || '100%'}</div>
+              <div style="font-size:12px; color:#666;">Placement Rate</div>
+            </div>
+          </div>
+        `;
+      } 
+      else if (reportType === 'ProjectPortfolio') {
+        const projects = await API.getProjects();
+        let tableHTML = `<table style="width:100%; border-collapse:collapse; font-size:12px;">
+          <tr style="background:#0D1B4C; color:white; text-align:left;">
+            <th style="padding:10px;">Project Title</th>
+            <th style="padding:10px;">Category</th>
+            <th style="padding:10px;">Client/Tech</th>
+            <th style="padding:10px;">Status</th>
+          </tr>`;
+        projects.forEach(p => {
+          tableHTML += `<tr style="border-bottom:1px solid #ddd;">
+            <td style="padding:10px; font-weight:600;">${p.title}</td>
+            <td style="padding:10px;">${p.category}</td>
+            <td style="padding:10px;">${p.clientType || ''}<br><span style="color:#666;">${Array.isArray(p.technology) ? p.technology.join(', ') : p.technology || ''}</span></td>
+            <td style="padding:10px;">${p.status}</td>
+          </tr>`;
+        });
+        tableHTML += '</table>';
+        contentDiv.innerHTML = tableHTML;
+      }
+      else if (reportType === 'PlacementReport') {
+        const plac = await API.getPlacements();
+        let tableHTML = `<table style="width:100%; border-collapse:collapse; font-size:12px;">
+          <tr style="background:#0D1B4C; color:white; text-align:left;">
+            <th style="padding:10px;">Student Name</th>
+            <th style="padding:10px;">Course</th>
+            <th style="padding:10px;">Company & Role</th>
+            <th style="padding:10px;">Package</th>
+          </tr>`;
+        plac.forEach(p => {
+          tableHTML += `<tr style="border-bottom:1px solid #ddd;">
+            <td style="padding:10px; font-weight:600;">${p.student}</td>
+            <td style="padding:10px;">${p.course}</td>
+            <td style="padding:10px;">${p.company}<br><span style="color:#666;">${p.designation}</span></td>
+            <td style="padding:10px; color:#0096D6; font-weight:600;">${p.package || 'Confidential'}</td>
+          </tr>`;
+        });
+        tableHTML += '</table>';
+        contentDiv.innerHTML = tableHTML;
+      }
+      else if (reportType === 'CourseReport') {
+        const courses = await API.getCourses();
+        let tableHTML = `<table style="width:100%; border-collapse:collapse; font-size:12px;">
+          <tr style="background:#0D1B4C; color:white; text-align:left;">
+            <th style="padding:10px;">Course Name</th>
+            <th style="padding:10px;">Category</th>
+            <th style="padding:10px;">Duration / Fee</th>
+            <th style="padding:10px;">Next Batch</th>
+          </tr>`;
+        courses.forEach(c => {
+          tableHTML += `<tr style="border-bottom:1px solid #ddd;">
+            <td style="padding:10px; font-weight:600;">${c.title}</td>
+            <td style="padding:10px;">${c.type} - ${c.category}</td>
+            <td style="padding:10px;">${c.duration} <br><span style="color:#6CCB2F; font-weight:600;">${c.fee}</span></td>
+            <td style="padding:10px;">${c.batch || 'TBA'}</td>
+          </tr>`;
+        });
+        tableHTML += '</table>';
+        contentDiv.innerHTML = tableHTML;
+      }
+      else if (reportType === 'EmployeeReport') {
+        const emp = await API.getEmployees();
+        let tableHTML = `<table style="width:100%; border-collapse:collapse; font-size:12px;">
+          <tr style="background:#0D1B4C; color:white; text-align:left;">
+            <th style="padding:10px;">Employee Name</th>
+            <th style="padding:10px;">Role</th>
+            <th style="padding:10px;">Status</th>
+          </tr>`;
+        emp.forEach(e => {
+          tableHTML += `<tr style="border-bottom:1px solid #ddd;">
+            <td style="padding:10px; font-weight:600;">${e.name}</td>
+            <td style="padding:10px;">${e.role}</td>
+            <td style="padding:10px;">${e.status || 'Active'}</td>
+          </tr>`;
+        });
+        tableHTML += '</table>';
+        contentDiv.innerHTML = tableHTML;
+      }
+      else if (reportType === 'JobApplicationReport') {
+        const apps = await API.getResumes();
+        let tableHTML = `<table style="width:100%; border-collapse:collapse; font-size:12px;">
+          <tr style="background:#0D1B4C; color:white; text-align:left;">
+            <th style="padding:10px;">Applicant Name</th>
+            <th style="padding:10px;">Applied For</th>
+            <th style="padding:10px;">Date / Status</th>
+          </tr>`;
+        apps.forEach(a => {
+          tableHTML += `<tr style="border-bottom:1px solid #ddd;">
+            <td style="padding:10px; font-weight:600;">${a.name}<br><span style="color:#666;font-size:10px;">${a.email}</span></td>
+            <td style="padding:10px;">${a.role || 'General'}</td>
+            <td style="padding:10px;">${a.date}<br><span style="color:#0096D6;">${a.status}</span></td>
+          </tr>`;
+        });
+        tableHTML += '</table>';
+        contentDiv.innerHTML = tableHTML;
+      }
+      else if (reportType === 'MonthlyBusinessReport') {
+        const set = await API.getSettings();
+        contentDiv.innerHTML = `
+          <h2 style="color:#0096D6; margin-bottom:15px;">Monthly Business Overview</h2>
+          <p style="font-size:14px; margin-bottom:30px;">Performance snapshot for ${new Date().toLocaleString('default', { month: 'long', year: 'numeric' })}.</p>
+          <ul style="list-style:none; padding:0; font-size:16px;">
+            <li style="margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;"><strong>Active Courses:</strong> ${set.courses || '10'}</li>
+            <li style="margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;"><strong>Total Placements:</strong> ${set.placements || '100+'}</li>
+            <li style="margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;"><strong>Projects Completed:</strong> ${set.projectsCompleted || '50+'}</li>
+            <li style="margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;"><strong>Highest Package Achieved:</strong> ${set.highestPackage || '12 LPA'}</li>
+          </ul>
+        `;
+      }
 
-  const thead = document.getElementById('tr-thead');
-  const tbody = document.getElementById('tr-tbody');
-  
-  // Define columns based on type
-  let cols = [];
-  if(type === 'Placements') cols = ['studentName', 'courseName', 'companyName', 'package'];
-  if(type === 'Courses') cols = ['title', 'category', 'type', 'fee'];
-  if(type === 'Resumes') cols = ['name', 'preferredRole', 'experience', 'createdAt'];
+      // Execute PDF Generation
+      const template = document.getElementById('pdf-container');
+      template.style.display = 'block';
 
-  thead.innerHTML = cols.map(c => `<th style="padding:12px;border:1px solid #ddd;text-transform:capitalize">${c.replace(/([A-Z])/g, ' $1').trim()}</th>`).join('');
-  
-  tbody.innerHTML = data.map(row => 
-    `<tr>${cols.map(c => `<td style="padding:10px;border:1px solid #ddd">${row[c]||'—'}</td>`).join('')}</tr>`
-  ).join('');
+      const opt = {
+        margin: 0,
+        filename: `${reportType}_${new Date().getTime()}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
 
-  showToast('Generating PDF...');
-  
-  const opt = {
-    margin:       0.5,
-    filename:     `${type}_Report_${new Date().getTime()}.pdf`,
-    image:        { type: 'jpeg', quality: 0.98 },
-    html2canvas:  { scale: 2 },
-    jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-  };
+      html2pdf().set(opt).from(template).save().then(() => {
+        template.style.display = 'none';
+        showAdminToast('Report downloaded successfully!', 'success');
+      }).catch(err => {
+        console.error(err);
+        template.style.display = 'none';
+        showAdminToast('Error generating PDF', 'error');
+      });
 
-  html2pdf().set(opt).from(template).save().then(() => {
-    template.style.display = 'none';
-  }).catch(err => {
-    console.error(err);
-    alert('Error generating PDF');
-    template.style.display = 'none';
-  });  showToast('Report downloaded successfully!', 'success');
-}
+    } catch(err) {
+      console.error(err);
+      showAdminToast('Error fetching report data', 'error');
+    }
+  }
 </script>
 </body>
 </html>

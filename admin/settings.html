@@ -27,7 +27,7 @@
 </head>
 <body>
 <div class="admin-sidebar" id="admin-sidebar">
-  <div class="sidebar-brand"><img src="../assets/logos/logo-icon.png" alt="" onerror="this.style.display='none'"><div><div class="sidebar-brand-name">ASG Admin</div><div class="sidebar-brand-sub">Control Panel</div></div><button class="sidebar-collapse-btn" id="sidebar-toggle"><i class="fas fa-bars"></i></button></div>
+  <div class="sidebar-brand"><img src="../assets/logos/logo-icon.png" alt="Aditya Skill Gate IT Solution Logo" onerror="this.style.display='none'"><div><div class="sidebar-brand-name">ASG Admin</div><div class="sidebar-brand-sub">Control Panel</div></div><button class="sidebar-collapse-btn" id="sidebar-toggle"><i class="fas fa-bars"></i></button></div>
   <nav class="sidebar-nav">
     <div class="sidebar-section-title">Main</div>
     <a href="dashboard.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-chart-pie"></i></div><span>Dashboard</span></a>
@@ -67,6 +67,7 @@
       <div class="settings-nav">
         <a href="#api" class="settings-nav-link active" onclick="showSection('api',this)"><i class="fas fa-plug"></i> API Setup</a>
         <a href="#company" class="settings-nav-link" onclick="showSection('company',this)"><i class="fas fa-building"></i> Company Info</a>
+        <a href="#metrics" class="settings-nav-link" onclick="showSection('metrics',this)"><i class="fas fa-chart-line"></i> Company Metrics</a>
         <a href="#social" class="settings-nav-link" onclick="showSection('social',this)"><i class="fas fa-share-alt"></i> Social Links</a>
         <a href="#security" class="settings-nav-link" onclick="showSection('security',this)"><i class="fas fa-shield-alt"></i> Security</a>
         <a href="#sheets" class="settings-nav-link" onclick="showSection('sheets',this)"><i class="fas fa-table"></i> Google Sheets</a>
@@ -127,6 +128,31 @@
             <div class="form-group"><label class="form-label">Address</label><input type="text" class="form-control" value="Tamil Nadu, India"></div>
             <div class="form-group"><label class="form-label">Working Hours</label><input type="text" class="form-control" value="Mon – Sat: 9:00 AM – 6:00 PM"></div>
             <button class="btn-admin-primary" onclick="showAdminToast('Company info saved!','success')"><i class="fas fa-save"></i> Save Changes</button>
+          </div>
+        </div>
+
+        <!-- Company Metrics -->
+        <div id="section-metrics" style="display:none">
+          <div class="settings-section">
+            <div class="settings-section-title">📊 Company Metrics</div>
+            <div class="settings-section-desc">Manage the statistics displayed on the public website (e.g., Hero, About page).</div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Students Trained</label><input type="text" class="form-control" value="500+" id="metric-students"></div>
+              <div class="form-group"><label class="form-label">Placements</label><input type="text" class="form-control" value="100+" id="metric-placements"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Placement Rate</label><input type="text" class="form-control" value="90%+" id="metric-placementRate"></div>
+              <div class="form-group"><label class="form-label">Highest Package</label><input type="text" class="form-control" value="₹16 LPA" id="metric-highestPackage"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Projects Delivered</label><input type="text" class="form-control" value="50+" id="metric-projects"></div>
+              <div class="form-group"><label class="form-label">Expert Team Members</label><input type="text" class="form-control" value="20+" id="metric-employees"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Hiring Partners</label><input type="text" class="form-control" value="50+" id="metric-partners"></div>
+              <div class="form-group"><label class="form-label">Student Rating</label><input type="text" class="form-control" value="4.9/5" id="metric-rating"></div>
+            </div>
+            <button class="btn-admin-primary" onclick="showAdminToast('Metrics saved! (Mocked)','success')"><i class="fas fa-save"></i> Save Metrics</button>
           </div>
         </div>
 

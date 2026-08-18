@@ -20,69 +20,54 @@ const DEMO_DATA = {
     address: 'Tamil Nadu, India',
     heroTitle: 'Empowering Skills Through Technology',
     heroSubtitle: 'Premium IT Training, Services & Placement Support',
-    stats: { students: 500, placements: 100, projects: 50, employees: 20, technologies: 10 }
+    stats: { students: 500, placements: 100, projects: 50, employees: 20, technologies: 10, placementRate: '90%+', highestPackage: '₹16 LPA', rating: '4.9/5' }
   },
+  
+  categories: [
+    { id: 'cat1', name: 'Enterprise Solutions', parent: null, status: 'Active' },
+    { id: 'cat2', name: 'IT Training', parent: null, status: 'Active' },
+    { id: 'cat3', name: 'Non-IT Training', parent: null, status: 'Active' },
+    { id: 'cat4', name: 'Abroad Study', parent: null, status: 'Active' },
+    { id: 'cat5', name: 'Abroad Jobs', parent: null, status: 'Active' },
+    { id: 'cat6', name: 'IT', parent: 'Abroad Jobs', status: 'Active' },
+    { id: 'cat7', name: 'Non-IT', parent: 'Abroad Jobs', status: 'Active' }
+  ],
   services: [
-    { id: 's1', title: 'Enterprise Solutions', category: 'Services', icon: 'fa-building', description: 'Custom software development, IT consulting, and comprehensive tech solutions for businesses.', status: 'Active' },
-    { id: 's2', title: 'IT Training', category: 'Training', icon: 'fa-laptop-code', description: 'Industry-oriented courses in Full Stack, Python, AI, Java, Data Science, and Cyber Security.', status: 'Active' },
-    { id: 's3', title: 'Non-IT Training', category: 'Training', icon: 'fa-users-cog', description: 'Professional training in Accounting, HR, Banking, Office Admin, and Soft Skills.', status: 'Active' },
-    { id: 's4', title: 'Abroad Study', category: 'Consulting', icon: 'fa-graduation-cap', description: 'End-to-end admission guidance, scholarship assistance, and visa support for international universities.', status: 'Active' },
-    { id: 's5', title: 'Abroad Jobs', category: 'Consulting', icon: 'fa-plane-departure', description: 'Global career opportunities with visa sponsorship in top companies across the world.', status: 'Active' }
-     ],
-     partners: [
-       { id: 'pt1', name: 'Infosys', type: 'Hiring Company', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg', website: '#', status: 'Active' },
-       { id: 'pt2', name: 'TCS', type: 'Hiring Company', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg', website: '#', status: 'Active' },
-       { id: 'pt3', name: 'University of London', type: 'University', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/University_of_London_logo.svg/200px-University_of_London_logo.svg.png', website: '#', status: 'Active' },
-       { id: 'pt4', name: 'Toronto College', type: 'Study Abroad College', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/53/University_of_Toronto_crest.svg/200px-University_of_Toronto_crest.svg.png', website: '#', status: 'Active' }
-     ],
-     courses: [
-       { id: 'c1', title: 'Full Stack Web Development', type: 'IT', category: 'Full Stack', duration: '6 Months', fee: '₹48,000', originalFee: '₹72,000', trainer: 'Mr. Marimuthu', imageUrl: '', status: 'Active', badge: 'Popular', description: 'Master HTML, CSS, JavaScript, Angular/React, Python/Java/Dot Ner, and Sql Server.' },
-       { id: 'c2', title: 'Python & AI/ML', type: 'IT', category: 'AI', duration: '3 Months', fee: '₹24,000', originalFee: '₹30,000', trainer: 'Mr. Marimuthu', imageUrl: '', status: 'Active', badge: 'Trending', description: 'Learn Python, machine learning, and AI model deployment.' },
-       { id: 'c3', title: 'Advanced Java SpringBoot', type: 'IT', category: 'Java', duration: '3 Months', fee: '₹24,000', originalFee: '₹30,000', trainer: 'Mr. Marimuthu.', imageUrl: '', status: 'Active', badge: 'New', description: 'Build enterprise applications using Java and SpringBoot.' },
-       {
-        id: 'c4',
-        title: 'Advanced .NET with C#',
-        type: 'IT',
-        category: '.NET',
-        duration: '3 Months',
-        fee: '₹24,000',
-        originalFee: '₹30,000',
-        trainer: 'Mr. Marimuthu.',
-        imageUrl: '',
-        status: 'Active',
-        badge: 'New',
-        description: 'Build enterprise web applications using C#, .NET, ASP.NET Core, Entity Framework Core and SQL Server.'
-      },
-       {
-        id: 'c5',
-        title: 'Advanced Angular Development',
-        type: 'IT',
-        category: 'Angular',
-        duration: '3 Months',
-        fee: '₹24,000',
-        originalFee: '₹30,000',
-        trainer: 'Mr. Marimuthu.',
-        imageUrl: '',
-        status: 'Active',
-        badge: 'In Demand',
-        description: 'Build modern, responsive web applications using Angular, TypeScript, HTML, CSS, Angular Material and REST APIs.'
-      },
-      
-      {
-        id: 'c6',
-        title: 'Advanced React Development',
-        type: 'IT',
-        category: 'React',
-        duration: '3 Months',
-        fee: '₹24,000',
-        originalFee: '₹30,000',
-        trainer: 'Mr. Marimuthu.',
-        imageUrl: '',
-        status: 'Active',
-        badge: 'New',
-        description: 'Develop modern and scalable web applications using React, JavaScript, JSX, React Hooks, APIs and modern UI technologies.'
-      }
-     ],
+    { id: 's1', title: 'Enterprise Web Development', category: 'Enterprise Solutions', icon: 'fa-building', description: 'Custom software development and IT consulting.', status: 'Active' },
+    { id: 's2', title: 'Full Stack Development', category: 'IT Training', icon: 'fa-laptop-code', description: 'Industry-oriented courses in Full Stack and Python.', status: 'Active' },
+    { id: 's3', title: 'Accounting & Tally', category: 'Non-IT Training', icon: 'fa-users-cog', description: 'Professional training in Accounting and Banking.', status: 'Active' },
+    { id: 's4', title: 'University Admissions', category: 'Abroad Study', icon: 'fa-graduation-cap', description: 'End-to-end admission guidance.', status: 'Active' },
+    { id: 's5', title: 'Global Tech Placements', category: 'IT', parentCategory: 'Abroad Jobs', icon: 'fa-plane-departure', description: 'Global IT career opportunities with visa sponsorship.', status: 'Active' },
+    { id: 's6', title: 'Healthcare Abroad Jobs', category: 'Non-IT', parentCategory: 'Abroad Jobs', icon: 'fa-user-nurse', description: 'Nursing and healthcare placements globally.', status: 'Active' }
+  ],
+  
+       partners: [
+         { id: 'pt1', name: 'Infosys', type: 'Hiring Company', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg', website: 'https://infosys.com', country: 'India', description: 'Global leader in next-generation digital services and consulting.', status: 'Verified' },
+         { id: 'pt2', name: 'TCS', type: 'Hiring Company', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg', website: 'https://tcs.com', country: 'India', description: 'IT services, consulting and business solutions organization.', status: 'Verified' },
+         { id: 'pt3', name: 'University of London', type: 'University', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/University_of_London_logo.svg/200px-University_of_London_logo.svg.png', website: 'https://london.ac.uk', country: 'UK', description: 'A globally recognized collegiate research university.', status: 'Verified' },
+         { id: 'pt4', name: 'Toronto College', type: 'College', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/53/University_of_Toronto_crest.svg/200px-University_of_Toronto_crest.svg.png', website: 'https://utoronto.ca', country: 'Canada', description: 'Leading institution of learning, discovery and knowledge creation.', status: 'Pending' }
+       ],
+       abroadJobs: [
+         { id: 'aj1', slug: 'senior-software-engineer-uk', title: 'Senior Software Engineer', category: 'IT', country: 'UK', employer: 'TechGlobal Solutions', role: 'Full Stack Developer', experience: '5+ Years', salary: '£60,000 - £80,000', benefits: 'Visa Sponsorship, Relocation Bonus, Health Insurance', requirements: 'React, Node.js, AWS, System Design', closingDate: '2026-12-31', status: 'Active' },
+         { id: 'aj2', slug: 'registered-nurse-canada', title: 'Registered Nurse', category: 'Non-IT', country: 'Canada', employer: 'Toronto Health Network', role: 'Staff Nurse', experience: '2+ Years', salary: '$70,000 - $90,000 CAD', benefits: 'Visa Sponsorship, Permanent Residency Pathway', requirements: 'BSc Nursing, IELTS 7.0+, Active License', closingDate: '2026-11-15', status: 'Active' },
+         { id: 'aj3', slug: 'data-scientist-australia', title: 'Data Scientist', category: 'IT', country: 'Australia', employer: 'DataCorp AU', role: 'Data Scientist', experience: '3+ Years', salary: '$100,000 - $130,000 AUD', benefits: 'Visa Sponsorship, Flexible Working', requirements: 'Python, Machine Learning, SQL, Statistics', closingDate: '2024-01-01', status: 'Active' } // Expired for testing
+       ],
+       abroadJobApplications: [],
+       courses: [
+         { id: 'c1', slug: 'full-stack-web-development', title: 'Full Stack Web Development', type: 'IT', category: 'Full Stack', duration: '6 Months', fee: '₹48,000', originalFee: '₹72,000', trainer: 'Mr. Marimuthu', imageUrl: '', status: 'Active', badge: 'Popular', batch: 'Oct 15th, 2024', description: 'Master HTML, CSS, JavaScript, Angular/React, Python/Java, and SQL Server.' },
+         { id: 'c2', slug: 'python-ai-ml', title: 'Python & AI/ML', type: 'IT', category: 'AI/ML', duration: '3 Months', fee: '₹24,000', originalFee: '₹30,000', trainer: 'Mr. Marimuthu', imageUrl: '', status: 'Active', badge: 'Trending', batch: 'Nov 1st, 2024', description: 'Learn Python, machine learning, and AI model deployment.' },
+         { id: 'c3', slug: 'advanced-java-springboot', title: 'Advanced Java SpringBoot', type: 'IT', category: 'Java', duration: '3 Months', fee: '₹24,000', originalFee: '₹30,000', trainer: 'Mr. Marimuthu', imageUrl: '', status: 'Active', badge: 'New', batch: 'Oct 20th, 2024', description: 'Build enterprise applications using Java and SpringBoot.' },
+         { id: 'c4', slug: 'advanced-net-csharp', title: 'Advanced .NET with C#', type: 'IT', category: 'Full Stack', duration: '3 Months', fee: '₹24,000', originalFee: '₹30,000', trainer: 'Mr. Marimuthu', imageUrl: '', status: 'Active', badge: '', batch: 'Nov 5th, 2024', description: 'Enterprise app development with .NET Core and C#.' },
+         { id: 'c5', slug: 'cyber-security', title: 'Cyber Security & Ethical Hacking', type: 'IT', category: 'Cyber Security', duration: '4 Months', fee: '₹35,000', originalFee: '₹45,000', trainer: 'Mr. Karthik', imageUrl: '', status: 'Active', badge: 'High Demand', batch: 'Oct 10th, 2024', description: 'Learn ethical hacking, network security, and penetration testing.' },
+         { id: 'c6', slug: 'accounting-tally', title: 'Professional Accounting & Tally', type: 'Non-IT', category: 'Accounting', duration: '2 Months', fee: '₹12,000', originalFee: '₹18,000', trainer: 'Mrs. Priya', imageUrl: '', status: 'Active', badge: '', batch: 'Oct 12th, 2024', description: 'Master Tally Prime, GST, and corporate accounting.' },
+         { id: 'c7', slug: 'hr-management', title: 'HR Management & Payroll', type: 'Non-IT', category: 'HR', duration: '2 Months', fee: '₹15,000', originalFee: '₹20,000', trainer: 'Ms. Swetha', imageUrl: '', status: 'Active', badge: '', batch: 'Oct 15th, 2024', description: 'Core HR operations, payroll processing, and statutory compliances.' }
+       ],
+       universities: [
+         { id: 'u1', slug: 'toronto-college-canada', name: 'Toronto College', country: 'Canada', type: 'College', programs: ['Computer Science', 'Business Administration', 'Nursing'], scholarship: 'Up to $5,000 CAD', status: 'Active', description: 'A premier institution in Canada offering world-class facilities and high post-graduation employment rates.', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/53/University_of_Toronto_crest.svg/200px-University_of_Toronto_crest.svg.png' },
+         { id: 'u2', slug: 'university-of-london-uk', name: 'University of London', country: 'UK', type: 'University', programs: ['Data Science', 'Finance', 'Engineering'], scholarship: 'Up to £3,000', status: 'Active', description: 'Study in the heart of the UK with access to global networking opportunities.', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/University_of_London_logo.svg/200px-University_of_London_logo.svg.png' }
+       ],
+       abroadApplications: []
+,
      jobs: [
         {
           id: 'j1',
@@ -304,54 +289,202 @@ const DEMO_DATA = {
 const isApiConfigured = () => API_BASE_URL !== 'YOUR_APPS_SCRIPT_WEB_APP_URL_HERE' && API_BASE_URL.length > 10;
 
 async function apiGet(endpoint, params = {}) {
-  if (!isApiConfigured()) {
-    console.info('🔧 API not configured — using demo data.');
-    return null;
-  }
-  try {
-    const url = new URL(API_BASE_URL);
-    url.searchParams.set('action', endpoint);
-    Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
-    const res = await fetch(url.toString());
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.json();
-  } catch (err) {
-    console.warn(`API GET failed (${endpoint}):`, err.message);
-    return null;
-  }
-}
+    if (!isApiConfigured()) {
+      // console.info('API not configured ?" using demo data.');
+      return null;
+    }
+    
+    // Check Cache (Bypass if Admin is logged in to ensure fresh data for CRUD)
+    const isAdmin = !!sessionStorage.getItem('admin_token');
+    const cacheKey = 'asg_cache_' + endpoint;
+    if (!isAdmin) {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        try {
+          const parsed = JSON.parse(cached);
+          // 15-minute TTL
+          if (Date.now() - parsed.timestamp < 15 * 60 * 1000) {
+            return parsed.data;
+          }
+        } catch(e) {}
+      }
+    }
+    
+    try {
+      const url = new URL(API_BASE_URL);
+      url.searchParams.set('action', endpoint);
+      Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
+      
+      const token = sessionStorage.getItem('admin_token');
+      if (token) url.searchParams.set('token', token);
 
-async function apiPost(endpoint, body = {}) {
-  if (!isApiConfigured()) {
-    console.info('🔧 API not configured — simulating post.');
-    return { success: true, message: 'Submitted (demo mode)', data: null };
+      const res = await fetch(url.toString());
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      
+      const data = await res.json();
+      
+      // Handle Auth Rejection
+      if (data.error && data.error.includes('Unauthorized')) {
+        sessionStorage.removeItem('admin_token');
+        if(window.location.pathname.includes('admin/')) window.location.replace('login.html');
+        return null;
+      }
+      
+      // Save to cache
+      if (!isAdmin && data.success) {
+        sessionStorage.setItem(cacheKey, JSON.stringify({ timestamp: Date.now(), data: data }));
+      }
+      return data;
+    } catch (err) {
+      console.warn(`API GET failed (${endpoint}):`, err.message);
+      return null;
+    }
   }
-  try {
-    const res = await fetch(API_BASE_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ action: endpoint, ...body })
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.json();
-  } catch (err) {
-    console.warn(`API POST failed (${endpoint}):`, err.message);
-    return { success: false, message: 'Network error. Please try again.', data: null };
+  
+  async function apiPost(endpoint, body = {}) {
+    if (!isApiConfigured()) {
+      return { success: true, message: 'Submitted (demo mode)', data: null };
+    }
+    try {
+      // Inject token for auth
+      const token = sessionStorage.getItem('admin_token');
+      if (token) body.token = token;
+      
+      const res = await fetch(API_BASE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action: endpoint, ...body })
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      
+      const data = await res.json();
+      
+      // Handle Auth Rejection
+      if (data.error && data.error.includes('Unauthorized')) {
+        sessionStorage.removeItem('admin_token');
+        if(window.location.pathname.includes('admin/')) {
+          alert('Session expired. Please log in again.');
+          window.location.replace('login.html');
+        }
+        return { success: false, message: 'Session expired.' };
+      }
+      
+      return data;
+    } catch (err) {
+      console.warn(`API POST failed (${endpoint}):`, err.message);
+      return { success: false, message: 'Network error. Please try again.', data: null };
+    }
   }
-}
-
-/* ============ PUBLIC API CALLS ============ */
+  
+  /* ============ PUBLIC API CALLS ============ */
 const API = {
+  
   async getSettings() {
     const res = await apiGet('getSettings');
-    return res?.data || DEMO_DATA.settings;
+    let s = (res && res.data) ? res.data : DEMO_DATA.settings;
+    
+    // Dynamic metrics overriding placeholders
+    if (DEMO_DATA.placements && DEMO_DATA.placements.length > 0) s.placements = DEMO_DATA.placements.length;
+    if (DEMO_DATA.projects && DEMO_DATA.projects.length > 0) s.projectsCompleted = DEMO_DATA.projects.length;
+    if (DEMO_DATA.courses && DEMO_DATA.courses.length > 0) s.courses = DEMO_DATA.courses.length;
+    if (DEMO_DATA.employees && DEMO_DATA.employees.length > 0) s.employees = DEMO_DATA.employees.length;
+    
+    return s;
   },
+
 
   async getCourses() {
     const res = await apiGet('getCourses');
-    return (res?.data?.length) ? res.data : DEMO_DATA.courses;
+    const data = (res?.data?.length) ? res.data : DEMO_DATA.courses;
+    
+    // Inject Course Schema dynamically
+    try {
+      if (document.querySelector('#schema-courses')) document.querySelector('#schema-courses').remove();
+      const schema = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": data.map((c, i) => ({
+          "@type": "ListItem",
+          "position": i + 1,
+          "item": {
+            "@type": "Course",
+            "name": c.title,
+            "description": c.description,
+            "provider": {
+              "@type": "EducationalOrganization",
+              "name": "Aditya Skill Gate IT Solution",
+              "sameAs": "https://adityaskillgate.com"
+            }
+          }
+        }))
+      };
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.id = 'schema-courses';
+      script.text = JSON.stringify(schema);
+      document.head.appendChild(script);
+    } catch(e) {}
+    
+    return data;
   },
 
+  
+  
+  // --- PARTNERS API ---
+  async getPartners() {
+    const res = await apiGet('getPartners');
+    return (res?.data?.length) ? res.data : DEMO_DATA.partners;
+  },
+  async savePartner(data) {
+    const res = await apiPost('savePartner', data);
+    return res || { success: true, message: 'Partner saved (Demo Mode)' };
+  },
+  async deletePartner(id) {
+    const res = await apiPost('deletePartner', { id });
+    return res || { success: true, message: 'Partner deleted (Demo Mode)' };
+  },
+
+  // --- ABROAD JOBS API ---
+  async getAbroadJobs() {
+    const res = await apiGet('getAbroadJobs');
+    const allJobs = (res?.data?.length) ? res.data : DEMO_DATA.abroadJobs;
+    // Filter out expired jobs
+    const today = new Date().toISOString().split('T')[0];
+    return allJobs.filter(job => job.status === 'Active' && job.closingDate >= today);
+  },
+  async getAllAbroadJobsAdmin() {
+    // Admin needs to see all jobs including expired/draft
+    const res = await apiGet('getAbroadJobs');
+    return (res?.data?.length) ? res.data : DEMO_DATA.abroadJobs;
+  },
+  async saveAbroadJob(data) {
+    const res = await apiPost('saveAbroadJob', data);
+    return res || { success: true, message: 'Job saved (Demo Mode)' };
+  },
+  async deleteAbroadJob(id) {
+    const res = await apiPost('deleteAbroadJob', { id });
+    return res || { success: true, message: 'Job deleted (Demo Mode)' };
+  },
+  async submitAbroadJobApp(data) {
+    const res = await apiPost('submitAbroadJobApp', data);
+    return res || { success: true, message: 'Application submitted successfully!' };
+  },
+
+  // --- EXISTING CATEGORIES ENDPOINTS ---
+
+  async getCategories() {
+    const res = await apiGet('getCategories');
+    return (res?.data?.length) ? res.data : DEMO_DATA.categories;
+  },
+  async saveCategory(data) {
+    const res = await apiPost('saveCategory', data);
+    return res || { success: true, message: 'Category saved successfully (Demo Mode)' };
+  },
+  async deleteCategory(id) {
+    const res = await apiPost('deleteCategory', { id });
+    return res || { success: true, message: 'Category deleted successfully (Demo Mode)' };
+  },
+  
   async getServices() {
     const res = await apiGet('getServices');
     return (res?.data?.length) ? res.data : DEMO_DATA.services;
@@ -369,7 +502,40 @@ const API = {
 
   async getJobs() {
     const res = await apiGet('getJobs');
-    return (res?.data?.length) ? res.data : DEMO_DATA.jobs;
+    const data = (res?.data?.length) ? res.data : DEMO_DATA.jobs;
+    
+    // Inject JobPosting Schema dynamically
+    try {
+      if (document.querySelector('#schema-jobs')) document.querySelector('#schema-jobs').remove();
+      const schema = data.map(j => ({
+        "@context": "https://schema.org",
+        "@type": "JobPosting",
+        "title": j.title,
+        "description": j.description || j.title,
+        "datePosted": new Date().toISOString().split('T')[0],
+        "employmentType": "FULL_TIME",
+        "hiringOrganization": {
+          "@type": "Organization",
+          "name": "Aditya Skill Gate Hiring Partners",
+          "sameAs": "https://adityaskillgate.com"
+        },
+        "jobLocation": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": j.location,
+            "addressCountry": "IN"
+          }
+        }
+      }));
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.id = 'schema-jobs';
+      script.text = JSON.stringify(schema);
+      document.head.appendChild(script);
+    } catch(e) {}
+    
+    return data;
   },
 
   async getEmployees() {
@@ -404,7 +570,22 @@ const API = {
 
   async search(query) {
     const res = await apiGet('search', { q: query });
-    return res?.data || { courses: [], jobs: [], blogs: [] };
+    return res?.data || { 
+       courses: [
+         { id: 'c1', slug: 'full-stack-web-development', title: 'Full Stack Web Development', type: 'IT', category: 'Full Stack', duration: '6 Months', fee: '₹48,000', originalFee: '₹72,000', trainer: 'Mr. Marimuthu', imageUrl: '', status: 'Active', badge: 'Popular', batch: 'Oct 15th, 2024', description: 'Master HTML, CSS, JavaScript, Angular/React, Python/Java, and SQL Server.' },
+         { id: 'c2', slug: 'python-ai-ml', title: 'Python & AI/ML', type: 'IT', category: 'AI/ML', duration: '3 Months', fee: '₹24,000', originalFee: '₹30,000', trainer: 'Mr. Marimuthu', imageUrl: '', status: 'Active', badge: 'Trending', batch: 'Nov 1st, 2024', description: 'Learn Python, machine learning, and AI model deployment.' },
+         { id: 'c3', slug: 'advanced-java-springboot', title: 'Advanced Java SpringBoot', type: 'IT', category: 'Java', duration: '3 Months', fee: '₹24,000', originalFee: '₹30,000', trainer: 'Mr. Marimuthu', imageUrl: '', status: 'Active', badge: 'New', batch: 'Oct 20th, 2024', description: 'Build enterprise applications using Java and SpringBoot.' },
+         { id: 'c4', slug: 'advanced-net-csharp', title: 'Advanced .NET with C#', type: 'IT', category: 'Full Stack', duration: '3 Months', fee: '₹24,000', originalFee: '₹30,000', trainer: 'Mr. Marimuthu', imageUrl: '', status: 'Active', badge: '', batch: 'Nov 5th, 2024', description: 'Enterprise app development with .NET Core and C#.' },
+         { id: 'c5', slug: 'cyber-security', title: 'Cyber Security & Ethical Hacking', type: 'IT', category: 'Cyber Security', duration: '4 Months', fee: '₹35,000', originalFee: '₹45,000', trainer: 'Mr. Karthik', imageUrl: '', status: 'Active', badge: 'High Demand', batch: 'Oct 10th, 2024', description: 'Learn ethical hacking, network security, and penetration testing.' },
+         { id: 'c6', slug: 'accounting-tally', title: 'Professional Accounting & Tally', type: 'Non-IT', category: 'Accounting', duration: '2 Months', fee: '₹12,000', originalFee: '₹18,000', trainer: 'Mrs. Priya', imageUrl: '', status: 'Active', badge: '', batch: 'Oct 12th, 2024', description: 'Master Tally Prime, GST, and corporate accounting.' },
+         { id: 'c7', slug: 'hr-management', title: 'HR Management & Payroll', type: 'Non-IT', category: 'HR', duration: '2 Months', fee: '₹15,000', originalFee: '₹20,000', trainer: 'Ms. Swetha', imageUrl: '', status: 'Active', badge: '', batch: 'Oct 15th, 2024', description: 'Core HR operations, payroll processing, and statutory compliances.' }
+       ],
+       universities: [
+         { id: 'u1', slug: 'toronto-college-canada', name: 'Toronto College', country: 'Canada', type: 'College', programs: ['Computer Science', 'Business Administration', 'Nursing'], scholarship: 'Up to $5,000 CAD', status: 'Active', description: 'A premier institution in Canada offering world-class facilities and high post-graduation employment rates.', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/53/University_of_Toronto_crest.svg/200px-University_of_Toronto_crest.svg.png' },
+         { id: 'u2', slug: 'university-of-london-uk', name: 'University of London', country: 'UK', type: 'University', programs: ['Data Science', 'Finance', 'Engineering'], scholarship: 'Up to £3,000', status: 'Active', description: 'Study in the heart of the UK with access to global networking opportunities.', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/University_of_London_logo.svg/200px-University_of_London_logo.svg.png' }
+       ],
+       abroadApplications: []
+, jobs: [], blogs: [] };
   },
 
   async submitContact(formData) {

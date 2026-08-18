@@ -548,5 +548,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  /* ====== METRICS & DYNAMIC DATES ====== */
+  async function loadMetrics() {
+    // 1. Dynamic Copyright Year
+    document.querySelectorAll('.current-year').forEach(el => {
+      el.textContent = new Date().getFullYear();
+    });
+
+    // 2. Load Company Metrics
+    try {
+      const settings = await API.getSettings();
+      // 'stats' could be a JSON string or object in settings
+      let stats = {};
+      if (settings.stats) {
+        stats = typeof settings.stats === 'string' ? JSON.parse(settings.stats) : settings.stats;
+      } else {
+        // Fallback or flat settings mapping
+        stats = settings; 
+      }
+      
+      document.querySelectorAll('[data-metric]').forEach(el => {
+        const key = el.dataset.metric;
+        if (stats[key]) {
+          el.textContent = stats[key];
+        }
+      });
+    } catch (err) {
+      console.warn('Failed to load dynamic metrics:', err);
+    }
+  }
+  
+  loadMetrics();
+
   console.log('✅ Aditya Skill Gate — main.js loaded');
 });

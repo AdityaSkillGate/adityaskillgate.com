@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manage Services | Admin Panel</title>
+  <title>Manage Categories | Admin Panel</title>
   <meta name="robots" content="noindex">
   <link rel="icon" href="../assets/logos/favicon.ico" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
     <a href="dashboard.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-chart-pie"></i></div><span>Dashboard</span></a>
     <a href="reports.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-file-pdf"></i></div><span>Report Center</span></a>
     <div class="sidebar-section-title">Content</div>
-    <a href="services.html" class="sidebar-link" class="sidebar-link active"><div class="sidebar-icon"><i class="fas fa-cog"></i></div><span>Services</span></a>
+    <a href="services.html" class="sidebar-link" class="sidebar-link active"><div class="sidebar-icon"><i class="fas fa-tags"></i></div><span>Services</span></a>
     <a href="courses.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-graduation-cap"></i></div><span>Courses</span></a>
     <a href="abroad.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-plane-departure"></i></div><span>Study Abroad</span></a>
     <a href="partners.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-handshake"></i></div><span>Partners</span></a>
@@ -34,7 +34,7 @@
     <a href="contacts.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-envelope"></i></div><span>Contact Forms</span></a>
     <a href="chatbot.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-robot"></i></div><span>Chatbot KB</span></a>
     <div class="sidebar-section-title">Settings</div>
-    <a href="settings.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-cog"></i></div><span>Settings</span></a>
+    <a href="settings.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-tags"></i></div><span>Settings</span></a>
   </nav>
 </div>
 <div class="admin-main" id="admin-main">
@@ -49,7 +49,7 @@
   <div class="admin-content">
     <div class="admin-page-header">
       <div><h1 class="admin-page-title">Manage Services</h1><p class="admin-page-sub">Add, edit, or remove IT & Training Services from the website.</p></div>
-      <button class="btn-admin-primary" onclick="openModal('service-modal')"><i class="fas fa-plus"></i> Add New Service</button>
+      <button class="btn-admin-primary" onclick="openModal('service-modal')"><i class="fas fa-plus"></i> Add New Category</button>
     </div>
 
     <div class="admin-card">
@@ -59,7 +59,12 @@
       </div>
       <div class="admin-table-wrap">
         <table class="admin-table">
-          <thead><tr><th>Title</th><th>Category</th><th>Icon</th><th>Status</th><th>Actions</th></tr></thead>
+          <thead><tr>
+            <th>Category Name</th>
+            <th>Parent Category</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr></thead>
           <tbody id="services-tbody">
             <tr><td colspan="5" class="admin-table-empty">Loading services...</td></tr>
           </tbody>
@@ -73,33 +78,39 @@
 <div class="modal-overlay" id="service-modal">
   <div class="modal modal-lg">
     <div class="modal-header">
-      <h3 id="service-modal-title" style="margin:0;color:var(--a-navy)">Add New Service</h3>
+      <h3 id="service-modal-title" style="margin:0;color:var(--a-navy)">Add New Category</h3>
       <button class="modal-close" onclick="closeAdminModal('service-modal')"><i class="fas fa-times"></i></button>
     </div>
     <div class="modal-body">
-      <form id="service-form">
-        <input type="hidden" id="service-id" name="id">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
-          <div><label class="admin-label">Service Title *</label><input type="text" class="admin-input" name="title" required></div>
-          <div><label class="admin-label">Category *</label>
-            <select class="admin-input" name="category" required>
-              <option value="Services">Services</option>
-              <option value="Training">Training</option>
-              <option value="Consulting">Consulting</option>
-            </select>
+      
+        <form id="service-form">
+          <input type="hidden" id="service-id" name="id">
+          <div style="display:grid;grid-template-columns:1fr;gap:20px;margin-bottom:20px">
+            <div>
+              <label class="admin-label">Category Name *</label>
+              <input type="text" class="admin-input" name="name" required>
+            </div>
+            <div>
+              <label class="admin-label">Parent Category (Optional)</label>
+              <select class="admin-input" name="parent" id="parent-category-select">
+                <option value="">-- None (Top Level) --</option>
+              </select>
+              <small style="color:var(--gray-500);font-size:0.8rem;">Select a parent category if this is a sub-category (e.g., IT under Abroad Jobs).</small>
+            </div>
+            <div>
+              <label class="admin-label">Status</label>
+              <select class="admin-input" name="status">
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+            </div>
           </div>
-          <div><label class="admin-label">Icon (FontAwesome Class)</label><input type="text" class="admin-input" name="icon" placeholder="fa-laptop-code"></div>
-          <div><label class="admin-label">Status</label><select class="admin-input" name="status"><option value="Active">Active</option><option value="Inactive">Inactive</option></select></div>
-        </div>
-        <div style="margin-bottom:20px">
-          <label class="admin-label">Short Description</label>
-          <textarea class="admin-input" name="description" rows="3" required></textarea>
-        </div>
-        <div style="display:flex;justify-content:flex-end;gap:12px">
-          <button type="submit" class="btn-admin-primary" id="service-submit"><i class="fas fa-save"></i> Save Service</button>
-          <button type="button" class="btn-admin-outline" onclick="closeAdminModal('service-modal')">Cancel</button>
-        </div>
-      </form>
+          <div style="display:flex;justify-content:flex-end;gap:12px">
+            <button type="submit" class="btn-admin-primary" id="service-submit"><i class="fas fa-save"></i> Save Category</button>
+            <button type="button" class="btn-admin-outline" onclick="closeAdminModal('service-modal')">Cancel</button>
+          </div>
+        </form>
+
     </div>
   </div>
 </div>
@@ -140,7 +151,7 @@ function renderservices(list){
 
 window.editService=function(id){
   const c=allservices.find(x=>x.id===id);if(!c)return;
-  document.getElementById('service-modal-title').textContent='Edit Service';
+  document.getElementById('service-modal-title').textContent='Edit Category';
   document.getElementById('service-id').value=c.id;
   const f=document.getElementById('service-form');
   ['title','category','icon','description','status'].forEach(k=>{if(f[k])f[k].value=c[k]||'';});
@@ -186,7 +197,7 @@ document.getElementById('search-services')?.addEventListener('input',(e)=>{
 const _openModal=window.openModal;
 window.openModal=function(id){
   if(id==='service-modal'&&!document.getElementById('service-id').value){
-    document.getElementById('service-modal-title').textContent='Add New Service';
+    document.getElementById('service-modal-title').textContent='Add New Category';
     document.getElementById('service-form').reset();
     document.getElementById('service-id').value='';
   }

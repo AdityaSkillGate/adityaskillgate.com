@@ -95,22 +95,38 @@ document.getElementById('eye-toggle')?.addEventListener('click',function(){const
 
 // Login form
 document.getElementById('login-form')?.addEventListener('submit',async(e)=>{
-  e.preventDefault();
-  const username=document.getElementById('username').value.trim();
-  const password=document.getElementById('password').value;
-  const btn=document.getElementById('login-btn');
-  const err=document.getElementById('login-error');
-  const errMsg=document.getElementById('error-msg');
-  err.style.display='none';
-  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Logging in...';btn.disabled=true;
+    e.preventDefault();
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+    const btn = document.getElementById('login-btn');
+    const err = document.getElementById('login-error');
+    const errMsg = document.getElementById('error-msg');
+    
+    err.style.display = 'none';
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+    btn.disabled = true;
 
-  // Local fallback auth
-  const isValid=username==='admin'&&password==='Aditya@2026';
-  let success=false;
-  let authToken='asg_admin_demo_token';
-  
-  try{
-    const res=await API.adminLogin({username,password});
+    try {
+      const res = await API.adminLogin({ username, password });
+      if (res && res.success && res.token) {
+        sessionStorage.setItem('admin_token', res.token);
+        sessionStorage.setItem('admin_user', username);
+        btn.innerHTML = '<i class="fas fa-check"></i> Login Successful!';
+        btn.style.background = 'linear-gradient(135deg, #5ab225, #6CCB2F)';
+        setTimeout(() => { window.location.href = 'dashboard.html'; }, 500);
+      } else {
+        throw new Error(res?.error || 'Invalid credentials');
+      }
+    } catch(ex) {
+      err.style.display = 'block';
+      errMsg.textContent = 'Invalid username or password. Please try again.';
+      document.getElementById('username').classList.add('error');
+      document.getElementById('password').classList.add('error');
+      document.getElementById('password').value = '';
+      btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Dashboard';
+      btn.disabled = false;
+    }
+});
     if(res?.success){
       // Use the real server token if provided, else fallback
       authToken=res.token||'asg_admin_demo_token';

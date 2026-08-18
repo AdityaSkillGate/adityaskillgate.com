@@ -92,7 +92,7 @@
     <div style="font-size:64px;font-weight:900;letter-spacing:-2px;margin-bottom:20px;color:white;">ASG</div>
     <h1 class="cover-title">COMPANY<br>PROFILE</h1>
     <div class="cover-subtitle">Aditya Skill Gate IT Solution</div>
-    <div class="cover-footer" id="cover-date">2024</div>
+    <div class="cover-footer" id="cover-date"><span class="current-year">2024</span></div>
   </div>
 
   <!-- PAGE 2: ABOUT -->
@@ -167,6 +167,7 @@
 document.getElementById('cover-date').innerText = new Date().getFullYear();
 
 async function init() {
+  document.querySelectorAll('.current-year').forEach(el => el.textContent = new Date().getFullYear());
   try {
     const services = await API.getServices();
     const placements = await API.getPlacements();
