@@ -5,8 +5,8 @@
    Replace API_BASE_URL with your deployed Google Apps Script URL
    ============================================================ */
 
-const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbyOH9ZjGPl-xMgfW_V1UqhUpDUhMofWryVuYtCJk8Uf0D_sjY1WoAOYyLIGTMCBvisKQw/exec';
-const SHEET_ID = '1zQKpOnYjpCMku9gYi3fQHPw84IFdHmTWYJ8_rSbJkco';
+const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbyR3SuYfQmSadQlb78weA8LG4ICWLIUogRLWzpoAnpDRgzc2cMzTI1ytVgFhCjTaJS1/exec';
+const SHEET_ID = '1P8a4IpQ9DW2Ut7kE4oBV8f9BHRBoU39UyJPSAjoJUDc';
 
 /* ============ DEMO DATA (fallback when API not configured) ============ */
 const DEMO_DATA = {
