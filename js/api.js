@@ -16,7 +16,7 @@ const DEMO_DATA = {
     whatsapp: '+916382604808',
     email: 'Adityaskillgateitsolution@gmail.com',
     instagram: 'https://www.instagram.com/adityaskillgate.official/',
-    youtube: 'https://www.youtube.com/@thoduvaanamyt1867',
+    youtube: 'https://www.youtube.com/@AdityaSkillGateITSolution',
     address: 'Tamil Nadu, India',
     heroTitle: 'Empowering Skills Through Technology',
     heroSubtitle: 'Premium IT Training, Services & Placement Support',

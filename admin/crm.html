@@ -126,8 +126,8 @@
       <form id="crm-form">
         <input type="hidden" id="l-id" name="id">
         <div style="margin-bottom:16px;">
-          <label class="admin-label">Lead Status</label>
-          <select class="admin-input" name="status" id="l-status">
+          <label class="form-label">Lead Status</label>
+          <select class="form-control" name="status" id="l-status">
             <option value="New">New</option>
             <option value="Contacted">Contacted</option>
             <option value="Qualified">Qualified</option>
@@ -136,12 +136,12 @@
           </select>
         </div>
         <div style="margin-bottom:16px;">
-          <label class="admin-label">Follow-up Date</label>
-          <input type="date" class="admin-input" id="l-followup">
+          <label class="form-label">Follow-up Date</label>
+          <input type="date" class="form-control" id="l-followup">
         </div>
         <div>
-          <label class="admin-label">Notes & Activity</label>
-          <textarea class="admin-input" name="notes" id="l-notes" rows="3" placeholder="Called on..., sent email..."></textarea>
+          <label class="form-label">Notes & Activity</label>
+          <textarea class="form-control" name="notes" id="l-notes" rows="3" placeholder="Called on..., sent email..."></textarea>
         </div>
 
         <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:20px;">
@@ -200,7 +200,7 @@ window.viewLead = function(id) {
   document.getElementById('l-service').textContent = currentLead.service || currentLead.subject || 'General Enquiry';
   document.getElementById('l-message').textContent = currentLead.message || '—';
   document.getElementById('l-source').textContent = currentLead.source || 'Website Form';
-  document.getElementById('l-date').textContent = currentLead.timestamp || '—';
+  document.getElementById('l-date').textContent = currentLead.createdAt || '—';
 
   document.getElementById('l-status').value = currentLead.status || 'New';
   document.getElementById('l-followup').value = currentLead.followup || '';

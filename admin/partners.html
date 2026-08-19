@@ -55,7 +55,7 @@
     <div class="admin-card">
       <div class="admin-card-header" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--a-border)">
         <h3 style="margin:0;color:var(--a-navy)">All Partners</h3>
-        <input type="text" class="admin-input" id="search-partners" placeholder="Search partners..." style="max-width:300px;margin-bottom:0">
+        <input type="text" class="form-control" id="search-partners" placeholder="Search partners..." style="max-width:300px;margin-bottom:0">
       </div>
       <div class="admin-table-wrap">
         <table class="admin-table">
@@ -80,19 +80,19 @@
       <form id="partner-form">
         <input type="hidden" id="partner-id" name="id">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
-          <div><label class="admin-label">Partner Name *</label><input type="text" class="admin-input" name="name" required></div>
-          <div><label class="admin-label">Partner Type *</label>
-            <select class="admin-input" name="type" required>
+          <div><label class="form-label">Partner Name *</label><input type="text" class="form-control" name="name" required></div>
+          <div><label class="form-label">Partner Type *</label>
+            <select class="form-control" name="type" required>
               <option value="Hiring">Hiring Companies</option>
               <option value="College">Study Abroad Colleges</option>
               <option value="University">Universities</option>
               <option value="Training">Training Partners</option>
             </select>
           </div>
-          <div style="grid-column: 1 / -1;"><label class="admin-label">Logo URL</label><input type="url" class="admin-input" name="logoUrl" id="partner-logo-input">
+          <div style="grid-column: 1 / -1;"><label class="form-label">Logo URL</label><input type="url" class="form-control" name="logoUrl" id="partner-logo-input">
             <div id="partner-logo-preview" style="margin-top:10px; max-height: 80px; overflow: hidden; background:var(--a-bg); padding:10px; border-radius:4px"></div>
           </div>
-          <div><label class="admin-label">Status</label><select class="admin-input" name="status"><option value="Active">Active</option><option value="Inactive">Inactive</option></select></div>
+          <div><label class="form-label">Status</label><select class="form-control" name="status"><option value="Active">Active</option><option value="Inactive">Inactive</option></select></div>
         </div>
         <div style="display:flex;justify-content:flex-end;gap:12px">
           <button type="submit" class="btn-admin-primary" id="partner-submit"><i class="fas fa-save"></i> Save Partner</button>

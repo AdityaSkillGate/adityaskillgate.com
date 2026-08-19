@@ -128,7 +128,7 @@
     <div class="navbar-inner">
       <a href="index.html" class="navbar-logo">
         <img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate IT Solution">
-        <div class="navbar-logo-text">ADITYA SKILL GATE<br><span>IT SOLUTION</span></div>
+        <div class="navbar-logo-text" style="text-align: center;">ADITYA SKILL GATE<br><span>IT SOLUTION</span></div>
       </a>
             <ul class="navbar-nav">
         <li><a href="index.html" class="nav-link active">Home</a></li>
@@ -502,25 +502,19 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-logo">
-          <img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate">
-          <div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2">ADITYA<br><span style="color:#6CCB2F">SKILL GATE IT</span></div>
+          <img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate IT Solution Logo">
+          <div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2;text-align:center">ADITYA SKILL GATE<br><span style="color:#6CCB2F">IT SOLUTION</span></div>
         </div>
-        <p>Empowering careers through premium IT training, services, and guaranteed placement support. Your success is our mission.</p>
+        <p>Empowering careers through premium IT training, services, and guaranteed placement support.</p>
         <div class="footer-socials">
+          <a href="https://www.linkedin.com/in/aditya-skill-gate-it-solution-5446b63a8?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="footer-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
           <a href="https://www.instagram.com/adityaskillgate.official/" target="_blank" class="footer-social" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.youtube.com/@thoduvaanamyt1867" target="_blank" class="footer-social" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.youtube.com/@AdityaSkillGateITSolution" target="_blank" class="footer-social" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
           <a href="https://wa.me/916382604808" target="_blank" class="footer-social" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
           <a href="mailto:Adityaskillgateitsolution@gmail.com" class="footer-social" aria-label="Email"><i class="fas fa-envelope"></i></a>
         </div>
       </div>
       <div class="footer-col">
-  <h4>Local Hubs</h4>
-  <div class="footer-links">
-    <a href="it-training-sankarankovil.html">IT Training Sankarankovil</a>
-    <a href="software-company-sankarankovil.html">Software Company Sankarankovil</a>
-  </div>
-</div>
-<div class="footer-col">
         <h4>Quick Links</h4>
         <div class="footer-links">
           <a href="index.html">Home</a>
@@ -528,32 +522,32 @@
           <a href="services.html">Services</a>
           <a href="courses.html">Courses</a>
           <a href="jobs.html">Careers</a>
+          <a href="contact.html">Contact</a>
         </div>
       </div>
       <div class="footer-col">
         <h4>Resources</h4>
         <div class="footer-links">
-          <a href="projects.html">Projects</a>
           <a href="placements.html">Placements</a>
-          <a href="blog.html">Blog</a>
+          <a href="projects.html">Projects</a>
           <a href="faq.html">FAQ</a>
-          <a href="resume.html">Resume Upload</a>
+          <a href="resume.html">Upload Resume</a>
         </div>
       </div>
       <div class="footer-col">
-        <h4>Contact</h4>
+        <h4>Local Hubs</h4>
         <div class="footer-links">
-          <a href="tel:+916382604808">📞 +91 63826 04808</a>
-          <a href="mailto:Adityaskillgateitsolution@gmail.com">📧 Email Us</a>
-          <a href="https://wa.me/916382604808" target="_blank">💬 WhatsApp</a>
-          <a href="contact.html">📍 Sankarankovil, Tamil Nadu, India</a>
+          <a href="it-training-sankarankovil.html">IT Training Sankarankovil</a>
+          <a href="software-company-sankarankovil.html">Software Company Sankarankovil</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; <span class="current-year" data-metric="currentYear">2024</span> Aditya Skill Gate IT Solution. All rights reserved. Made with ❤️ 💻 in Tamil Nadu.</p>
-      <p><a href="privacy.html" style="color:rgba(255,255,255,0.5)">Privacy Policy</a> · <a href="terms.html" style="color:rgba(255,255,255,0.5)">Terms</a> · 
-        <a href="admin/login.html" style="color:rgba(255,255,255,0.4);font-size:0.8rem;text-align:center">🔐 Admin Login</a>
+      <p>&copy; <span class="current-year" data-metric="currentYear">2024</span> Aditya Skill Gate IT Solution.</p>
+      <p>
+        <a href="privacy.html" style="color:rgba(255,255,255,0.5)">Privacy</a> &nbsp;&middot;&nbsp; 
+        <a href="terms.html" style="color:rgba(255,255,255,0.5)">Terms</a>
+      </p>
     </div>
   </div>
 </footer>
@@ -707,87 +701,89 @@ function renderPlacements(placements){
   },100);
 }
 
-function renderProjects(projects){
-  const g=document.getElementById('projects-grid');if(!g)return;
-  g.innerHTML=projects.slice(0,3).map((p,i)=>`
-    <div class="project-card" data-animate data-delay="${(i+1)*100}">
-      <div class="project-img" style="background:linear-gradient(135deg,${COLORS[i%COLORS.length]}cc,${COLORS[(i+2)%COLORS.length]}cc)">
-        <div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:5rem">${PROJECT_ICONS[p.category]||'💻'}</div>
-        <div class="project-overlay">
-          <a href="projects.html" class="btn btn-primary btn-sm">View Details</a>
+
+function renderTestimonials(testimonials){
+  const track=document.getElementById('testimonials-track');if(!track)return;
+  track.innerHTML=testimonials.map(t=>`
+    <div class="testimonial-card">
+      <div class="testimonial-header">
+        <div class="testimonial-avatar" style="${t.photoUrl ? `background:url('${t.photoUrl}') center/cover;` : `background:${avatarBg(t.name||'S')};display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-size:1.2rem`}">
+          ${t.photoUrl ? '' : initials(t.name||'A')}
+        </div>
+        <div class="testimonial-info">
+          <div class="testimonial-name">${t.name}</div>
+          <div class="testimonial-role">${t.role}</div>
         </div>
       </div>
-      <div class="project-body">
-        <div class="project-category">${p.category}</div>
-        <h3>${p.title}</h3>
-        <p>${p.description?.substring(0,100)}...</p>
-        <div class="project-tech">${(Array.isArray(p.techStack)?p.techStack:(p.techStack||'').split(',')).slice(0,4).map(t=>`<span class="tech-tag">${t.trim()}</span>`).join('')}</div>
+      <div class="testimonial-rating">
+        ${Array.from({length:5},(_,i)=>i<(t.rating||5)?'<i class="fas fa-star" style="color:var(--a-yellow)"></i>':'<i class="far fa-star" style="color:var(--a-yellow)"></i>').join('')}
       </div>
+      <p class="testimonial-text">"${t.message}"</p>
     </div>`).join('');
+    
+  setTimeout(()=>{
+    const prev=document.getElementById('test-prev'),next=document.getElementById('test-next'),dots=document.getElementById('test-dots');
+    const items=track.children;let cur=0;
+    const n=Math.ceil(items.length/3);
+    if(dots)dots.innerHTML=Array.from({length:n},(_,i)=>`<div class="slider-dot ${i===0?'active':''}" data-i="${i}"></div>`).join('');
+    function go(i){cur=Math.max(0,Math.min(i,n-1));const w=items[0]?.offsetWidth||340;const gap=24;track.style.transform=`translateX(-${cur*(w*3+gap*3)}px)`;dots?.querySelectorAll('.slider-dot').forEach((d,j)=>d.classList.toggle('active',j===cur));}
+    prev?.addEventListener('click',()=>go(cur<=0?n-1:cur-1));
+    next?.addEventListener('click',()=>go(cur>=n-1?0:cur+1));
+    dots?.querySelectorAll('.slider-dot').forEach(d=>d.addEventListener('click',()=>go(parseInt(d.dataset.i))));
+    setInterval(()=>go(cur>=n-1?0:cur+1),5000);
+  }, 100);
 }
 
 function renderTeam(employees){
   const g=document.getElementById('team-grid');if(!g)return;
-  g.innerHTML=employees.slice(0,4).map((e,i)=>`
-    <div class="team-card" data-animate data-delay="${(i+1)*100}">
-      <div class="team-img" style="background:linear-gradient(135deg,${COLORS[i%COLORS.length]},${COLORS[(i+2)%COLORS.length]})">
-        <div class="team-img-placeholder" style="font-size:4rem">${initials(e.name)}</div>
-      </div>
-      <div class="team-card-body">
-        <div class="team-name">${e.name}</div>
-        <div class="team-role">${e.role}</div>
-        <div class="team-bio">${e.bio?.substring(0,80)||'Expert trainer and mentor.'}</div>
+  g.innerHTML=employees.slice(0,4).map(e=>`
+    <div class="team-card" data-animate>
+      <div class="team-img" style="${e.photoUrl ? `background:url('${e.photoUrl}') center/cover;` : `background:${avatarBg(e.name||'A')};display:flex;align-items:center;justify-content:center;color:white;font-size:4rem;font-weight:bold`}">
+        ${e.photoUrl ? '' : initials(e.name||'A')}
         <div class="team-socials">
-          ${e.linkedin?`<a href="${e.linkedin}" class="social-btn social-btn-linkedin"><i class="fab fa-linkedin-in"></i></a>`:''}
-          ${e.email?`<a href="mailto:${e.email}" class="social-btn social-btn-email"><i class="fas fa-envelope"></i></a>`:''}
+          ${e.linkedin ? `<a href="${e.linkedin}" target="_blank"><i class="fab fa-linkedin-in"></i></a>` : ''}
+          ${e.email ? `<a href="mailto:${e.email}"><i class="fas fa-envelope"></i></a>` : ''}
         </div>
+      </div>
+      <div class="team-body">
+        <h3>${e.name}</h3>
+        <p>${e.role}</p>
       </div>
     </div>`).join('');
 }
 
-function renderTestimonials(testimonials){
-  const track=document.getElementById('testimonials-track');if(!track)return;
-  if(!testimonials || !testimonials.length){
-    track.innerHTML='<div style="text-align:center;padding:60px 20px;color:var(--gray-500)"><div style="font-size:3rem;margin-bottom:16px">💬</div><p>No reviews yet. Add testimonials in the Admin Panel with <strong>Active</strong> status.</p></div>';
-    return;
+function renderProjects(projects){
+    const g=document.getElementById('projects-grid');if(!g)return;
+    g.innerHTML=projects.slice(0,3).map((p,i)=>{
+      const imgUrl = p.screenshotUrl || p.imageUrl || p.results || '';
+      return `
+      <div class="project-card" data-animate data-delay="${(i+1)*100}">
+        <div class="project-img" style="${imgUrl ? `background:url('${imgUrl}') center/cover;` : `background:linear-gradient(135deg,${COLORS[i%COLORS.length]}cc,${COLORS[(i+2)%COLORS.length]}cc)`}">
+          ${imgUrl ? '' : `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:5rem">${PROJECT_ICONS[p.category]||'🌐'}</div>`}
+          <div class="project-overlay">
+            <a href="projects.html" class="btn btn-primary btn-sm">View Details</a>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-category">${p.category}</div>
+          <h3>${p.title}</h3>
+          <p style="font-size:0.85rem;color:var(--gray-500);margin-bottom:12px">${(p.description||'').substring(0,90)}...</p>
+        </div>
+      </div>`}).join('');
   }
-  track.innerHTML=testimonials.map(t=>`
-    <div class="testimonial-card" style="min-width:calc(33.333% - 16px)">
-      <div class="testimonial-quote">"</div>
-      <p class="testimonial-text">${t.message}</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar" style="background:${avatarBg(t.name)}">${initials(t.name)}</div>
-        <div>
-          <div class="testimonial-name">${t.name}</div>
-          <div class="testimonial-role">${t.role} · ${t.company}</div>
-          <div class="testimonial-stars">${'★'.repeat(parseInt(t.rating)||5)}</div>
-        </div>
-      </div>
-    </div>`).join('');
-  setTimeout(()=>{
-    const prev=document.getElementById('test-prev'),next=document.getElementById('test-next'),dots=document.getElementById('test-dots');
-    const items=track.children;let cur=0;const visible=window.innerWidth<768?1:window.innerWidth<992?2:3;
-    const max=Math.max(0,items.length-visible);
-    if(dots)dots.innerHTML=Array.from({length:max+1},(_,i)=>`<div class="slider-dot ${i===0?'active':''}" data-i="${i}"></div>`).join('');
-    function go(i){cur=Math.max(0,Math.min(i,max));const w=items[0]?.offsetWidth||0;const gap=24;track.style.transform=`translateX(-${cur*(w+gap)}px)`;dots?.querySelectorAll('.slider-dot').forEach((d,j)=>d.classList.toggle('active',j===cur));}
-    prev?.addEventListener('click',()=>go(cur<=0?max:cur-1));
-    next?.addEventListener('click',()=>go(cur>=max?0:cur+1));
-    dots?.querySelectorAll('.slider-dot').forEach(d=>d.addEventListener('click',()=>go(parseInt(d.dataset.i))));
-    setInterval(()=>go(cur>=max?0:cur+1),4500);
-  },100);
-}
-
-(async()=>{
-  const [courses,jobs,placements,testimonials,employees,projects,services,partners]=await Promise.all([
-    API.getCourses(),API.getJobs(),API.getPlacements(),API.getTestimonials(),API.getEmployees(),API.getProjects(),API.getServices(),API.getPartners()
-  ]);
-  renderCourses(courses);
-  renderJobs(jobs);
-  renderPlacements(placements);
-  renderTestimonials(testimonials);
-  renderTeam(employees);
-  renderProjects(projects);
-  renderServices(services);
+  
+  (async function loadPageData() {
+    const [courses, jobs, placements, testimonials, employees, projects, services, partners] = await Promise.all([
+      API.getCourses(), API.getJobs(), API.getPlacements(),
+      API.getTestimonials(), API.getEmployees(), API.getProjects(), API.getServices(), API.getPartners()
+    ]);
+    renderCourses(courses);
+    renderJobs(jobs);
+    renderPlacements(placements);
+    renderTestimonials(testimonials);
+    renderTeam(employees);
+    renderProjects(projects);
+    renderServices(services);
   renderPartners(partners);
   // Re-trigger scroll animations for newly added elements
   document.querySelectorAll('[data-animate]').forEach(el=>{

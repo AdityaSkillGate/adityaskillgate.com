@@ -62,11 +62,11 @@
         <form id="placement-form">
           <input type="hidden" name="id" id="placement-id">
           <div class="form-row">
-            <div class="form-group"><label class="form-label">Student Name *</label><input type="text" class="form-control" name="student" required></div>
-            <div class="form-group"><label class="form-label">Course</label><input type="text" class="form-control" name="course"></div>
+            <div class="form-group"><label class="form-label">Student Name *</label><input type="text" class="form-control" name="studentName" required></div>
+            <div class="form-group"><label class="form-label">Course</label><input type="text" class="form-control" name="courseName"></div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label class="form-label">Company *</label><input type="text" class="form-control" name="company" required></div>
+            <div class="form-group"><label class="form-label">Company *</label><input type="text" class="form-control" name="companyName" required></div>
             <div class="form-group"><label class="form-label">Designation</label><input type="text" class="form-control" name="designation"></div>
           </div>
           <div class="form-row">
@@ -108,8 +108,8 @@ function renderPlacements(list){
   const tb=document.getElementById('placements-tbody');
   if(!list.length){tb.innerHTML='<tr><td colspan="7" class="admin-table-empty">No placements yet.</td></tr>';return;}
   tb.innerHTML=list.map(p=>`<tr>
-    <td><div style="display:flex;align-items:center;gap:10px">${p.photoUrl?`<img src="${p.photoUrl}" style="width:40px;height:40px;border-radius:50%;object-fit:cover">`:''}<div style="font-weight:600">${p.studentName}</div></div></td>
-    <td>${p.courseName||'—'}</td><td>${p.companyName}</td><td>${p.designation||'—'}</td>
+    <td><div style="display:flex;align-items:center;gap:10px">${p.photoUrl?`<img src="${p.photoUrl}" style="width:40px;height:40px;border-radius:50%;object-fit:cover">`:''}<div style="font-weight:600">${(p.studentName || p.student || 'Unknown')}</div></div></td>
+    <td>${(p.courseName || p.course)||'—'}</td><td>${(p.companyName || p.company || 'Unknown')}</td><td>${p.designation||'—'}</td>
     <td><span class="status-badge status-active">${p.package}</span></td>
     <td><span class="status-badge status-${(p.status||'Published').toLowerCase()}">${p.status||'Published'}</span></td>
     <td><div class="action-btns"><button class="btn-icon btn-icon-edit" onclick="editPlacement('${p.id}')"><i class="fas fa-pencil"></i></button><button class="btn-icon btn-icon-delete" onclick="confirmDelete('${p.id}')"><i class="fas fa-trash"></i></button></div></td>
@@ -136,8 +136,13 @@ document.getElementById('placement-form')?.addEventListener('submit',async(e)=>{
   const data=Object.fromEntries(new FormData(form));
   const btn=form.querySelector('[type=submit]');const orig=btn.innerHTML;
   btn.innerHTML='<i class="fas fa-spinner fa-spin"></i>...';btn.disabled=true;
+  
+  data.student = data.studentName;
+  data.course = data.courseName;
+  data.company = data.companyName;
   const isEdit=!!data.id;
   const res = isEdit ? await API.adminUpdate('Placements', data.id, data) : await API.adminCreate('Placements', data);
+
   btn.innerHTML=orig;btn.disabled=false;
   if(res?.success!==false){showAdminToast(`Placement ${isEdit?'updated':'added'}`,'success');closeAdminModal('placement-modal');form.reset();document.getElementById('placement-image-preview').innerHTML='';document.getElementById('placement-id').value='';API.adminGet('Placements').then(ps=>{allPlacements=ps;renderPlacements(ps);});}
   else showAdminToast(res?.message||'Error','error');

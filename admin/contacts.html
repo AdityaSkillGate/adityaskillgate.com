@@ -82,7 +82,7 @@ function renderContacts(list){
     <td>${c.phone||'—'}</td>
     <td><span class="status-badge status-pending">${c.subject||'General'}</span></td>
     <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:0.8rem;color:var(--a-gray4)">${c.message?.substring(0,60)||'—'}</td>
-    <td style="font-size:0.8rem;color:var(--a-gray4)">${c.timestamp||c.date||'—'}</td>
+    <td style="font-size:0.8rem;color:var(--a-gray4)">${c.createdAt||'—'}</td>
     <td><div class="action-btns">
       <button class="btn-icon btn-icon-edit" title="View" onclick="viewContact(${i})"><i class="fas fa-eye"></i></button>
       <a href="mailto:${c.email}?subject=Re:%20${encodeURIComponent(c.subject||'Your Enquiry')}" class="btn-icon" title="Reply by Email" style="text-decoration:none;color:var(--a-blue)"><i class="fas fa-reply"></i></a>
