@@ -5,7 +5,7 @@
    Replace API_BASE_URL with your deployed Google Apps Script URL
    ============================================================ */
 
-const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbyR3SuYfQmSadQlb78weA8LG4ICWLIUogRLWzpoAnpDRgzc2cMzTI1ytVgFhCjTaJS1/exec';
+const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbw-Wv6pSJ3vSTr2CmNEYd5M_yy-NAjZj6yduq7DtuFxB8jekjj4S5nhK4CV-C2HdyqT/exec';
 const SHEET_ID = '1P8a4IpQ9DW2Ut7kE4oBV8f9BHRBoU39UyJPSAjoJUDc';
 
 /* ============ DEMO DATA (fallback when API not configured) ============ */
@@ -41,12 +41,12 @@ const DEMO_DATA = {
     { id: 's6', title: 'Healthcare Abroad Jobs', category: 'Non-IT', parentCategory: 'Abroad Jobs', icon: 'fa-user-nurse', description: 'Nursing and healthcare placements globally.', status: 'Active' }
   ],
   
-       partners: [
-         { id: 'pt1', name: 'Infosys', type: 'Hiring Company', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg', website: 'https://infosys.com', country: 'India', description: 'Global leader in next-generation digital services and consulting.', status: 'Verified' },
-         { id: 'pt2', name: 'TCS', type: 'Hiring Company', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg', website: 'https://tcs.com', country: 'India', description: 'IT services, consulting and business solutions organization.', status: 'Verified' },
-         { id: 'pt3', name: 'University of London', type: 'University', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/University_of_London_logo.svg/200px-University_of_London_logo.svg.png', website: 'https://london.ac.uk', country: 'UK', description: 'A globally recognized collegiate research university.', status: 'Verified' },
-         { id: 'pt4', name: 'Toronto College', type: 'College', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/53/University_of_Toronto_crest.svg/200px-University_of_Toronto_crest.svg.png', website: 'https://utoronto.ca', country: 'Canada', description: 'Leading institution of learning, discovery and knowledge creation.', status: 'Pending' }
-       ],
+      //  partners: [
+      //    { id: 'pt1', name: 'Infosys', type: 'Hiring Company', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg', website: 'https://infosys.com', country: 'India', description: 'Global leader in next-generation digital services and consulting.', status: 'Verified' },
+      //    { id: 'pt2', name: 'TCS', type: 'Hiring Company', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg', website: 'https://tcs.com', country: 'India', description: 'IT services, consulting and business solutions organization.', status: 'Verified' },
+      //    { id: 'pt3', name: 'University of London', type: 'University', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/University_of_London_logo.svg/200px-University_of_London_logo.svg.png', website: 'https://london.ac.uk', country: 'UK', description: 'A globally recognized collegiate research university.', status: 'Verified' },
+      //    { id: 'pt4', name: 'Toronto College', type: 'College', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/53/University_of_Toronto_crest.svg/200px-University_of_Toronto_crest.svg.png', website: 'https://utoronto.ca', country: 'Canada', description: 'Leading institution of learning, discovery and knowledge creation.', status: 'Pending' }
+      //  ],
        abroadJobs: [
          { id: 'aj1', slug: 'senior-software-engineer-uk', title: 'Senior Software Engineer', category: 'IT', country: 'UK', employer: 'TechGlobal Solutions', role: 'Full Stack Developer', experience: '5+ Years', salary: '£60,000 - £80,000', benefits: 'Visa Sponsorship, Relocation Bonus, Health Insurance', requirements: 'React, Node.js, AWS, System Design', closingDate: '2026-12-31', status: 'Active' },
          { id: 'aj2', slug: 'registered-nurse-canada', title: 'Registered Nurse', category: 'Non-IT', country: 'Canada', employer: 'Toronto Health Network', role: 'Staff Nurse', experience: '2+ Years', salary: '$70,000 - $90,000 CAD', benefits: 'Visa Sponsorship, Permanent Residency Pathway', requirements: 'BSc Nursing, IELTS 7.0+, Active License', closingDate: '2026-11-15', status: 'Active' },
@@ -379,6 +379,7 @@ async function apiGet(endpoint, params = {}) {
   /* ============ PUBLIC API CALLS ============ */
 const API = {
   
+  async saveSettings(data) { return await apiPost('saveSettings', data); },
   async getSettings() {
     const res = await apiGet('getSettings');
     let s = (res && res.data) ? res.data : DEMO_DATA.settings;
@@ -393,6 +394,18 @@ const API = {
   },
 
 
+  
+  async getCompanyMetrics() {
+    const res = await apiGet('getCompanyMetrics');
+    if (res && res.data) {
+      // Overwrite DEMO_DATA stats with real data so legacy code seamlessly picks it up
+      Object.assign(DEMO_DATA.stats, res.data);
+      return res.data;
+    }
+    return DEMO_DATA.stats;
+  },
+
+  async getConfig() { const res = await apiPost('getConfig'); return res?.data || {}; },
   async getCourses() {
     const res = await apiGet('getCourses');
     const data = (res?.data?.length) ? res.data : DEMO_DATA.courses;
@@ -489,6 +502,8 @@ const API = {
     const res = await apiGet('getServices');
     return (res?.data?.length) ? res.data : DEMO_DATA.services;
   },
+
+  async getTimeline() { return await apiGet('getTimeline'); },
 
   async getPartners() {
     const res = await apiGet('getPartners');
@@ -617,17 +632,23 @@ const API = {
 
   async adminCreate(resource, data) {
     const token = sessionStorage.getItem('admin_token');
-    return apiPost('adminCreate', { resource, data, token });
+    const res = await apiPost('adminCreate', { resource, data, token });
+    if (res?.success) localStorage.setItem('asg_admin_refresh', Date.now());
+    return res;
   },
 
   async adminUpdate(resource, id, data) {
     const token = sessionStorage.getItem('admin_token');
-    return apiPost('adminUpdate', { resource, id, data, token });
+    const res = await apiPost('adminUpdate', { resource, id, data, token });
+    if (res?.success) localStorage.setItem('asg_admin_refresh', Date.now());
+    return res;
   },
 
   async adminDelete(resource, id) {
     const token = sessionStorage.getItem('admin_token');
-    return apiPost('adminDelete', { resource, id, token });
+    const res = await apiPost('adminDelete', { resource, id, token });
+    if (res?.success) localStorage.setItem('asg_admin_refresh', Date.now());
+    return res;
   },
 
   async adminGetAnalytics() {

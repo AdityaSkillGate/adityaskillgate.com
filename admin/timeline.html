@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Timeline | Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+<div class="admin-sidebar" id="admin-sidebar">
+  <div class="sidebar-header"><img src="../assets/logos/logo-icon.png" alt="Logo"><span>ASG Admin</span></div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section-title">Main</div>
+    <a href="dashboard.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-chart-pie"></i></div><span>Dashboard</span></a>
+    <div class="sidebar-section-title">Content</div>
+    <a href="services.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-cog"></i></div><span>Services</span></a>
+    <a href="courses.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-graduation-cap"></i></div><span>Courses</span></a>
+    <a href="jobs.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-briefcase"></i></div><span>Job Openings</span></a>
+    <a href="employees.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-users"></i></div><span>Team / Employees</span></a>
+    <a href="projects.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-laptop-code"></i></div><span>Projects</span></a>
+    <a href="placements.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-trophy"></i></div><span>Placements</span></a>
+    <a href="partners.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-handshake"></i></div><span>Partners</span></a>
+    <a href="timeline.html" class="sidebar-link active"><div class="sidebar-icon"><i class="fas fa-history"></i></div><span>Company Journey</span></a>
+    <a href="testimonials.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-star"></i></div><span>Testimonials</span></a>
+    <a href="settings.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-cog"></i></div><span>Settings</span></a>
+  </nav>
+</div>
+<div class="admin-main" id="admin-main">
+  <div class="admin-topbar">
+    <div class="topbar-left"><button class="topbar-toggle" id="topbar-toggle"><i class="fas fa-bars"></i></button></div>
+    <div class="topbar-right"><button class="theme-btn" id="admin-theme-btn"><i class="fas fa-moon"></i></button><a href="../about.html" target="_blank" class="btn-admin-sm"><i class="fas fa-external-link-alt"></i> View Timeline</a></div>
+  </div>
+  <div class="admin-content">
+    <div class="admin-page-header">
+      <div><h1 class="admin-page-title"><i class="fas fa-history" style="color:var(--a-primary);margin-right:8px"></i> Company Journey</h1><p class="admin-page-sub">Manage company milestones and history.</p></div>
+      <button class="btn-admin-primary" onclick="openTimelineModal()"><i class="fas fa-plus"></i> Add Milestone</button>
+    </div>
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead><tr><th>Sort Order</th><th>Date</th><th>Milestone Title</th><th>Description</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="timeline-tbody"><tr><td colspan="6" class="admin-table-empty">Loading timeline...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="timeline-modal">
+  <div class="modal" style="max-width:600px">
+    <div class="modal-header"><div class="modal-title" id="timeline-modal-title">Add Milestone</div><button class="modal-close" onclick="closeAdminModal('timeline-modal')"><i class="fas fa-times"></i></button></div>
+    <div class="modal-body">
+      <form id="timeline-form">
+        <input type="hidden" name="id" id="timeline-id">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Exact Date *</label><input type="date" class="form-control" name="date" required></div>
+          <div class="form-group"><label class="form-label">Display Year</label><input type="text" class="form-control" name="year" placeholder="e.g. 2025"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Milestone Title *</label><input type="text" class="form-control" name="title" required placeholder="e.g. Company Founded"></div>
+        <div class="form-group"><label class="form-label">Description *</label><textarea class="form-control" name="description" rows="3" required placeholder="Description of the milestone..."></textarea></div>
+        
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Icon Class (FontAwesome)</label><input type="text" class="form-control" name="icon" placeholder="fas fa-flag"></div>
+          <div class="form-group"><label class="form-label">Image URL</label><input type="url" class="form-control" name="image" placeholder="https://..."></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Sort Order</label><input type="number" class="form-control" name="sortOrder" value="1"></div>
+          <div class="form-group"><label class="form-label">Status</label><select class="form-control" name="status"><option value="Active">Active</option><option value="Draft">Draft</option></select></div>
+        </div>
+        
+        <div style="display:flex;gap:12px;margin-top:24px">
+          <button type="submit" class="btn-admin-primary" id="save-btn"><i class="fas fa-save"></i> Save Milestone</button>
+          <button type="button" class="btn-admin-outline" onclick="closeAdminModal('timeline-modal')">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="delete-modal"><div class="modal" style="max-width:400px;text-align:center"><div class="modal-body" style="padding:40px"><div style="font-size:3rem;margin-bottom:16px">🗑️</div><h3 style="margin-bottom:10px;color:var(--a-navy)">Delete Milestone?</h3><p style="color:var(--a-gray4);margin-bottom:24px">This will remove it from the timeline.</p><div style="display:flex;gap:12px;justify-content:center"><button class="btn-admin-danger" id="confirm-delete-btn">Delete</button><button class="btn-admin-outline" onclick="closeAdminModal('delete-modal')">Cancel</button></div></div></div></div>
+<div id="toast-container"></div>
+<script src="../js/api.js?v=4"></script><script src="../js/admin.js"></script>
+<script>
+let allTimeline=[];let deleteId=null;
+
+function renderTimeline(milestones) {
+  const tbody = document.getElementById('timeline-tbody');
+  if(!milestones.length) { tbody.innerHTML='<tr><td colspan="6" class="admin-table-empty">No milestones found.</td></tr>'; return; }
+  tbody.innerHTML = milestones.map(m => {
+    let statClass = m.status === 'Active' ? 'status-active' : 'status-draft';
+    return \`<tr>
+      <td><span style="font-weight:600;color:var(--a-gray4)">#\${m.sortOrder||0}</span></td>
+      <td>\${m.date ? new Date(m.date).toLocaleDateString() : '-'}</td>
+      <td style="font-weight:600;color:var(--a-navy)">\${m.title}</td>
+      <td style="font-size:0.85rem;color:var(--a-gray4)">\${m.description?.substring(0,60)||''}...</td>
+      <td><span class="status-badge \${statClass}">\${m.status || 'Active'}</span></td>
+      <td>
+        <button class="action-btn" onclick="editTimeline('\${m.id}')" title="Edit"><i class="fas fa-pen"></i></button>
+        <button class="action-btn" style="color:var(--a-danger)" onclick="confirmDelete('\${m.id}')" title="Delete"><i class="fas fa-trash"></i></button>
+      </td>
+    </tr>\`;
+  }).join('');
+}
+
+function openTimelineModal() {
+  document.getElementById('timeline-form').reset();
+  document.getElementById('timeline-id').value = '';
+  document.getElementById('timeline-modal-title').textContent = 'Add Milestone';
+  document.getElementById('timeline-form').elements['sortOrder'].value = allTimeline.length + 1;
+  openModal('timeline-modal');
+}
+
+function editTimeline(id) {
+  const m = allTimeline.find(x => x.id === id);
+  if(!m) return;
+  document.getElementById('timeline-id').value = m.id;
+  document.getElementById('timeline-modal-title').textContent = 'Edit Milestone';
+  const form = document.getElementById('timeline-form');
+  
+  ['year','title','description','icon','image','sortOrder','status'].forEach(k => {
+    if(form.elements[k]) form.elements[k].value = m[k] || '';
+  });
+  
+  if(m.date && form.elements['date']) form.elements['date'].value = new Date(m.date).toISOString().split('T')[0];
+  
+  openModal('timeline-modal');
+}
+
+document.getElementById('timeline-form').addEventListener('submit', async(e) => {
+  e.preventDefault();
+  const btn = document.getElementById('save-btn');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...'; btn.disabled = true;
+  
+  const fd = new FormData(e.target);
+  const data = Object.fromEntries(fd.entries());
+  
+  const res = await API.adminCreate('Timeline', data);
+  btn.innerHTML = '<i class="fas fa-save"></i> Save Milestone'; btn.disabled = false;
+  if(res?.success) {
+    showAdminToast('Milestone saved successfully!', 'success');
+    closeAdminModal('timeline-modal');
+    loadTimeline();
+  } else showAdminToast(res?.message||'Error','error');
+});
+
+function confirmDelete(id) { deleteId = id; openModal('delete-modal'); }
+document.getElementById('confirm-delete-btn').addEventListener('click', async() => {
+  if(!deleteId) return;
+  const btn = document.getElementById('confirm-delete-btn');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...'; btn.disabled = true;
+  const res = await API.adminUpdate('Timeline', deleteId, {status: 'Deleted'});
+  btn.innerHTML = 'Delete'; btn.disabled = false;
+  if(res?.success) {
+    showAdminToast('Milestone deleted', 'success');
+    closeAdminModal('delete-modal');
+    loadTimeline();
+  } else showAdminToast(res?.message||'Error','error');
+});
+
+window.openModal = function(id) { document.getElementById(id)?.classList.add('active'); };
+window.closeAdminModal = function(id) { document.getElementById(id)?.classList.remove('active'); };
+
+function loadTimeline() {
+  API.adminGet('Timeline').then(ps => {
+    allTimeline = ps.filter(p => p.status !== 'Deleted').sort((a,b)=> (parseInt(a.sortOrder)||0)-(parseInt(b.sortOrder)||0));
+    renderTimeline(allTimeline);
+  }).catch(e => {
+    document.getElementById('timeline-tbody').innerHTML='<tr><td colspan="6" class="admin-table-empty">Failed to load timeline.</td></tr>';
+  });
+}
+loadTimeline();
+</script>
+</body>
+</html>

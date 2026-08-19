@@ -2,235 +2,204 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard | Aditya Skill Gate IT Solution</title>
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="icon" href="../assets/logos/favicon.ico" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Dashboard | Admin Panel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../css/admin.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    .stat-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:32px}
-    .stat-card-admin{background:white;border:1px solid var(--a-border);border-radius:var(--a-radius);padding:24px;transition:var(--a-transition)}
-    .stat-card-admin:hover{box-shadow:var(--a-shadow);transform:translateY(-2px)}
-    .sca-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
-    .sca-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
-    .sca-trend{font-size:0.75rem;font-weight:600;padding:3px 10px;border-radius:100px}
-    .sca-trend.up{background:rgba(108,203,47,0.1);color:#5ab225}
-    .sca-trend.down{background:rgba(239,68,68,0.1);color:#dc2626}
-    .sca-num{font-size:2.4rem;font-weight:900;color:var(--a-navy);font-family:'Outfit',sans-serif;line-height:1}
-    .sca-label{font-size:0.8rem;color:var(--a-gray4);margin-top:6px}
-    .dashboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px}
-    .admin-card{background:white;border:1px solid var(--a-border);border-radius:var(--a-radius);overflow:hidden}
-    .admin-card-header{padding:16px 20px;border-bottom:1px solid var(--a-border);display:flex;align-items:center;justify-content:space-between}
-    .admin-card-title{font-weight:700;font-size:0.95rem;color:var(--a-navy)}
-    .admin-card-body{padding:0}
-    .activity-item{display:flex;gap:12px;padding:14px 20px;border-bottom:1px solid var(--a-border);align-items:flex-start;transition:var(--a-transition)}
-    .activity-item:hover{background:var(--a-bg)}
-    .activity-item:last-child{border-bottom:none}
-    .activity-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
-    .activity-time{font-size:0.75rem;color:var(--a-gray4);white-space:nowrap}
-    .quick-links{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:16px}
-    .quick-link{display:flex;gap:12px;align-items:center;padding:14px;background:var(--a-bg);border-radius:var(--a-radius);text-decoration:none;color:var(--a-navy);font-weight:600;font-size:0.875rem;transition:var(--a-transition)}
-    .quick-link:hover{background:var(--a-navy);color:white}
-    .quick-link-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;background:rgba(13,27,76,0.08)}
-    .quick-link:hover .quick-link-icon{background:rgba(255,255,255,0.15)}
-    .table-row{display:grid;padding:12px 20px;border-bottom:1px solid var(--a-border);align-items:center;font-size:0.875rem;transition:background 0.2s}
-    .table-row:hover{background:var(--a-bg)}
-    .table-row:last-child{border-bottom:none}
-    .badge-sm{padding:3px 10px;border-radius:100px;font-size:0.7rem;font-weight:700}
-    .badge-green{background:rgba(108,203,47,0.1);color:#5ab225}
-    .badge-blue{background:rgba(0,150,214,0.1);color:var(--a-blue)}
-    .badge-orange{background:rgba(245,158,11,0.1);color:#d97706}
-    @media(max-width:1199px){.stat-cards{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:768px){.dashboard-grid{grid-template-columns:1fr}}
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 30px; }
+    .kpi-card { background: var(--a-surface); border: 1px solid var(--a-border); padding: 16px; border-radius: 8px; display: flex; flex-direction: column; }
+    .kpi-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .kpi-title { font-size: 0.85rem; color: var(--a-gray4); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+    .kpi-icon { background: var(--a-bg); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--a-primary); }
+    .kpi-val { font-size: 1.8rem; font-weight: 700; color: var(--a-navy); margin-bottom: 8px; }
+    .kpi-footer { font-size: 0.75rem; color: var(--a-gray4); display: flex; flex-direction: column; gap: 4px; border-top: 1px solid var(--a-border); padding-top: 10px; margin-top: auto; }
+    .chart-container { background: var(--a-surface); border: 1px solid var(--a-border); border-radius: 8px; padding: 20px; margin-bottom: 24px; }
+    .recent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 30px; }
+    .recent-list-card { background: var(--a-surface); border: 1px solid var(--a-border); border-radius: 8px; overflow: hidden; }
+    .recent-header { padding: 16px 20px; border-bottom: 1px solid var(--a-border); font-weight: 600; color: var(--a-navy); display: flex; justify-content: space-between; align-items: center; }
+    .recent-item { padding: 12px 20px; border-bottom: 1px solid var(--a-border); display: flex; flex-direction: column; gap: 4px; font-size: 0.875rem; }
+    .recent-item:last-child { border-bottom: none; }
+    @media (max-width: 900px) { .recent-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
-<!-- Admin Sidebar -->
 <div class="admin-sidebar" id="admin-sidebar">
-  <div class="sidebar-brand">
-    <img src="../assets/logos/logo-icon.png" alt="ASG" onerror="this.style.display='none'">
-    <div><div class="sidebar-brand-name">ASG Admin</div><div class="sidebar-brand-sub">Control Panel</div></div>
-    <button class="sidebar-collapse-btn" id="sidebar-toggle"><i class="fas fa-bars"></i></button>
-  </div>
+  <div class="sidebar-header"><img src="../assets/logos/logo-icon.png" alt="Logo"><span>ASG Admin</span></div>
   <nav class="sidebar-nav">
     <div class="sidebar-section-title">Main</div>
-    <a href="dashboard.html" class="sidebar-link" class="sidebar-link active"><div class="sidebar-icon"><i class="fas fa-chart-pie"></i></div><span>Dashboard</span></a>
-    <a href="reports.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-file-pdf"></i></div><span>Report Center</span></a>
+    <a href="dashboard.html" class="sidebar-link active"><div class="sidebar-icon"><i class="fas fa-chart-pie"></i></div><span>Dashboard</span></a>
     <div class="sidebar-section-title">Content</div>
     <a href="services.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-cog"></i></div><span>Services</span></a>
     <a href="courses.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-graduation-cap"></i></div><span>Courses</span></a>
-    <a href="abroad.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-plane-departure"></i></div><span>Study Abroad</span></a>
-    <a href="partners.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-handshake"></i></div><span>Partners</span></a>
     <a href="jobs.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-briefcase"></i></div><span>Job Openings</span></a>
     <a href="employees.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-users"></i></div><span>Team / Employees</span></a>
     <a href="projects.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-laptop-code"></i></div><span>Projects</span></a>
     <a href="placements.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-trophy"></i></div><span>Placements</span></a>
-    <a href="testimonials.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-star"></i></div><span>Testimonials</span></a>
-    <a href="blog.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-blog"></i></div><span>Blog Posts</span></a>
-    <div class="sidebar-section-title">Submissions</div>
-    <a href="crm.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-users-cog"></i></div><span>CRM / Leads</span></a>
-    <a href="resumes.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-file-pdf"></i></div><span>Resumes</span></a>
-    <a href="contacts.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-envelope"></i></div><span>Contact Forms</span></a>
-    <a href="chatbot.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-robot"></i></div><span>Chatbot KB</span></a>
-    <div class="sidebar-section-title">Settings</div>
+    <a href="partners.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-handshake"></i></div><span>Partners</span></a>
+    <a href="timeline.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-history"></i></div><span>Company Journey</span></a>
     <a href="settings.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-cog"></i></div><span>Settings</span></a>
   </nav>
 </div>
-
-<!-- Main Content -->
 <div class="admin-main" id="admin-main">
-  <!-- Topbar -->
   <div class="admin-topbar">
-    <div class="topbar-left">
-      <button class="topbar-toggle" id="topbar-toggle"><i class="fas fa-bars"></i></button>
-      <div class="topbar-search"><i class="fas fa-search"></i><input type="text" placeholder="Search..."></div>
-    </div>
-    <div class="topbar-right">
-      <button class="theme-btn" id="admin-theme-btn"><i class="fas fa-moon"></i></button>
-      <a href="../index.html" target="_blank" class="btn-admin-sm"><i class="fas fa-external-link-alt"></i> View Site</a>
-      <div class="admin-user-menu">
-        <div class="admin-avatar" id="admin-avatar">A</div>
-        <div class="admin-user-info"><div class="admin-user-name" id="admin-user-name">Admin</div><div class="admin-user-role">Administrator</div></div>
-        <div class="user-dropdown">
-          <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
-        </div>
-      </div>
-    </div>
+    <div class="topbar-left"><button class="topbar-toggle" id="topbar-toggle"><i class="fas fa-bars"></i></button></div>
+    <div class="topbar-right"><div style="font-size:0.8rem;color:var(--a-gray4);margin-right:16px" id="last-updated">Updating...</div><button class="theme-btn" id="admin-theme-btn"><i class="fas fa-moon"></i></button><a href="../index.html" target="_blank" class="btn-admin-sm"><i class="fas fa-external-link-alt"></i> View Site</a></div>
   </div>
-
-  <!-- Dashboard Body -->
   <div class="admin-content">
     <div class="admin-page-header">
-      <div>
-        <h1 class="admin-page-title">Dashboard</h1>
-        <p class="admin-page-sub">Welcome back! Here's what's happening today.</p>
+      <div><h1 class="admin-page-title">Live Overview</h1><p class="admin-page-sub">Dynamic analytics and active database counts.</p></div>
+      <button class="btn-admin-primary" onclick="loadDashboard()"><i class="fas fa-sync-alt"></i> Refresh Data</button>
+    </div>
+    
+    <!-- KPI Grid -->
+    <div class="kpi-grid" id="kpi-grid">
+      <!-- Injected via JS -->
+    </div>
+    
+    <!-- Charts -->
+    <div class="recent-grid">
+      <div class="chart-container">
+        <h4 style="margin-bottom:16px;color:var(--a-navy)">Monthly Placements & Projects</h4>
+        <canvas id="chart-placements"></canvas>
       </div>
-      <div style="display:flex;gap:12px">
-        <a href="../index.html" target="_blank" class="btn-admin-outline"><i class="fas fa-eye"></i> View Website</a>
+      <div class="chart-container">
+        <h4 style="margin-bottom:16px;color:var(--a-navy)">Monthly Lead & Applications Pipeline</h4>
+        <canvas id="chart-apps"></canvas>
       </div>
     </div>
-
-    <!-- Stats Cards -->
-    <div class="stat-cards">
-      <div class="stat-card-admin"><div class="sca-header"><div class="sca-icon" style="background:rgba(0,150,214,0.1)">👁️</div><span class="sca-trend up">↑ 12%</span></div><div class="sca-num" id="stat-visitors">1.2K</div><div class="sca-label">Website Visitors</div></div>
-      <div class="stat-card-admin"><div class="sca-header"><div class="sca-icon" style="background:rgba(245,158,11,0.1)">🎯</div><span class="sca-trend up">↑ 8%</span></div><div class="sca-num" id="stat-leads">0</div><div class="sca-label">Total Leads</div></div>
-      <div class="stat-card-admin"><div class="sca-header"><div class="sca-icon" style="background:rgba(13,27,76,0.08)">📄</div><span class="sca-trend up">↑ New</span></div><div class="sca-num" id="stat-applications">0</div><div class="sca-label">Applications</div></div>
-      <div class="stat-card-admin"><div class="sca-header"><div class="sca-icon" style="background:rgba(108,203,47,0.1)">🏆</div><span class="sca-trend up">↑ Growing</span></div><div class="sca-num" id="stat-placements">0</div><div class="sca-label">Placements</div></div>
-      <div class="stat-card-admin"><div class="sca-header"><div class="sca-icon" style="background:rgba(0,150,214,0.1)">🎓</div><span class="sca-trend up">↑ Active</span></div><div class="sca-num" id="stat-course-enquiries">0</div><div class="sca-label">Course Enquiries</div></div>
-      <div class="stat-card-admin"><div class="sca-header"><div class="sca-icon" style="background:rgba(139,92,246,0.1)">✈️</div><span class="sca-trend up">↑ 5%</span></div><div class="sca-num" id="stat-abroad">0</div><div class="sca-label">Abroad Applications</div></div>
-    </div>
-
-    <!-- Analytics Charts -->
-    <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr;">
-      <div class="admin-card">
-        <div class="admin-card-header"><div class="admin-card-title">📈 Monthly Trends</div></div>
-        <div class="admin-card-body" style="padding:20px;">
-          <canvas id="monthlyTrendChart" height="100"></canvas>
-        </div>
+    
+    <!-- Recent Activity -->
+    <div class="recent-grid">
+      <div class="recent-list-card">
+        <div class="recent-header">Recent Placements <a href="placements.html" style="font-size:0.8rem;color:var(--a-primary);font-weight:500;text-decoration:none">View All</a></div>
+        <div id="recent-placements"></div>
       </div>
-      <div class="admin-card">
-        <div class="admin-card-header"><div class="admin-card-title">🎯 Lead Sources</div></div>
-        <div class="admin-card-body" style="padding:20px; display:flex; justify-content:center;">
-          <canvas id="sourceChart" height="200"></canvas>
-        </div>
+      <div class="recent-list-card">
+        <div class="recent-header">Recent Projects <a href="projects.html" style="font-size:0.8rem;color:var(--a-primary);font-weight:500;text-decoration:none">View All</a></div>
+        <div id="recent-projects"></div>
+      </div>
+      <div class="recent-list-card">
+        <div class="recent-header">Recent Jobs <a href="jobs.html" style="font-size:0.8rem;color:var(--a-primary);font-weight:500;text-decoration:none">View All</a></div>
+        <div id="recent-jobs"></div>
+      </div>
+      <div class="recent-list-card">
+        <div class="recent-header">Recent Applications</div>
+        <div id="recent-apps"></div>
       </div>
     </div>
-
-    <div class="dashboard-grid">
-      <!-- Recent Activity -->
-      <div class="admin-card">
-        <div class="admin-card-header">
-          <div class="admin-card-title">📋 Recent Activity</div>
-          <span class="badge-sm badge-green">Live</span>
-        </div>
-        <div class="admin-card-body" id="activity-list">
-          <div class="activity-item"><div class="activity-dot" style="background:rgba(108,203,47,0.1)">📄</div><div style="flex:1"><div style="font-size:0.85rem;font-weight:600;color:var(--a-navy)">New resume submitted</div><div style="font-size:0.775rem;color:var(--a-gray4)">Rahul Kumar – Web Developer</div></div><div class="activity-time">Just now</div></div>
-          <div class="activity-item"><div class="activity-dot" style="background:rgba(0,150,214,0.1)">📩</div><div style="flex:1"><div style="font-size:0.85rem;font-weight:600;color:var(--a-navy)">Contact form received</div><div style="font-size:0.775rem;color:var(--a-gray4)">Course enquiry from Priya</div></div><div class="activity-time">5 min ago</div></div>
-          <div class="activity-item"><div class="activity-dot" style="background:rgba(108,203,47,0.1)">🏆</div><div style="flex:1"><div style="font-size:0.85rem;font-weight:600;color:var(--a-navy)">New placement added</div><div style="font-size:0.775rem;color:var(--a-gray4)">Arun – Placed at Infosys</div></div><div class="activity-time">2h ago</div></div>
-        </div>
-      </div>
-
-      <!-- Quick Actions -->
-      <div class="admin-card">
-        <div class="admin-card-header"><div class="admin-card-title">⚡ Quick Actions</div></div>
-        <div style="padding:16px">
-          <div class="quick-links">
-            <a href="courses.html" class="quick-link"><div class="quick-link-icon">🎓</div>Manage Courses</a>
-            <a href="jobs.html" class="quick-link"><div class="quick-link-icon">💼</div>Manage Jobs</a>
-            <a href="placements.html" class="quick-link"><div class="quick-link-icon">🏆</div>Add Placement</a>
-            <a href="employees.html" class="quick-link"><div class="quick-link-icon">👥</div>Manage Team</a>
-            <a href="projects.html" class="quick-link"><div class="quick-link-icon">🛠️</div>Manage Projects</a>
-            <a href="testimonials.html" class="quick-link"><div class="quick-link-icon">⭐</div>Testimonials</a>
-            <a href="resumes.html" class="quick-link"><div class="quick-link-icon">📄</div>View Resumes</a>
-            <a href="contacts.html" class="quick-link"><div class="quick-link-icon">📩</div>Contact Forms</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    
   </div>
 </div>
 
-<div id="toast-container"></div>
-<script src="../js/api.js?v=4"></script>
-<script src="../js/admin.js"></script>
+<script src="../js/api.js?v=4"></script><script src="../js/admin.js"></script>
 <script>
-function logout(){sessionStorage.clear();window.location.href='login.html';}
-const user=sessionStorage.getItem('admin_user')||'Admin';
-if(document.getElementById('admin-user-name'))document.getElementById('admin-user-name').textContent=user;
-if(document.getElementById('admin-avatar'))document.getElementById('admin-avatar').textContent=user[0].toUpperCase();
+let chartPlacements, chartApps;
 
-// Chart.js Initialization
-const trendCtx = document.getElementById('monthlyTrendChart').getContext('2d');
-new Chart(trendCtx, {
-  type: 'line',
-  data: {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-    datasets: [{
-      label: 'Applications',
-      data: [12, 19, 30, 25, 42, 55],
-      borderColor: '#0D1B4C',
-      tension: 0.4
-    }, {
-      label: 'Leads',
-      data: [30, 45, 60, 50, 75, 90],
-      borderColor: '#0096D6',
-      tension: 0.4
-    }]
-  },
-  options: { responsive: true, maintainAspectRatio: false }
-});
+function createKpiCard(title, val, src, icon) {
+  return \`
+    <div class="kpi-card">
+      <div class="kpi-header"><div class="kpi-title">\${title}</div><div class="kpi-icon"><i class="\${icon}"></i></div></div>
+      <div class="kpi-val">\${val}</div>
+      <div class="kpi-footer">
+        <div><i class="fas fa-database" style="margin-right:4px"></i> \${src}</div>
+      </div>
+    </div>
+  \`;
+}
 
-const sourceCtx = document.getElementById('sourceChart').getContext('2d');
-new Chart(sourceCtx, {
-  type: 'doughnut',
-  data: {
-    labels: ['Organic', 'Referral', 'Social Media', 'Direct'],
-    datasets: [{
-      data: [40, 20, 25, 15],
-      backgroundColor: ['#0D1B4C', '#0096D6', '#6CCB2F', '#f59e0b']
-    }]
-  },
-  options: { responsive: true, maintainAspectRatio: false }
-});
+function processChartData(dataObj) {
+  const keys = Object.keys(dataObj).sort(); // YYYY-MM
+  return { labels: keys, values: keys.map(k => dataObj[k]) };
+}
 
-// Load stats
-(async()=>{
+async function loadDashboard() {
+  document.getElementById('last-updated').textContent = 'Refreshing...';
   try {
-    const res = await API.getAnalytics();
-    if (res && res.summary) {
-      document.getElementById('stat-placements').textContent = res.summary.placements || 0;
-      document.getElementById('stat-applications').textContent = res.summary.resumes || 0;
-      document.getElementById('stat-leads').textContent = res.summary.contacts || 0;
-      document.getElementById('stat-course-enquiries').textContent = Math.floor((res.summary.contacts || 0) * 0.7); // Mock based on contacts
-      document.getElementById('stat-abroad').textContent = Math.floor((res.summary.contacts || 0) * 0.3); // Mock
-    }
-  } catch (err) {
-    console.error('Failed to load stats', err);
+    const res = await API.adminGetAnalytics();
+    if(!res) throw new Error('No data');
+    
+    const s = res.summary;
+    document.getElementById('kpi-grid').innerHTML = 
+      createKpiCard('Students & Leads', s.students.val, s.students.src, 'fas fa-user-graduate') +
+      createKpiCard('Placements', s.placements.val, s.placements.src, 'fas fa-trophy') +
+      createKpiCard('Projects', s.projects.val, s.projects.src, 'fas fa-laptop-code') +
+      createKpiCard('Employees', s.employees.val, s.employees.src, 'fas fa-users') +
+      createKpiCard('All Courses', s.courses.val, s.courses.src, 'fas fa-book') +
+      createKpiCard('IT Courses', s.itCourses.val, s.itCourses.src, 'fas fa-code') +
+      createKpiCard('Non-IT Courses', s.nonItCourses.val, s.nonItCourses.src, 'fas fa-chart-bar') +
+      createKpiCard('Local Jobs', s.openJobs.val, s.openJobs.src, 'fas fa-briefcase') +
+      createKpiCard('Abroad Jobs', s.abroadJobs.val, s.abroadJobs.src, 'fas fa-plane') +
+      createKpiCard('Partners', s.partners.val, s.partners.src, 'fas fa-handshake') +
+      createKpiCard('CRM Leads', s.leads.val, s.leads.src, 'fas fa-funnel-dollar') +
+      createKpiCard('Applications', s.applications.val, s.applications.src, 'fas fa-file-alt');
+    
+    document.getElementById('last-updated').innerHTML = \`<i class="fas fa-clock"></i> Updated: \${new Date(res.updatedAt).toLocaleTimeString()}\`;
+    
+    // Lists
+    document.getElementById('recent-placements').innerHTML = res.recent.placements.length ? res.recent.placements.map(p => 
+      \`<div class="recent-item"><div style="font-weight:600;color:var(--a-navy)">\${p.studentName}</div><div style="color:var(--a-gray4)">\${p.companyName} • \${p.package}</div></div>\`
+    ).join('') : '<div class="recent-item">No recent records.</div>';
+    
+    document.getElementById('recent-projects').innerHTML = res.recent.projects.length ? res.recent.projects.map(p => 
+      \`<div class="recent-item"><div style="font-weight:600;color:var(--a-navy)">\${p.title}</div><div style="color:var(--a-gray4)">\${p.category} • \${p.clientName}</div></div>\`
+    ).join('') : '<div class="recent-item">No recent records.</div>';
+
+    document.getElementById('recent-jobs').innerHTML = res.recent.jobs.length ? res.recent.jobs.map(j => 
+      \`<div class="recent-item"><div style="font-weight:600;color:var(--a-navy)">\${j.title}</div><div style="color:var(--a-gray4)">\${j.category} • \${j.company||'ASG'}</div></div>\`
+    ).join('') : '<div class="recent-item">No recent records.</div>';
+    
+    document.getElementById('recent-apps').innerHTML = res.recent.applications.length ? res.recent.applications.map(a => 
+      \`<div class="recent-item"><div style="font-weight:600;color:var(--a-navy)">\${a.name}</div><div style="color:var(--a-gray4)">\${a.email} • \${new Date(a.createdAt).toLocaleDateString()}</div></div>\`
+    ).join('') : '<div class="recent-item">No recent records.</div>';
+
+    // Charts
+    const c = res.charts;
+    const monthsSet = new Set([...Object.keys(c.monthlyPlacements), ...Object.keys(c.monthlyProjects), ...Object.keys(c.monthlyApplications), ...Object.keys(c.monthlyCourseEnquiries)]);
+    const allMonths = Array.from(monthsSet).sort();
+    
+    if(chartPlacements) chartPlacements.destroy();
+    chartPlacements = new Chart(document.getElementById('chart-placements'), {
+      type: 'bar',
+      data: {
+        labels: allMonths,
+        datasets: [
+          { label: 'Placements', data: allMonths.map(m => c.monthlyPlacements[m]||0), backgroundColor: '#0096D6' },
+          { label: 'Projects', data: allMonths.map(m => c.monthlyProjects[m]||0), backgroundColor: '#6CCB2F' }
+        ]
+      }
+    });
+    
+    if(chartApps) chartApps.destroy();
+    chartApps = new Chart(document.getElementById('chart-apps'), {
+      type: 'line',
+      data: {
+        labels: allMonths,
+        datasets: [
+          { label: 'Total Applications', data: allMonths.map(m => c.monthlyApplications[m]||0), borderColor: '#8b5cf6', fill: false, tension: 0.2 },
+          { label: 'Course Enquiries', data: allMonths.map(m => c.monthlyCourseEnquiries[m]||0), borderColor: '#f59e0b', fill: false, tension: 0.2 }
+        ]
+      }
+    });
+
+  } catch(e) {
+    document.getElementById('last-updated').textContent = 'Error loading data';
   }
-})();
+}
+document.addEventListener('DOMContentLoaded', loadDashboard);
+
+// Listen for cross-tab updates from other CRUD operations
+window.addEventListener('storage', (e) => {
+  if (e.key === 'asg_admin_refresh') {
+    console.log('Cross-tab refresh triggered');
+    loadDashboard();
+  }
+});
+
+// Periodic auto-refresh every 5 minutes just in case
+setInterval(loadDashboard, 300000);
+
 </script>
 </body>
 </html>

@@ -5,118 +5,10 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ====== PAGE LOADER ====== */
-  const loader = document.getElementById('page-loader');
-  if (loader) {
-    window.addEventListener('load', () => {
-      setTimeout(() => loader.classList.add('hidden'), 800);
-    });
-  }
-
-  /* ====== THEME (DARK/LIGHT MODE) ====== */
-  const themeKey = 'asg_theme';
-  const theme = localStorage.getItem(themeKey) || 'light';
-  document.documentElement.setAttribute('data-theme', theme);
-
-  const themeToggles = document.querySelectorAll('.theme-toggle');
-  themeToggles.forEach(btn => {
-    updateThemeIcon(btn, theme);
-    btn.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem(themeKey, next);
-      themeToggles.forEach(b => updateThemeIcon(b, next));
-    });
-  });
-
-  function updateThemeIcon(btn, theme) {
-    btn.innerHTML = theme === 'dark'
-      ? '<i class="fas fa-sun"></i>'
-      : '<i class="fas fa-moon"></i>';
-  }
-
-  /* ====== NAVBAR ====== */
-  const navbar = document.querySelector('.navbar');
-  if (navbar) {
-    const handleScroll = () => {
-      if (window.scrollY > 60) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
-    /* Set active nav link */
-    const path = window.location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
-      if (link.getAttribute('href') === path) link.classList.add('active');
-    });
-  }
-
-  /* ====== MOBILE MENU ====== */
-  const hamburger = document.querySelector('.hamburger');
-  const mobileMenu = document.querySelector('.mobile-menu');
-
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open');
-      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
-    });
-
-    /* Close on outside click */
-    document.addEventListener('click', (e) => {
-      if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-    });
-
-    /* Mobile submenu toggles */
-    document.querySelectorAll('.mobile-nav-link[data-submenu]').forEach(link => {
-      link.addEventListener('click', () => {
-        const target = document.getElementById(link.dataset.submenu);
-        if (target) target.classList.toggle('open');
-        const icon = link.querySelector('.submenu-icon');
-        if (icon) icon.style.transform = target?.classList.contains('open') ? 'rotate(180deg)' : '';
-      });
-    });
-  }
-
-  /* ====== SMOOTH SCROLL ====== */
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', e => {
-      const target = document.querySelector(link.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        const offset = 80;
-        const top = target.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top, behavior: 'smooth' });
-      }
-    });
-  });
-
-  /* ====== SCROLL ANIMATIONS (IntersectionObserver) ====== */
-  const animElements = document.querySelectorAll('[data-animate]');
-  if (animElements.length) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animated');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    animElements.forEach(el => observer.observe(el));
-  }
-
-  /* ====== COUNTER ANIMATION ====== */
+  /* ====== DYNAMIC METRICS & COUNTER ANIMATION ====== */
   function animateCounter(el) {
-    const target = parseInt(el.dataset.target || el.textContent, 10);
+    let target = parseInt(el.dataset.target || el.textContent, 10);
+    if (isNaN(target)) target = 0; // Never display NaN
     const duration = 2000;
     const start = performance.now();
     el.textContent = '0';
@@ -124,25 +16,98 @@ document.addEventListener('DOMContentLoaded', () => {
     function update(now) {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3); // ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
       const current = Math.floor(eased * target);
       el.textContent = current.toLocaleString('en-IN');
       if (progress < 1) requestAnimationFrame(update);
     }
-
     requestAnimationFrame(update);
   }
 
-  const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !entry.target.dataset.counted) {
-        entry.target.dataset.counted = 'true';
-        animateCounter(entry.target);
+  async function initMetricsAndCounters() {
+    // 1. Safe Fallback Preparation
+    document.querySelectorAll('[data-metric]').forEach(el => {
+      el.dataset.fallback = el.textContent; // Store original HTML as safe fallback
+      el.innerHTML = '<span style="opacity:0.5">...</span>'; // Show loading state
+    });
+
+    // 2. Fetch Latest Values from Apps Script
+    let metrics = null;
+    try {
+      if (window.API && window.API.getCompanyMetrics) {
+        metrics = await window.API.getCompanyMetrics();
+      }
+    } catch (e) {
+      console.warn('API metrics failed, using safe fallback.', e);
+    }
+
+    // 3. Render Dynamically / Handle API failure gracefully
+    document.querySelectorAll('[data-metric]').forEach(el => {
+      const key = el.dataset.metric;
+      if (metrics && metrics[key] !== undefined && metrics[key] !== null) {
+        el.textContent = metrics[key];
+      } else {
+        el.textContent = el.dataset.fallback || '0';
       }
     });
-  }, { threshold: 0.5 });
 
-  document.querySelectorAll('.counter, [data-counter]').forEach(el => counterObserver.observe(el));
+    document.querySelectorAll('[data-metric-target]').forEach(el => {
+      const key = el.dataset.metricTarget;
+      if (metrics && metrics[key] !== undefined && metrics[key] !== null) {
+        const num = String(metrics[key]).replace(/\D/g, '');
+        el.dataset.target = num || '0';
+      }
+    });
+
+    // 4. Animate numbers AFTER successful fetch (or fallback)
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.counted) {
+          entry.target.dataset.counted = 'true';
+          animateCounter(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.counter, [data-counter]').forEach(el => counterObserver.observe(el));
+  }
+
+  
+  
+  /* ====== THEME TOGGLE ====== */
+  const themeToggle = document.querySelector('.theme-toggle');
+  const docEl = document.documentElement;
+  const savedTheme = localStorage.getItem('asg_theme') || 'light';
+  if (savedTheme === 'dark') {
+    docEl.setAttribute('data-theme', 'dark');
+    if (themeToggle && themeToggle.querySelector('i')) themeToggle.querySelector('i').className = 'fas fa-sun';
+  }
+  
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const isDark = docEl.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        docEl.removeAttribute('data-theme');
+        localStorage.setItem('asg_theme', 'light');
+        if (themeToggle.querySelector('i')) themeToggle.querySelector('i').className = 'fas fa-moon';
+      } else {
+        docEl.setAttribute('data-theme', 'dark');
+        localStorage.setItem('asg_theme', 'dark');
+        if (themeToggle.querySelector('i')) themeToggle.querySelector('i').className = 'fas fa-sun';
+      }
+    });
+  }
+
+  /* ====== PAGE LOADER ====== */
+  const loader = document.getElementById('page-loader');
+  if (loader) {
+    setTimeout(() => {
+      loader.style.opacity = '0';
+      setTimeout(() => loader.style.display = 'none', 500);
+    }, 500);
+  }
+
+  initMetricsAndCounters();
 
   /* ====== TYPING ANIMATION ====== */
   const typingEl = document.querySelector('.typing-text');
@@ -580,5 +545,111 @@ document.addEventListener('DOMContentLoaded', () => {
   
   loadMetrics();
 
-  console.log('✅ Aditya Skill Gate — main.js loaded');
+  
+  /* ====== GLOBAL ANIMATION OBSERVER ====== */
+  const animateObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animated');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('[data-animate]').forEach(el => {
+    animateObserver.observe(el);
+  });
+  
+  // Expose function globally so dynamic content can re-trigger it
+  window.observeAnimations = function() {
+    document.querySelectorAll('[data-animate]:not(.animated)').forEach(el => {
+      animateObserver.observe(el);
+    });
+  };
+
+    console.log('Aditya Skill Gate - main.js loaded');
 });
+
+
+function initCompanyAge() {
+  const founded = new Date('2025-10-26T00:00:00+05:30');
+  const now = new Date();
+  
+  // Calculate full months difference
+  let months = (now.getFullYear() - founded.getFullYear()) * 12;
+  months -= founded.getMonth();
+  months += now.getMonth();
+  if (now.getDate() < founded.getDate()) {
+      months--;
+  }
+  if (months < 0) months = 0;
+  
+  const years = Math.floor(months / 12);
+  const remMonths = months % 12;
+  
+  let longText = '';
+  if (years === 0) longText = `${remMonths} Month${remMonths !== 1 ? 's' : ''}`;
+  else if (remMonths === 0) longText = `${years} Year${years !== 1 ? 's' : ''}`;
+  else longText = `${years} Year${years !== 1 ? 's' : ''}, ${remMonths} Month${remMonths !== 1 ? 's' : ''}`;
+  
+  let shortText = '';
+  if (years >= 1) shortText = `${years}+ years`;
+  else shortText = `${months} months`;
+  
+  // Populate elements
+  document.querySelectorAll('.dynamic-company-age').forEach(el => el.textContent = longText);
+  document.querySelectorAll('.dynamic-company-age-short').forEach(el => el.textContent = shortText);
+  
+  // Also update any current year spans
+  document.querySelectorAll('[data-metric="currentYear"]').forEach(el => el.textContent = now.getFullYear());
+}
+
+// Call on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', initCompanyAge);
+
+
+async function initCompanyConfig() {
+  if (typeof API === 'undefined') return;
+  const config = await API.getConfig();
+  if (!config) return;
+  
+  // Populate text elements
+  document.querySelectorAll('[data-config]').forEach(el => {
+    const key = el.getAttribute('data-config');
+    if (config[key]) {
+       if (el.tagName === 'A' && key === 'email') el.href = 'mailto:' + config[key];
+       else if (el.tagName === 'A' && key === 'phone') el.href = 'tel:' + config[key].replace(/\D/g, '');
+       else if (el.tagName === 'A' && key === 'whatsapp') el.href = 'https://wa.me/' + config[key].replace(/\D/g, '');
+       else el.textContent = config[key];
+    }
+  });
+  
+  // Populate hrefs
+  document.querySelectorAll('[data-config-href]').forEach(el => {
+    const key = el.getAttribute('data-config-href');
+    if (config[key]) el.href = config[key];
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initCompanyConfig);
+
+async function loadDynamicMetrics() {
+  if (typeof window.API === 'undefined') return;
+  try {
+    const res = await window.API.getCompanyMetrics(); 
+    if (!res || !res.data) return;
+    
+    document.querySelectorAll('[data-metric]').forEach(el => {
+      const key = el.getAttribute('data-metric');
+      if (res.data[key] !== undefined) {
+         el.textContent = res.data[key];
+      }
+      if (key === 'currentYear') el.textContent = new Date().getFullYear();
+      if (key === 'currentMonthYear') {
+         const m = new Intl.DateTimeFormat('en', {month: 'long', year: 'numeric'}).format(new Date());
+         el.textContent = m;
+      }
+    });
+  } catch(e){}
+}
+document.addEventListener('DOMContentLoaded', loadDynamicMetrics);

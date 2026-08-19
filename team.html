@@ -126,13 +126,13 @@
           <img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate IT Solution Logo">
           <div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2;text-align:center">ADITYA SKILL GATE<br><span style="color:#6CCB2F">IT SOLUTION</span></div>
         </div>
-        <p>Empowering careers through premium IT training, services, and guaranteed placement support.</p>
+        <p><span data-config="description">Empowering careers through premium IT training, services, and guaranteed placement support.</span></p>
         <div class="footer-socials">
-          <a href="https://www.linkedin.com/in/aditya-skill-gate-it-solution-5446b63a8?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="footer-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://www.instagram.com/adityaskillgate.official/" target="_blank" class="footer-social" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.youtube.com/@AdityaSkillGateITSolution" target="_blank" class="footer-social" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-          <a href="https://wa.me/916382604808" target="_blank" class="footer-social" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          <a href="mailto:Adityaskillgateitsolution@gmail.com" class="footer-social" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/aditya-skill-gate-it-solution-5446b63a8" data-config-href="linkedin" target="_blank" class="footer-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/adityaskillgate.official/" data-config-href="instagram" target="_blank" class="footer-social" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@AdityaSkillGateITSolution" data-config-href="youtube" target="_blank" class="footer-social" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://wa.me/916382604808" data-config="whatsapp" target="_blank" class="footer-social" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="mailto:Adityaskillgateitsolution@gmail.com" data-config="email" class="footer-social" aria-label="Email"><i class="fas fa-envelope"></i></a>
         </div>
       </div>
       <div class="footer-col">
@@ -164,7 +164,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; <span class="current-year" data-metric="currentYear">2024</span> Aditya Skill Gate IT Solution.</p>
+      <p>&copy; <span class="current-year" data-metric="currentYear"></span> Aditya Skill Gate IT Solution.</p>
       <p>
         <a href="privacy.html" style="color:rgba(255,255,255,0.5)">Privacy</a> &nbsp;&middot;&nbsp; 
         <a href="terms.html" style="color:rgba(255,255,255,0.5)">Terms</a>
@@ -172,31 +172,37 @@
     </div>
   </div>
 </footer>
-<div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808" target="_blank" class="whatsapp-option">💬 Chat Now</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
+<div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808" data-config="whatsapp" target="_blank" class="whatsapp-option">💬 Chat Now</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
 <div id="back-to-top"><i class="fas fa-arrow-up"></i></div><div id="toast-container"></div>
 <script src="js/api.js?v=4"></script><script src="js/main.js"></script>
 <script>
 const COLORS=['#0096D6','#0D1B4C','#6CCB2F','#f59e0b','#8b5cf6','#ef4444'];
 function initials(n){return(n||'T').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase()}
 function renderTeam(employees){
-  const g=document.getElementById('team-grid');if(!g)return;
-  g.innerHTML=employees.map((e,i)=>`
-    <div class="team-card" data-animate data-delay="${(i%4+1)*80}">
-      <div class="team-img" style="background:linear-gradient(135deg,${COLORS[i%COLORS.length]},${COLORS[(i+2)%COLORS.length]})">
-        <div class="team-img-placeholder" style="font-size:4rem;font-weight:900;color:white">${initials(e.name)}</div>
-      </div>
-      <div class="team-card-body">
-        <div class="team-name">${e.name}</div>
-        <div class="team-role">${e.role}</div>
-        <div class="team-bio" style="font-size:0.825rem;color:var(--gray-500);margin-bottom:16px">${e.bio?.substring(0,90)||'Expert trainer and mentor.'}</div>
-        <div class="team-socials">
-          ${e.linkedin&&e.linkedin!='#'?`<a href="${e.linkedin}" target="_blank" class="social-btn social-btn-linkedin"><i class="fab fa-linkedin-in"></i></a>`:''}
-          ${e.email?`<a href="mailto:${e.email}" class="social-btn" style="background:rgba(0,150,214,0.1);color:var(--tech-blue)"><i class="fas fa-envelope"></i></a>`:''}
+    const g=document.getElementById('team-grid');if(!g)return;
+    const featured = employees.filter(e => e.featured === 'true' || e.featured === true);
+    let displayList = featured.length > 0 ? featured : employees;
+    if (window.location.pathname.includes('index.html') || window.location.pathname === '/') displayList = displayList.slice(0,4);
+    
+    g.innerHTML=displayList.map((e,i)=>{
+      const photo = e.photo || e.photoUrl || e.imageUrl || '';
+      return `
+      <div class="team-card" data-animate data-delay="${(i%4+1)*80}">
+        <div class="team-img" style="${photo ? `background:url('${photo}') center/cover;` : `background:linear-gradient(135deg,${COLORS[i%COLORS.length]},${COLORS[(i+2)%COLORS.length]})`}">
+          ${photo ? '' : `<div class="team-img-placeholder" style="font-size:4rem;font-weight:900;color:white;display:flex;align-items:center;justify-content:center;height:100%;">${initials(e.name)}</div>`}
         </div>
-      </div>
-    </div>`).join('');
-  document.querySelectorAll('[data-animate]').forEach(el=>{const obs=new IntersectionObserver(e=>{e.forEach(e=>e.isIntersecting&&(e.target.classList.add('animated'),obs.unobserve(e.target)))},{threshold:0.1});obs.observe(el);});
-}
-API.getEmployees().then(renderTeam);
+        <div class="team-card-body">
+          <div class="team-name">${e.name}</div>
+          <div class="team-role">${e.designation || e.role || '-'}</div>
+          <div class="team-bio" style="font-size:0.825rem;color:var(--gray-500);margin-bottom:16px">${e.bio?.substring(0,90)||'Expert team member.'}</div>
+          <div class="team-socials">
+            ${e.linkedin&&e.linkedin!='#'?`<a href="${e.linkedin}" target="_blank" class="social-btn social-btn-linkedin"><i class="fab fa-linkedin-in"></i></a>`:``}
+            ${e.email?`<a href="mailto:${e.email}" class="social-btn" style="background:rgba(0,150,214,0.1);color:var(--tech-blue)"><i class="fas fa-envelope"></i></a>`:``}
+          </div>
+        </div>
+      </div>`}).join('');
+    if(window.observeAnimations) window.observeAnimations();
+  }
+  API.getEmployees().then(renderTeam);
 </script>
 </body></html>

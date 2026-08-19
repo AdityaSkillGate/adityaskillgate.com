@@ -103,7 +103,13 @@
   <div class="modal" style="max-width:640px">
     <div class="modal-header"><div class="modal-title" id="proj-modal-title">Project Details</div><button class="modal-close" onclick="closeModal('project-modal')"><i class="fas fa-times"></i></button></div>
     <div class="modal-body">
-      <div id="proj-modal-img" style="width:100%;height:200px;border-radius:var(--border-radius);margin-bottom:20px;display:flex;align-items:center;justify-content:center;font-size:5rem"></div>
+      
+        <div id="proj-modal-img-wrap" style="width:100%;height:300px;border-radius:var(--border-radius);margin-bottom:20px;overflow:hidden;">
+          <img id="proj-modal-img" src="" style="width:100%;height:100%;object-fit:cover;display:none;">
+          <div id="proj-modal-placeholder" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;background:var(--a-border);">💻</div>
+        </div>
+        <div id="proj-modal-gallery" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;"></div>
+
       <p id="proj-modal-desc" style="color:var(--gray-600);line-height:1.8;margin-bottom:16px"></p>
       <div style="margin-bottom:16px"><strong style="color:var(--navy)">Client:</strong> <span id="proj-modal-client" style="color:var(--gray-500)"></span></div>
       <div style="margin-bottom:16px"><strong style="color:var(--navy)">Tech Stack:</strong><div id="proj-modal-tech" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"></div></div>
@@ -129,13 +135,13 @@
           <img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate IT Solution Logo">
           <div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2;text-align:center">ADITYA SKILL GATE<br><span style="color:#6CCB2F">IT SOLUTION</span></div>
         </div>
-        <p>Empowering careers through premium IT training, services, and guaranteed placement support.</p>
+        <p><span data-config="description">Empowering careers through premium IT training, services, and guaranteed placement support.</span></p>
         <div class="footer-socials">
-          <a href="https://www.linkedin.com/in/aditya-skill-gate-it-solution-5446b63a8?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="footer-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://www.instagram.com/adityaskillgate.official/" target="_blank" class="footer-social" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.youtube.com/@AdityaSkillGateITSolution" target="_blank" class="footer-social" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-          <a href="https://wa.me/916382604808" target="_blank" class="footer-social" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          <a href="mailto:Adityaskillgateitsolution@gmail.com" class="footer-social" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/aditya-skill-gate-it-solution-5446b63a8" data-config-href="linkedin" target="_blank" class="footer-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/adityaskillgate.official/" data-config-href="instagram" target="_blank" class="footer-social" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@AdityaSkillGateITSolution" data-config-href="youtube" target="_blank" class="footer-social" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://wa.me/916382604808" data-config="whatsapp" target="_blank" class="footer-social" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="mailto:Adityaskillgateitsolution@gmail.com" data-config="email" class="footer-social" aria-label="Email"><i class="fas fa-envelope"></i></a>
         </div>
       </div>
       <div class="footer-col">
@@ -167,7 +173,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; <span class="current-year" data-metric="currentYear">2024</span> Aditya Skill Gate IT Solution.</p>
+      <p>&copy; <span class="current-year" data-metric="currentYear"></span> Aditya Skill Gate IT Solution.</p>
       <p>
         <a href="privacy.html" style="color:rgba(255,255,255,0.5)">Privacy</a> &nbsp;&middot;&nbsp; 
         <a href="terms.html" style="color:rgba(255,255,255,0.5)">Terms</a>
@@ -204,27 +210,44 @@ function renderProjects(projects){
     document.querySelectorAll('[data-animate]').forEach(el=>{const obs=new IntersectionObserver(e=>{e.forEach(e=>e.isIntersecting&&(e.target.classList.add('animated'),obs.unobserve(e.target)))} ,{threshold:0.1});obs.observe(el);});
   }
   
-  window.viewProject=function(id){
-  const p=allProjects.find(x=>x.id===id);if(!p)return;
-  document.getElementById('proj-modal-title').textContent=p.title;
-  document.getElementById('proj-modal-desc').textContent=p.description||'';
-  document.getElementById('proj-modal-client').textContent=p.clientName||'Confidential';
-  const i=allProjects.indexOf(p);
-  const imgEl = document.getElementById('proj-modal-img');
-  if (p.imageUrl) {
-    imgEl.style.background = `url('${p.imageUrl}') center/cover`;
-    imgEl.innerHTML = '';
-  } else {
-    imgEl.style.background=`linear-gradient(135deg,${COLORS[i%COLORS.length]},${COLORS[(i+2)%COLORS.length]})`;
-    imgEl.innerHTML=`<div style="font-size:5rem">${ICONS[p.category]||'🌐'}</div>`;
-  }
-  document.getElementById('proj-modal-tech').innerHTML=(p.techStack||'').split(',').map(t=>`<span class="tech-tag">${t.trim()}</span>`).join('');
-  const link=document.getElementById('proj-modal-link');
-  link.href=p.liveUrl||'#';link.style.display=p.liveUrl&&p.liveUrl!=='#'?'':'none';
-  openModal('project-modal');
-};
+  
 
-document.getElementById('project-filters')?.addEventListener('filterChange',e=>{
+window.viewProject=function(id){
+    const p=allProjects.find(x=>x.id===id);if(!p)return;
+    document.getElementById('proj-modal-title').textContent=p.title;
+    document.getElementById('proj-modal-desc').textContent=p.description||'';
+    document.getElementById('proj-modal-client').textContent=p.clientName||'Confidential';
+    
+    const imgEl = document.getElementById('proj-modal-img');
+    const placeholder = document.getElementById('proj-modal-placeholder');
+    if (p.image || p.screenshotUrl || p.imageUrl) {
+      imgEl.src = p.image || p.screenshotUrl || p.imageUrl;
+      imgEl.style.display = 'block';
+      placeholder.style.display = 'none';
+    } else {
+      imgEl.style.display = 'none';
+      placeholder.style.display = 'flex';
+      const i = allProjects.indexOf(p);
+      placeholder.style.background = `linear-gradient(135deg,${COLORS[i%COLORS.length]},${COLORS[(i+2)%COLORS.length]})`;
+    }
+    
+    const galleryHtml = p.gallery ? String(p.gallery).split(',').filter(u=>u.trim()).map(url => `<img src="${url.trim()}" style="width:100%;height:120px;object-fit:cover;border-radius:8px;">`).join('') : '';
+    document.getElementById('proj-modal-gallery').innerHTML = galleryHtml;
+
+    const tStack = p.technologies || p.techStack || p.screenshots || p.technology || '';
+    document.getElementById('proj-modal-tech').innerHTML=String(tStack).split(',').filter(t=>t.trim()).map(t=>`<span class="tech-tag">${t.trim()}</span>`).join('');
+    
+    const link=document.getElementById('proj-modal-link');
+    if(p.liveUrl && p.liveUrl !== '#') {
+      link.href=p.liveUrl;
+      link.style.display='inline-flex';
+    } else {
+      link.style.display='none';
+    }
+    openModal('project-modal');
+  };
+
+  document.getElementById('project-filters')?.addEventListener('filterChange',e=>{
   const val=e.detail.value;
   document.querySelectorAll('.project-card').forEach(card=>{
     card.style.display=(val==='All'||card.dataset.category===val)?'':'none';

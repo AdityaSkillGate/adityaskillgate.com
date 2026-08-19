@@ -178,15 +178,15 @@
           <h2 style="color:#0096D6; margin-bottom:15px;">Key Metrics</h2>
           <div style="display:flex; justify-content:space-between; margin-bottom:40px;">
             <div style="text-align:center; padding:20px; background:#f8fafc; border-radius:8px; width:22%;">
-              <div style="font-size:28px; font-weight:800; color:#0D1B4C;">${set.studentsTrained || '500+'}</div>
+              <div style="font-size:28px; font-weight:800; color:#0D1B4C;">${set.studentsTrained || '<span data-metric="studentsTrained"></span>+'}</div>
               <div style="font-size:12px; color:#666;">Students Trained</div>
             </div>
             <div style="text-align:center; padding:20px; background:#f8fafc; border-radius:8px; width:22%;">
-              <div style="font-size:28px; font-weight:800; color:#0D1B4C;">${set.placements || '100+'}</div>
+              <div style="font-size:28px; font-weight:800; color:#0D1B4C;">${set.placements || '<span data-metric="placements"></span>+'}</div>
               <div style="font-size:12px; color:#666;">Placements</div>
             </div>
             <div style="text-align:center; padding:20px; background:#f8fafc; border-radius:8px; width:22%;">
-              <div style="font-size:28px; font-weight:800; color:#0D1B4C;">${set.projectsCompleted || '50+'}</div>
+              <div style="font-size:28px; font-weight:800; color:#0D1B4C;">${set.projectsCompleted || '<span data-metric="projectsCompleted"></span>+'}</div>
               <div style="font-size:12px; color:#666;">Projects Delivered</div>
             </div>
             <div style="text-align:center; padding:20px; background:#f8fafc; border-radius:8px; width:22%;">
@@ -299,8 +299,8 @@
           <p style="font-size:14px; margin-bottom:30px;">Performance snapshot for ${new Date().toLocaleString('default', { month: 'long', year: 'numeric' })}.</p>
           <ul style="list-style:none; padding:0; font-size:16px;">
             <li style="margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;"><strong>Active Courses:</strong> ${set.courses || '10'}</li>
-            <li style="margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;"><strong>Total Placements:</strong> ${set.placements || '100+'}</li>
-            <li style="margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;"><strong>Projects Completed:</strong> ${set.projectsCompleted || '50+'}</li>
+            <li style="margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;"><strong>Total Placements:</strong> ${set.placements || '<span data-metric="placements"></span>+'}</li>
+            <li style="margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;"><strong>Projects Completed:</strong> ${set.projectsCompleted || '<span data-metric="projectsCompleted"></span>+'}</li>
             <li style="margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;"><strong>Highest Package Achieved:</strong> ${set.highestPackage || '12 LPA'}</li>
           </ul>
         `;

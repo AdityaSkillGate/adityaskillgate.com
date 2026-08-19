@@ -182,13 +182,13 @@
           <img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate IT Solution Logo">
           <div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2;text-align:center">ADITYA SKILL GATE<br><span style="color:#6CCB2F">IT SOLUTION</span></div>
         </div>
-        <p>Empowering careers through premium IT training, services, and guaranteed placement support.</p>
+        <p><span data-config="description">Empowering careers through premium IT training, services, and guaranteed placement support.</span></p>
         <div class="footer-socials">
-          <a href="https://www.linkedin.com/in/aditya-skill-gate-it-solution-5446b63a8?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="footer-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://www.instagram.com/adityaskillgate.official/" target="_blank" class="footer-social" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.youtube.com/@AdityaSkillGateITSolution" target="_blank" class="footer-social" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-          <a href="https://wa.me/916382604808" target="_blank" class="footer-social" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          <a href="mailto:Adityaskillgateitsolution@gmail.com" class="footer-social" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/aditya-skill-gate-it-solution-5446b63a8" data-config-href="linkedin" target="_blank" class="footer-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/adityaskillgate.official/" data-config-href="instagram" target="_blank" class="footer-social" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@AdityaSkillGateITSolution" data-config-href="youtube" target="_blank" class="footer-social" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://wa.me/916382604808" data-config="whatsapp" target="_blank" class="footer-social" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="mailto:Adityaskillgateitsolution@gmail.com" data-config="email" class="footer-social" aria-label="Email"><i class="fas fa-envelope"></i></a>
         </div>
       </div>
       <div class="footer-col">
@@ -220,7 +220,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; <span class="current-year" data-metric="currentYear">2024</span> Aditya Skill Gate IT Solution.</p>
+      <p>&copy; <span class="current-year" data-metric="currentYear"></span> Aditya Skill Gate IT Solution.</p>
       <p>
         <a href="privacy.html" style="color:rgba(255,255,255,0.5)">Privacy</a> &nbsp;&middot;&nbsp; 
         <a href="terms.html" style="color:rgba(255,255,255,0.5)">Terms</a>
@@ -228,7 +228,7 @@
     </div>
   </div>
 </footer>
-<div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808?text=Hi!%20I%27m%20interested%20in%20a%20job" target="_blank" class="whatsapp-option">💼 Job Enquiry</a><a href="https://wa.me/916382604808" target="_blank" class="whatsapp-option">💬 Quick Chat</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
+<div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808?text=Hi!%20I%27m%20interested%20in%20a%20job" target="_blank" class="whatsapp-option">💼 Job Enquiry</a><a href="https://wa.me/916382604808" data-config="whatsapp" target="_blank" class="whatsapp-option">💬 Quick Chat</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
 <div class="chatbot-widget"><div class="chatbot-window" id="chatbot-window"><div class="chatbot-header"><div class="chatbot-avatar">🤖</div><div class="chatbot-info"><h4>ASG Assistant</h4><span>Online</span></div></div><div class="chatbot-messages" id="chat-messages"><div class="chat-msg bot">Hi! Looking for a job? 💼 I can help!</div></div><div class="chatbot-suggestions"><span class="chat-suggestion">Jobs</span><span class="chat-suggestion">Contact</span></div><div class="chatbot-input"><input type="text" placeholder="Ask..." id="chat-input"><button class="chatbot-send" id="chat-send"><i class="fas fa-paper-plane"></i></button></div></div><div class="chatbot-toggle" id="chatbot-toggle"><i class="fas fa-robot"></i></div></div>
 <div id="back-to-top"><i class="fas fa-arrow-up"></i></div><div id="toast-container"></div>
 
@@ -236,30 +236,36 @@
 <script>
 const TYPE_COLORS={'Full-time':'badge-fulltime','Remote':'badge-remote','Hybrid':'badge-hybrid'};
 function renderJobs(jobs){
-  const list=document.getElementById('jobs-list');if(!list)return;
-  list.innerHTML=jobs.map(j=>`
-    <div class="job-detail-card" data-animate data-dept="${j.department}">
-      <div class="job-header-row">
-        <div>
-          <div style="font-size:1.2rem;font-weight:800;color:var(--navy);margin-bottom:6px">${j.title}</div>
-          <div style="color:var(--gray-500);font-size:0.875rem;margin-bottom:12px"><i class="fas fa-building" style="margin-right:6px;color:var(--tech-blue)"></i>${j.department} · <i class="fas fa-map-marker-alt" style="margin-left:8px;margin-right:6px;color:var(--accent-green-dark)"></i>${j.location}</div>
+    const list=document.getElementById('jobs-list');if(!list)return;
+    const featured = jobs.filter(j => j.featured === 'true' || j.featured === true);
+    const nonFeatured = jobs.filter(j => j.featured !== 'true' && j.featured !== true);
+    const sorted = [...featured, ...nonFeatured];
+    const typeMap={'Full-time':'badge-fulltime','Remote':'badge-remote','Hybrid':'badge-hybrid'};
+    
+    list.innerHTML=sorted.map((j, i)=>`
+      <div class="job-detail-card" data-animate data-dept="${j.category||'Local'}" data-delay="${(i%5)*50}">
+        <div class="job-header-row">
+          <div>
+            <div style="font-size:1.2rem;font-weight:800;color:var(--navy);margin-bottom:6px">${j.title}</div>
+            <div style="color:var(--gray-500);font-size:0.875rem;margin-bottom:12px"><i class="fas fa-building" style="margin-right:6px;color:var(--tech-blue)"></i>${j.company||'Aditya Skill Gate'} • <i class="fas fa-map-marker-alt" style="margin-left:8px;margin-right:6px;color:var(--accent-green-dark)"></i>${j.location||'-'}, ${j.country||'India'}</div>
+          </div>
+          <span class="job-type-badge ${typeMap[j.type]||'badge-fulltime'}">${j.type||'Full-time'}</span>
         </div>
-        <span class="job-type-badge ${TYPE_COLORS[j.type]||'badge-fulltime'}">${j.type}</span>
-      </div>
-      <div class="job-meta" style="margin-bottom:14px">
-        <div class="job-meta-item"><i class="fas fa-briefcase"></i>${j.experience}</div>
-        <div class="job-meta-item"><i class="fas fa-rupee-sign"></i>${j.salary}</div>
-      </div>
-      <div class="job-skills" style="margin-bottom:20px">${(Array.isArray(j.skills) ? j.skills : String(j.skills||'').split(',')).map(s=>`<span class="skill-tag">${s.trim()}</span>`).join('')}</div>
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <button class="btn btn-primary" onclick="applyJob('${j.title}')"><i class="fas fa-paper-plane"></i> Apply Now</button>
-        <a href="resume.html" class="btn btn-outline"><i class="fas fa-upload"></i> Upload Resume</a>
-      </div>
-    </div>`).join('');
-  document.querySelectorAll('[data-animate]').forEach(el=>{const obs=new IntersectionObserver(e=>{e.forEach(e=>e.isIntersecting&&(e.target.classList.add('animated'),obs.unobserve(e.target)))},{threshold:0.1});obs.observe(el);});
-}
-
-window.applyJob=function(title){
+        <div class="job-meta" style="margin-bottom:14px">
+          <div class="job-meta-item"><i class="fas fa-briefcase"></i> ${j.experience||'-'}</div>
+          <div class="job-meta-item"><i class="fas fa-rupee-sign"></i> ${j.salary||'Negotiable'}</div>
+        </div>
+        <p style="font-size:0.85rem;color:var(--gray-600);line-height:1.6;margin-bottom:16px">${j.description||''}</p>
+        <div class="job-skills" style="margin-bottom:20px">${(Array.isArray(j.skills) ? j.skills : String(j.skills||'').split(',')).map(s=>`<span class="skill-tag">${s.trim()}</span>`).join('')}</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="applyJob('${j.title}')"><i class="fas fa-paper-plane"></i> Apply Now</button>
+          ${j.deadline ? `<div style="font-size:0.8rem;color:var(--gray-500);display:flex;align-items:center;margin-left:auto"><i class="fas fa-clock" style="margin-right:4px"></i> Deadline: ${new Date(j.deadline).toLocaleDateString()}</div>` : ''}
+        </div>
+      </div>`).join('');
+    if(window.observeAnimations) window.observeAnimations();
+  }
+  
+  window.applyJob=function(title){
   document.getElementById('apply-position').value=title;
   document.getElementById('apply-modal-title').textContent='💼 Apply for ' + title;
   openModal('apply-modal');
