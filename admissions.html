@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Team | Aditya Skill Gate IT Solution</title>
-  <meta name="description" content="Meet the expert team at Aditya Skill Gate IT Solution - passionate trainers, developers, and HR professionals dedicated to your success.">
+  <title>Admissions & Course Enrollment | Aditya Skill Gate IT Solution</title>
+  <meta name="description" content="Apply for professional IT training courses and programs at Aditya Skill Gate IT Solution. Learn about eligibility, fees, and batch schedules.">
+  <meta name="keywords" content="IT courses Tamil Nadu, web development course, Python AI course, digital marketing training, cloud computing AWS">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,14 +15,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/responsive.css">
   <style>
-    .culture-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-    .culture-card{padding:36px;background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-xl);text-align:center;transition:var(--transition)}
-    .culture-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-xl)}
-    @media(max-width:768px){.culture-grid{grid-template-columns:1fr}}
+    .enroll-modal .modal{max-width:500px}
+    .step-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+    .step-card{text-align:center;padding:30px 20px;background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-lg);transition:var(--transition)}
+    .step-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+    .step-num{width:52px;height:52px;border-radius:50%;background:var(--gradient-primary);color:white;font-size:1.4rem;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+    @media(max-width:768px){.step-cards{grid-template-columns:repeat(2,1fr)}}
   </style>
 
-  <link rel="canonical" href="https://adityaskillgate.com/team.html">
-  <meta property="og:url" content="https://adityaskillgate.com/team.html">
+  <link rel="canonical" href="https://adityaskillgate.com/courses.html">
+  <meta property="og:url" content="https://adityaskillgate.com/courses.html">
 
   <!-- Breadcrumb Schema -->
   <script type="application/ld+json">
@@ -36,18 +39,18 @@
     },{
       "@type": "ListItem",
       "position": 2,
-      "name": "Team",
-      "item": "https://adityaskillgate.com/team.html"
+      "name": "Courses",
+      "item": "https://adityaskillgate.com/courses.html"
     }]
   }
   </script>
   <link rel="stylesheet" href="css/motion.css">
 
-  <link rel="alternate" hreflang="en" href="https://adityaskillgate.com/team.html">
-  <link rel="alternate" hreflang="zh" href="https://adityaskillgate.com/zh/team.html">
-  <link rel="alternate" hreflang="ms" href="https://adityaskillgate.com/ms/team.html">
-  <link rel="alternate" hreflang="ta" href="https://adityaskillgate.com/ta/team.html">
-  <link rel="alternate" hreflang="x-default" href="https://adityaskillgate.com/team.html">
+  <link rel="alternate" hreflang="en" href="https://adityaskillgate.com/admissions.html">
+  <link rel="alternate" hreflang="zh" href="https://adityaskillgate.com/zh/admissions.html">
+  <link rel="alternate" hreflang="ms" href="https://adityaskillgate.com/ms/admissions.html">
+  <link rel="alternate" hreflang="ta" href="https://adityaskillgate.com/ta/admissions.html">
+  <link rel="alternate" hreflang="x-default" href="https://adityaskillgate.com/admissions.html">
   </head>
 <body>
 <div id="page-loader"><img src="assets/logos/logo-icon.png" class="loader-logo" alt="Aditya Skill Gate IT Solution Logo"><div class="loader-bar"><div class="loader-progress"></div></div></div>
@@ -98,54 +101,79 @@
     </div>
   </div>
 
-<section class="page-hero">
-  <div class="container">
-    <div class="section-badge"><i class="fas fa-users"></i> The People Behind It</div>
-    <h1>Our Expert Team</h1>
-    <p>A passionate group of IT professionals, educators, and mentors committed to your success.</p>
+
+
+<section class="page-hero" style="background:var(--navy); color:white; padding:100px 0 60px; text-align:center;">
+  <div class="container" data-motion="fade-up">
+    <div class="section-badge" style="background:rgba(255,255,255,0.1); border-color:transparent;"><i class="fas fa-university"></i> Admissions Hub</div>
+    <h1 style="font-size:clamp(2rem, 5vw, 3.5rem); margin-bottom:16px;">Join <span class="text-gradient">Aditya Skill Gate</span></h1>
+    <p style="opacity:0.9; max-width:600px; margin:0 auto; font-size:1.1rem; margin-bottom:30px;">Your journey to a successful tech career starts here. Review our admission process and apply today.</p>
+    <div style="display:flex; justify-content:center; gap:16px;">
+      <a href="apply.html" class="btn btn-primary">Start Application</a>
+      <a href="status.html" class="btn btn-outline-light">Check Application Status</a>
+    </div>
   </div>
 </section>
 
 <section class="section section-light">
   <div class="container">
-    <div class="section-header" data-animate><h2 class="section-title">Meet the <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Team</span></h2><p class="section-subtitle">Each member brings unique expertise and a shared passion for technology and education.</p></div>
-    <div class="team-grid" id="team-grid"><!-- JS --></div>
-  </div>
-</section>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:40px;">
+      
+      <!-- Eligibility -->
+      <div style="background:white; padding:40px; border-radius:20px; box-shadow:0 10px 40px rgba(0,0,0,0.05);" data-motion="fade-up">
+        <div style="width:60px; height:60px; border-radius:16px; background:rgba(0,150,214,0.1); color:var(--tech-blue); display:flex; align-items:center; justify-content:center; font-size:2rem; margin-bottom:20px;"><i class="fas fa-user-check"></i></div>
+        <h3 style="font-size:1.5rem; color:var(--navy); margin-bottom:16px;">General Eligibility</h3>
+        <ul style="padding-left:20px; color:var(--gray-600); line-height:1.8; margin-bottom:20px;">
+          <li>Graduates from any recognized university (B.E, B.Tech, B.Sc, BCA, B.Com, B.A).</li>
+          <li>Final year students awaiting results are eligible for provisional admission.</li>
+          <li>Working professionals looking to upskill or transition to IT.</li>
+          <li>No prior coding experience is required for foundation courses.</li>
+        </ul>
+      </div>
 
-<!-- Culture -->
-<section class="section section-gray">
-  <div class="container">
-    <div class="section-header" data-animate><div class="section-badge"><i class="fas fa-heart"></i> Our Culture</div><h2 class="section-title">Life at <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Aditya Skill Gate</span></h2></div>
-    <div class="culture-grid">
-      <div class="culture-card" data-animate data-delay="100">
-        <div style="font-size:3rem;margin-bottom:16px">📚</div>
-        <h3 style="color:var(--navy);margin-bottom:10px">Continuous Learning</h3>
-        <p style="color:var(--gray-500);font-size:0.875rem;line-height:1.7">We invest in our team's growth through regular workshops, certifications, and knowledge sharing sessions.</p>
+      <!-- Required Documents -->
+      <div style="background:white; padding:40px; border-radius:20px; box-shadow:0 10px 40px rgba(0,0,0,0.05);" data-motion="fade-up" data-delay="100">
+        <div style="width:60px; height:60px; border-radius:16px; background:rgba(108,203,47,0.1); color:var(--accent-green-dark); display:flex; align-items:center; justify-content:center; font-size:2rem; margin-bottom:20px;"><i class="fas fa-folder-open"></i></div>
+        <h3 style="font-size:1.5rem; color:var(--navy); margin-bottom:16px;">Required Documents</h3>
+        <p style="color:var(--gray-600); margin-bottom:16px;">Please keep the following documents ready (digital copies) before starting your application:</p>
+        <ul style="padding-left:20px; color:var(--gray-600); line-height:1.8;">
+          <li>Latest Resume / CV</li>
+          <li>Recent passport size photograph</li>
+          <li>Government ID Proof (Aadhaar/PAN/Passport)</li>
+          <li>Degree Certificate or Final Year Marksheets</li>
+        </ul>
       </div>
-      <div class="culture-card" data-animate data-delay="200">
-        <div style="font-size:3rem;margin-bottom:16px">🤝</div>
-        <h3 style="color:var(--navy);margin-bottom:10px">Collaboration First</h3>
-        <p style="color:var(--gray-500);font-size:0.875rem;line-height:1.7">Open communication, teamwork, and a supportive environment where every voice matters and ideas are welcomed.</p>
-      </div>
-      <div class="culture-card" data-animate data-delay="300">
-        <div style="font-size:3rem;margin-bottom:16px">🚀</div>
-        <h3 style="color:var(--navy);margin-bottom:10px">Career Growth</h3>
-        <p style="color:var(--gray-500);font-size:0.875rem;line-height:1.7">Clear career paths, regular performance reviews, and leadership opportunities for every team member.</p>
+
+    </div>
+
+    <!-- Admission Process -->
+    <div style="margin-top:80px; text-align:center;">
+      <h2 style="font-size:2rem; color:var(--navy); margin-bottom:40px;">The <span class="text-gradient">Admission Process</span></h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px; position:relative;">
+        <div style="background:white; padding:30px 20px; border-radius:16px; border:1px solid var(--gray-200); position:relative; z-index:2;" data-motion="scale-in">
+          <div style="font-size:2rem; color:var(--tech-blue); margin-bottom:16px;"><i class="fas fa-edit"></i></div>
+          <h4 style="color:var(--navy); margin-bottom:8px;">1. Apply Online</h4>
+          <p style="font-size:0.9rem; color:var(--gray-500);">Submit your application form and documents securely.</p>
+        </div>
+        <div style="background:white; padding:30px 20px; border-radius:16px; border:1px solid var(--gray-200); position:relative; z-index:2;" data-motion="scale-in" data-delay="100">
+          <div style="font-size:2rem; color:var(--tech-blue); margin-bottom:16px;"><i class="fas fa-search"></i></div>
+          <h4 style="color:var(--navy); margin-bottom:8px;">2. Profile Review</h4>
+          <p style="font-size:0.9rem; color:var(--gray-500);">Our admissions team will evaluate your eligibility.</p>
+        </div>
+        <div style="background:white; padding:30px 20px; border-radius:16px; border:1px solid var(--gray-200); position:relative; z-index:2;" data-motion="scale-in" data-delay="200">
+          <div style="font-size:2rem; color:var(--tech-blue); margin-bottom:16px;"><i class="fas fa-comments"></i></div>
+          <h4 style="color:var(--navy); margin-bottom:8px;">3. Counseling</h4>
+          <p style="font-size:0.9rem; color:var(--gray-500);">1-on-1 session to align your career goals with the programme.</p>
+        </div>
+        <div style="background:white; padding:30px 20px; border-radius:16px; border:1px solid var(--gray-200); position:relative; z-index:2;" data-motion="scale-in" data-delay="300">
+          <div style="font-size:2rem; color:var(--accent-green); margin-bottom:16px;"><i class="fas fa-check-circle"></i></div>
+          <h4 style="color:var(--navy); margin-bottom:8px;">4. Enrollment</h4>
+          <p style="font-size:0.9rem; color:var(--gray-500);">Receive your offer letter and join the upcoming batch.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- Join Us CTA -->
-<section style="background:var(--gradient-primary);padding:70px 0;text-align:center">
-  <div class="container" data-animate>
-    <h2 style="color:white;margin-bottom:12px">Want to Join Our Team?</h2>
-    <p style="color:rgba(255,255,255,0.75);margin-bottom:32px">We're always looking for passionate, talented individuals who love technology and teaching.</p>
-    <a href="jobs.html" class="btn btn-primary" style="background:white;color:var(--navy)"><i class="fas fa-briefcase"></i> View Open Positions</a>
-  </div>
-</section>
-
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
@@ -201,44 +229,24 @@
   </div>
 </footer>
 
+
 <div class="mobile-sticky-cta" id="mobileStickyCta">
   <a href="tel:+916382604808" class="sticky-cta-btn bg-navy text-white"><i class="fas fa-phone-alt"></i> Call</a>
   <a href="https://wa.me/916382604808?text=Hi!%20I'm%20interested%20in%20Aditya%20Skill%20Gate%20courses%20and%20services" target="_blank" class="sticky-cta-btn bg-green text-white"><i class="fab fa-whatsapp"></i> Chat</a>
   <a href="resume.html" class="sticky-cta-btn bg-blue text-white"><i class="fas fa-paper-plane"></i> Apply</a>
 </div>
 
-<div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808" data-config="whatsapp" target="_blank" class="whatsapp-option">💬 Chat Now</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
+<div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808?text=Hi!%20I'm%20interested%20in%20your%20courses" target="_blank" class="whatsapp-option">🎓 Course Enquiry</a><a href="https://wa.me/916382604808" data-config="whatsapp" target="_blank" class="whatsapp-option">💬 Quick Chat</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
+<div class="chatbot-widget"><div class="chatbot-window" id="chatbot-window"><div class="chatbot-header"><div class="chatbot-avatar">🤖</div><div class="chatbot-info"><h4>ASG Assistant</h4><span>Online</span></div></div><div class="chatbot-messages" id="chat-messages"><div class="chat-msg bot">Hi! Ask me about our courses! 😊</div></div><div class="chatbot-suggestions"><span class="chat-suggestion">Fees</span><span class="chat-suggestion">Duration</span><span class="chat-suggestion">Placement</span></div><div class="chatbot-input"><input type="text" placeholder="Ask..." id="chat-input"><button class="chatbot-send" id="chat-send"><i class="fas fa-paper-plane"></i></button></div></div><div class="chatbot-toggle" id="chatbot-toggle"><i class="fas fa-robot"></i></div></div>
 <div id="back-to-top"><i class="fas fa-arrow-up"></i></div><div id="toast-container"></div>
+
 <script src="js/api.js?v=4"></script><script src="js/main.js"></script>
 <script>
 const COLORS=['#0096D6','#0D1B4C','#6CCB2F','#f59e0b','#8b5cf6','#ef4444'];
-function initials(n){return(n||'T').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase()}
-function renderTeam(employees){
-    const g=document.getElementById('team-grid');if(!g)return;
-    const featured = employees.filter(e => e.featured === 'true' || e.featured === true);
-    let displayList = featured.length > 0 ? featured : employees;
-    if (window.location.pathname.includes('index.html') || window.location.pathname === '/') displayList = displayList.slice(0,4);
-    
-    g.innerHTML=displayList.map((e,i)=>{
-      const photo = e.photo || e.photoUrl || e.imageUrl || '';
-      return `
-      <div class="team-card" data-animate data-delay="${(i%4+1)*80}">
-        <div class="team-img" style="${photo ? `background:url('${photo}') center/cover;` : `background:linear-gradient(135deg,${COLORS[i%COLORS.length]},${COLORS[(i+2)%COLORS.length]})`}">
-          ${photo ? '' : `<div class="team-img-placeholder" style="font-size:4rem;font-weight:900;color:white;display:flex;align-items:center;justify-content:center;height:100%;">${initials(e.name)}</div>`}
-        </div>
-        <div class="team-card-body">
-          <div class="team-name">${e.name}</div>
-          <div class="team-role">${e.designation || e.role || '-'}</div>
-          <div class="team-bio" style="font-size:0.825rem;color:var(--gray-500);margin-bottom:16px">${e.bio?.substring(0,90)||'Expert team member.'}</div>
-          <div class="team-socials">
-            ${e.linkedin&&e.linkedin!='#'?`<a href="${e.linkedin}" target="_blank" class="social-btn social-btn-linkedin"><i class="fab fa-linkedin-in"></i></a>`:``}
-            ${e.email?`<a href="mailto:${e.email}" class="social-btn" style="background:rgba(0,150,214,0.1);color:var(--tech-blue)"><i class="fas fa-envelope"></i></a>`:``}
-          </div>
-        </div>
-      </div>`}).join('');
-    if(window.observeAnimations) window.observeAnimations();
-  }
-  API.getEmployees().then(renderTeam);
+const CATICONS={'Web':'🌐','AI':'🤖','ML':'🤖','Mobile':'📱','Cloud':'☁️','Marketing':'📣','Design':'🎨','Android':'📱'};
+function initials(n){return n.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase()}
+
+
 </script>
   <script src="js/motion.js"></script>
   <script src="js/i18n.js"></script>

@@ -1,6 +1,6 @@
 /* ============================================================
    ADITYA SKILL GATE IT SOLUTION — ADMIN JS
-   js/admin.js — Admin panel shared logic
+   js/admin.js — Admin panel shared logic (V2.0.4 Stabilized)
    ============================================================ */
 
 /* ====== AUTH GUARD (runs immediately, before DOM load) ====== */
@@ -15,21 +15,26 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ====== SIDEBAR COLLAPSE ====== */
+  /* ====== SIDEBAR MANAGEMENT ====== */
   const sidebar = document.getElementById('admin-sidebar');
-  // Support both sidebar-collapse (old) and sidebar-toggle (new admin pages)
   const collapseBtn = document.getElementById('sidebar-collapse') || document.getElementById('sidebar-toggle');
   const adminMain = document.getElementById('admin-main') || document.querySelector('.admin-main');
+  const topbarToggle = document.getElementById('topbar-toggle');
   const SIDEBAR_KEY = 'asg_sidebar_collapsed';
 
   function applySidebarState() {
-    const isCollapsed = localStorage.getItem(SIDEBAR_KEY) === 'true';
-    sidebar?.classList.toggle('collapsed', isCollapsed);
-    if (adminMain) adminMain.style.marginLeft = isCollapsed ? '70px' : '260px';
-    if (collapseBtn) {
-      collapseBtn.innerHTML = isCollapsed
-        ? '<i class="fas fa-chevron-right"></i>'
-        : '<i class="fas fa-bars"></i>';
+    if (window.innerWidth >= 992) {
+      const isCollapsed = localStorage.getItem(SIDEBAR_KEY) === 'true';
+      sidebar?.classList.toggle('collapsed', isCollapsed);
+      if (adminMain) adminMain.style.marginLeft = isCollapsed ? '70px' : '260px';
+      if (collapseBtn) {
+        collapseBtn.innerHTML = isCollapsed
+          ? '<i class="fas fa-chevron-right"></i>'
+          : '<i class="fas fa-bars"></i>';
+      }
+    } else {
+      sidebar?.classList.remove('collapsed');
+      if (adminMain) adminMain.style.marginLeft = '0';
     }
   }
 
@@ -39,50 +44,43 @@ document.addEventListener('DOMContentLoaded', () => {
     applySidebarState();
   });
 
-  applySidebarState();
-
-  /* ====== MOBILE SIDEBAR TOGGLE ====== */
-  const topbarToggle = document.getElementById('topbar-toggle');
-  topbarToggle?.addEventListener('click', () => {
+  topbarToggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
     sidebar?.classList.toggle('mobile-open');
   });
 
   /* Close sidebar on outside click (mobile) */
   document.addEventListener('click', (e) => {
-    if (window.innerWidth < 992 && sidebar && !sidebar.contains(e.target) && !topbarToggle?.contains(e.target)) {
-      sidebar.classList.remove('mobile-open');
+    if (window.innerWidth < 992 && sidebar && sidebar.classList.contains('mobile-open')) {
+      if (!sidebar.contains(e.target) && !topbarToggle?.contains(e.target)) {
+        sidebar.classList.remove('mobile-open');
+      }
     }
   });
 
+  window.addEventListener('resize', applySidebarState);
+  applySidebarState();
+
   /* ====== ACTIVE SIDEBAR LINK ====== */
-  const path = window.location.pathname.split('/').pop();
+  let currentFile = window.location.pathname.split('/').filter(Boolean).pop() || 'dashboard.html';
+  if (!currentFile.endsWith('.html')) currentFile = currentFile + '.html';
+  
+  let foundActive = false;
   document.querySelectorAll('.sidebar-link').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === path) link.classList.add('active');
+    link.classList.remove('active');
+    const href = (link.getAttribute('href') || '').split('/').pop();
+    if (href && (href === currentFile || href === currentFile.replace('.html', '') || href.replace('.html', '') === currentFile.replace('.html', ''))) {
+      link.classList.add('active');
+      foundActive = true;
+    }
   });
 
-  /* ====== THEME TOGGLE ====== */
-  const themeKey = 'asg_theme';
-  const savedTheme = localStorage.getItem(themeKey) || 'light';
-  document.documentElement.setAttribute('data-theme', savedTheme);
-
-  // Support both .theme-toggle and #admin-theme-btn
-  const themeIcon = s => s === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-  const allThemeBtns = () => document.querySelectorAll('.theme-toggle, .theme-btn, #admin-theme-btn');
-  allThemeBtns().forEach(btn => { btn.innerHTML = themeIcon(savedTheme); });
-
-  document.addEventListener('click', e => {
-    const btn = e.target.closest('.theme-toggle, .theme-btn, #admin-theme-btn');
-    if (!btn) return;
-    const current = document.documentElement.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem(themeKey, next);
-    allThemeBtns().forEach(b => { b.innerHTML = themeIcon(next); });
-  });
+  if (!foundActive && (currentFile === 'admin.html' || currentFile === 'dashboard.html' || currentFile === 'index.html')) {
+    const dashLink = document.querySelector('.sidebar-link[href*="dashboard"]');
+    if (dashLink) dashLink.classList.add('active');
+  }
 
   /* ====== MODAL MANAGEMENT ====== */
-  // Use 'active' class — matching our admin page CSS (.modal-overlay.active { display: flex; })
   window.openAdminModal = function(id) {
     const modal = document.getElementById(id);
     if (!modal) return;
@@ -97,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   };
 
-  // Alias: openModal / closeModal for pages that call the shorter name
   window.openModal = window.openAdminModal;
   window.closeModal = window.closeAdminModal;
 
@@ -113,8 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
   window.AdminTable = class AdminTable {
     constructor({ tableId, data, columns, onEdit, onDelete, onToggle, searchField }) {
       this.tableId = tableId;
-      this.data = [...data];
-      this.filtered = [...data];
+      this.data = Array.isArray(data) ? [...data] : [];
+      this.filtered = [...this.data];
       this.columns = columns;
       this.onEdit = onEdit;
       this.onDelete = onDelete;
@@ -152,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
       /* Bind action buttons */
       tbody.querySelectorAll('.edit-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-          const item = this.data.find(d => d.id === btn.dataset.id);
+          const item = this.data.find(d => String(d.id) === String(btn.dataset.id));
           if (item && this.onEdit) this.onEdit(item);
         });
       });
@@ -160,8 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
       tbody.querySelectorAll('.delete-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           if (confirm('Are you sure you want to delete this record?')) {
-            this.data = this.data.filter(d => d.id !== btn.dataset.id);
-            this.filtered = this.filtered.filter(d => d.id !== btn.dataset.id);
+            this.data = this.data.filter(d => String(d.id) !== String(btn.dataset.id));
+            this.filtered = this.filtered.filter(d => String(d.id) !== String(btn.dataset.id));
             if (this.onDelete) this.onDelete(btn.dataset.id);
             this.render();
             showAdminToast('Record deleted successfully', 'success');
@@ -171,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       tbody.querySelectorAll('.toggle-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-          const item = this.data.find(d => d.id === btn.dataset.id);
+          const item = this.data.find(d => String(d.id) === String(btn.dataset.id));
           if (item && this.onToggle) this.onToggle(item);
           this.render();
         });
@@ -193,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `<button class="page-btn" ${this.page === 1 ? 'disabled' : ''} id="prev-page"><i class="fas fa-chevron-left"></i></button>`,
         ...Array.from({ length: Math.min(totalPages, 5) }, (_, i) =>
           `<button class="page-btn ${this.page === i + 1 ? 'active' : ''}" data-page="${i + 1}">${i + 1}</button>`),
-        `<button class="page-btn" ${this.page === totalPages ? 'disabled' : ''} id="next-page"><i class="fas fa-chevron-right"></i></button>`
+        `<button class="page-btn" ${this.page >= totalPages ? 'disabled' : ''} id="next-page"><i class="fas fa-chevron-right"></i></button>`
       ].join('');
 
       btns.querySelectorAll('[data-page]').forEach(btn => {
@@ -207,9 +204,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const searchInput = document.getElementById(`${this.tableId}-search`);
       if (searchInput && this.searchField) {
         searchInput.addEventListener('input', () => {
-          const q = searchInput.value.toLowerCase();
+          const q = searchInput.value.toLowerCase().trim();
           this.filtered = this.data.filter(d =>
-            (d[this.searchField] || '').toLowerCase().includes(q)
+            (d[this.searchField] || '').toString().toLowerCase().includes(q)
           );
           this.page = 1;
           this.render();
@@ -237,9 +234,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     updateRecord(id, updates) {
-      const idx = this.data.findIndex(d => d.id === id);
+      const idx = this.data.findIndex(d => String(d.id) === String(id));
       if (idx !== -1) { this.data[idx] = { ...this.data[idx], ...updates }; }
-      const fidx = this.filtered.findIndex(d => d.id === id);
+      const fidx = this.filtered.findIndex(d => String(d.id) === String(id));
       if (fidx !== -1) { this.filtered[fidx] = { ...this.filtered[fidx], ...updates }; }
       this.render();
     }
@@ -258,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
     toast.innerHTML = `
-      <span class="toast-icon">${icons[type]}</span>
+      <span class="toast-icon">${icons[type] || icons.info}</span>
       <span class="toast-msg">${message}</span>
       <span class="toast-close" onclick="this.parentElement.remove()">✕</span>
     `;
@@ -290,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ====== CSV EXPORT ====== */
   window.exportToCSV = function(data, filename) {
-    if (!data.length) return;
+    if (!data || !data.length) return;
     const headers = Object.keys(data[0]);
     const rows = data.map(row => headers.map(h => `"${(row[h] || '').toString().replace(/"/g, '""')}"`).join(','));
     const csv = [headers.join(','), ...rows].join('\n');
@@ -318,9 +315,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ====== AVATAR HELPER ====== */
   window.avatarDiv = function(name, size = 36) {
-    const initials = name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+    const initials = (name || 'A').split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
     const colors = ['#0096D6', '#0D1B4C', '#6CCB2F', '#f59e0b', '#8b5cf6', '#ef4444'];
-    const color = colors[name.charCodeAt(0) % colors.length];
+    const color = colors[(name || 'A').charCodeAt(0) % colors.length];
     return `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:${size * 0.35}px;flex-shrink:0">${initials}</div>`;
   };
 
@@ -366,5 +363,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  console.log('✅ Admin panel initialized');
+  console.log('✅ Admin panel initialized (V2.0.4)');
 });

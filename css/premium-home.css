@@ -1,0 +1,239 @@
+/* Premium Homepage CSS */
+
+/* --- Hero Section & Ken Burns --- */
+.premium-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+.hero-bg-slider {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-slide {
+  position: absolute;
+  inset: -5%; /* scale bleed for Ken Burns */
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  transform: scale(1.1);
+}
+.hero-slide.active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 1.5s ease-in-out, transform 10s ease-out;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(13, 27, 76, 0.9) 0%, rgba(13, 27, 76, 0.4) 100%);
+  z-index: 1;
+}
+
+.hero-content-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+.hero-content {
+  max-width: 700px;
+}
+.hero-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-left: 3px solid var(--accent-green);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.premium-hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.premium-hero p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.6;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 40px;
+}
+.text-gradient {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Stagger Animation */
+.stagger-el {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.stagger-el.animate {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.stagger-el:nth-child(1).animate { transition-delay: 0.1s; }
+.stagger-el:nth-child(2).animate { transition-delay: 0.2s; }
+.stagger-el:nth-child(3).animate { transition-delay: 0.3s; }
+.stagger-el:nth-child(4).animate { transition-delay: 0.4s; }
+
+/* Scroll Indicator */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+.mouse {
+  width: 30px;
+  height: 50px;
+  border: 2px solid rgba(255,255,255,0.6);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+.wheel {
+  width: 4px;
+  height: 8px;
+  background: white;
+  border-radius: 2px;
+  animation: scrollWheel 2s infinite;
+}
+@keyframes scrollWheel {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(15px); opacity: 0; }
+}
+
+/* --- Trust Strip --- */
+.trust-strip {
+  background: var(--white);
+  padding: 30px 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+.trust-logos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.trust-logos::-webkit-scrollbar { display: none; }
+.trust-logos img {
+  height: 40px;
+  filter: grayscale(100%);
+  opacity: 0.5;
+  transition: var(--transition);
+}
+.trust-logos img:hover {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+/* --- Admission Journey --- */
+.journey-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+.journey-step {
+  text-align: center;
+  position: relative;
+}
+.journey-step::after {
+  content: '';
+  position: absolute;
+  top: 40px;
+  right: -50%;
+  width: 100%;
+  height: 2px;
+  background: dashed 2px var(--gray-300);
+  z-index: 0;
+}
+.journey-step:last-child::after { display: none; }
+@media (max-width: 768px) {
+  .journey-step::after { display: none; }
+}
+.step-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--tech-blue);
+  margin: 0 auto 20px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  z-index: 1;
+  border: 4px solid var(--light-gray);
+}
+.step-number {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--accent-green);
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Campus / Experience --- */
+.campus-collage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.campus-collage img {
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  height: 100%;
+}
+.campus-img-large { grid-row: span 2; height: 100%; min-height: 400px; }
+
+/* --- Global Section --- */
+.global-section {
+  background: radial-gradient(circle at 50% 50%, rgba(0,150,214,0.15) 0%, transparent 70%), var(--navy);
+  color: white;
+  padding: 100px 0;
+}
+
+/* --- Utility --- */
+.btn-outline-light {
+  border: 2px solid rgba(255,255,255,0.3);
+  color: white;
+  background: transparent;
+}
+.btn-outline-light:hover {
+  background: white;
+  color: var(--navy);
+}

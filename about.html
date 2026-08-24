@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us | Aditya Skill Gate IT Solution</title>
-  <meta name="description" content="Learn about Aditya Skill Gate IT Solution - our story, mission, values, and the team driving IT education and services in Tamil Nadu.">
-  <meta name="keywords" content="about Aditya Skill Gate, IT company Tamil Nadu, IT training institute history">
+  <meta name="description" content="Learn about Aditya Skill Gate IT Solution - our story, mission, values, and the team driving IT education and software services in Tamil Nadu.">
+  <meta name="keywords" content="about Aditya Skill Gate, IT company Tamil Nadu, IT training institute history, Sankarankovil software company">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://script.google.com">
   <link rel="icon" href="assets/logos/favicon.ico" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/style.css?v=20260824_2"><link rel="stylesheet" href="css/responsive.css?v=20260824_2">
   <style>
     .about-intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
     .about-highlight-card{background:var(--gradient-primary);border-radius:24px;padding:40px;color:white}
@@ -33,7 +32,15 @@
     .timeline-year{font-size:0.8rem;font-weight:700;color:var(--tech-blue);margin-bottom:4px}
     .timeline-title{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:6px}
     .timeline-desc{font-size:0.875rem;color:var(--gray-500);line-height:1.6}
+    
+    /* Founder 1:1 Card */
+    .founder-card { max-width: 920px; margin: 0 auto; background: white; border-radius: 24px; box-shadow: 0 10px 40px rgba(13,27,76,0.08); padding: 44px; display: flex; gap: 40px; align-items: center; border: 1px solid rgba(0,150,214,0.12); }
+    .founder-image-wrap { flex-shrink: 0; width: 320px; height: 320px; max-width: 320px; max-height: 320px; aspect-ratio: 1/1; border-radius: 20px; overflow: hidden; position: relative; box-shadow: 0 12px 32px rgba(13,27,76,0.14); border: 3px solid white; background: var(--gradient-primary); display: flex; align-items: center; justify-content: center; }
+    .founder-img { width: 100% !important; height: 100% !important; aspect-ratio: 1/1 !important; object-fit: cover !important; object-position: center top !important; display: block; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+    .founder-image-wrap:hover .founder-img { transform: scale(1.06); }
+    
     @media(max-width:991px){.about-intro-grid{grid-template-columns:1fr}.values-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:768px){.founder-card{flex-direction:column;padding:28px 20px;gap:24px;text-align:center}.founder-image-wrap{width:260px;height:260px;max-width:260px;max-height:260px;margin:0 auto}}
     @media(max-width:576px){.values-grid{grid-template-columns:1fr}}
   </style>
 
@@ -58,34 +65,55 @@
     }]
   }
   </script>
+  <link rel="stylesheet" href="css/motion.css">
 </head>
 <body>
 <div id="page-loader"><img src="assets/logos/logo-icon.png" class="loader-logo" alt="Aditya Skill Gate IT Solution Logo"><div class="loader-bar"><div class="loader-progress"></div></div></div>
-<nav class="navbar" id="navbar"><div class="container"><div class="navbar-inner">
-  <a href="index.html" class="navbar-logo"><img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate">
-    <div class="navbar-logo-text" style="text-align: center;">ADITYA SKILL GATE<br><span>IT SOLUTION</span></div></a>
-        <ul class="navbar-nav">
-        <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="about.html" class="nav-link active">About</a></li>
-        <li><a href="services.html" class="nav-link">Services</a></li>
-        <li><a href="courses.html" class="nav-link">Courses</a></li>
-        <li><a href="jobs.html" class="nav-link">Careers</a></li>
-        <li><a href="projects.html" class="nav-link">Projects</a></li>
-        <li><a href="placements.html" class="nav-link">Placements</a></li>
-        <li><a href="contact.html" class="nav-link">Contact</a></li>
-      </ul>
-  <div class="navbar-actions"><button class="theme-toggle"><i class="fas fa-moon"></i></button><a href="resume.html" class="btn-nav-cta">Upload Resume</a><button class="hamburger" id="hamburger"><span></span><span></span><span></span></button></div>
-</div></div></nav>
-<div class="mobile-menu" id="mobile-menu" style="display: none;">  <nav class="mobile-nav">
-    <a href="index.html" class="mobile-nav-link active">🏠 Home</a>
-    <a href="about.html" class="mobile-nav-link">ℹ️ About Us</a>
-    <a href="services.html" class="mobile-nav-link">⚙️ Services</a>
-    <a href="courses.html" class="mobile-nav-link">🎓 Courses</a>
-    <a href="jobs.html" class="mobile-nav-link">💼 Careers</a>
-    <a href="projects.html" class="mobile-nav-link">🎨 Projects</a>
-    <a href="placements.html" class="mobile-nav-link">🎯 Placements</a>
-    <a href="contact.html" class="mobile-nav-link">📞 Contact Us</a>
-  </nav><div class="mobile-menu-footer"><a href="resume.html" class="btn btn-primary">📄 Upload Resume</a></div></div>
+
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="index.html" class="navbar-logo" aria-label="Aditya Skill Gate Home">
+          <img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate Logo">
+          <div class="navbar-logo-text" style="text-align: center;">ADITYA SKILL GATE<br><span>IT SOLUTION</span></div>
+        </a>
+        <ul class="navbar-nav" role="menubar">
+          <li role="none"><a href="index.html" class="nav-link" role="menuitem">Home</a></li>
+          <li role="none"><a href="about.html" class="nav-link active" role="menuitem">About</a></li>
+          <li role="none"><a href="services.html" class="nav-link" role="menuitem">Services</a></li>
+          <li role="none"><a href="courses.html" class="nav-link" role="menuitem">Courses</a></li>
+          <li role="none"><a href="jobs.html" class="nav-link" role="menuitem">Careers</a></li>
+          <li role="none"><a href="projects.html" class="nav-link" role="menuitem">Projects</a></li>
+          <li role="none"><a href="placements.html" class="nav-link" role="menuitem">Placements</a></li>
+          <li role="none"><a href="contact.html" class="nav-link" role="menuitem">Contact</a></li>
+        </ul>
+        <div class="navbar-actions">
+          <a href="contact.html" class="btn btn-outline btn-sm hidden-mobile">Enquire</a>
+          <a href="resume.html" class="btn btn-primary btn-sm hidden-mobile"><i class="fas fa-paper-plane"></i> Apply Now</a>
+          <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true" style="display: none;">
+    <nav class="mobile-nav" role="menu">
+      <a href="index.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-home" style="width:20px;"></i> Home</a>
+      <a href="about.html" class="mobile-nav-link active" role="menuitem"><i class="fas fa-info-circle" style="width:20px;"></i> About Us</a>
+      <a href="services.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-concierge-bell" style="width:20px;"></i> Services</a>
+      <a href="courses.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-laptop-code" style="width:20px;"></i> Courses</a>
+      <a href="jobs.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-briefcase" style="width:20px;"></i> Careers</a>
+      <a href="projects.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-project-diagram" style="width:20px;"></i> Projects</a>
+      <a href="placements.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-user-graduate" style="width:20px;"></i> Placements</a>
+      <a href="contact.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-envelope" style="width:20px;"></i> Contact Us</a>
+    </nav>
+    <div class="mobile-menu-footer">
+      <a href="resume.html" class="btn btn-primary" style="width:100%;margin-bottom:10px;"><i class="fas fa-paper-plane"></i> Apply Now</a>
+      <a href="contact.html" class="btn btn-outline" style="width:100%;margin-bottom:20px;text-align:center;"><i class="fas fa-headset"></i> Enquire</a>
+      
+    </div>
+  </div>
 
 <section class="page-hero">
   <div class="container">
@@ -122,7 +150,7 @@
           <div style="font-size:0.8rem;color:rgba(255,255,255,0.5);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:20px">Company Highlights</div>
           <div class="highlight-item"><div class="highlight-dot">📅</div><div class="highlight-text"><strong>Founded in 2025</strong><span><span class="dynamic-company-age-short"></span> of excellence</span></div></div>
           <div class="highlight-item"><div class="highlight-dot">📍</div><div class="highlight-text"><strong><span data-config="state">Tamil Nadu</span>, <span data-config="country">India</span></strong><span>Serving students nationwide</span></div></div>
-          <div class="highlight-item"><div class="highlight-dot">🎓</div><div class="highlight-text"><strong><span data-metric="students">500+</span> Students Trained</strong><span>Across 6 courses</span></div></div>
+          <div class="highlight-item"><div class="highlight-dot">🎓</div><div class="highlight-text"><strong><span data-metric="students">500+</span> Students Trained</strong><span>Across professional programmes</span></div></div>
           <div class="highlight-item"><div class="highlight-dot">🏆</div><div class="highlight-text"><strong><span data-metric="placements">100+</span> Placements</strong><span><span data-metric="placementRate">90%+</span> placement rate</span></div></div>
           <div class="highlight-item"><div class="highlight-dot">💼</div><div class="highlight-text"><strong><span data-metric="projects">50+</span> Projects Delivered</strong><span>For clients across industries</span></div></div>
           <div class="highlight-item"><div class="highlight-dot">👥</div><div class="highlight-text"><strong><span data-metric="employees">20+</span> Expert Team Members</strong><span>Industry professionals</span></div></div>
@@ -135,22 +163,23 @@
 <!-- FOUNDER MESSAGE SECTION -->
 <section class="section section-gray" id="founder-section">
   <div class="container">
-    <div style="max-width:900px;margin:0 auto;background:white;border-radius:20px;box-shadow:0 8px 40px rgba(13,27,76,0.10);padding:48px;display:flex;gap:40px;align-items:flex-start;border:1px solid rgba(0,150,214,0.1);flex-wrap:wrap" data-animate>
-      <div style="flex-shrink:0">
-        <img src="https://res.cloudinary.com/dfetzuxxx/image/upload/v1787158725/Gemini_Generated_Image_4vgo624vgo624vgo_tvcdki.png"
+    <div class="founder-card" style="max-width:920px;margin:0 auto;background:white;border-radius:24px;box-shadow:0 10px 40px rgba(13,27,76,0.08);padding:44px;display:flex;gap:40px;align-items:center;border:1px solid rgba(0,150,214,0.12);" data-animate>
+      <div class="founder-image-wrap" style="flex-shrink:0;width:320px;height:320px;max-width:320px;max-height:320px;aspect-ratio:1/1;border-radius:20px;overflow:hidden;position:relative;box-shadow:0 12px 32px rgba(13,27,76,0.14);border:3px solid white;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;">
+        <img src="https://res.cloudinary.com/dfetzuxxx/image/upload/v1787559634/Gemini_Generated_Image_4vgo624vgo624vgo_tvcdki.png"
              alt="Padma Marimuthu, MBA - Founder &amp; CEO"
-             style="width:180px;height:220px;object-fit:cover;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.15);" loading="lazy">
+             class="founder-img"
+             style="width:100%;height:100%;max-width:320px;max-height:320px;aspect-ratio:1/1;object-fit:cover;object-position:center top;display:block;" loading="lazy">
       </div>
       <div style="flex:1;min-width:280px">
         <div style="font-size:0.75rem;font-weight:700;color:var(--tech-blue);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px">MESSAGE FROM FOUNDER</div>
-        <h2 style="font-size:1.5rem;font-weight:800;color:var(--navy);line-height:1.3;margin-bottom:20px;font-family:'Outfit',sans-serif">"Education is the most powerful tool for change."</h2>
+        <h2 style="font-size:1.6rem;font-weight:800;color:var(--navy);line-height:1.3;margin-bottom:20px;font-family:'Outfit',sans-serif">"Education is the most powerful tool for change."</h2>
         <p style="color:var(--gray-600);line-height:1.85;margin-bottom:14px;font-style:italic">Education is the most powerful weapon which you can use to change the world. At Aditya Skill Gate, we are committed to providing world-class education that not only teaches technical skills but also builds confidence and character.</p>
         <p style="color:var(--gray-600);line-height:1.85;margin-bottom:14px;font-style:italic">Our journey began with a simple belief: everyone deserves access to quality education regardless of their background. Today, we are proud to have helped thousands of students transform their careers and achieve their dreams.</p>
         <p style="color:var(--gray-600);line-height:1.85;margin-bottom:28px;font-style:italic">We don't just teach courses; we build careers, foster innovation, and create opportunities for a better future.</p>
         <div style="display:flex;align-items:center;gap:14px">
           <div style="width:40px;height:3px;background:var(--accent-green-dark);border-radius:2px"></div>
           <div>
-            <div style="font-weight:800;color:var(--navy);font-size:1rem;font-family:'Outfit',sans-serif">Padma Marimuthu, MBA</div>
+            <div style="font-weight:800;color:var(--navy);font-size:1.05rem;font-family:'Outfit',sans-serif">Padma Marimuthu, MBA</div>
             <div style="font-size:0.85rem;color:var(--gray-500);margin-top:2px">Founder &amp; CEO</div>
           </div>
         </div>
@@ -159,9 +188,10 @@
   </div>
 </section>
 
-<section class="section section-gray">
+<!-- OUR VALUES SECTION -->
+<section class="section section-light">
   <div class="container">
-    <div class="section-header" data-animate>
+    <div class="section-header text-center" data-animate style="text-align:center;margin-bottom:48px;">
       <div class="section-badge"><i class="fas fa-heart"></i> Our Values</div>
       <h2 class="section-title">What We <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Stand For</span></h2>
     </div>
@@ -176,24 +206,25 @@
   </div>
 </section>
 
-<section class="section section-light">
+<!-- JOURNEY & AWARDS SECTION -->
+<section class="section section-gray">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start">
-      <!-- <div data-animate="fade-left">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:60px;align-items:start">
+      <div data-animate="fade-left">
         <div class="section-badge"><i class="fas fa-history"></i> Timeline</div>
         <h2 class="section-title" style="margin-bottom:40px">Our <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Journey</span></h2>
         <div class="timeline" id="about-timeline">
-          <!-- Dynamic Timeline will be injected here
+          <!-- Dynamic Timeline will be rendered here -->
         </div>
-      </div> -->
+      </div>
       <div data-animate="fade-right">
         <div class="section-badge"><i class="fas fa-trophy"></i> Awards & Recognition</div>
         <h2 class="section-title" style="margin-bottom:32px">Why Students <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Trust Us</span></h2>
         <div style="display:flex;flex-direction:column;gap:16px">
-          <div style="padding:20px;background:var(--light-gray);border-radius:var(--border-radius);display:flex;gap:14px;align-items:center"><div style="font-size:1.8rem">🏅</div><div><strong style="color:var(--navy);display:block">Best IT Training Institute</strong><span style="color:var(--gray-500);font-size:0.85rem">Recognized by students and industry partners</span></div></div>
-          <div style="padding:20px;background:var(--light-gray);border-radius:var(--border-radius);display:flex;gap:14px;align-items:center"><div style="font-size:1.8rem">⭐</div><div><strong style="color:var(--navy);display:block"><span data-metric="rating">4.9/5</span> Student Rating</strong><span style="color:var(--gray-500);font-size:0.85rem">Based on <span data-metric="students">500+</span> student reviews</span></div></div>
-          <div style="padding:20px;background:var(--light-gray);border-radius:var(--border-radius);display:flex;gap:14px;align-items:center"><div style="font-size:1.8rem">🤝</div><div><strong style="color:var(--navy);display:block"><span data-metric="partners">50+</span> Hiring Partner Companies</strong><span style="color:var(--gray-500);font-size:0.85rem">TCS, Infosys, Wipro, Zoho, HCL & more</span></div></div>
-          <div style="padding:20px;background:var(--light-gray);border-radius:var(--border-radius);display:flex;gap:14px;align-items:center"><div style="font-size:1.8rem">💼</div><div><strong style="color:var(--navy);display:block"><span data-metric="highestPackage">₹6 LPA</span> Highest Package</strong><span style="color:var(--gray-500);font-size:0.85rem">Among our recent graduates</span></div></div>
+          <div style="padding:20px;background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius);display:flex;gap:14px;align-items:center"><div style="font-size:1.8rem">🏅</div><div><strong style="color:var(--navy);display:block">Best IT Training Institute</strong><span style="color:var(--gray-500);font-size:0.85rem">Recognized by students and industry partners</span></div></div>
+          <div style="padding:20px;background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius);display:flex;gap:14px;align-items:center"><div style="font-size:1.8rem">⭐</div><div><strong style="color:var(--navy);display:block"><span data-metric="rating">4.9/5</span> Student Rating</strong><span style="color:var(--gray-500);font-size:0.85rem">Based on <span data-metric="students">500+</span> student reviews</span></div></div>
+          <div style="padding:20px;background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius);display:flex;gap:14px;align-items:center"><div style="font-size:1.8rem">🤝</div><div><strong style="color:var(--navy);display:block"><span data-metric="partners">50+</span> Hiring Partner Companies</strong><span style="color:var(--gray-500);font-size:0.85rem">TCS, Infosys, Wipro, Zoho, HCL & more</span></div></div>
+          <div style="padding:20px;background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius);display:flex;gap:14px;align-items:center"><div style="font-size:1.8rem">💼</div><div><strong style="color:var(--navy);display:block"><span data-metric="highestPackage">₹6 LPA</span> Highest Package</strong><span style="color:var(--gray-500);font-size:0.85rem">Among our recent graduates</span></div></div>
         </div>
         <div style="margin-top:32px">
           <a href="placements.html" class="btn btn-primary"><i class="fas fa-trophy"></i> View Placements</a>
@@ -284,40 +315,28 @@ document.addEventListener('DOMContentLoaded', async () => {
     const container = document.getElementById('about-timeline');
     if (!container) return;
     
-    // Use API data or fallback to demo data if API is offline or sheet is empty
     let timelineData = (res && res.data && res.data.length > 0) ? res.data : [
       { year: '2025', title: 'Founded', description: 'Aditya Skill Gate IT Solution was established in Tamil Nadu with a vision to bridge the IT skill gap.' },
       { year: '2025', title: 'First 50 Placements', description: 'Achieved our first major milestone by placing 50 students in reputed IT companies across India.' },
-      { year: '2025', title: 'Expanded Courses', description: 'Launched 4 new courses including AI/ML, Cloud Computing, and Flutter Development.' },
-      { year: '2026', title: '100+ Placements Milestone', description: 'Crossed 100 successful placements with students at TCS, Infosys, Wipro, Zoho, and HCL.' },
-      { year: '2026', title: '500+ Students Strong', description: 'Over 500+ students trained, 20+ team members, 50+ projects completed. Growing stronger every day.' },
-      { year: 'Future', title: 'National Expansion', description: 'Expanding to more cities and launching online programs to serve students across India.', icon: 'fas fa-rocket' }
+      { year: '2025', title: 'Expanded Courses', description: 'Launched new courses including AI/ML, Cloud Computing, and Flutter Development.' },
+      { year: '2026', title: '100+ Placements Milestone', description: 'Crossed 100 successful placements with students placed in top tech MNCs.' },
+      { year: '2026', title: '500+ Students Strong', description: 'Growing rapidly with comprehensive career acceleration and placement training.' },
+      { year: 'Future', title: 'National Expansion', description: 'Expanding to more centers and launching advanced enterprise certifications.', icon: 'fas fa-rocket' }
     ];
     
-    container.innerHTML = timelineData.map((m, i) => \`
-      <div class="timeline-item" data-animate data-delay="\${(i%5)*100}">
-        <div class="timeline-dot" style="\${m.icon ? 'background:none' : (m.year==='Future'?'background:var(--accent-green)':'')}">\${m.icon ? \`<i class="\${m.icon}" style="color:var(--accent-green-dark);font-size:1.5rem;background:#fff;padding:8px;border-radius:50%;box-shadow:0 4px 10px rgba(0,0,0,0.1)"></i>\` : ''}</div>
-        <div class="timeline-year">\${m.year || (m.date ? new Date(m.date).getFullYear() : '2025')}</div>
-        <div class="timeline-title">\${m.title}</div>
-        <div class="timeline-desc">\${m.description}</div>
-      </div>
-    \`).join('');
+    container.innerHTML = timelineData.map((m, i) => {
+      const iconHtml = m.icon ? '<i class="' + m.icon + '" style="color:var(--accent-green-dark);font-size:1.5rem;background:#fff;padding:8px;border-radius:50%;box-shadow:0 4px 10px rgba(0,0,0,0.1)"></i>' : '';
+      const dotStyle = m.icon ? 'background:none' : (m.year === 'Future' ? 'background:var(--accent-green)' : '');
+      const yearText = m.year || (m.date ? new Date(m.date).getFullYear() : '2025');
+      return '<div class="timeline-item" data-animate data-delay="' + ((i % 5) * 100) + '">' +
+        '<div class="timeline-dot" style="' + dotStyle + '">' + iconHtml + '</div>' +
+        '<div class="timeline-year">' + yearText + '</div>' +
+        '<div class="timeline-title">' + m.title + '</div>' +
+        '<div class="timeline-desc">' + m.description + '</div>' +
+      '</div>';
+    }).join('');
     
-    // Re-trigger scroll animations for newly added elements
     if (window.observeAnimations) window.observeAnimations();
-    else {
-      document.querySelectorAll('[data-animate]').forEach(el => {
-        const obs = new IntersectionObserver(e => {
-          e.forEach(entry => {
-            if(entry.isIntersecting) {
-              entry.target.classList.add('animated');
-              obs.unobserve(entry.target);
-            }
-          });
-        }, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
-        obs.observe(el);
-      });
-    }
   } catch (e) {
     console.error('Failed to load timeline', e);
   }

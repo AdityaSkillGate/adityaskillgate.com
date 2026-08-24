@@ -5,29 +5,41 @@
   <title>Manage Jobs | Admin Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/admin.css?v=6">
 </head>
 <body>
 <div class="admin-sidebar" id="admin-sidebar">
-  <div class="sidebar-header"><img src="../assets/logos/logo-icon.png" alt="Logo"><span>ASG Admin</span></div>
+  <div class="sidebar-brand"><img src="../assets/logos/logo-icon.png" alt="Aditya Skill Gate IT Solution Logo" onerror="this.style.display='none'"><div><div class="sidebar-brand-name">ASG Admin</div><div class="sidebar-brand-sub">Control Panel</div></div><button class="sidebar-collapse-btn" id="sidebar-toggle"><i class="fas fa-bars"></i></button></div>
   <nav class="sidebar-nav">
     <div class="sidebar-section-title">Main</div>
-    <a href="dashboard.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-chart-pie"></i></div><span>Dashboard</span></a>
+    <a href="dashboard.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-chart-pie"></i></div><span class="sidebar-link-text">Dashboard</span></a>
+    <a href="reports.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-file-pdf"></i></div><span class="sidebar-link-text">Report Center</span></a>
     <div class="sidebar-section-title">Content</div>
-    <a href="services.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-cog"></i></div><span>Services</span></a>
-    <a href="courses.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-graduation-cap"></i></div><span>Courses</span></a>
-    <a href="jobs.html" class="sidebar-link active"><div class="sidebar-icon"><i class="fas fa-briefcase"></i></div><span>Job Openings</span></a>
-    <a href="employees.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-users"></i></div><span>Team / Employees</span></a>
-    <a href="projects.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-laptop-code"></i></div><span>Projects</span></a>
-    <a href="placements.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-trophy"></i></div><span>Placements</span></a>
-    <a href="testimonials.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-star"></i></div><span>Testimonials</span></a>
-    <a href="settings.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-cog"></i></div><span>Settings</span></a>
+    <a href="services.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-cog"></i></div><span class="sidebar-link-text">Services</span></a>
+    <a href="courses.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-graduation-cap"></i></div><span class="sidebar-link-text">Courses</span></a>
+    <a href="abroad.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-plane-departure"></i></div><span class="sidebar-link-text">Study Abroad</span></a>
+    <a href="abroad-jobs.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-briefcase"></i></div><span class="sidebar-link-text">Abroad Jobs</span></a>
+    <a href="partners.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-handshake"></i></div><span class="sidebar-link-text">Partners</span></a>
+    <a href="jobs.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-briefcase"></i></div><span class="sidebar-link-text">Job Openings</span></a>
+    <a href="employees.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-users"></i></div><span class="sidebar-link-text">Team / Employees</span></a>
+    <a href="projects.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-laptop-code"></i></div><span class="sidebar-link-text">Projects</span></a>
+    <a href="placements.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-trophy"></i></div><span class="sidebar-link-text">Placements</span></a>
+    <a href="testimonials.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-star"></i></div><span class="sidebar-link-text">Testimonials</span></a>
+    <a href="timeline.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-history"></i></div><span class="sidebar-link-text">Company Journey</span></a>
+    <a href="blog.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-blog"></i></div><span class="sidebar-link-text">Blog Posts</span></a>
+    <div class="sidebar-section-title">Submissions</div>
+    <a href="crm.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-users-cog"></i></div><span class="sidebar-link-text">CRM / Leads</span></a>
+    <a href="resumes.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-file-pdf"></i></div><span class="sidebar-link-text">Resumes</span></a>
+    <a href="contacts.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-envelope"></i></div><span class="sidebar-link-text">Contact Forms</span></a>
+    <a href="chatbot.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-robot"></i></div><span class="sidebar-link-text">Chatbot KB</span></a>
+    <div class="sidebar-section-title">Settings</div>
+    <a href="settings.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-cog"></i></div><span class="sidebar-link-text">Settings</span></a>
   </nav>
 </div>
 <div class="admin-main" id="admin-main">
   <div class="admin-topbar">
     <div class="topbar-left"><button class="topbar-toggle" id="topbar-toggle"><i class="fas fa-bars"></i></button></div>
-    <div class="topbar-right"><button class="theme-btn" id="admin-theme-btn"><i class="fas fa-moon"></i></button><a href="../index.html" target="_blank" class="btn-admin-sm"><i class="fas fa-external-link-alt"></i> View Site</a></div>
+    <div class="topbar-right"><a href="../index.html" target="_blank" class="btn-admin-sm"><i class="fas fa-external-link-alt"></i> View Site</a></div>
   </div>
   <div class="admin-content">
     <div class="admin-page-header">
@@ -84,7 +96,7 @@
 </div>
 <div class="modal-overlay" id="delete-modal"><div class="modal" style="max-width:400px;text-align:center"><div class="modal-body" style="padding:40px"><div style="font-size:3rem;margin-bottom:16px">🗑️</div><h3 style="margin-bottom:10px;color:var(--a-navy)">Close Job?</h3><p style="color:var(--a-gray4);margin-bottom:24px">This will hide it from the active jobs board.</p><div style="display:flex;gap:12px;justify-content:center"><button class="btn-admin-danger" id="confirm-delete-btn">Close Job</button><button class="btn-admin-outline" onclick="closeAdminModal('delete-modal')">Cancel</button></div></div></div></div>
 <div id="toast-container"></div>
-<script src="../js/api.js?v=4"></script><script src="../js/admin.js"></script>
+<script src="../js/api.js?v=6"></script><script src="../js/admin.js?v=6"></script>
 <script>
 let allJobs=[];let deleteId=null;
 
@@ -99,21 +111,21 @@ function renderJobs(jobs) {
       if(isExpired) { statClass = 'status-draft'; j.status = 'Expired'; }
     }
     
-    return \`<tr>
+    return `<tr>
       <td>
-        <div style="font-weight:600;color:var(--a-navy)">\${j.title}</div>
-        <div style="font-size:0.8rem;color:var(--a-gray4)">\${j.type||'-'} • Exp: \${j.experience||'-'}</div>
+        <div style="font-weight:600;color:var(--a-navy)">${j.title}</div>
+        <div style="font-size:0.8rem;color:var(--a-gray4)">${j.type||'-'} • Exp: ${j.experience||'-'}</div>
       </td>
-      <td><span style="padding:2px 8px;background:var(--a-bg);border-radius:4px;font-size:0.85rem">\${j.category || 'Local'}</span></td>
-      <td>\${j.company||'-'}<br><span style="font-size:0.8rem;color:var(--a-gray4)">\${j.location||'-'}, \${j.country||'India'}</span></td>
-      <td>\${j.deadline ? new Date(j.deadline).toLocaleDateString() : '-'} \${isExpired ? '<span style="color:red;font-size:0.8rem">(Passed)</span>' : ''}</td>
-      <td><span class="status-badge \${statClass}">\${j.status || 'Open'}</span></td>
-      <td>\${(j.featured==='true' || j.featured===true) ? '<i class="fas fa-star" style="color:#f59e0b"></i>' : '-'}</td>
+      <td><span style="padding:2px 8px;background:var(--a-bg);border-radius:4px;font-size:0.85rem">${j.category || 'Local'}</span></td>
+      <td>${j.company||'-'}<br><span style="font-size:0.8rem;color:var(--a-gray4)">${j.location||'-'}, ${j.country||'India'}</span></td>
+      <td>${j.deadline ? new Date(j.deadline).toLocaleDateString() : '-'} ${isExpired ? '<span style="color:red;font-size:0.8rem">(Passed)</span>' : ''}</td>
+      <td><span class="status-badge ${statClass}">${j.status || 'Open'}</span></td>
+      <td>${(j.featured==='true' || j.featured===true) ? '<i class="fas fa-star" style="color:#f59e0b"></i>' : '-'}</td>
       <td>
-        <button class="action-btn" onclick="editJob('\${j.id}')" title="Edit"><i class="fas fa-pen"></i></button>
-        <button class="action-btn" style="color:var(--a-danger)" onclick="confirmDelete('\${j.id}')" title="Close"><i class="fas fa-times-circle"></i></button>
+        <button class="action-btn" onclick="editJob('${j.id}')" title="Edit"><i class="fas fa-pen"></i></button>
+        <button class="action-btn" style="color:var(--a-danger)" onclick="confirmDelete('${j.id}')" title="Close"><i class="fas fa-times-circle"></i></button>
       </td>
-    </tr>\`;
+    </tr>`;
   }).join('');
 }
 

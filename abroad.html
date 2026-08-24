@@ -64,41 +64,63 @@
     }]
   }
   </script>
-</head>
+  <link rel="stylesheet" href="css/motion.css">
+
+  <link rel="alternate" hreflang="en" href="https://adityaskillgate.com/abroad.html">
+  <link rel="alternate" hreflang="zh" href="https://adityaskillgate.com/zh/abroad.html">
+  <link rel="alternate" hreflang="ms" href="https://adityaskillgate.com/ms/abroad.html">
+  <link rel="alternate" hreflang="ta" href="https://adityaskillgate.com/ta/abroad.html">
+  <link rel="alternate" hreflang="x-default" href="https://adityaskillgate.com/abroad.html">
+  </head>
 <body>
 <div id="page-loader"><img src="assets/logos/logo-icon.png" class="loader-logo" alt="Loading"><div class="loader-bar"><div class="loader-progress"></div></div></div>
 
-<nav class="navbar" id="navbar">
-  <div class="container">
-    <div class="navbar-inner">
-      <a href="index.html" class="navbar-logo">
-        <img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate">
-        <div class="navbar-logo-text" style="text-align:center;">ADITYA SKILL GATE<br><span>IT SOLUTION</span></center></div>
-      </a>
-      <ul class="navbar-nav">
-        <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="about.html" class="nav-link">About Us</a></li>
-        <li class="nav-item-dropdown">
-          <a href="services.html" class="nav-link">Services <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
-          <div class="dropdown-menu">
-            <a href="services.html" class="dropdown-item">Web & App Development</a>
-            <a href="services.html" class="dropdown-item">AI & Cloud Solutions</a>
-            <a href="services.html" class="dropdown-item">Digital Marketing</a>
-          </div>
-        </li>
-        <li><a href="courses.html" class="nav-link">Courses</a></li>
-        <li><a href="placements.html" class="nav-link">Placements</a></li>
-        <li><a href="abroad.html" class="nav-link active">Study Abroad</a></li>
-      </ul>
-      <div class="navbar-actions">
-        <a href="contact.html" class="btn btn-primary btn-sm">Get in Touch</a>
-        <button class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></button>
-        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="index.html" class="navbar-logo" aria-label="Aditya Skill Gate Home">
+          <img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate Logo">
+          <div class="navbar-logo-text" style="text-align: center;">ADITYA SKILL GATE<br><span>IT SOLUTION</span></div>
+        </a>
+        <ul class="navbar-nav" role="menubar">
+          <li role="none"><a href="index.html" class="nav-link" role="menuitem" data-i18n="nav.home">Home</a></li>
+          <li role="none"><a href="about.html" class="nav-link" role="menuitem" data-i18n="nav.about">About</a></li>
+          <li role="none"><a href="services.html" class="nav-link" role="menuitem" data-i18n="nav.services">Services</a></li>
+          <li role="none"><a href="courses.html" class="nav-link" role="menuitem">Courses</a></li>
+          <li role="none"><a href="jobs.html" class="nav-link" role="menuitem">Careers</a></li>
+          <li role="none"><a href="projects.html" class="nav-link" role="menuitem">Projects</a></li>
+          <li role="none"><a href="placements.html" class="nav-link" role="menuitem">Placements</a></li>
+          <li role="none"><a href="contact.html" class="nav-link" role="menuitem" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+        <div class="navbar-actions">
+          
+          <a href="contact.html" class="btn btn-outline btn-sm hidden-mobile">Enquire</a>
+          <a href="resume.html" class="btn btn-primary btn-sm hidden-mobile"><i class="fas fa-paper-plane"></i> Apply Now</a>
+          <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
       </div>
     </div>
-</nav>
+  </nav>
 
-<div class="mobile-menu" id="mobile-menu"><div class="mobile-menu-header"><div class="navbar-logo"><img src="assets/logos/logo-icon.png" alt="Logo"><div class="navbar-logo-text" style="text-align: center;">ADITYA<br><span>SKILL GATE IT</span></div></div><button class="mobile-close" id="mobile-close"><i class="fas fa-times"></i></button></div><nav class="mobile-nav-links"><a href="index.html" class="mobile-nav-link">🏠 Home</a><a href="about.html" class="mobile-nav-link">🏢 About Us</a><a href="services.html" class="mobile-nav-link">⚙️ Services</a><a href="courses.html" class="mobile-nav-link">🎓 Courses</a><a href="abroad.html" class="mobile-nav-link active">✈️ Study Abroad</a><a href="jobs.html" class="mobile-nav-link">💼 Careers</a><a href="projects.html" class="mobile-nav-link">🎨 Projects</a><a href="placements.html" class="mobile-nav-link">🎯 Placements</a><a href="contact.html" class="mobile-nav-link">📞 Contact Us</a></nav><div class="mobile-menu-footer"><a href="contact.html" class="btn btn-primary">📩 Get a Quote</a></div></div>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <nav class="mobile-nav" role="menu">
+      <a href="index.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-home" style="width:20px;"></i> Home</a>
+      <a href="about.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-info-circle" style="width:20px;"></i> About Us</a>
+      <a href="services.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-concierge-bell" style="width:20px;"></i> Services</a>
+      <a href="courses.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-laptop-code" style="width:20px;"></i> Courses</a>
+      <a href="jobs.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-briefcase" style="width:20px;"></i> Careers</a>
+      <a href="projects.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-project-diagram" style="width:20px;"></i> Projects</a>
+      <a href="placements.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-user-graduate" style="width:20px;"></i> Placements</a>
+      <a href="contact.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-envelope" style="width:20px;"></i> Contact Us</a>
+    </nav>
+    <div class="mobile-menu-footer">
+      <a href="resume.html" class="btn btn-primary" style="width:100%;margin-bottom:10px;"><i class="fas fa-paper-plane"></i> Apply Now</a>
+      <a href="contact.html" class="btn btn-outline" style="width:100%;margin-bottom:20px;text-align:center;"><i class="fas fa-headset"></i> Enquire</a>
+      
+    </div>
+  </div>
 
 <section class="abroad-hero">
   <div class="container">
@@ -186,12 +208,12 @@
       <div class="footer-col">
         <h4>Quick Links</h4>
         <div class="footer-links">
-          <a href="index.html">Home</a>
+          <a href="index.html" data-i18n="nav.home">Home</a>
           <a href="about.html">About Us</a>
-          <a href="services.html">Services</a>
+          <a href="services.html" data-i18n="nav.services">Services</a>
           <a href="courses.html">Courses</a>
           <a href="jobs.html">Careers</a>
-          <a href="contact.html">Contact</a>
+          <a href="contact.html" data-i18n="nav.contact">Contact</a>
         </div>
       </div>
       <div class="footer-col">
@@ -220,6 +242,13 @@
     </div>
   </div>
 </footer>
+
+
+<div class="mobile-sticky-cta" id="mobileStickyCta">
+  <a href="tel:+916382604808" class="sticky-cta-btn bg-navy text-white"><i class="fas fa-phone-alt"></i> Call</a>
+  <a href="https://wa.me/916382604808?text=Hi!%20I'm%20interested%20in%20Aditya%20Skill%20Gate%20courses%20and%20services" target="_blank" class="sticky-cta-btn bg-green text-white"><i class="fab fa-whatsapp"></i> Chat</a>
+  <a href="resume.html" class="sticky-cta-btn bg-blue text-white"><i class="fas fa-paper-plane"></i> Apply</a>
+</div>
 
 <div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808?text=Hi!%20I'm%20interested%20in%20Study%20Abroad" target="_blank" class="whatsapp-option">✈️ Study Abroad</a><a href="https://wa.me/916382604808" data-config="whatsapp" target="_blank" class="whatsapp-option">💬 Quick Chat</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
 <div id="back-to-top"><i class="fas fa-arrow-up"></i></div><div id="toast-container"></div>
@@ -286,5 +315,7 @@
 
   loadUniversities();
   </script>
+  <script src="js/motion.js"></script>
+  <script src="js/i18n.js"></script>
 </body>
 </html>

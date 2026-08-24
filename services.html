@@ -9,26 +9,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://script.google.com">
   <link rel="icon" href="assets/logos/favicon.ico" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/responsive.css">
   <style>
     .services-detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
-    .service-detail-card{padding:40px;background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-xl);transition:var(--transition)}
+    .service-detail-card{padding:36px 30px;background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-xl);transition:var(--transition);display:flex;flex-direction:column}
     .service-detail-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-xl);border-color:transparent}
-    .service-detail-icon{width:72px;height:72px;border-radius:var(--border-radius);display:flex;align-items:center;justify-content:center;font-size:2.2rem;margin-bottom:24px}
+    .service-detail-icon{width:68px;height:68px;border-radius:var(--border-radius);display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:20px}
     .service-sub-list{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:8px}
     .service-sub-list li{display:flex;gap:10px;font-size:0.875rem;color:var(--gray-600);align-items:center}
     .service-sub-list li::before{content:'→';color:var(--tech-blue);font-weight:700;flex-shrink:0}
-    .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+    .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative}
     .process-steps::before{content:'';position:absolute;top:36px;left:12%;right:12%;height:2px;background:var(--gradient-accent);z-index:0}
-    .process-step{text-align:center;padding:20px;position:relative;z-index:1}
-    .process-step-num{width:72px;height:72px;border-radius:50%;background:var(--gradient-primary);color:white;font-size:1.6rem;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:4px solid white;box-shadow:var(--shadow-md)}
+    .process-step{text-align:center;padding:20px;position:relative;z-index:1;background:white;border-radius:16px;border:1px solid var(--gray-200)}
+    .process-step-num{width:64px;height:64px;border-radius:50%;background:var(--gradient-primary);color:white;font-size:1.5rem;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:4px solid white;box-shadow:var(--shadow-md)}
     .tech-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
     .tech-chip{padding:10px 20px;background:white;border:1px solid var(--gray-200);border-radius:100px;font-size:0.875rem;font-weight:600;color:var(--navy);transition:var(--transition)}
     .tech-chip:hover{background:var(--gradient-primary);color:white;border-color:transparent;transform:translateY(-2px)}
-    @media(max-width:768px){.services-detail-grid{grid-template-columns:1fr}.process-steps{grid-template-columns:repeat(2,1fr)}.process-steps::before{display:none}}
+    @media(max-width:768px){.services-detail-grid{grid-template-columns:1fr}.process-steps{grid-template-columns:1fr}.process-steps::before{display:none}}
   </style>
 
   <link rel="canonical" href="https://adityaskillgate.com/services.html">
@@ -52,34 +51,61 @@
     }]
   }
   </script>
+  <link rel="stylesheet" href="css/motion.css">
+
+  <link rel="alternate" hreflang="en" href="https://adityaskillgate.com/services.html">
+  <link rel="alternate" hreflang="zh" href="https://adityaskillgate.com/zh/services.html">
+  <link rel="alternate" hreflang="ms" href="https://adityaskillgate.com/ms/services.html">
+  <link rel="alternate" hreflang="ta" href="https://adityaskillgate.com/ta/services.html">
+  <link rel="alternate" hreflang="x-default" href="https://adityaskillgate.com/services.html">
 </head>
 <body>
 <div id="page-loader"><img src="assets/logos/logo-icon.png" class="loader-logo" alt="Aditya Skill Gate IT Solution Logo"><div class="loader-bar"><div class="loader-progress"></div></div></div>
-<nav class="navbar" id="navbar"><div class="container"><div class="navbar-inner">
-  <a href="index.html" class="navbar-logo"><img src="assets/logos/logo-icon.png" alt="ASG">
-    <div class="navbar-logo-text" style="text-align: center;">ADITYA SKILL GATE<br><span>IT SOLUTION</span></div></a>
-        <ul class="navbar-nav">
-        <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="about.html" class="nav-link">About</a></li>
-        <li><a href="services.html" class="nav-link active">Services</a></li>
-        <li><a href="courses.html" class="nav-link">Courses</a></li>
-        <li><a href="jobs.html" class="nav-link">Careers</a></li>
-        <li><a href="projects.html" class="nav-link">Projects</a></li>
-        <li><a href="placements.html" class="nav-link">Placements</a></li>
-        <li><a href="contact.html" class="nav-link">Contact</a></li>
-      </ul>
-  <div class="navbar-actions"><button class="theme-toggle"><i class="fas fa-moon"></i></button><a href="resume.html" class="btn-nav-cta">Upload Resume</a><button class="hamburger" id="hamburger"><span></span><span></span><span></span></button></div>
-</div></div></nav>
-<div class="mobile-menu" id="mobile-menu" style="display: none;">  <nav class="mobile-nav">
-    <a href="index.html" class="mobile-nav-link active">🏠 Home</a>
-    <a href="about.html" class="mobile-nav-link">ℹ️ About Us</a>
-    <a href="services.html" class="mobile-nav-link">⚙️ Services</a>
-    <a href="courses.html" class="mobile-nav-link">🎓 Courses</a>
-    <a href="jobs.html" class="mobile-nav-link">💼 Careers</a>
-    <a href="projects.html" class="mobile-nav-link">🎨 Projects</a>
-    <a href="placements.html" class="mobile-nav-link">🎯 Placements</a>
-    <a href="contact.html" class="mobile-nav-link">📞 Contact Us</a>
-  </nav><div class="mobile-menu-footer"><a href="contact.html" class="btn btn-primary">📩 Get a Quote</a></div></div>
+
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="index.html" class="navbar-logo" aria-label="Aditya Skill Gate Home">
+          <img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate Logo">
+          <div class="navbar-logo-text" style="text-align: center;">ADITYA SKILL GATE<br><span>IT SOLUTION</span></div>
+        </a>
+        <ul class="navbar-nav" role="menubar">
+          <li role="none"><a href="index.html" class="nav-link" role="menuitem" data-i18n="nav.home">Home</a></li>
+          <li role="none"><a href="about.html" class="nav-link" role="menuitem" data-i18n="nav.about">About</a></li>
+          <li role="none"><a href="services.html" class="nav-link active" role="menuitem" data-i18n="nav.services">Services</a></li>
+          <li role="none"><a href="courses.html" class="nav-link" role="menuitem">Courses</a></li>
+          <li role="none"><a href="jobs.html" class="nav-link" role="menuitem">Careers</a></li>
+          <li role="none"><a href="projects.html" class="nav-link" role="menuitem">Projects</a></li>
+          <li role="none"><a href="placements.html" class="nav-link" role="menuitem">Placements</a></li>
+          <li role="none"><a href="contact.html" class="nav-link" role="menuitem" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+        <div class="navbar-actions">
+          <a href="contact.html" class="btn btn-outline btn-sm hidden-mobile">Enquire</a>
+          <a href="resume.html" class="btn btn-primary btn-sm hidden-mobile"><i class="fas fa-paper-plane"></i> Apply Now</a>
+          <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <nav class="mobile-nav" role="menu">
+      <a href="index.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-home"></i> Home</a>
+      <a href="about.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-info-circle"></i> About Us</a>
+      <a href="services.html" class="mobile-nav-link active" role="menuitem"><i class="fas fa-concierge-bell"></i> Services</a>
+      <a href="courses.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-laptop-code"></i> Courses</a>
+      <a href="jobs.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-briefcase"></i> Careers</a>
+      <a href="projects.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-project-diagram"></i> Projects</a>
+      <a href="placements.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-user-graduate"></i> Placements</a>
+      <a href="contact.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-envelope"></i> Contact Us</a>
+    </nav>
+    <div class="mobile-menu-footer">
+      <a href="resume.html" class="btn btn-primary" style="width:100%;margin-bottom:10px;"><i class="fas fa-paper-plane"></i> Apply Now</a>
+      <a href="contact.html" class="btn btn-outline" style="width:100%;margin-bottom:20px;text-align:center;"><i class="fas fa-headset"></i> Enquire</a>
+      
+    </div>
+  </div>
 
 <section class="page-hero">
   <div class="container">
@@ -93,7 +119,7 @@
   <div class="container">
     <div class="section-header" data-animate><h2 class="section-title">What We <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Offer</span></h2><p class="section-subtitle">Comprehensive IT solutions tailored to your business needs, delivered by experienced professionals.</p></div>
     <div class="services-detail-grid" id="services-page-grid">
-      <!-- Loaded by JS -->
+      <!-- Loaded dynamically via API -->
     </div>
   </div>
 </section>
@@ -140,7 +166,7 @@
 <!-- Quote Form -->
 <section class="section section-light">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
+    <div class="quote-grid">
       <div data-animate>
         <div class="section-badge"><i class="fas fa-paper-plane"></i> Get Started</div>
         <h2 class="section-title" style="margin-bottom:16px">Request a <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Free Quote</span></h2>
@@ -151,7 +177,7 @@
           <div style="display:flex;gap:14px;align-items:center"><div style="width:42px;height:42px;background:rgba(13,27,76,0.08);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0">🤝</div><div><strong style="color:var(--navy)">Free Consultation</strong><p style="font-size:0.85rem;color:var(--gray-500);margin:0">First consultation call is completely free.</p></div></div>
         </div>
       </div>
-      <div style="background:white;border:1px solid var(--gray-200);border-radius:24px;padding:40px" data-animate>
+      <div style="background:white;border:1px solid var(--gray-200);border-radius:24px;padding:32px" data-animate>
         <form id="quote-form">
           <div class="form-row">
             <div class="form-group"><label class="form-label">Name *</label><input type="text" class="form-control" name="name" placeholder="Your name" required><span class="form-error"></span></div>
@@ -197,12 +223,12 @@
       <div class="footer-col">
         <h4>Quick Links</h4>
         <div class="footer-links">
-          <a href="index.html">Home</a>
+          <a href="index.html" data-i18n="nav.home">Home</a>
           <a href="about.html">About Us</a>
-          <a href="services.html">Services</a>
+          <a href="services.html" data-i18n="nav.services">Services</a>
           <a href="courses.html">Courses</a>
           <a href="jobs.html">Careers</a>
-          <a href="contact.html">Contact</a>
+          <a href="contact.html" data-i18n="nav.contact">Contact</a>
         </div>
       </div>
       <div class="footer-col">
@@ -231,7 +257,15 @@
     </div>
   </div>
 </footer>
+
+<div class="mobile-sticky-cta" id="mobileStickyCta">
+  <a href="tel:+916382604808" class="sticky-cta-btn bg-navy text-white"><i class="fas fa-phone-alt"></i> Call</a>
+  <a href="https://wa.me/916382604808?text=Hi!%20I'm%20interested%20in%20Aditya%20Skill%20Gate%20courses%20and%20services" target="_blank" class="sticky-cta-btn bg-green text-white"><i class="fab fa-whatsapp"></i> Chat</a>
+  <a href="resume.html" class="sticky-cta-btn bg-blue text-white"><i class="fas fa-paper-plane"></i> Apply</a>
+</div>
+
 <div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808?text=Hi!%20I%20need%20IT%20services" target="_blank" class="whatsapp-option">🛠️ IT Services</a><a href="https://wa.me/916382604808" data-config="whatsapp" target="_blank" class="whatsapp-option">💬 Quick Chat</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
+<div class="chatbot-widget"><div class="chatbot-window" id="chatbot-window"><div class="chatbot-header"><div class="chatbot-avatar">🤖</div><div class="chatbot-info"><h4>ASG Assistant</h4><span>Online</span></div></div><div class="chatbot-messages" id="chat-messages"><div class="chat-msg bot">Hi! Ask me about our IT services! 😊</div></div><div class="chatbot-suggestions"><span class="chat-suggestion">Web Dev</span><span class="chat-suggestion">Mobile App</span><span class="chat-suggestion">Pricing</span></div><div class="chatbot-input"><input type="text" placeholder="Ask..." id="chat-input"><button class="chatbot-send" id="chat-send"><i class="fas fa-paper-plane"></i></button></div></div><div class="chatbot-toggle" id="chatbot-toggle"><i class="fas fa-robot"></i></div></div>
 <div id="back-to-top"><i class="fas fa-arrow-up"></i></div><div id="toast-container"></div>
 <script src="js/api.js?v=4"></script><script src="js/main.js"></script>
 <script>
@@ -242,18 +276,16 @@
   
   if(container && services && categories) {
     container.innerHTML = '';
-    container.style.display = 'block'; // Remove grid from container, apply it inside category blocks
+    container.style.display = 'block';
     
     // Group services
     const grouped = {};
     categories.forEach(c => grouped[c.name] = []);
     
     services.forEach(s => {
-      // If service category exists
       if (s.category && grouped[s.category]) {
          grouped[s.category].push(s);
       } else {
-         // Fallback
          if (!grouped['Other']) grouped['Other'] = [];
          grouped['Other'].push(s);
       }
@@ -263,33 +295,29 @@
     for (const [catName, catServices] of Object.entries(grouped)) {
       if (catServices.length === 0) continue;
       
-      html += `<div style="margin-bottom: 50px;">
-        <h3 style="color:var(--gray-900); font-size:1.8rem; margin-bottom:20px; border-bottom:2px solid var(--gray-200); padding-bottom:10px;">${catName}</h3>
-        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:30px;">
-          ${catServices.map((s,i) => `
+      html += '<div style="margin-bottom: 50px;">' +
+        '<h3 style="color:var(--gray-900); font-size:1.8rem; margin-bottom:20px; border-bottom:2px solid var(--gray-200); padding-bottom:10px;">' + catName + '</h3>' +
+        '<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:30px;">' +
+          catServices.map((s,i) => `
             <div class="service-detail-card" data-animate data-delay="${(i%3+1)*100}">
               <div class="service-detail-icon" style="background:rgba(0,150,214,0.1); color:var(--tech-blue);"><i class="fas ${s.icon || 'fa-cog'}"></i></div>
-              <h4 style="color:var(--gray-900);margin-bottom:8px;font-size:1.1rem;font-weight:700;">${s.title}</h4>
+              <h4 style="color:var(--gray-900);margin-bottom:8px;font-size:1.15rem;font-weight:700;">${s.title}</h4>
               ${s.parentCategory ? `<span style="display:inline-block; margin-bottom:10px; font-size:0.75rem; background:var(--gray-200); padding:2px 8px; border-radius:4px; font-weight:600; color:var(--gray-600);">${s.parentCategory}</span>` : ''}
-              <p style="color:var(--gray-600);font-size:0.875rem;margin-bottom:16px">${s.description}</p>
+              <p style="color:var(--gray-600);font-size:0.875rem;margin-bottom:16px;flex:1;">${s.description}</p>
               <a href="contact.html?service=${encodeURIComponent(s.title)}" class="btn btn-outline btn-sm" style="margin-top:auto">Get Quote <i class="fas fa-arrow-right"></i></a>
             </div>
-          `).join('')}
-        </div>
-      </div>`;
+          `).join('') +
+        '</div>' +
+      '</div>';
     }
     container.innerHTML = html;
 
-    // Trigger animations
-    document.querySelectorAll('[data-animate]').forEach(el=>{
-      const obs=new IntersectionObserver(e=>{e.forEach(e=>e.isIntersecting&&(e.target.classList.add('animated'),obs.unobserve(e.target)))},{threshold:0.1});
-      obs.observe(el);
-    });
+    if(window.observeAnimations) window.observeAnimations();
   }
 })();
 
 document.getElementById('quote-form')?.addEventListener('submit',async(e)=>{
-  e.preventDefault();if(!validateForm(e.target))return;
+  e.preventDefault();
   const btn=e.target.querySelector('[type=submit]');const orig=btn.innerHTML;
   btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending...';btn.disabled=true;
   const res=await API.submitContact(Object.fromEntries(new FormData(e.target)));
@@ -298,4 +326,6 @@ document.getElementById('quote-form')?.addEventListener('submit',async(e)=>{
   else showToast(res?.message||'Error. Please try again.','error');
 });
 </script>
+  <script src="js/motion.js"></script>
+  <script src="js/i18n.js"></script>
 </body></html>
