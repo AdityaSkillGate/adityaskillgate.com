@@ -1,0 +1,574 @@
+﻿Created At: 2026-08-26T20:57:11+05:30
+Completed At: 2026-08-26T20:57:12+05:30
+File Path: `file:///c:/Users/hp/Downloads/Kurunji-FunWorld/Code.gs`
+Total Lines: 565
+Total Bytes: 25121
+Showing lines 1 to 565
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1: // ==========================================
+2: // KURUNJI FUN WORLD - APPS SCRIPT BACKEND
+3: // ==========================================
+4: 
+5: var SHEET_ID = "1vTdluh04bE1RauMaIzyafInvY51ZEs7P1-d4vq5CwBk";
+6: 
+7: function sendResponse(data) {
+8:   return ContentService.createTextOutput(JSON.stringify(data))
+9:     .setMimeType(ContentService.MimeType.JSON);
+10: }
+11: 
+12: function ensureHeaders(sheet, expectedHeaders) {
+13:   if (sheet.getLastRow() === 0) {
+14:     sheet.appendRow(expectedHeaders);
+15:     sheet.getRange(1, 1, 1, expectedHeaders.length).setFontWeight("bold");
+16:     sheet.setFrozenRows(1);
+17:     return;
+18:   }
+19:   var firstRow = sheet.getRange(1, 1, 1, expectedHeaders.length).getValues()[0];
+20:   if (String(firstRow[0]).indexOf("#") === 0 || firstRow[0] === "") {
+21:     sheet.insertRowBefore(1);
+22:     sheet.getRange(1, 1, 1, expectedHeaders.length).setValues([expectedHeaders]);
+23:     sheet.getRange(1, 1, 1, expectedHeaders.length).setFontWeight("bold");
+24:     sheet.setFrozenRows(1);
+25:   }
+26: }
+27: 
+28: function getOrCreateSheet(sheetName, headers) {
+29:   var ss;
+30:   try { ss = SpreadsheetApp.getActiveSpreadsheet(); } catch(e) {}
+31:   if (!ss) ss = SpreadsheetApp.openById(SHEET_ID);
+32:   var sheet = ss.getSheetByName(sheetName);
+33:   if (!sheet) sheet = ss.insertSheet(sheetName);
+34:   if (headers && headers.length > 0) ensureHeaders(sheet, headers);
+35:   return sheet;
+36: }
+37: 
+38: // ------------------------------------------
+39: // SECURITY UTILITIES
+40: // ------------------------------------------
+41: function generateHash(text) {
+42:   var rawHash = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, text);
+43:   var txtHash = '';
+44:   for (var i = 0; i < rawHash.length; i++) {
+45:     var hashVal = rawHash[i];
+46:     if (hashVal < 0) hashVal += 256;
+47:     if (hashVal.toString(16).length == 1) txtHash += '0';
+48:     txtHash += hashVal.toString(16);
+49:   }
+50:   return txtHash;
+51: }
+52: 
+53: function generateOTP() {
+54:   return Math.floor(100000 + Math.random() * 900000).toString();
+55: }
+56: 
+57: function generateId(prefix) {
+58:   return prefix + "-" + Math.floor(1000 + Math.random() * 9000);
+59: }
+60: 
+61: function generateToken() {
+62:   return Utilities.getUuid();
+63: }
+64: 
+65: function logAdminAction(email, role, action, details) {
+66:   try {
+67:     var sheet = getOrCreateSheet("AdminLogs", ["Timestamp", "Email", "Role", "Action", "Details"]);
+68:     sheet.appendRow([new Date().toISOString(), email, role, action, details]);
+69:   } catch(e) {}
+70: }
+71: 
+72: function validateToken(token) {
+73:   if (!token) return null;
+74:   var cache = CacheService.getScriptCache();
+75:   var sessionStr = cache.get("SESSION_" + token);
+76:   if (sessionStr) {
+77:     return JSON.parse(sessionStr);
+78:   }
+79:   return null;
+80: }
+81: 
+82: function checkPermission(role, action) {
+83:   if (role === "SUPER_ADMIN") return true;
+84:   
+85:   // View-only access
+86:   var readActions = ["fetchAdminFeedbacks", "fetchAdminEnquiries", "fetchStatistics", "fetchCMS", "fetchAttractions", "fetchVRThemes"];
+87:   if (role === "OWNER" && readActions.indexOf(action) !== -1) return true;
+88:   if (role === "OWNER") return false; // OWNER cannot write
+89:   
+90:   // Manager access
+91:   if (role === "MANAGER") {
+92:     var forbidden = ["deleteAttraction", "deleteVRTheme", "updateCMS"]; // Example restrictions
+93:     if (forbidden.indexOf(action) !== -1) return false;
+94:     return true; 
+95:   }
+96:   return false;
+97: }
+98: 
+99: // ------------------------------------------
+100: // INITIALIZATION
+101: // ------------------------------------------
+102: function initializeSetup() {
+103:   var usersSheet = getOrCreateSheet("AdminUsers", ["Email", "PasswordHash", "Role", "Status", "ResetOTP", "OTPExpiry"]);
+104:   if (usersSheet.getLastRow() <= 1) {
+105:     var defaultHash = generateHash("Admin@2026");
+106:     usersSheet.appendRow(["admin@exmail.com", defaultHash, "SUPER_ADMIN", "ACTIVE", "", ""]);
+107:     usersSheet.appendRow(["owner@exmail.com", defaultHash, "OWNER", "ACTIVE", "", ""]);
+108:     usersSheet.appendRow(["manager@exmail.com", defaultHash, "MANAGER", "ACTIVE", "", ""]);
+109:   }
+110:   getOrCreateSheet("AdminLogs", ["Timestamp", "Email", "Role", "Action", "Details"]);
+111: 
+112:   getOrCreateSheet("Feedbacks", ["ID", "Date", "Guest Name", "Phone", "Email", "Rating", "Comments", "Status", "VisitType", "Hours", "IndoorRating", "OutdoorRating", "VRRating", "CleanlinessRating", "StaffRating", "ValueRating", "Favorites"]);
+113:   getOrCreateSheet("Enquiries", ["ID", "Date", "Name", "Phone", "Email", "Type", "Message", "Status"]);
+114:   getOrCreateSheet("UpcomingInterest", ["ID", "Date", "Name", "Phone", "Email", "Attraction", "Status"]);
+115:   getOrCreateSheet("Attractions", ["ID", "Name", "Slug", "Type", "Floor", "Category", "Description", "Image", "Video", "Panorama", "Status", "Featured", "DisplayOrder"]);
+116:   getOrCreateSheet("VRThemes", ["ID", "Name", "Image", "Status", "DisplayOrder"]);
+117:   getOrCreateSheet("AdminLogs", ["Timestamp", "Email", "Role", "Action", "Details"]);
+118:   
+119:   var usersSheet = getOrCreateSheet("AdminUsers", ["Email", "PasswordHash", "Role", "Status", "ResetOTP", "OTPExpiry"]);
+120:   if (usersSheet.getLastRow() <= 1) {
+121:     var defaultHash = generateHash("Admin@2026");
+122:     usersSheet.appendRow(["admin@exmail.com", defaultHash, "SUPER_ADMIN", "ACTIVE", "", ""]);
+123:     usersSheet.appendRow(["owner@exmail.com", defaultHash, "OWNER", "ACTIVE", "", ""]);
+124:     usersSheet.appendRow(["manager@exmail.com", defaultHash, "MANAGER", "ACTIVE", "", ""]);
+125:   }
+126: 
+127:   var cmsSheet = getOrCreateSheet("CMS", ["Key", "Value"]);
+128:   if (cmsSheet.getLastRow() <= 1) {
+129:     var defaultCMS = [
+130:       ["heroTitle", "Experience the Magic of Kurunji"],
+131:       ["heroSubtitle", "Unforgettable adventures await at Kodaikanal's premier amusement park."],
+132:       ["alertBanner", "Special Monsoon Offer: Get 20% off on all online bookings!"],
+133:       ["seoTitle", "Kurunji Fun World | Kodaikanal"],
+134:       ["seoDesc", "The best amusement park in Kodaikanal featuring VR arenas, 4D simulators, and family rides."],
+135:       ["aboutIntro", "Kurunji Fun World brings cutting-edge entertainment to the serene hills of Kodaikanal."],
+136:       ["hours", "Open Daily: 9:00 AM - 8:00 PM"]
+137:     ];
+138:     for (var i = 0; i < defaultCMS.length; i++) {
+139:       cmsSheet.appendRow(defaultCMS[i]);
+140:     }
+141:   }
+142: 
+143:   var statsSheet = getOrCreateSheet("Statistics", ["Key", "Value"]);
+144:   if (statsSheet.getLastRow() <= 1) {
+145:     statsSheet.appendRow(["visitorsToday", 342]);
+146:     statsSheet.appendRow(["visitorsMonthly", 8450]);
+147:     statsSheet.appendRow(["averageRating", 4.8]);
+148:     statsSheet.appendRow(["totalReviews", 1254]);
+149:     statsSheet.appendRow(["averageHoursSpent", "3.5"]);
+150:     statsSheet.appendRow(["repeatVisitorRate", 28]);
+151:     statsSheet.appendRow(["mostLovedCategory", "VR Arena"]);
+152:   }
+153: }
+154: 
+155: // ------------------------------------------
+156: // POST HANDLER (Writes)
+157: // ------------------------------------------
+158: function doPost(e) {
+159:   try {
+160:     var data = JSON.parse(e.postData.contents);
+161:     var action = e.parameter.action;
+162:     if (action === "loginAdmin") {
+163:       var email = data.email;
+164:       var password = data.password;
+165:       var sheet = getOrCreateSheet("AdminUsers");
+166:       var rows = sheet.getDataRange().getValues();
+167:       var hashedPass = generateHash(password);
+168:       
+169:       for (var i = 1; i < rows.length; i++) {
+170:         if (rows[i][0] === email && rows[i][1] === hashedPass && rows[i][3] === "ACTIVE") {
+171:            var token = Utilities.getUuid();
+172:            var cache = CacheService.getScriptCache();
+173:            var role = rows[i][2];
+174:            cache.put("SESSION_" + token, JSON.stringify({ email: email, role: role }), 21600); // 6 hours
+175:            logAdminAction(email, role, "LOGIN", "Successful login");
+176:            return sendResponse({ status: "success", token: token, role: role, email: email });
+177:         }
+178:       }
+179:       logAdminAction(email || "Unknown", "UNKNOWN", "LOGIN_FAILED", "Invalid credentials");
+180:       return sendResponse({ status: "error", message: "Invalid credentials or inactive account" });
+181:     }
+182: 
+183:     if (action === "requestOTP") {
+184:       var email = data.email;
+185:       var sheet = getOrCreateSheet("AdminUsers");
+186:       var rows = sheet.getDataRange().getValues();
+187:       for (var i = 1; i < rows.length; i++) {
+188:         if (rows[i][0] === email) {
+189:           var otp = Math.floor(100000 + Math.random() * 900000).toString();
+190:           var expiry = new Date();
+191:           expiry.setMinutes(expiry.getMinutes() + 15);
+192:           
+193:           sheet.getRange(i + 1, 5).setValue(otp);
+194:           sheet.getRange(i + 1, 6).setValue(expiry.toISOString());
+195:           
+196:           MailApp.sendEmail({
+197:             to: email,
+198:             subject: "Kurunji Fun World - Password Reset OTP",
+199:             body: "Your OTP for password reset is: " + otp + "\n\nThis OTP is valid for 15 minutes."
+200:           });
+201:           logAdminAction(email, rows[i][2], "OTP_REQUESTED", "Password reset OTP sent");
+202:           return sendResponse({ status: "success", message: "OTP sent to email" });
+203:         }
+204:       }
+205:       return sendResponse({ status: "error", message: "Email not found" });
+206:     }
+207: 
+208:     if (action === "resetPassword") {
+209:       var email = data.email;
+210:       var otp = data.otp;
+211:       var newPassword = data.newPassword;
+212:       var sheet = getOrCreateSheet("AdminUsers");
+213:       var rows = sheet.getDataRange().getValues();
+214:       for (var i = 1; i < rows.length; i++) {
+215:         if (rows[i][0] === email) {
+216:           var storedOTP = rows[i][4];
+217:           var expiry = new Date(rows[i][5]);
+218:           if (storedOTP == otp && new Date() < expiry) {
+219:             var newHash = generateHash(newPassword);
+220:             sheet.getRange(i + 1, 2).setValue(newHash);
+221:             sheet.getRange(i + 1, 5).setValue(""); // clear OTP
+222:             logAdminAction(email, rows[i][2], "PASSWORD_RESET", "Password successfully reset");
+223:             return sendResponse({ status: "success", message: "Password updated successfully" });
+224:           } else {
+225:             return sendResponse({ status: "error", message: "Invalid or expired OTP" });
+226:           }
+227:         }
+228:       }
+229:       return sendResponse({ status: "error", message: "Email not found" });
+230:     }
+231: 
+232:     if (action === "logoutAdmin") {
+233:        if (data.token) {
+234:            CacheService.getScriptCache().remove("SESSION_" + data.token);
+235:            return sendResponse({ status: "success" });
+236:        }
+237:     }
+238: 
+239:     // AUTHENTICATION CHECK FOR PROTECTED POST ROUTES
+240:     var publicActions = ["submitFeedback", "submitEnquiry", "submitInterest"];
+241:     if (publicActions.indexOf(action) === -1) {
+242:       var session = validateToken(data.token);
+243:       if (!session) return sendResponse({ status: "error", message: "Unauthorized. Token invalid or expired." });
+244:       if (!checkPermission(session.role, action)) {
+245:          logAdminAction(session.email, session.role, "UNAUTHORIZED_ACTION", action);
+246:          return sendResponse({ status: "error", message: "Forbidden. Insufficient permissions." });
+247:       }
+248:       logAdminAction(session.email, session.role, action, "Triggered POST action");
+249:     }
+250: 
+251: 
+252:     // --- AUTHENTICATION ENDPOINTS (Public) ---
+253:     if (action === "loginAdmin") {
+254:       var email = data.email;
+255:       var password = data.password;
+256:       var sheet = getOrCreateSheet("AdminUsers");
+257:       var rows = sheet.getDataRange().getValues();
+258:       var hashedPass = generateHash(password);
+259:       
+260:       for (var i = 1; i < rows.length; i++) {
+261:         if (rows[i][0] === email && rows[i][1] === hashedPass && rows[i][3] === "ACTIVE") {
+262:           var token = generateToken();
+263:           var sessionData = { email: email, role: rows[i][2] };
+264:           CacheService.getScriptCache().put("SESSION_" + token, JSON.stringify(sessionData), 21600); // 6 hours
+265:           logAdminAction(email, rows[i][2], "LOGIN_SUCCESS", "Admin logged in");
+266:           return sendResponse({ status: "success", token: token, role: rows[i][2], email: email });
+267:         }
+268:       }
+269:       logAdminAction(email || "Unknown", "UNKNOWN", "LOGIN_FAILED", "Invalid credentials");
+270:       return sendResponse({ status: "error", message: "Invalid credentials or inactive account" });
+271:     }
+272: 
+273:     if (action === "logoutAdmin") {
+274:       if (data.token) {
+275:         var session = validateToken(data.token);
+276:         if (session) logAdminAction(session.email, session.role, "LOGOUT", "Admin logged out");
+277:         CacheService.getScriptCache().remove("SESSION_" + data.token);
+278:       }
+279:       return sendResponse({ status: "success" });
+280:     }
+281: 
+282:     if (action === "requestOTP") {
+283:       var email = data.email;
+284:       var sheet = getOrCreateSheet("AdminUsers");
+285:       var rows = sheet.getDataRange().getValues();
+286:       for (var i = 1; i < rows.length; i++) {
+287:         if (rows[i][0] === email && rows[i][3] === "ACTIVE") {
+288:           var otp = generateOTP();
+289:           var expiry = new Date(new Date().getTime() + 15*60000).toISOString(); // 15 mins
+290:           sheet.getRange(i+1, 5).setValue(otp);
+291:           sheet.getRange(i+1, 6).setValue(expiry);
+292:           
+293:           MailApp.sendEmail({
+294:             to: email,
+295:             subject: "Kurunji Fun World - Admin Password Reset",
+296:             body: "Your OTP for password reset is: " + otp + "\nThis OTP is valid for 15 minutes."
+297:           });
+298:           
+299:           logAdminAction(email, rows[i][2], "OTP_REQUESTED", "Password reset OTP requested");
+300:           return sendResponse({ status: "success", message: "OTP sent to email" });
+301:         }
+302:       }
+303:       return sendResponse({ status: "error", message: "Email not found or inactive" });
+304:     }
+305: 
+306:     if (action === "resetPassword") {
+307:       var email = data.email;
+308:       var otp = data.otp;
+309:       var newPassword = data.newPassword;
+310:       var sheet = getOrCreateSheet("AdminUsers");
+311:       var rows = sheet.getDataRange().getValues();
+312:       for (var i = 1; i < rows.length; i++) {
+313:         if (rows[i][0] === email) {
+314:           var storedOTP = rows[i][4];
+315:           var expiry = new Date(rows[i][5]);
+316:           if (storedOTP == otp && new Date() < expiry) {
+317:             sheet.getRange(i+1, 2).setValue(generateHash(newPassword));
+318:             sheet.getRange(i+1, 5).setValue(""); // Clear OTP
+319:             sheet.getRange(i+1, 6).setValue("");
+320:             logAdminAction(email, rows[i][2], "PASSWORD_RESET", "Password successfully reset");
+321:             return sendResponse({ status: "success", message: "Password reset successful" });
+322:           } else {
+323:             return sendResponse({ status: "error", message: "Invalid or expired OTP" });
+324:           }
+325:         }
+326:       }
+327:       return sendResponse({ status: "error", message: "Email not found" });
+328:     }
+329: 
+330:     // --- PUBLIC DATA ENDPOINTS ---
+331:     if (action === "submitFeedback") {
+332:       var sheet = getOrCreateSheet("Feedbacks");
+333:       var id = generateId("#F");
+334:       var dateStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+335:       
+336:       var avgRating = 5;
+337:       if (data.ratings && Object.keys(data.ratings).length > 0) {
+338:         var sum = 0, count = 0;
+339:         for (var k in data.ratings) { sum += parseInt(data.ratings[k]); count++; }
+340:         if (count > 0) avgRating = Math.round(sum / count);
+341:       } else if (data.rating) {
+342:         avgRating = data.rating;
+343:       }
+344:       var comments = (data.suggestions && data.comments) ? "Suggestions: " + data.suggestions + "\n\nReview: " + data.comments : (data.suggestions || data.comments || "");
+345:       
+346:       sheet.appendRow([id, dateStr, data.name || data.guestName || "", data.phone || "", data.email || "", avgRating, comments, "PENDING", data.visitType || "", data.hoursSpent || "", data.ratings ? (data.ratings['Indoor Attractions'] || "") : "", data.ratings ? (data.ratings['Outdoor Attractions'] || "") : "", data.ratings ? (data.ratings['VR Experience'] || "") : "", data.ratings ? (data.ratings['Cleanliness'] || "") : "", data.ratings ? (data.ratings['Staff Behaviour'] || "") : "", data.ratings ? (data.ratings['Value for Money'] || "") : "", data.favorites ? data.favorites.join(', ') : ""]);
+347:       return sendResponse({ status: "success" });
+348:     }
+349:     
+350:     if (action === "submitEnquiry") {
+351:       var sheet = getOrCreateSheet("Enquiries");
+352:       var id = generateId("#E");
+353:       var dateStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+354:       sheet.appendRow([id, dateStr, data.name || "", data.phone || "", data.email || "", data.type || "", data.message || "", "NEW"]);
+355:       return sendResponse({ status: "success" });
+356:     }
+357:     
+358:     if (action === "submitInterest") {
+359:       var sheet = getOrCreateSheet("UpcomingInterest");
+360:       var id = generateId("#U");
+361:       var dateStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+362:       sheet.appendRow([id, dateStr, data.name || "", data.phone || "", data.email || "", data.attraction || "", "NEW"]);
+363:       return sendResponse({ status: "success" });
+364:     }
+365: 
+366:     // --- PROTECTED DATA ENDPOINTS ---
+367:     var token = data.token || e.parameter.token;
+368:     var session = validateToken(token);
+369:     if (!session) return sendResponse({ status: "error", message: "UNAUTHORIZED" });
+370:     
+371:     if (!checkPermission(session.role, action)) {
+372:       logAdminAction(session.email, session.role, "FORBIDDEN", "Attempted " + action);
+373:       return sendResponse({ status: "error", message: "FORBIDDEN" });
+374:     }
+375: 
+376:     if (action === "updateFeedbackStatus") {
+377:       var sheet = getOrCreateSheet("Feedbacks");
+378:       var rows = sheet.getDataRange().getValues();
+379:       for (var i = 1; i < rows.length; i++) {
+380:         if (rows[i][0] === data.id) {
+381:           sheet.getRange(i + 1, 8).setValue(data.status);
+382:           logAdminAction(session.email, session.role, "UPDATE_FEEDBACK", data.id + " -> " + data.status);
+383:           return sendResponse({ success: true });
+384:         }
+385:       }
+386:       return sendResponse({ success: false, message: "ID not found" });
+387:     }
+388: 
+389:     if (action === "updateEnquiryStatus") {
+390:       var sheet = getOrCreateSheet("Enquiries");
+391:       var rows = sheet.getDataRange().getValues();
+392:       for (var i = 1; i < rows.length; i++) {
+393:         if (rows[i][0] === data.id) {
+394:           sheet.getRange(i + 1, 8).setValue(data.status);
+395:           logAdminAction(session.email, session.role, "UPDATE_ENQUIRY", data.id + " -> " + data.status);
+396:           return sendResponse({ success: true });
+397:         }
+398:       }
+399:       return sendResponse({ success: false, message: "ID not found" });
+400:     }
+401:     
+402:     if (action === "updateCMS") {
+403:       var sheet = getOrCreateSheet("CMS");
+404:       var rows = sheet.getDataRange().getValues();
+405:       var keysInSheet = {};
+406:       for (var i = 1; i < rows.length; i++) {
+407:         if (rows[i][0]) keysInSheet[rows[i][0]] = i + 1;
+408:       }
+409:       
+410:       for (var key in data.payload) { // Assuming data.payload holds the CMS keys now to separate from token
+411:         if (keysInSheet[key]) {
+412:           sheet.getRange(keysInSheet[key], 2).setValue(data.payload[key]);
+413:         } else {
+414:           sheet.appendRow([key, data.payload[key]]);
+415:         }
+416:       }
+417:       logAdminAction(session.email, session.role, "UPDATE_CMS", "Updated website text");
+418:       return sendResponse({ success: true });
+419:     }
+420: 
+421:     return sendResponse({ status: "error", message: "Unknown action" });
+422:   } catch(err) {
+423:     return sendResponse({ status: "error", message: err.toString() });
+424:   }
+425: }
+426: 
+427: // ------------------------------------------
+428: // GET HANDLER (Reads)
+429: // ------------------------------------------
+430: function doGet(e) {
+431:   var action = e.parameter.action;
+432:   var publicActions = ["fetchPublicFeedbacks", "fetchCMS", "fetchAttractions", "fetchVRThemes"];
+433:   if (publicActions.indexOf(action) === -1) {
+434:       var session = validateToken(e.parameter.token);
+435:       if (!session) return sendResponse({ status: "error", message: "Unauthorized. Token invalid or expired." });
+436:       if (action === "validateAdminSession") {
+437:          return sendResponse({ status: "success", email: session.email, role: session.role });
+438:       }
+439:       if (!checkPermission(session.role, action)) {
+440:          return sendResponse({ status: "error", message: "Forbidden. Insufficient permissions." });
+441:       }
+442:   }
+443: 
+444:   
+445:   // --- PUBLIC READS ---
+446:   if (action === "fetchPublicFeedbacks") {
+447:     var sheet = getOrCreateSheet("Feedbacks");
+448:     var rows = sheet.getDataRange().getValues();
+449:     var feedbacks = [];
+450:     for (var i = rows.length - 1; i > 0; i--) { 
+451:       if ((rows[i][1] || rows[i][2] || rows[i][6]) && String(rows[i][7]).trim().toUpperCase() === "APPROVED") {
+452:         feedbacks.push({ date: rows[i][1] || "", guest: rows[i][2] || "Anonymous", rating: rows[i][5] || "", comments: rows[i][6] || "" });
+453:       }
+454:     }
+455:     return sendResponse({ feedbacks: feedbacks });
+456:   }
+457:   
+458:   if (action === "fetchCMS") {
+459:     var sheet = getOrCreateSheet("CMS");
+460:     var rows = sheet.getDataRange().getValues();
+461:     var cmsData = {};
+462:     for (var i = 1; i < rows.length; i++) {
+463:       if (rows[i][0]) cmsData[rows[i][0]] = rows[i][1];
+464:     }
+465:     return sendResponse(cmsData);
+466:   }
+467:   
+468:   if (action === "fetchAttractions") {
+469:     var sheet = getOrCreateSheet("Attractions");
+470:     var rows = sheet.getDataRange().getValues();
+471:     var attractions = [];
+472:     var headers = rows[0] || [];
+473:     for (var i = 1; i < rows.length; i++) {
+474:       if (rows[i][0]) {
+475:         var attraction = {};
+476:         for (var j = 0; j < headers.length; j++) attraction[String(headers[j]).toLowerCase()] = rows[i][j];
+477:         attractions.push(attraction);
+478:       }
+479:     }
+480:     return sendResponse({ attractions: attractions });
+481:   }
+482: 
+483:   if (action === "fetchVRThemes") {
+484:     var sheet = getOrCreateSheet("VRThemes");
+485:     var rows = sheet.getDataRange().getValues();
+486:     var themes = [];
+487:     var headers = rows[0] || [];
+488:     for (var i = 1; i < rows.length; i++) {
+489:       if (rows[i][0]) {
+490:         var theme = {};
+491:         for (var j = 0; j < headers.length; j++) theme[String(headers[j]).toLowerCase()] = rows[i][j];
+492:         themes.push(theme);
+493:       }
+494:     }
+495:     return sendResponse({ themes: themes });
+496:   }
+497: 
+498:   // --- PROTECTED READS ---
+499:   var token = e.parameter.token;
+500:   if(action === "validateAdminSession") {
+501:     var session = validateToken(token);
+502:     if(session) return sendResponse({ status: "success", role: session.role, email: session.email });
+503:     return sendResponse({ status: "error", message: "UNAUTHORIZED" });
+504:   }
+505: 
+506:   var session = validateToken(token);
+507:   if (!session) return sendResponse({ status: "error", message: "UNAUTHORIZED" });
+508:   
+509:   if (!checkPermission(session.role, action)) {
+510:     logAdminAction(session.email, session.role, "FORBIDDEN", "Attempted " + action);
+511:     return sendResponse({ status: "error", message: "FORBIDDEN" });
+512:   }
+513: 
+514:   if (action === "fetchAdminFeedbacks") {
+515:     var sheet = getOrCreateSheet("Feedbacks");
+516:     var rows = sheet.getDataRange().getValues();
+517:     var feedbacks = [];
+518:     for (var i = rows.length - 1; i > 0; i--) { 
+519:       if (rows[i][1] || rows[i][2] || rows[i][6]) {
+520:         feedbacks.push({
+521:           id: rows[i][0] || ("Row-" + (i+1)), date: rows[i][1] || "", guest: rows[i][2] || "Anonymous",
+522:           phone: rows[i][3] || "", email: rows[i][4] || "", rating: rows[i][5] || "", comments: rows[i][6] || "",
+523:           status: rows[i][7] || "NEW", visitType: rows[i][8] || "", hours: rows[i][9] || "", indoorRating: rows[i][10] || "",
+524:           outdoorRating: rows[i][11] || "", vrRating: rows[i][12] || "", cleanlinessRating: rows[i][13] || "",
+525:           staffRating: rows[i][14] || "", valueRating: rows[i][15] || "", favorites: rows[i][16] || ""
+526:         });
+527:       }
+528:     }
+529:     logAdminAction(session.email, session.role, "READ_FEEDBACKS", "Fetched feedback data");
+530:     return sendResponse({ feedbacks: feedbacks, total: feedbacks.length, hasMore: false });
+531:   }
+532:   
+533:   if (action === "fetchAdminEnquiries") {
+534:     var sheet = getOrCreateSheet("Enquiries");
+535:     var rows = sheet.getDataRange().getValues();
+536:     var enquiries = [];
+537:     for (var i = rows.length - 1; i >= 0; i--) {
+538:       if (rows[i][0] && String(rows[i][0]).startsWith("#E")) {
+539:         enquiries.push({
+540:           id: rows[i][0], date: rows[i][1], name: rows[i][2], phone: rows[i][3],
+541:           email: rows[i][4], type: rows[i][5], message: rows[i][6], status: rows[i][7]
+542:         });
+543:       }
+544:     }
+545:     logAdminAction(session.email, session.role, "READ_ENQUIRIES", "Fetched enquiries data");
+546:     return sendResponse({ enquiries: enquiries, total: enquiries.length, hasMore: false });
+547:   }
+548: 
+549:   if (action === "fetchStatistics") {
+550:     var sheet = getOrCreateSheet("Statistics");
+551:     var rows = sheet.getDataRange().getValues();
+552:     var stats = {};
+553:     for (var i = 1; i < rows.length; i++) {
+554:       if (rows[i][0]) stats[rows[i][0]] = rows[i][1];
+555:     }
+556:     stats.demographics = { families: 45, tourists: 30, schoolGroups: 15, corporate: 10 };
+557:     stats.historicalVisitors = [5000, 5200, 6100, 5800, 7200, 8450];
+558:     
+559:     logAdminAction(session.email, session.role, "READ_STATS", "Fetched statistics");
+560:     return sendResponse(stats);
+561:   }
+562: 
+563:   return sendResponse({ status: "success", message: "API is active. Invalid protected action." });
+564: }
+565: 
+The above content shows the entire, complete file contents of the requested file.
+

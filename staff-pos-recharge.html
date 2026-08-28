@@ -1,0 +1,289 @@
+﻿<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>Recharge | Kurunji Fun World POS</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="assets/css/tailwind.css" />
+    
+    <link href="assets/css/pos.css" rel="stylesheet" />
+  </head>
+  <body class="bg-surface font-body flex flex-col overflow-hidden text-slate-800 hidden" style="height:100dvh;height:100vh;" id="app-body">
+    
+    <!-- Top Header -->
+    <header class="bg-slate-900 text-white h-14 flex items-center justify-between px-4 shadow-md shrink-0">
+      <div class="flex items-center gap-4">
+        <a href="staff-pos.html" class="flex items-center gap-2 hover:text-primaryLight transition-colors">
+            <span class="material-symbols-outlined">arrow_back</span>
+            <span class="font-semibold text-sm hidden sm:inline">Back to Dashboard</span>
+        </a>
+      </div>
+      <div class="text-lg font-bold">Ground Floor: New Card / Recharge</div>
+    </header>
+
+    <!-- Ground Floor Tabs -->
+    <div class="bg-white border-b border-slate-200 flex shadow-sm shrink-0">
+      <a href="staff-pos-recharge.html" class="flex-1 py-3 text-center font-bold text-primary border-b-[3px] border-primary">New Card / Recharge</a>
+      <a href="staff-pos-usage.html" class="flex-1 py-3 text-center font-bold text-slate-500 hover:text-primary hover:bg-slate-50 transition-colors">Game Usage</a>
+    </div>
+    <div class="billing-layout flex flex-col lg:flex-row flex-1 min-h-0 overflow-hidden">
+      
+      <!-- Main Content Area: Package Selection -->
+      <main class="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col min-h-0">
+        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">sell</span> 1. Select Package
+        </h2>
+        
+        <div id="loading-packages" class="flex items-center gap-2 text-slate-500 py-4">
+            <span class="material-symbols-outlined animate-spin">progress_activity</span> Loading packages...
+        </div>
+        
+        <div id="package-grid" class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <!-- Packages will be injected here -->
+        </div>
+
+      </main>
+      
+      <!-- Right Sidebar: Customer & Payment Details -->
+      <aside class="w-full lg:w-96 bg-white border-l border-slate-200 flex flex-col shadow-lg z-10">
+        
+        <div class="p-4 border-b border-slate-200 bg-slate-50 shrink-0">
+          <h2 class="font-bold text-slate-800 text-lg flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">person_add</span> 2. Customer Details
+          </h2>
+        </div>
+        
+        <div class="p-5 overflow-y-auto flex-1 flex flex-col gap-4">
+            
+            <!-- Summary of Selection -->
+            <div id="selection-summary" class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-2 hidden">
+                <div class="text-sm text-blue-800 font-semibold mb-1">Selected Package</div>
+                <div class="flex justify-between items-center">
+                    <span class="text-2xl font-bold text-blue-900" id="summary-pay">₹0</span>
+                    <span class="text-lg font-bold text-green-700" id="summary-points">0 pts</span>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Card Number *</label>
+                <div class="flex gap-2">
+                    <input type="text" id="card-number" class="w-full rounded-md border-slate-300 focus:border-primary focus:ring-primary text-slate-900 bg-slate-50 uppercase" placeholder="KF-XXXX" required />
+                    <button type="button" id="generate-card-btn" class="bg-slate-200 hover:bg-slate-300 px-3 rounded-md transition-colors" title="Generate Random Card" tabindex="-1">
+                        <span class="material-symbols-outlined text-sm">autorenew</span>
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Customer Name *</label>
+                <input type="text" id="cust-name" class="w-full rounded-md border-slate-300 focus:border-primary focus:ring-primary text-slate-900 bg-slate-50" placeholder="Full Name" required />
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Mobile Number *</label>
+                <input type="tel" id="cust-phone" class="w-full rounded-md border-slate-300 focus:border-primary focus:ring-primary text-slate-900 bg-slate-50" placeholder="10-digit number" required />
+                    <div id="existing-cust-badge" class="col-span-full hidden mt-1">
+                        <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded">
+                            <span class="material-symbols-outlined text-sm">verified_user</span> Existing Customer
+                        </span>
+                    </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Email (Optional)</label>
+                <input type="email" id="cust-email" class="w-full rounded-md border-slate-300 focus:border-primary focus:ring-primary text-slate-900 bg-slate-50" placeholder="email@example.com" />
+            </div>
+
+            <!-- Demographics (Adults & Children) -->
+            <div class="grid grid-cols-2 gap-4 border-t border-slate-200 pt-4 mt-2">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Adults</label>
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="updateDemographics('adult', -1)" class="bg-slate-200 hover:bg-slate-300 w-8 h-8 rounded-full flex items-center justify-center font-bold text-slate-700">-</button>
+                        <input type="number" id="adult-count" class="w-16 text-center border-slate-300 rounded-md font-bold focus:ring-primary focus:border-primary bg-slate-50" value="0" min="0" onchange="validateDemographics()" />
+                        <button type="button" onclick="updateDemographics('adult', 1)" class="bg-slate-200 hover:bg-slate-300 w-8 h-8 rounded-full flex items-center justify-center font-bold text-slate-700">+</button>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Children</label>
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="updateDemographics('child', -1)" class="bg-slate-200 hover:bg-slate-300 w-8 h-8 rounded-full flex items-center justify-center font-bold text-slate-700">-</button>
+                        <input type="number" id="child-count" class="w-16 text-center border-slate-300 rounded-md font-bold focus:ring-primary focus:border-primary bg-slate-50" value="0" min="0" onchange="validateDemographics()" />
+                        <button type="button" onclick="updateDemographics('child', 1)" class="bg-slate-200 hover:bg-slate-300 w-8 h-8 rounded-full flex items-center justify-center font-bold text-slate-700">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coupon Code -->
+            <div class="border-t border-slate-200 pt-4 mt-2 mb-2">
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Apply Coupon</label>
+                <div class="flex gap-2">
+                    <input type="text" id="coupon-code" class="w-full rounded-md border-slate-300 focus:border-primary uppercase text-sm" placeholder="CODE">
+                    <button type="button" id="apply-coupon-btn" class="bg-slate-800 text-white px-3 rounded text-sm font-bold hover:bg-slate-700">Apply</button>
+                </div>
+                <div id="coupon-msg" class="text-xs font-bold mt-1"></div>
+            </div>
+
+            <div class="border-t border-slate-200 pt-4 mt-2">
+                <h2 class="font-bold text-slate-800 text-lg flex items-center gap-2 mb-3">
+                    <span class="material-symbols-outlined text-green-600">payments</span> 3. Payment
+                </h2>
+                
+                <div class="grid grid-cols-2 gap-2">
+                    <label class="cursor-pointer">
+                        <input type="radio" name="payment-method" value="Cash" class="peer sr-only" checked>
+                        <div class="text-center py-2 border rounded-md border-slate-300 peer-checked:border-primary peer-checked:bg-blue-50 peer-checked:text-primary font-semibold text-sm transition-colors">
+                            Cash
+                        </div>
+                    </label>
+                    <label class="cursor-pointer">
+                        <input type="radio" name="payment-method" value="UPI" class="peer sr-only">
+                        <div class="text-center py-2 border rounded-md border-slate-300 peer-checked:border-primary peer-checked:bg-blue-50 peer-checked:text-primary font-semibold text-sm transition-colors">
+                            UPI
+                        </div>
+                    </label>
+                    <label class="cursor-pointer">
+                        <input type="radio" name="payment-method" value="Card" class="peer sr-only">
+                        <div class="text-center py-2 border rounded-md border-slate-300 peer-checked:border-primary peer-checked:bg-blue-50 peer-checked:text-primary font-semibold text-sm transition-colors">
+                            Card
+                        </div>
+                    </label>
+                    <label class="cursor-pointer">
+                        <input type="radio" name="payment-method" value="Future Online" class="peer sr-only">
+                        <div class="text-center py-2 border border-slate-300 rounded-lg peer-checked:border-primary peer-checked:bg-blue-50 peer-checked:text-primary font-bold transition-colors text-sm">
+                            Future Online
+                        </div>
+                    </label>
+
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="p-4 border-t border-slate-200 bg-slate-50 shrink-0">
+            <button id="complete-btn" class="w-full bg-primary hover:bg-blue-700 text-white font-bold py-4 rounded-lg text-lg shadow-md transition-colors flex justify-center items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                <span>Review Order</span>
+                <span class="material-symbols-outlined text-lg hidden" id="processing-spinner">progress_activity</span>
+            </button>
+            <div id="error-msg" class="text-red-600 text-sm font-semibold text-center mt-2 hidden"></div>
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- Receipt Modal -->
+    <div id="receipt-modal" class="fixed inset-0 bg-slate-900/60 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-sm overflow-hidden flex flex-col">
+            
+            <div class="bg-green-600 text-white p-6 text-center">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/20 mb-3">
+                    <span class="material-symbols-outlined text-4xl">check_circle</span>
+                </div>
+                <h2 class="text-xl font-bold">Transaction Successful</h2>
+                <p class="text-green-100 text-sm opacity-90">Card Created/Recharged</p>
+            </div>
+            
+            <div class="p-6 pb-2" id="print-area">
+                <div class="text-center border-b border-dashed border-slate-300 pb-4 mb-4">
+                    <h3 class="font-bold text-lg text-slate-800">KURUNJI FUN WORLD</h3>
+                    <p class="text-sm text-slate-500">Card Recharge Receipt</p>
+                </div>
+                
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">Date</span>
+                        <span class="font-semibold text-slate-800" id="receipt-date"></span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">Txn ID</span>
+                        <span class="font-semibold text-slate-800" id="receipt-txn"></span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">Card Number</span>
+                        <span class="font-bold text-slate-900" id="receipt-card"></span>
+                    </div>
+                    <div class="flex justify-between mt-2 pt-2 border-t border-slate-100">
+                        <span class="text-slate-500">Amount Paid</span>
+                        <span class="font-bold text-slate-800" id="receipt-pay"></span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">Payment Mode</span>
+                        <span class="font-semibold text-slate-800" id="receipt-mode"></span>
+                    </div>
+                    <div class="flex justify-between mt-2 pt-2 border-t border-slate-100">
+                        <span class="text-slate-500">Points Added</span>
+                        <span class="font-bold text-green-600" id="receipt-added"></span>
+                    </div>
+                    <div class="flex justify-between text-base">
+                        <span class="text-slate-700 font-bold">Total Balance</span>
+                        <span class="font-bold text-blue-700" id="receipt-balance"></span>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="p-4 bg-slate-50 border-t border-slate-200">
+                <div class="grid grid-cols-2 gap-2 mb-2">
+                    <button id="print-btn" class="bg-white border border-slate-300 text-slate-700 py-2 rounded font-semibold hover:bg-slate-100 transition-colors flex items-center justify-center gap-1 text-sm"><span class="material-symbols-outlined text-sm">print</span> Print</button>
+                    <button id="pdf-btn" class="bg-white border border-slate-300 text-slate-700 py-2 rounded font-semibold hover:bg-slate-100 transition-colors flex items-center justify-center gap-1 text-sm"><span class="material-symbols-outlined text-sm">picture_as_pdf</span> PDF</button>
+                    <button id="wa-btn" class="bg-white border border-slate-300 text-slate-700 py-2 rounded font-semibold hover:bg-slate-100 transition-colors flex items-center justify-center gap-1 text-sm text-green-600"><span class="material-symbols-outlined text-sm">chat</span> WhatsApp</button>
+                    <button id="email-btn" class="bg-white border border-slate-300 text-slate-700 py-2 rounded font-semibold hover:bg-slate-100 transition-colors flex items-center justify-center gap-1 text-sm"><span class="material-symbols-outlined text-sm">mail</span> Email</button>
+                </div>
+                <button id="new-txn-btn" class="w-full bg-primary text-white py-3 rounded font-bold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined">add_circle</span> New Transaction
+                </button>
+            </div>
+</div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/staff-auth.js"></script>
+    <script src="assets/js/pos-recharge.js"></script>
+  
+    <!-- Unified Order Summary Modal -->
+    <div id="review-modal" class="fixed inset-0 bg-slate-900/60 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden flex flex-col">
+            <div class="bg-slate-800 text-white p-4 text-center">
+                <h2 class="text-xl font-bold">Order Summary</h2>
+            </div>
+            
+            <div class="p-6 pb-4 bg-slate-50" id="review-content">
+                <!-- Injected via JS based on order type -->
+            </div>
+            
+            <div class="p-4 bg-white border-t border-slate-200 flex gap-3">
+                <button type="button" id="review-cancel-btn" class="flex-1 bg-white border border-slate-300 text-slate-700 py-3 rounded-lg font-bold hover:bg-slate-50 transition-colors">Back</button>
+                <button type="button" id="review-confirm-btn" class="flex-1 bg-primary text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+                    <span>Confirm Payment</span>
+                    <span class="material-symbols-outlined text-lg hidden animate-spin" id="review-spinner">progress_activity</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

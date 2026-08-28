@@ -1,0 +1,275 @@
+﻿<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>Products & Add-ons | Kurunji Fun World POS</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="assets/css/tailwind.css" />
+    
+    <link href="assets/css/pos.css" rel="stylesheet" />
+  </head>
+  <body class="bg-surface font-body flex flex-col overflow-hidden text-slate-800 hidden" style="height:100dvh;height:100vh;" id="app-body">
+    
+    <!-- Top Header -->
+    <header class="bg-slate-900 text-white h-14 flex items-center justify-between px-4 shadow-md shrink-0">
+      <div class="flex items-center gap-4">
+        <a href="staff-pos.html" class="flex items-center gap-2 hover:text-primaryLight transition-colors">
+            <span class="material-symbols-outlined">arrow_back</span>
+            <span class="font-semibold text-sm hidden sm:inline">Back to Dashboard</span>
+        </a>
+      </div>
+      <div class="text-lg font-bold">Products & Add-ons: Direct Billing</div>
+    </header>
+
+    <div class="billing-layout flex flex-col lg:flex-row flex-1 min-h-0 overflow-hidden">
+      
+      <!-- Main Content Area: Product Selection -->
+      <main class="flex-1 overflow-y-auto p-6 flex flex-col relative" id="main-area">
+
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">shopping_bag</span> Select Add-ons
+            </h2>
+            <div class="bg-yellow-100 text-yellow-800 text-sm font-bold px-3 py-1 rounded-full border border-yellow-200 flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">info</span>
+                Not Points - Direct INR Billing Only
+            </div>
+        </div>
+        
+        <div id="loading-products" class="flex items-center gap-2 text-slate-500 py-4">
+            <span class="material-symbols-outlined animate-spin">progress_activity</span> Loading add-ons...
+        </div>
+        
+        <div id="product-grid" class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 pb-6">
+            <!-- Products injected here -->
+        </div>
+
+      </main>
+      
+      <!-- Right Sidebar: Cart & Transaction -->
+      <aside class="w-full lg:w-96 bg-white border-l border-slate-200 flex flex-col shadow-lg z-20 shrink-0">
+        
+        <!-- Cart Items Section -->
+        <div class="flex-1 flex flex-col overflow-y-auto min-h-0">
+            
+            <div class="p-4 border-b border-slate-200 bg-slate-100 font-bold text-slate-700 text-sm flex justify-between items-center shrink-0">
+                <span>Add-ons Cart</span>
+                <button id="clear-cart-btn" class="text-xs text-red-600 hover:text-red-800 hidden">Clear All</button>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-3" id="cart-items">
+                <div class="text-center text-slate-400 my-auto" id="empty-cart-msg">
+                    <span class="material-symbols-outlined text-4xl mb-2 opacity-50">shopping_cart_checkout</span>
+                    <p class="text-sm">No add-ons added.<br>Tap an item to add it.</p>
+                </div>
+            </div>
+
+            <!-- Customer Details (Optional) -->
+            <div class="p-4 border-t border-slate-200 bg-slate-50 shrink-0">
+                <div class="grid grid-cols-2 gap-3 mb-3">
+                    <div>
+                        <input type="tel" id="cust-phone" class="w-full rounded-md border-slate-300 focus:border-primary text-xs" placeholder="Mobile Number" />
+                    </div>
+                    <div>
+                        <input type="text" id="cust-name" class="w-full rounded-md border-slate-300 focus:border-primary text-xs" placeholder="Customer Name" />
+                    </div>
+                    <div id="existing-cust-badge" class="col-span-full hidden mt-1">
+                        <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded">
+                            <span class="material-symbols-outlined text-sm">verified_user</span> Existing Customer
+                        </span>
+                    </div>
+                </div>
+                <!-- Coupon Section -->
+                <div class="mt-3 pt-3 border-t border-slate-200">
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Coupon Code (Optional)</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="coupon-code" class="w-full rounded-md border-slate-300 focus:border-primary text-xs uppercase" placeholder="e.g. SAVE10" />
+                        <button type="button" id="apply-coupon-btn" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-3 py-1 rounded text-xs font-bold transition-colors">Apply</button>
+                    </div>
+                    <div id="coupon-msg" class="text-xs font-bold mt-1 hidden"></div>
+                </div>
+
+                
+                <div class="flex justify-between items-center text-xl pt-2 border-t border-slate-300">
+                    <span class="text-slate-800 font-bold">Total (Inc. Tax)</span>
+                    <span class="font-bold text-slate-900" id="total-cost">₹0</span>
+                </div>
+            </div>
+            
+            <!-- Payment Method -->
+            <div class="p-4 border-t border-slate-200 bg-white shrink-0">
+                <h3 class="font-bold text-slate-700 text-sm mb-2">Payment Method</h3>
+                <div class="grid grid-cols-2 gap-2 mb-4">
+                    <label class="cursor-pointer">
+                        <input type="radio" name="payment-method" value="Cash" class="peer sr-only" checked>
+                        <div class="text-center py-2 border border-slate-300 rounded-lg peer-checked:border-primary peer-checked:bg-blue-50 peer-checked:text-primary font-bold transition-colors text-sm">
+                            Cash
+                        </div>
+                    </label>
+                    <label class="cursor-pointer">
+                        <input type="radio" name="payment-method" value="UPI" class="peer sr-only">
+                        <div class="text-center py-2 border border-slate-300 rounded-lg peer-checked:border-primary peer-checked:bg-blue-50 peer-checked:text-primary font-bold transition-colors text-sm">
+                            UPI
+                        </div>
+                    </label>
+                    <label class="cursor-pointer">
+                        <input type="radio" name="payment-method" value="Card" class="peer sr-only">
+                        <div class="text-center py-2 border border-slate-300 rounded-lg peer-checked:border-primary peer-checked:bg-blue-50 peer-checked:text-primary font-bold transition-colors text-sm">
+                            Card
+                        </div>
+                    </label>
+                    <label class="cursor-pointer">
+                        <input type="radio" name="payment-method" value="Future Online" class="peer sr-only">
+                        <div class="text-center py-2 border border-slate-300 rounded-lg peer-checked:border-primary peer-checked:bg-blue-50 peer-checked:text-primary font-bold transition-colors text-sm">
+                            Future Online
+                        </div>
+                    </label>
+
+                </div>
+                
+                <div id="cart-error" class="text-red-600 text-sm font-semibold mt-2 hidden text-center mb-2"></div>
+                
+                <button id="confirm-btn" class="w-full bg-primary hover:bg-blue-700 text-white font-bold py-4 rounded-xl text-lg shadow-md transition-colors flex justify-center items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                    <span class="material-symbols-outlined">receipt_long</span>
+                    <span>Review Order</span>
+                    <span class="material-symbols-outlined text-lg hidden" id="process-spinner">progress_activity</span>
+                </button>
+            </div>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- Quantity Selection Modal -->
+    <div id="qty-modal" class="fixed inset-0 bg-slate-900/60 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-lg w-full max-w-xs p-6 flex flex-col items-center">
+            <h3 class="text-lg font-bold text-slate-800 mb-1" id="qty-modal-title">Product</h3>
+            <p class="text-primary font-semibold text-sm mb-6" id="qty-modal-price">₹0</p>
+            
+            <label class="block text-sm font-semibold text-slate-700 mb-2 w-full text-center">Quantity</label>
+            <div class="flex items-center mb-6">
+                <button id="modal-qty-minus" class="w-12 h-12 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-l-lg font-bold text-xl flex items-center justify-center transition-colors">-</button>
+                <input type="number" id="modal-qty-input" value="1" min="1" max="20" class="w-16 h-12 border-y border-slate-300 text-center font-bold text-lg focus:ring-0" readonly />
+                <button id="modal-qty-plus" class="w-12 h-12 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-r-lg font-bold text-xl flex items-center justify-center transition-colors">+</button>
+            </div>
+            
+            <div class="flex gap-3 w-full">
+                <button id="modal-qty-cancel" class="flex-1 bg-white border border-slate-300 text-slate-700 py-2 rounded-lg font-semibold hover:bg-slate-50 transition-colors">Cancel</button>
+                <button id="modal-qty-add" class="flex-1 bg-primary text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Receipt Modal -->
+    <div id="receipt-modal" class="fixed inset-0 bg-slate-900/60 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-sm overflow-hidden flex flex-col">
+            
+            <div class="bg-green-600 text-white p-6 text-center">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/20 mb-3">
+                    <span class="material-symbols-outlined text-4xl">check_circle</span>
+                </div>
+                <h2 class="text-xl font-bold">Billing Successful</h2>
+            </div>
+            
+            <div class="p-6 pb-2" id="print-area">
+                <div class="text-center border-b border-dashed border-slate-300 pb-4 mb-4">
+                    <h3 class="font-bold text-lg text-slate-800">KURUNJI FUN WORLD</h3>
+                    <p class="text-sm text-slate-500">Add-ons Bill</p>
+                </div>
+                
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">Date</span>
+                        <span class="font-semibold text-slate-800" id="receipt-date"></span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">Bill No</span>
+                        <span class="font-semibold text-slate-800" id="receipt-bill"></span>
+                    </div>
+                    
+                    <div class="mt-4 pt-4 border-t border-dashed border-slate-200" id="receipt-items">
+                        <!-- Items injected here -->
+                    </div>
+                    
+                    <div class="flex justify-between mt-2 pt-2 border-t border-slate-200 text-lg">
+                        <span class="text-slate-700 font-bold">Total Paid</span>
+                        <span class="font-bold text-slate-900" id="receipt-total"></span>
+                    </div>
+                    <div class="flex justify-between text-xs mt-1">
+                        <span class="text-slate-500">Payment Mode</span>
+                        <span class="font-semibold text-slate-600" id="receipt-mode"></span>
+                    </div>
+                    
+                    
+                    <div id="qr-container" class="mt-4 pt-4 border-t border-dashed border-slate-200 flex flex-col items-center">
+                        <img id="receipt-qr" src="" alt="QR Code" class="w-32 h-32 mb-2" />
+                        <span class="text-xs text-slate-500 font-bold" id="receipt-qr-text">Scan for Check-in</span>
+                    </div>
+
+                    <div class="mt-6 text-center text-xs text-slate-500">
+                        Thank you for visiting!
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="p-4 bg-slate-50 border-t border-slate-200">
+                <div class="grid grid-cols-2 gap-2 mb-2">
+                    <button id="print-btn" class="bg-white border border-slate-300 text-slate-700 py-2 rounded font-semibold hover:bg-slate-100 transition-colors flex items-center justify-center gap-1 text-sm"><span class="material-symbols-outlined text-sm">print</span> Print</button>
+                    <button id="pdf-btn" class="bg-white border border-slate-300 text-slate-700 py-2 rounded font-semibold hover:bg-slate-100 transition-colors flex items-center justify-center gap-1 text-sm"><span class="material-symbols-outlined text-sm">picture_as_pdf</span> PDF</button>
+                    <button id="wa-btn" class="bg-white border border-slate-300 text-slate-700 py-2 rounded font-semibold hover:bg-slate-100 transition-colors flex items-center justify-center gap-1 text-sm text-green-600"><span class="material-symbols-outlined text-sm">chat</span> WhatsApp</button>
+                    <button id="email-btn" class="bg-white border border-slate-300 text-slate-700 py-2 rounded font-semibold hover:bg-slate-100 transition-colors flex items-center justify-center gap-1 text-sm"><span class="material-symbols-outlined text-sm">mail</span> Email</button>
+                </div>
+                <button id="new-txn-btn" class="w-full bg-primary text-white py-3 rounded font-bold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined">add_circle</span> New Transaction
+                </button>
+            </div>
+</div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/staff-auth.js"></script>
+    <script src="assets/js/pos-addons.js"></script>
+  
+    <!-- Unified Order Summary Modal -->
+    <div id="review-modal" class="fixed inset-0 bg-slate-900/60 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden flex flex-col">
+            <div class="bg-slate-800 text-white p-4 text-center">
+                <h2 class="text-xl font-bold">Order Summary</h2>
+            </div>
+            
+            <div class="p-6 pb-4 bg-slate-50" id="review-content">
+                <!-- Injected via JS based on order type -->
+            </div>
+            
+            <div class="p-4 bg-white border-t border-slate-200 flex gap-3">
+                <button type="button" id="review-cancel-btn" class="flex-1 bg-white border border-slate-300 text-slate-700 py-3 rounded-lg font-bold hover:bg-slate-50 transition-colors">Back</button>
+                <button type="button" id="review-confirm-btn" class="flex-1 bg-primary text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+                    <span>Confirm Payment</span>
+                    <span class="material-symbols-outlined text-lg hidden animate-spin" id="review-spinner">progress_activity</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+  </body>
+</html>
+
+
+
+
+
+

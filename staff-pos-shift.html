@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>Shift Management | Kurunji Fun World POS</title>
+    
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/tailwind.css" />
+    
+    <link href="assets/css/pos.css" rel="stylesheet" />
+  </head>
+  <body class="bg-surface font-body h-screen flex flex-col overflow-hidden text-slate-800 hidden" id="app-body">
+    
+    <header class="bg-slate-900 text-white h-16 flex items-center justify-between px-6 shadow-md shrink-0">
+      <div class="flex items-center gap-4">
+        <a href="staff-pos.html" class="flex items-center gap-2 hover:text-primaryLight transition-colors">
+            <span class="material-symbols-outlined">arrow_back</span>
+            <span class="font-semibold text-lg">Back to Dashboard</span>
+        </a>
+      </div>
+      <div class="text-lg font-bold">Shift Management</div>
+    </header>
+
+    <main class="flex-1 overflow-y-auto p-6 flex items-center justify-center relative">
+        <div id="loading-area" class="text-center">
+            <span class="material-symbols-outlined text-5xl text-primary animate-spin mb-4">progress_activity</span>
+            <p class="text-lg font-bold text-slate-700">Loading Shift Status...</p>
+        </div>
+
+        <!-- Open Shift UI -->
+        <div id="open-shift-ui" class="bg-white rounded-xl shadow-xl w-full max-w-md overflow-hidden flex flex-col hidden">
+            <div class="bg-blue-600 text-white p-6 text-center">
+                <span class="material-symbols-outlined text-5xl mb-2">storefront</span>
+                <h2 class="text-2xl font-bold">Start New Shift</h2>
+                <p class="text-blue-100 mt-1" id="os-staff-name"></p>
+            </div>
+            
+            <form id="open-shift-form" class="p-6">
+                <div class="mb-6">
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Opening Cash Balance (Drawer Float)</label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-3 font-bold text-slate-500">₹</span>
+                        <input type="number" id="opening-cash" class="w-full rounded-lg border-slate-300 focus:border-blue-500 pl-8 py-3 text-lg font-bold" required min="0" value="0" />
+                    </div>
+                </div>
+                
+                <div id="os-error" class="hidden bg-red-100 text-red-700 p-3 rounded mb-4 text-sm font-bold"></div>
+                
+                <button type="submit" id="os-submit-btn" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined">lock_open</span> Open Shift
+                </button>
+            </form>
+        </div>
+
+        <!-- Active Shift UI -->
+        <div id="active-shift-ui" class="bg-white rounded-xl shadow-xl w-full max-w-2xl overflow-hidden flex flex-col hidden">
+            <div class="bg-slate-800 text-white p-6 flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-bold flex items-center gap-2">
+                        <span class="material-symbols-outlined text-green-400">check_circle</span> Active Shift
+                    </h2>
+                    <p class="text-slate-300 mt-1 font-mono text-sm" id="as-shift-id"></p>
+                </div>
+                <div class="text-right">
+                    <div class="text-sm text-slate-400">Started at</div>
+                    <div class="font-bold" id="as-start-time"></div>
+                </div>
+            </div>
+            
+            <div class="p-6 bg-slate-50 border-b border-slate-200">
+                <h3 class="font-bold text-slate-700 mb-4 uppercase tracking-wider text-sm">Shift Summary (Live)</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                        <div class="text-xs text-slate-500 font-bold mb-1">Opening Cash</div>
+                        <div class="text-lg font-bold text-slate-800" id="stat-opening">₹0</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                        <div class="text-xs text-slate-500 font-bold mb-1">Cash Collected</div>
+                        <div class="text-lg font-bold text-green-600" id="stat-cash">+₹0</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                        <div class="text-xs text-slate-500 font-bold mb-1">Cash Refunds</div>
+                        <div class="text-lg font-bold text-red-600" id="stat-refunds">-₹0</div>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg shadow-sm border border-blue-200">
+                        <div class="text-xs text-blue-700 font-bold mb-1">Expected Cash</div>
+                        <div class="text-xl font-bold text-blue-900" id="stat-expected">₹0</div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                    <div class="bg-white p-3 rounded shadow-sm border border-slate-200 text-center">
+                        <div class="text-xs text-slate-500 mb-1">UPI Sales</div>
+                        <div class="font-bold text-slate-700" id="stat-upi">₹0</div>
+                    </div>
+                    <div class="bg-white p-3 rounded shadow-sm border border-slate-200 text-center">
+                        <div class="text-xs text-slate-500 mb-1">Card Sales</div>
+                        <div class="font-bold text-slate-700" id="stat-card">₹0</div>
+                    </div>
+                    <div class="bg-white p-3 rounded shadow-sm border border-slate-200 text-center">
+                        <div class="text-xs text-slate-500 mb-1">Recharges</div>
+                        <div class="font-bold text-slate-700" id="stat-recharges">₹0</div>
+                    </div>
+                    <div class="bg-white p-3 rounded shadow-sm border border-slate-200 text-center">
+                        <div class="text-xs text-slate-500 mb-1">Coupons/Disc</div>
+                        <div class="font-bold text-slate-700" id="stat-coupons">₹0</div>
+                    </div>
+                </div>
+            </div>
+
+            <form id="close-shift-form" class="p-6 bg-white">
+                <div class="mb-6 max-w-sm mx-auto text-center">
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Count Actual Cash in Drawer</label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-3 font-bold text-slate-500">₹</span>
+                        <input type="number" id="actual-cash" class="w-full rounded-lg border-slate-300 focus:border-red-500 pl-8 py-3 text-2xl font-bold text-center" required min="0" placeholder="0" />
+                    </div>
+                </div>
+                
+                <div id="cs-error" class="hidden bg-red-100 text-red-700 p-3 rounded mb-4 text-sm font-bold max-w-sm mx-auto"></div>
+                
+                <div class="text-center">
+                    <button type="submit" id="cs-submit-btn" class="w-full max-w-sm mx-auto bg-slate-800 text-white py-3 rounded-lg font-bold hover:bg-slate-900 transition-colors flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined">lock</span> Close Shift
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </main>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/staff-auth.js"></script>
+    <script src="assets/js/pos-shift.js"></script>
+  </body>
+</html>
+
+
+
+

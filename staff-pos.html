@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>Staff Dashboard | Kurunji Fun World Billing</title>
+    
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/tailwind.css" />
+    
+    <link href="assets/css/pos.css" rel="stylesheet" />
+  </head>
+  <body class="bg-surface font-body min-h-screen flex flex-col overflow-x-hidden text-slate-800 hidden" id="app-body">
+    
+    <!-- Top Header -->
+    <header class="bg-slate-900 text-white h-16 flex items-center justify-between px-4 md:px-6 shadow-md shrink-0">
+      <!-- Left: Logo / Brand -->
+      <div class="flex items-center gap-3">
+        <img style="width: 45px;" src="assets/images/logo1.jpg" alt="Kurunji Fun World" class="h-9 w-9 rounded-full object-cover border-2 border-slate-600" onerror="this.style.display='none'" />
+        <div>
+          <div class="font-bold text-sm leading-tight">Kurunji Fun World</div>
+          <div class="text-xs text-slate-400 leading-tight">Staff Billing System</div>
+        </div>
+      </div>
+
+      <!-- Right: Staff Info + Logout -->
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:block text-right">
+          <div class="text-sm font-semibold leading-tight" id="staff-name">Staff</div>
+          <div class="text-xs text-slate-400 leading-tight" id="staff-role">Loading...</div>
+        </div>
+        <button id="logout-btn" title="Logout" class="flex items-center gap-1 bg-slate-700 hover:bg-red-600 text-white text-xs font-semibold px-3 py-2 rounded-lg transition-colors">
+          <span class="material-symbols-outlined text-base">logout</span>
+          <span class="hidden sm:inline">Logout</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="flex-1 overflow-hidden">
+      
+      <!-- Main Content Area -->
+      <main class="h-full overflow-y-auto p-4 md:p-6">
+        
+        <div class="mb-5 flex justify-between items-center">
+          <div>
+            <h2 class="text-xl md:text-2xl font-bold text-slate-800 mb-1">Dashboard</h2>
+            <p class="text-slate-500 text-xs md:text-sm" id="current-date">Today</p>
+          </div>
+          <!-- Mobile staff name -->
+          <div class="sm:hidden text-right">
+            <div class="text-sm font-semibold text-slate-800" id="staff-name-mobile"></div>
+          </div>
+        </div>
+
+        <!-- Metrics Grid: 2-col mobile, 5-col desktop -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mb-6">
+          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+            <div class="flex items-center gap-2 text-slate-500 mb-2">
+              <span class="material-symbols-outlined text-sm">group</span>
+              <h3 class="text-xs font-semibold uppercase tracking-wider">Visitors</h3>
+            </div>
+            <div id="stat-visitors" class="text-2xl font-bold text-slate-800">-</div>
+          </div>
+          
+          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+            <div class="flex items-center gap-2 text-slate-500 mb-2">
+              <span class="material-symbols-outlined text-sm">receipt_long</span>
+              <h3 class="text-xs font-semibold uppercase tracking-wider">Transactions</h3>
+            </div>
+            <div id="stat-transactions" class="text-2xl font-bold text-slate-800">-</div>
+          </div>
+          
+          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+            <div class="flex items-center gap-2 text-green-600 mb-2">
+              <span class="material-symbols-outlined text-sm">payments</span>
+              <h3 class="text-xs font-semibold uppercase tracking-wider">Revenue</h3>
+            </div>
+            <div id="stat-revenue" class="text-2xl font-bold text-slate-800">-</div>
+          </div>
+          
+          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+            <div class="flex items-center gap-2 text-blue-600 mb-2">
+              <span class="material-symbols-outlined text-sm">wallet</span>
+              <h3 class="text-xs font-semibold uppercase tracking-wider">Active Wallets</h3>
+            </div>
+            <div id="stat-wallets" class="text-2xl font-bold text-slate-800">-</div>
+          </div>
+          
+          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+            <div class="flex items-center gap-2 text-purple-600 mb-2">
+              <span class="material-symbols-outlined text-sm">add_card</span>
+              <h3 class="text-xs font-semibold uppercase tracking-wider">Recharge Sales</h3>
+            </div>
+            <div id="stat-recharges" class="text-2xl font-bold text-slate-800">-</div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <h2 class="text-base md:text-lg font-bold text-slate-800 mb-3">Quick Actions</h2>
+        
+        <!-- Ground Floor: full width on mobile -->
+        <a href="staff-pos-recharge.html" class="pos-action-btn bg-blue-600 hover:bg-blue-700 text-white p-5 rounded-xl shadow flex flex-col items-center justify-center gap-2 text-center w-full mb-3">
+          <span class="material-symbols-outlined text-4xl">storefront</span>
+          <span class="font-bold text-lg">Ground Floor Billing<br><span class="text-sm font-normal opacity-80">New Card, Recharge &amp; Games</span></span>
+        </a>
+
+        <!-- 2-col grid for remaining -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <!-- First Floor -->
+          <a href="staff-pos-ff.html" class="pos-action-btn bg-orange-600 hover:bg-orange-700 text-white p-4 md:p-5 rounded-xl shadow flex flex-col items-center justify-center gap-2 text-center">
+            <span class="material-symbols-outlined text-3xl md:text-4xl">confirmation_number</span>
+            <span class="font-bold text-sm md:text-base">First Floor<br><span class="text-xs font-normal opacity-80">Direct Billing</span></span>
+          </a>          
+          <!-- Outdoor -->
+          <a href="staff-pos-outdoor.html" class="pos-action-btn bg-green-600 hover:bg-green-700 text-white p-4 md:p-5 rounded-xl shadow flex flex-col items-center justify-center gap-2 text-center">
+            <span class="material-symbols-outlined text-3xl md:text-4xl">park</span>
+            <span class="font-bold text-sm md:text-base">Outdoor<br><span class="text-xs font-normal opacity-80">Direct Billing</span></span>
+          </a>
+          <!-- Add-ons -->
+          <a href="staff-pos-addons.html" class="pos-action-btn bg-pink-600 hover:bg-pink-700 text-white p-4 md:p-5 rounded-xl shadow flex flex-col items-center justify-center gap-2 text-center">
+            <span class="material-symbols-outlined text-3xl md:text-4xl">shopping_bag</span>
+            <span class="font-bold text-sm md:text-base">Add-ons<br><span class="text-xs font-normal opacity-80">Direct Billing</span></span>
+          </a>
+          <!-- Check-in -->
+          <a href="staff-pos-checkin.html" class="pos-action-btn bg-slate-800 hover:bg-slate-900 text-white p-4 md:p-5 rounded-xl shadow flex flex-col items-center justify-center gap-2 text-center">
+            <span class="material-symbols-outlined text-3xl md:text-4xl">qr_code_scanner</span>
+            <span class="font-bold text-sm md:text-base">Check-in<br><span class="text-xs font-normal opacity-80">Validate QR Ticket</span></span>
+          </a>
+          <!-- Booking History -->
+          <a href="staff-pos-history.html" class="pos-action-btn bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 p-4 md:p-5 rounded-xl shadow-sm flex flex-col items-center justify-center gap-2 text-center">
+            <span class="material-symbols-outlined text-3xl md:text-4xl text-slate-400">history</span>
+            <span class="font-bold text-sm md:text-base">History<br><span class="text-xs font-normal opacity-80">Past Bills</span></span>
+          </a>
+          <!-- Search Customer -->
+          <button onclick="alert('This feature will be built in the upcoming phases.');" class="pos-action-btn bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 p-4 md:p-5 rounded-xl shadow-sm flex flex-col items-center justify-center gap-2 text-center">
+            <span class="material-symbols-outlined text-3xl md:text-4xl text-slate-400">search</span>
+            <span class="font-bold text-sm md:text-base">Find Customer<br><span class="text-xs font-normal opacity-80">Search Database</span></span>
+          </button>
+        </div>
+
+        <!-- Bottom padding for mobile scroll -->
+        <div class="h-6"></div>
+
+      </main>
+
+    </div>
+
+
+
+      <!-- Refund Modal -->
+    <div id="refund-modal" class="fixed inset-0 bg-slate-900/60 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden flex flex-col">
+            <div class="bg-red-600 text-white p-4 text-center">
+                <h2 class="text-xl font-bold flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined">settings_backup_restore</span> Process Refund / Reversal
+                </h2>
+            </div>
+            
+            <form id="refund-form" class="p-6">
+                <input type="hidden" id="refund-txn-id" />
+                <input type="hidden" id="refund-txn-type" />
+                
+                <div class="bg-red-50 border border-red-100 p-3 rounded-lg mb-4 text-sm">
+                    <div class="flex justify-between font-bold text-slate-800 mb-1">
+                        <span id="refund-display-id"></span>
+                        <span id="refund-display-amt" class="text-red-600"></span>
+                    </div>
+                    <div class="text-slate-600" id="refund-display-cust"></div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-bold text-slate-700 mb-1">Reason for Reversal</label>
+                    <textarea id="refund-reason" rows="2" class="w-full rounded border-slate-300 focus:border-red-500 focus:ring-red-500" required placeholder="Guest accidentally booked wrong tickets..."></textarea>
+                </div>
+
+                <div class="border-t border-slate-200 pt-4 mb-4">
+                    <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Manager / Admin Authorization Required</p>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1">Authorizer Email</label>
+                            <input type="email" id="auth-email" class="w-full rounded border-slate-300 focus:border-red-500" required autocomplete="off" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1">Authorizer Password</label>
+                            <input type="password" id="auth-pass" class="w-full rounded border-slate-300 focus:border-red-500" required autocomplete="new-password" />
+                        </div>
+                    </div>
+                </div>
+
+                <div id="refund-error" class="hidden bg-red-100 text-red-700 p-3 rounded mb-4 text-sm font-bold"></div>
+
+                <div class="flex gap-3">
+                    <button type="button" id="refund-cancel-btn" class="flex-1 bg-white border border-slate-300 text-slate-700 py-2 rounded-lg font-bold hover:bg-slate-50 transition-colors">Cancel</button>
+                    <button type="submit" id="refund-submit-btn" class="flex-1 bg-red-600 text-white py-2 rounded-lg font-bold hover:bg-red-700 transition-colors flex items-center justify-center gap-2">
+                        <span>Authorize Reversal</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+      <script src="assets/js/api.js"></script>
+    <script src="assets/js/staff-auth.js"></script>
+    <script src="assets/js/pos.js?v=3"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

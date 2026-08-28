@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Staff Billing Login | Kurunji Fun World</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="assets/css/tailwind.css" />
+    
+    <link href="assets/css/pos.css" rel="stylesheet" />
+  </head>
+  <body class="bg-surface font-body h-screen flex items-center justify-center">
+    
+    <!-- Login Modal/Card -->
+    <div class="bg-white rounded-xl shadow-lg border border-slate-200 w-full max-w-md p-8">
+      <div class="text-center mb-8">
+        <img src="assets/images/logo.jpg" alt="Kurunji Logo" class="h-16 w-auto mx-auto mb-4 rounded" />
+        <h1 class="text-2xl font-bold text-slate-800">Staff Billing System</h1>
+        <p class="text-slate-500 text-sm mt-1">Kurunji Fun World</p>
+      </div>
+      
+      <form id="staff-login-form" class="space-y-5">
+        <div id="login-error" class="hidden bg-red-50 text-red-600 text-sm p-3 rounded-lg flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm">error</span>
+          <span id="login-error-text">Invalid credentials.</span>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1" for="email">Staff Email / Username</label>
+          <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border-slate-300 focus:border-primary focus:ring-primary text-slate-900 bg-slate-50 focus:bg-white transition-colors" placeholder="counter@kurunjifunworld.com" required />
+        </div>
+        
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1" for="password">Password</label>
+          <input type="password" id="password" class="w-full px-4 py-3 rounded-lg border-slate-300 focus:border-primary focus:ring-primary text-slate-900 bg-slate-50 focus:bg-white transition-colors" placeholder="••••••••" required />
+        </div>
+        
+        <button type="submit" id="login-btn" class="w-full py-3 px-4 bg-primary hover:bg-blue-700 text-white font-bold rounded-lg transition-colors flex justify-center items-center gap-2">
+          <span>Login to Billing</span>
+          <span class="material-symbols-outlined text-sm hidden" id="login-spinner">progress_activity</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/staff-auth.js"></script>
+  </body>
+</html>
+
+
+
+

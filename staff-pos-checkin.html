@@ -1,0 +1,106 @@
+﻿<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>QR Check-in | Kurunji Fun World Billing</title>
+    
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/tailwind.css" />
+    
+    <link href="assets/css/pos.css" rel="stylesheet" />
+      <script src="https://unpkg.com/html5-qrcode"></script>
+  </head>
+  <body class="bg-surface font-body flex flex-col overflow-hidden text-slate-800 hidden" style="height:100dvh;height:100vh;" id="app-body">
+    
+    <header class="bg-slate-900 text-white h-14 flex items-center justify-between px-4 shadow-md shrink-0">
+      <div class="flex items-center gap-4">
+        <a href="staff-pos.html" class="flex items-center gap-2 hover:text-primaryLight transition-colors">
+            <span class="material-symbols-outlined">arrow_back</span>
+            <span class="font-semibold text-sm hidden sm:inline">Back to Dashboard</span>
+        </a>
+      </div>
+      <div class="text-lg font-bold">QR Check-in Scanner</div>
+    </header>
+
+    <main class="flex-1 overflow-y-auto p-6 flex items-center justify-center relative">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden flex flex-col">
+            
+            <div class="p-6 border-b border-slate-200 text-center bg-slate-50">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">Scan Ticket QR</h2>
+                <p class="text-sm text-slate-500 mb-4">Click the input box and scan the QR using a barcode scanner device, or type the Order ID manually.</p>
+                
+                                  <div class="mb-4">
+                      <button type="button" id="toggle-camera-btn" class="bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2 mx-auto">
+                          <span class="material-symbols-outlined">photo_camera</span>
+                          <span>Use Mobile Camera</span>
+                      </button>
+                  </div>
+                  <div id="reader" class="mx-auto w-full max-w-sm mb-4 hidden"></div>
+                  
+                  <form id="qr-form" class="flex gap-2 justify-center">
+                    <input type="text" id="qr-input" class="rounded-lg border-slate-300 focus:border-primary px-4 py-3 text-lg w-full max-w-xs font-mono uppercase tracking-wider text-center" placeholder="B-FF-12345" autocomplete="off" autofocus />
+                    <button type="submit" class="bg-primary hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center gap-2">
+                        <span class="material-symbols-outlined">search</span>
+                        <span class="hidden sm:inline">Verify</span>
+                    </button>
+                </form>
+                <div id="scan-error" class="text-red-600 font-bold mt-3 hidden"></div>
+            </div>
+
+            <!-- Result Area -->
+            <div id="result-area" class="p-6 hidden">
+                <div id="status-badge" class="mb-4 inline-block px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wider"></div>
+                
+                <h3 class="text-xl font-bold text-slate-900 mb-1" id="res-customer"></h3>
+                <p class="text-sm text-slate-500 font-mono mb-4" id="res-order"></p>
+                
+                <div class="space-y-2 mb-6 border-t border-slate-200 pt-4" id="res-items">
+                    <!-- Items injected here -->
+                </div>
+                
+                <div class="flex gap-3 pt-4 border-t border-slate-200">
+                    <button id="reject-btn" class="flex-1 bg-white border border-slate-300 text-slate-700 py-3 rounded-lg font-bold hover:bg-slate-50 transition-colors">Reject / Reset</button>
+                    <button id="checkin-btn" class="flex-1 bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transition-colors flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined">check_circle</span>
+                        <span>Check In</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wallet Area -->
+            <div id="wallet-area" class="p-6 hidden text-center">
+                <div class="mb-4 inline-block px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wider bg-blue-100 text-blue-800">Ground Floor Wallet</div>
+                <h3 class="text-xl font-bold text-slate-900 mb-2">Card Scanned</h3>
+                <p class="text-3xl font-bold text-slate-900 mb-2" id="wallet-bal"></p>
+                <p class="text-sm text-slate-500 font-mono mb-6" id="wallet-id"></p>
+                <a href="staff-pos-usage.html" class="inline-block bg-teal-600 text-white py-3 px-6 rounded-lg font-bold hover:bg-teal-700 transition-colors">
+                    Go to Game Usage POS
+                </a>
+            </div>
+
+            <!-- Loading Area -->
+            <div id="loading-area" class="p-12 text-center hidden">
+                <span class="material-symbols-outlined text-5xl text-primary animate-spin mb-4">progress_activity</span>
+                <p class="text-lg font-bold text-slate-700">Validating QR Code...</p>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/staff-auth.js"></script>
+    <script src="assets/js/pos-checkin.js?v=3"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+

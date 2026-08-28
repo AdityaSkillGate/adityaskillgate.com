@@ -1,0 +1,212 @@
+﻿<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>Multi-Game Usage | Kurunji Fun World POS</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="assets/css/tailwind.css" />
+    
+    <link href="assets/css/pos.css" rel="stylesheet" />
+  </head>
+  <body class="bg-surface font-body h-screen flex flex-col overflow-hidden text-slate-800 hidden" id="app-body">
+    
+    <!-- Top Header -->
+    <header class="bg-slate-900 text-white h-14 flex items-center justify-between px-4 shadow-md shrink-0">
+      <div class="flex items-center gap-4">
+        <a href="staff-pos.html" class="flex items-center gap-2 hover:text-primaryLight transition-colors">
+            <span class="material-symbols-outlined">arrow_back</span>
+            <span class="font-semibold text-sm hidden sm:inline">Back to Dashboard</span>
+        </a>
+      </div>
+      <div class="text-lg font-bold">Ground Floor: Game Usage (Multi)</div>
+    </header>
+
+    <!-- Ground Floor Tabs -->
+    <div class="bg-white border-b border-slate-200 flex shadow-sm shrink-0">
+      <a href="staff-pos-recharge.html" class="flex-1 py-3 text-center font-bold text-slate-500 hover:text-primary hover:bg-slate-50 transition-colors">New Card / Recharge</a>
+      <a href="staff-pos-usage.html" class="flex-1 py-3 text-center font-bold text-primary border-b-[3px] border-primary">Game Usage</a>
+    </div>
+    <div class="flex flex-col lg:flex-row flex-1 overflow-hidden">
+      
+      <!-- Main Content Area: Attraction Selection -->
+      <main class="flex-1 overflow-y-auto p-6 flex flex-col relative" id="main-area">
+        <!-- Disabled Overlay until wallet is loaded -->
+        <div id="attraction-overlay" class="absolute inset-0 bg-white/70 z-10 flex flex-col items-center justify-center backdrop-blur-[1px]">
+            <span class="material-symbols-outlined text-5xl text-slate-400 mb-2">contactless</span>
+            <p class="text-lg font-bold text-slate-600">Scan or enter card to unlock games</p>
+        </div>
+
+        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">sports_esports</span> Select Games to Add
+        </h2>
+        
+        <div id="loading-games" class="flex items-center gap-2 text-slate-500 py-4">
+            <span class="material-symbols-outlined animate-spin">progress_activity</span> Loading attractions...
+        </div>
+        
+        <div id="attraction-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-6">
+            <!-- Attractions injected here -->
+        </div>
+
+      </main>
+      
+      <!-- Right Sidebar: Wallet & Transaction -->
+      <aside class="w-full lg:w-96 bg-white border-l border-slate-200 flex flex-col shadow-lg z-20 shrink-0">
+        
+        <!-- 1. Card Loading Section -->
+        <div class="p-5 border-b border-slate-200 bg-slate-50 shrink-0">
+          <label class="block text-sm font-semibold text-slate-700 mb-2 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">credit_card</span> Card Number
+          </label>
+          <div class="flex gap-2">
+              <input type="text" id="card-number-input" class="w-full rounded-md border-slate-300 focus:border-primary focus:ring-primary text-slate-900 uppercase" placeholder="KF-XXXX" />
+              <button id="load-wallet-btn" class="bg-slate-800 hover:bg-slate-700 text-white px-4 rounded-md font-semibold transition-colors flex items-center justify-center">
+                  <span class="material-symbols-outlined text-sm hidden mr-1" id="load-spinner">progress_activity</span>
+                  Load
+              </button>
+          </div>
+          <div id="wallet-error" class="text-red-600 text-sm font-semibold mt-2 hidden"></div>
+        </div>
+        
+        <!-- 2. Wallet Details Section -->
+        <div id="wallet-details" class="p-4 border-b border-slate-200 bg-blue-50/50 hidden shrink-0">
+            <div class="flex justify-between items-center mb-1">
+                <span class="text-sm font-semibold text-slate-600">Previous Balance</span>
+                <span class="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded" id="wallet-status">ACTIVE</span>
+            </div>
+            <div class="text-2xl font-bold text-blue-800" id="current-balance">0 pts</div>
+        </div>
+
+        <!-- 3. Usage Configuration (Cart) -->
+        <div class="flex-1 flex flex-col overflow-hidden pointer-events-none opacity-50 transition-opacity" id="usage-section">
+            
+            <div class="p-4 border-b border-slate-200 bg-slate-100 font-bold text-slate-700 text-sm flex justify-between items-center shrink-0">
+                <span>Current Transaction</span>
+                <button id="clear-cart-btn" class="text-xs text-red-600 hover:text-red-800 hidden">Clear All</button>
+            </div>
+
+            <!-- Demographics (Adults & Children) -->
+            <div class="grid grid-cols-2 gap-4 border-b border-slate-200 p-4 bg-white shrink-0">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Adults</label>
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="updateDemographics('adult', -1)" class="bg-slate-200 hover:bg-slate-300 w-8 h-8 rounded-full flex items-center justify-center font-bold text-slate-700">-</button>
+                        <input type="number" id="adult-count" class="w-16 text-center border-slate-300 rounded-md font-bold focus:ring-primary focus:border-primary bg-slate-50" value="0" min="0" onchange="validateDemographics()" />
+                        <button type="button" onclick="updateDemographics('adult', 1)" class="bg-slate-200 hover:bg-slate-300 w-8 h-8 rounded-full flex items-center justify-center font-bold text-slate-700">+</button>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Children</label>
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="updateDemographics('child', -1)" class="bg-slate-200 hover:bg-slate-300 w-8 h-8 rounded-full flex items-center justify-center font-bold text-slate-700">-</button>
+                        <input type="number" id="child-count" class="w-16 text-center border-slate-300 rounded-md font-bold focus:ring-primary focus:border-primary bg-slate-50" value="0" min="0" onchange="validateDemographics()" />
+                        <button type="button" onclick="updateDemographics('child', 1)" class="bg-slate-200 hover:bg-slate-300 w-8 h-8 rounded-full flex items-center justify-center font-bold text-slate-700">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-3" id="cart-items">
+                <div class="text-center text-slate-400 my-auto" id="empty-cart-msg">
+                    <span class="material-symbols-outlined text-4xl mb-2 opacity-50">shopping_cart</span>
+                    <p class="text-sm">No games added.<br>Tap a game to add it.</p>
+                </div>
+            </div>
+
+            <div class="p-4 bg-slate-50 border-t border-slate-200 shrink-0">
+                <div class="flex justify-between items-center mb-1 text-sm">
+                    <span class="text-slate-500 font-semibold">Points Used</span>
+                    <span class="font-bold text-red-600" id="total-cost">-0 pts</span>
+                </div>
+                <div class="flex justify-between items-center text-base pt-2 border-t border-slate-300 mt-2">
+                    <span class="text-slate-800 font-bold">Remaining Balance</span>
+                    <span class="font-bold text-blue-800" id="remaining-balance">0 pts</span>
+                </div>
+                <div id="cart-error" class="text-red-600 text-sm font-semibold mt-2 hidden text-center"></div>
+            </div>
+
+        </div>
+        
+        <!-- 4. Action Button -->
+        <div class="p-4 border-t border-slate-200 bg-white shrink-0">
+            <button id="confirm-btn" class="w-full bg-primary hover:bg-blue-700 text-white font-bold py-4 rounded-lg text-lg shadow-md transition-colors flex justify-center items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                <span>Confirm Bill</span>
+                <span class="material-symbols-outlined text-lg hidden" id="process-spinner">progress_activity</span>
+            </button>
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- Error/Success Modals -->
+    <div id="result-modal" class="fixed inset-0 bg-slate-900/60 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-sm overflow-hidden flex flex-col transform transition-transform" id="result-modal-content">
+            <!-- Dynamic Content Injected via JS -->
+        </div>
+    </div>
+    
+    <!-- Quantity Selection Modal -->
+    <div id="qty-modal" class="fixed inset-0 bg-slate-900/60 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-lg w-full max-w-xs p-6 flex flex-col items-center">
+            <h3 class="text-lg font-bold text-slate-800 mb-1" id="qty-modal-title">VR 360</h3>
+            <p class="text-primary font-semibold text-sm mb-6" id="qty-modal-price">200 pts / person</p>
+            
+            <label class="block text-sm font-semibold text-slate-700 mb-2 w-full text-center">Number of People</label>
+            <div class="flex items-center mb-6">
+                <button id="modal-qty-minus" class="w-12 h-12 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-l-lg font-bold text-xl flex items-center justify-center transition-colors">-</button>
+                <input type="number" id="modal-qty-input" value="1" min="1" max="20" class="w-16 h-12 border-y border-slate-300 text-center font-bold text-lg focus:ring-0" readonly />
+                <button id="modal-qty-plus" class="w-12 h-12 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-r-lg font-bold text-xl flex items-center justify-center transition-colors">+</button>
+            </div>
+            
+            <div class="flex gap-3 w-full">
+                <button id="modal-qty-cancel" class="flex-1 bg-white border border-slate-300 text-slate-700 py-2 rounded-lg font-semibold hover:bg-slate-50 transition-colors">Cancel</button>
+                <button id="modal-qty-add" class="flex-1 bg-primary text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/staff-auth.js"></script>
+    <script src="assets/js/pos-usage.js"></script>
+  
+    <!-- Unified Order Summary Modal -->
+    <div id="review-modal" class="fixed inset-0 bg-slate-900/60 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden flex flex-col">
+            <div class="bg-slate-800 text-white p-4 text-center">
+                <h2 class="text-xl font-bold">Order Summary</h2>
+            </div>
+            
+            <div class="p-6 pb-4 bg-slate-50" id="review-content">
+                <!-- Injected via JS based on order type -->
+            </div>
+            
+            <div class="p-4 bg-white border-t border-slate-200 flex gap-3">
+                <button type="button" id="review-cancel-btn" class="flex-1 bg-white border border-slate-300 text-slate-700 py-3 rounded-lg font-bold hover:bg-slate-50 transition-colors">Back</button>
+                <button type="button" id="review-confirm-btn" class="flex-1 bg-primary text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+                    <span>Confirm Payment</span>
+                    <span class="material-symbols-outlined text-lg hidden animate-spin" id="review-spinner">progress_activity</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+  </body>
+</html>
+
+
+
+
+
+
+

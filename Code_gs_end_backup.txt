@@ -1,0 +1,202 @@
+﻿Created At: 2026-08-28T16:57:20+05:30
+Completed At: 2026-08-28T16:57:22+05:30
+
+The command exited with code 0.
+Output:
+<truncated 1208 lines>
+          // Wait, WT does not strictly store the TXN- id in ref column, but we can assume total bonus = pointsIssued - inrRecharge globally or per period.
+          
+          if (type === "RECHARGE") {
+              stats.pointsIssued += ptsCr;
+          } else if (type === "USAGE") {
+              stats.pointsConsumed += ptsDb;
+              if (gameName) {
+                  if (!stats.games[gameName]) stats.games[gameName] = { plays: 0, pointsConsumed: 0, configuredRate: 0 };
+                  stats.games[gameName].plays++;
+                  stats.games[gameName].pointsConsumed += ptsDb;
+              }
+          }
+      }
+      
+      // Calculate bonus
+      stats.bonusIssued = stats.pointsIssued - stats.inrRecharge;
+      if (stats.bonusIssued < 0) stats.bonusIssued = 0; // fallback
+      
+      stats.avgRecharge = stats.rechargeCount > 0 ? (stats.inrRecharge / stats.rechargeCount).toFixed(2) : 0;
+      
+      logAdminAction(session.email, session.role, "READ_POINT_ANALYTICS", "Fetched Point analytics");
+      return sendResponse({ status: "success", stats: stats });
+  }
+
+  if (action === "fetchAdminAnalytics") {
+      var startDateStr = data.startDate || e.parameter.startDate;
+      var endDateStr = data.endDate || e.parameter.endDate;
+      
+      var startMs = 0;
+      var endMs = new Date().getTime(); // default now
+      
+      if (startDateStr) startMs = new Date(startDateStr).setHours(0,0,0,0);
+      if (endDateStr) endMs = new Date(endDateStr).setHours(23,59,59,999);
+      
+      var stats = {
+          visitors: { total: 0, adults: 0, children: 0 },
+          transactions: 0,
+          revenue: { gf: 0, ff: 0, out: 0, total: 0 },
+          payments: { cash: 0, upi: 0, card: 0 },
+          wallet: { issued: 0, used: 0, outstanding: 0 },
+          discounts: { total: 0, coupons: 0 },
+          refunds: { total: 0 },
+          games: { gf: {}, ff: {}, out: {}, vrPlays: 0 },
+          staff: {}
+      };
+      
+      // 1. BILLS
+      var bSheet = getOrCreateSheet("Bills");
+      var bRows = bSheet.getDataRange().getValues();
+      for (var i = 1; i < bRows.length; i++) {
+          var bTimeStr = bRows[i][2] + " " + bRows[i][3];
+          var bMs = new Date(bTimeStr).getTime();
+          
+          if (bMs < startMs || bMs > endMs) continue; // Time filter
+          
+          var id = String(bRows[i][0]);
+          var staff = bRows[i][4];
+          var amt = parseFloat(bRows[i][10]) || 0;
+          var disc = parseFloat(bRows[i][8]) || 0;
+          var payMethod = bRows[i][12];
+          var status = bRows[i][13];
+          
+          if (status === "COMPLETED" || status === "CHECKED_IN") {
+              stats.transactions++;
+              stats.discounts.total += disc;
+              if (bRows[i][7]) stats.discounts.coupons++; // If coupon applied
+              
+              if (payMethod === "Cash") stats.payments.cash += amt;
+              else if (payMethod === "UPI") stats.payments.upi += amt;
+              else if (payMethod === "Card") stats.payments.card += amt;
+              
+              stats.revenue.total += amt;
+              if (id.indexOf("TXN-") === 0) stats.revenue.gf += amt; // GF Recharge
+              else if (id.indexOf("B-FF-") === 0) stats.revenue.ff += amt; // First Floor
+              else if (id.indexOf("B-OUT-") === 0) stats.revenue.out += amt; // Outdoor
+              
+              // Staff sales
+              if (!stats.staff[staff]) stats.staff[staff] = { count: 0, revenue: 0 };
+              stats.staff[staff].count++;
+              stats.staff[staff].revenue += amt;
+          }
+      }
+      
+      // 2. REFUNDS
+      var rSheet = getOrCreateSheet("Refunds");
+      var rRows = rSheet.getDataRange().getValues();
+      for (var i = 1; i < rRows.length; i++) {
+          var rMs = new Date(rRows[i][1] + " " + rRows[i][2]).getTime();
+          if (rMs >= startMs && rMs <= endMs) {
+              stats.refunds.total += (parseFloat(rRows[i][4]) || 0); // Amount
+          }
+      }
+      
+      // 3. BILL ITEMS (for games popularity and visitors)
+      var biSheet = getOrCreateSheet("BillItems");
+      var biRows = biSheet.getDataRange().getValues();
+      var processedBillsForItems = {};
+      
+      for (var i = 1; i < bRows.length; i++) { // Map bill statuses
+          var bTimeStr = bRows[i][2] + " " + bRows[i][3];
+          var bMs = new Date(bTimeStr).getTime();
+          if (bMs >= startMs && bMs <= endMs && (bRows[i][13] === "COMPLETED" || bRows[i][13] === "CHECKED_IN")) {
+              processedBillsForItems[bRows[i][0]] = true;
+          }
+      }
+      
+      for (var i = 1; i < biRows.length; i++) {
+          var billId = biRows[i][1];
+          if (!processedBillsForItems[billId]) continue;
+          
+          var itemName = biRows[i][3];
+          var qty = parseInt(biRows[i][4]) || 0;
+          var zone = biRows[i][7];
+          
+          if (itemName.toLowerCase().indexOf("vr") !== -1) {
+              stats.games.vrPlays += qty;
+          }
+          
+          if (zone === "First Floor") {
+              stats.games.ff[itemName] = (stats.games.ff[itemName] || 0) + qty;
+              if (itemName.toLowerCase().indexOf("adult") !== -1) stats.visitors.adults += qty;
+              else if (itemName.toLowerCase().indexOf("child") !== -1) stats.visitors.children += qty;
+              else stats.visitors.total += qty; // Generic visitor
+          } else if (zone === "Outdoor") {
+              stats.games.out[itemName] = (stats.games.out[itemName] || 0) + qty;
+              stats.visitors.total += qty; // Assume 1 qty = 1 visitor
+          }
+      }
+      stats.visitors.total += stats.visitors.adults + stats.visitors.children;
+      
+      // 4. WALLET TRANSACTIONS (GF Usage, Recharge points)
+      var wtSheet = getOrCreateSheet("WalletTransactions");
+      var wtRows = wtSheet.getDataRange().getValues();
+      for (var i = 1; i < wtRows.length; i++) {
+          if (!wtRows[i][0]) continue;
+          var wtMs = new Date(wtRows[i][8]).getTime();
+          if (wtMs < startMs || wtMs > endMs) continue;
+          
+          var type = wtRows[i][2]; // RECHARGE, USAGE, POINT_REVERSAL
+          var ptsCr = parseFloat(wtRows[i][4]) || 0;
+          var ptsDb = parseFloat(wtRows[i][5]) || 0;
+          var game = wtRows[i][3];
+          
+          if (type === "RECHARGE") {
+              stats.wallet.issued += ptsCr;
+          } else if (type === "USAGE") {
+              stats.wallet.used += ptsDb;
+              if (game) {
+                  stats.games.gf[game] = (stats.games.gf[game] || 0) + 1; // Count plays
+                  if (game.toLowerCase().indexOf("vr") !== -1) stats.games.vrPlays++;
+                  stats.visitors.total++; // Estimate GF usage as visitor activity
+              }
+          }
+      }
+      
+      // 5. WALLET OUTSTANDING (Global, not time filtered)
+      var wSheet = getOrCreateSheet("Wallets");
+      var wRows = wSheet.getDataRange().getValues();
+      for (var i = 1; i < wRows.length; i++) {
+          if (wRows[i][4] === "ACTIVE") {
+              stats.wallet.outstanding += (parseFloat(wRows[i][3]) || 0);
+          }
+      }
+      
+      logAdminAction(session.email, session.role, "READ_ANALYTICS", "Fetched billing analytics");
+      return sendResponse({ status: "success", stats: stats });
+  }
+
+  if (action === "fetchStatistics") {
+    var sheet = getOrCreateSheet("Statistics");
+    var rows = sheet.getDataRange().getValues();
+    var stats = {};
+    for (var i = 1; i < rows.length; i++) {
+      if (rows[i][0]) stats[rows[i][0]] = rows[i][1];
+    }
+    stats.demographics = { families: 45, tourists: 30, schoolGroups: 15, corporate: 10 };
+    stats.historicalVisitors = [5000, 5200, 6100, 5800, 7200, 8450];
+    
+    logAdminAction(session.email, session.role, "READ_STATS", "Fetched statistics");
+    return sendResponse(stats);
+  }
+
+  return sendResponse({ status: "success", message: "API is active. Invalid protected action." });
+}
+
+
+
+
+
+
+
+
+
+
+
+
