@@ -1,0 +1,107 @@
+﻿/* POS Specific Styles */
+body {
+    overscroll-behavior: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Hide scrollbar for a cleaner POS look */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+.pos-action-btn {
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.pos-action-btn:active {
+    transform: scale(0.97);
+    box-shadow: none;
+}
+
+/* Utilities */
+.animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Page Loading Animation */
+body {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ========================================================
+   MOBILE RESPONSIVE IMPROVEMENTS
+   ======================================================== */
+
+/* On mobile, the billing layout stacks vertically.
+   Main content should have enough space and aside (cart) 
+   is placed below. Make h-screen work better on mobile */
+@media (max-width: 1023px) {
+    body {
+        height: 100dvh; /* dynamic viewport height for mobile browsers */
+    }
+    
+    /* Main content scrolls independently */
+    main {
+        min-height: 0;
+    }
+    
+    /* Cart/sidebar on mobile: limit height so both main + cart are visible */
+    .billing-layout > aside {
+        max-height: 45vh;
+        flex-shrink: 0;
+    }
+
+    /* Mobile cart header: smaller padding */
+    .billing-layout > aside .cart-header {
+        padding: 10px 14px;
+    }
+}
+
+/* Sticky "total" bar for billing pages on mobile - added via JS if needed */
+.mobile-cart-fab {
+    display: none;
+}
+@media (max-width: 1023px) {
+    .mobile-cart-fab {
+        display: flex;
+        position: fixed;
+        bottom: 16px;
+        right: 16px;
+        z-index: 99;
+    }
+}
+
+/* History page sidebar filter - hidden on mobile, shown in a sheet */
+@media (max-width: 767px) {
+    .history-filters-aside {
+        position: fixed;
+        left: 0;
+        top: 64px; /* below header */
+        bottom: 0;
+        width: 85%;
+        max-width: 320px;
+        z-index: 50;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        box-shadow: 4px 0 24px rgba(0,0,0,0.15);
+    }
+    .history-filters-aside.open {
+        transform: translateX(0);
+    }
+}
