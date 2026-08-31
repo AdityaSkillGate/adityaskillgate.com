@@ -234,8 +234,8 @@ body.no-scroll {
   .navbar-logo img { image-rendering: -webkit-optimize-contrast; }
 }
 
-/* ====== MOBILE STICKY CTA (1024px & below) ====== */
-@media (max-width: 1024px) {
+/* ====== MOBILE STICKY CTA (768px & below) ====== */
+@media (max-width: 768px) {
   .hidden-mobile { display: none !important; }
   
   .mobile-sticky-cta {

@@ -131,66 +131,75 @@
 </div>
 
 <div id="toast-container"></div>
-<script src="../js/api.js?v=6"></script>
-<script src="../js/admin.js?v=6"></script>
+<script src="../js/api.js?t=1788169325160"></script>
+<script src="../js/admin.js?t=1788169325160"></script>
 <script>
-let allservices=[];let deleteId=null;
+let allCategories=[];let deleteId=null;
 
-function renderservices(list){
+function renderCategories(list){
   const tb=document.getElementById('services-tbody');
-  if(!list.length){tb.innerHTML='<tr><td colspan="5" class="admin-table-empty">No services found. Add your first service!</td></tr>';return;}
+  if(!list.length){tb.innerHTML='<tr><td colspan="4" class="admin-table-empty">No categories found. Add your first category!</td></tr>';return;}
   tb.innerHTML=list.map(c=>`
     <tr>
-      <td><div style="font-weight:600">${c.title}</div></td>
-      <td>${c.category}</td>
-      <td><i class="fas ${c.icon}"></i> ${c.icon}</td>
+      <td><div style="font-weight:600">${c.name}</div></td>
+      <td>${c.parent || '<span style="color:var(--a-gray4)">None (Top Level)</span>'}</td>
       <td><span class="status-badge status-${(c.status||'Active').toLowerCase()}">${c.status||'Active'}</span></td>
-      <td><div class="action-btns"><button class="btn-icon btn-icon-edit" title="Edit" onclick="editService('${c.id}')"><i class="fas fa-pencil"></i></button><button class="btn-icon btn-icon-delete" title="Delete" onclick="confirmDelete('${c.id}')"><i class="fas fa-trash"></i></button></div></td>
+      <td><div class="action-btns"><button class="btn-icon btn-icon-edit" title="Edit" onclick="editCategory('${c.id}')"><i class="fas fa-pencil"></i></button><button class="btn-icon btn-icon-delete" title="Delete" onclick="confirmDelete('${c.id}')"><i class="fas fa-trash"></i></button></div></td>
     </tr>`).join('');
+
+  // Populate parent category dropdown
+  const parentSel = document.getElementById('parent-category-select');
+  if (parentSel) {
+    const curVal = parentSel.value;
+    parentSel.innerHTML = '<option value="">-- None (Top Level) --</option>' + 
+      list.filter(c => !c.parent).map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+    parentSel.value = curVal;
+  }
 }
 
-window.editService=function(id){
-  const c=allservices.find(x=>x.id===id);if(!c)return;
+window.editCategory=function(id){
+  const c=allCategories.find(x=>x.id===id);if(!c)return;
   document.getElementById('service-modal-title').textContent='Edit Category';
   document.getElementById('service-id').value=c.id;
   const f=document.getElementById('service-form');
-  ['title','category','icon','description','status'].forEach(k=>{if(f[k])f[k].value=c[k]||'';});
+  ['name','parent','status'].forEach(k=>{if(f[k])f[k].value=c[k]||'';});
   openModal('service-modal');
 };
 
 window.confirmDelete=function(id){deleteId=id;openModal('delete-modal');};
 document.getElementById('confirm-delete-btn').addEventListener('click',async()=>{
   if(!deleteId)return;
-  const orig=document.getElementById('confirm-delete-btn').innerHTML;
-  document.getElementById('confirm-delete-btn').innerHTML='<i class="fas fa-spinner fa-spin"></i>';
-  const res=await apiPost('deleteItem',{sheetName:'Services',id:deleteId});
-  document.getElementById('confirm-delete-btn').innerHTML=orig;
-  if(res?.success){showToast('Service deleted');closeAdminModal('delete-modal');loadServices();}
-  else showToast('Failed to delete','error');
+  const btn=document.getElementById('confirm-delete-btn');
+  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i>';
+  const res=await API.adminDelete('Categories', deleteId);
+  btn.innerHTML='Yes, Delete';
+  if(res?.success!==false){showAdminToast('Category deleted','success');closeAdminModal('delete-modal');loadCategories();}
+  else showAdminToast(res?.message||'Failed to delete','error');
+  deleteId=null;
 });
 
 document.getElementById('service-form').addEventListener('submit',async(e)=>{
   e.preventDefault();
   const formData=new FormData(e.target);
   const data=Object.fromEntries(formData);
-  if(!data.id) data.id='s'+Date.now();
   const btn=document.getElementById('service-submit');const orig=btn.innerHTML;
   btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Saving...';btn.disabled=true;
-  const res=await apiPost('saveItem',{sheetName:'Services',data});
+  const isEdit = !!data.id;
+  const res=isEdit ? await API.adminUpdate('Categories', data.id, data) : await API.adminCreate('Categories', data);
   btn.innerHTML=orig;btn.disabled=false;
-  if(res?.success){showToast('Service saved');closeAdminModal('service-modal');e.target.reset();loadServices();}
-  else showToast('Failed to save','error');
+  if(res?.success!==false){showAdminToast(`Category ${isEdit?'updated':'saved'} successfully`,'success');closeAdminModal('service-modal');e.target.reset();document.getElementById('service-id').value='';loadCategories();}
+  else showAdminToast(res?.message||'Failed to save','error');
 });
 
-async function loadServices(){
-  const res=await API.getServices();
-  allservices=res||[];
-  renderservices(allservices);
+async function loadCategories(){
+  const res=await API.adminGet('Categories');
+  allCategories=res||[];
+  renderCategories(allCategories);
 }
 
 document.getElementById('search-services')?.addEventListener('input',(e)=>{
   const q=e.target.value.toLowerCase();
-  renderservices(allservices.filter(c=>c.title.toLowerCase().includes(q)||c.category.toLowerCase().includes(q)));
+  renderCategories(allCategories.filter(c=>(c.name||'').toLowerCase().includes(q)||(c.parent||'').toLowerCase().includes(q)));
 });
 
 // override window.openModal to reset form
@@ -204,7 +213,7 @@ window.openModal=function(id){
   _openModal(id);
 };
 
-loadServices();
+loadCategories();
 </script>
 </body>
 </html>

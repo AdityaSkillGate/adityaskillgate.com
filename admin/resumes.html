@@ -127,8 +127,8 @@
 </div>
 
 <div id="toast-container"></div>
-<script src="../js/api.js?v=6"></script>
-<script src="../js/admin.js?v=6"></script>
+<script src="../js/api.js?t=1788169325160"></script>
+<script src="../js/admin.js?t=1788169325160"></script>
 <script>
 let allResumes=[];
 let currentResume = null;
@@ -214,16 +214,16 @@ document.getElementById('resume-form').addEventListener('submit', async(e) => {
     history: JSON.stringify(histArr)
   };
 
-  const res = await apiPost('saveItem', { sheetName: 'Resumes', data: updateData });
+  const res = await API.adminUpdate('Resumes', currentResume.id, updateData);
   btn.innerHTML = orig;
   btn.disabled = false;
 
-  if (res?.success) {
-    showToast('Application updated successfully');
+  if (res?.success !== false) {
+    showAdminToast('Application updated successfully', 'success');
     closeAdminModal('resume-modal');
     loadResumes();
   } else {
-    showToast('Update failed', 'error');
+    showAdminToast('Update failed', 'error');
   }
 });
 

@@ -121,8 +121,8 @@
 </div>
 
 <div id="toast-container"></div>
-<script src="../js/api.js?v=6"></script>
-<script src="../js/admin.js?v=6"></script>
+<script src="../js/api.js?t=1788169325160"></script>
+<script src="../js/admin.js?t=1788169325160"></script>
 <script>
 let allservices=[];let deleteId=null;
 
@@ -151,36 +151,37 @@ window.editService=function(id){
 window.confirmDelete=function(id){deleteId=id;openModal('delete-modal');};
 document.getElementById('confirm-delete-btn').addEventListener('click',async()=>{
   if(!deleteId)return;
-  const orig=document.getElementById('confirm-delete-btn').innerHTML;
-  document.getElementById('confirm-delete-btn').innerHTML='<i class="fas fa-spinner fa-spin"></i>';
-  const res=await apiPost('deleteItem',{sheetName:'Services',id:deleteId});
-  document.getElementById('confirm-delete-btn').innerHTML=orig;
-  if(res?.success){showToast('Service deleted');closeAdminModal('delete-modal');loadServices();}
-  else showToast('Failed to delete','error');
+  const btn=document.getElementById('confirm-delete-btn');
+  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i>';
+  const res=await API.adminDelete('Services', deleteId);
+  btn.innerHTML='Yes, Delete';
+  if(res?.success!==false){showAdminToast('Service deleted','success');closeAdminModal('delete-modal');loadServices();}
+  else showAdminToast(res?.message||'Failed to delete','error');
+  deleteId=null;
 });
 
 document.getElementById('service-form').addEventListener('submit',async(e)=>{
   e.preventDefault();
   const formData=new FormData(e.target);
   const data=Object.fromEntries(formData);
-  if(!data.id) data.id='s'+Date.now();
   const btn=document.getElementById('service-submit');const orig=btn.innerHTML;
   btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Saving...';btn.disabled=true;
-  const res=await apiPost('saveItem',{sheetName:'Services',data});
+  const isEdit = !!data.id;
+  const res=isEdit ? await API.adminUpdate('Services', data.id, data) : await API.adminCreate('Services', data);
   btn.innerHTML=orig;btn.disabled=false;
-  if(res?.success){showToast('Service saved');closeAdminModal('service-modal');e.target.reset();loadServices();}
-  else showToast('Failed to save','error');
+  if(res?.success!==false){showAdminToast(`Service ${isEdit?'updated':'saved'} successfully`,'success');closeAdminModal('service-modal');e.target.reset();document.getElementById('service-id').value='';loadServices();}
+  else showAdminToast(res?.message||'Failed to save','error');
 });
 
 async function loadServices(){
-  const res=await API.getServices();
+  const res=await API.adminGet('Services');
   allservices=res||[];
   renderservices(allservices);
 }
 
 document.getElementById('search-services')?.addEventListener('input',(e)=>{
   const q=e.target.value.toLowerCase();
-  renderservices(allservices.filter(c=>c.title.toLowerCase().includes(q)||c.category.toLowerCase().includes(q)));
+  renderservices(allservices.filter(c=>(c.title||'').toLowerCase().includes(q)||(c.category||'').toLowerCase().includes(q)));
 });
 
 // override window.openModal to reset form

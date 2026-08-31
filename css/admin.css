@@ -82,11 +82,34 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
   overflow: hidden;
 }
 
+.admin-sidebar.collapsed .sidebar-brand {
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 14px 6px !important;
+  gap: 8px !important;
+  min-height: 70px !important;
+}
+.admin-sidebar.collapsed .sidebar-brand img {
+  height: 28px !important;
+  margin: 0 auto !important;
+}
 .admin-sidebar.collapsed .sidebar-brand > div,
 .admin-sidebar.collapsed .sidebar-brand-name,
 .admin-sidebar.collapsed .sidebar-brand-sub,
 .admin-sidebar.collapsed .sidebar-header span {
   opacity: 0 !important; width: 0 !important; overflow: hidden !important; display: none !important;
+}
+.admin-sidebar.collapsed .sidebar-collapse-btn {
+  display: flex !important;
+  margin: 0 auto !important;
+  width: 28px !important;
+  height: 28px !important;
+  background: rgba(255,255,255,0.18) !important;
+  color: white !important;
+}
+.admin-sidebar.collapsed .sidebar-collapse-btn:hover {
+  background: #0096D6 !important;
 }
 .admin-sidebar.collapsed .sidebar-section-title,
 .admin-sidebar.collapsed .sidebar-section-label {

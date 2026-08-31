@@ -13,41 +13,68 @@
   }
 })();
 
-document.addEventListener('DOMContentLoaded', () => {
+/* ====== SIDEBAR MANAGEMENT GLOBALS ====== */
+const SIDEBAR_KEY = 'asg_sidebar_collapsed';
 
-  /* ====== SIDEBAR MANAGEMENT ====== */
+window.applySidebarState = function() {
   const sidebar = document.getElementById('admin-sidebar');
   const collapseBtn = document.getElementById('sidebar-collapse') || document.getElementById('sidebar-toggle');
   const adminMain = document.getElementById('admin-main') || document.querySelector('.admin-main');
   const topbarToggle = document.getElementById('topbar-toggle');
-  const SIDEBAR_KEY = 'asg_sidebar_collapsed';
 
-  function applySidebarState() {
-    if (window.innerWidth >= 992) {
-      const isCollapsed = localStorage.getItem(SIDEBAR_KEY) === 'true';
-      sidebar?.classList.toggle('collapsed', isCollapsed);
-      if (adminMain) adminMain.style.marginLeft = isCollapsed ? '70px' : '260px';
-      if (collapseBtn) {
-        collapseBtn.innerHTML = isCollapsed
-          ? '<i class="fas fa-chevron-right"></i>'
-          : '<i class="fas fa-bars"></i>';
-      }
-    } else {
-      sidebar?.classList.remove('collapsed');
-      if (adminMain) adminMain.style.marginLeft = '0';
+  if (window.innerWidth >= 992) {
+    const isCollapsed = localStorage.getItem(SIDEBAR_KEY) === 'true';
+    sidebar?.classList.toggle('collapsed', isCollapsed);
+    if (adminMain) adminMain.style.marginLeft = isCollapsed ? '70px' : '260px';
+    if (collapseBtn) {
+      collapseBtn.innerHTML = isCollapsed
+        ? '<i class="fas fa-chevron-right"></i>'
+        : '<i class="fas fa-bars"></i>';
+      collapseBtn.setAttribute('title', isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar');
     }
+    if (topbarToggle) {
+      topbarToggle.setAttribute('title', isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar');
+    }
+  } else {
+    sidebar?.classList.remove('collapsed');
+    if (adminMain) adminMain.style.marginLeft = '0';
   }
+};
 
-  collapseBtn?.addEventListener('click', () => {
+window.toggleSidebarDesktop = function() {
+  const sidebar = document.getElementById('admin-sidebar');
+  if (window.innerWidth >= 992) {
     const isCollapsed = sidebar?.classList.contains('collapsed');
     localStorage.setItem(SIDEBAR_KEY, (!isCollapsed).toString());
-    applySidebarState();
-  });
-
-  topbarToggle?.addEventListener('click', (e) => {
-    e.stopPropagation();
+    window.applySidebarState();
+  } else {
     sidebar?.classList.toggle('mobile-open');
-  });
+  }
+};
+window.toggleAdminSidebar = window.toggleSidebarDesktop;
+
+function initAdminShared() {
+  const sidebar = document.getElementById('admin-sidebar');
+  const collapseBtn = document.getElementById('sidebar-collapse') || document.getElementById('sidebar-toggle');
+  const topbarToggle = document.getElementById('topbar-toggle');
+
+  if (collapseBtn && !collapseBtn.dataset.bound) {
+    collapseBtn.dataset.bound = 'true';
+    collapseBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      window.toggleSidebarDesktop();
+    });
+  }
+
+  if (topbarToggle && !topbarToggle.dataset.bound) {
+    topbarToggle.dataset.bound = 'true';
+    topbarToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      window.toggleSidebarDesktop();
+    });
+  }
 
   /* Close sidebar on outside click (mobile) */
   document.addEventListener('click', (e) => {
@@ -58,8 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  window.addEventListener('resize', applySidebarState);
-  applySidebarState();
+  window.addEventListener('resize', window.applySidebarState);
+  window.applySidebarState();
 
   /* ====== ACTIVE SIDEBAR LINK ====== */
   let currentFile = window.location.pathname.split('/').filter(Boolean).pop() || 'dashboard.html';
@@ -363,5 +390,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  console.log('✅ Admin panel initialized (V2.0.4)');
-});
+  console.log('✅ Admin panel initialized (V2.0.5)');
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAdminShared);
+} else {
+  initAdminShared();
+}

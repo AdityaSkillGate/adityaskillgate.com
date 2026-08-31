@@ -9,16 +9,17 @@ document.addEventListener('DOMContentLoaded', () => {
   function animateCounter(el) {
     let target = parseInt(el.dataset.target || el.textContent, 10);
     if (isNaN(target)) target = 0; // Never display NaN
-    const duration = 2000;
+    const suffix = el.dataset.suffix !== undefined ? el.dataset.suffix : (el.dataset.metricTarget ? '+' : '');
+    const duration = 1500;
     const start = performance.now();
-    el.textContent = '0';
+    el.textContent = '0' + suffix;
 
     function update(now) {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       const current = Math.floor(eased * target);
-      el.textContent = current.toLocaleString('en-IN');
+      el.textContent = current.toLocaleString('en-IN') + suffix;
       if (progress < 1) requestAnimationFrame(update);
     }
     requestAnimationFrame(update);
@@ -55,17 +56,47 @@ document.addEventListener('DOMContentLoaded', () => {
       console.warn('API metrics failed, using safe fallback.', e);
     }
 
+    // Helper to resolve metric value across all naming variations
+    function resolveMetric(k) {
+      if (!metrics) return undefined;
+      if (metrics[k] !== undefined && metrics[k] !== null) return metrics[k];
+      const map = {
+        students: metrics.studentsTrained,
+        studentsTrained: metrics.studentsTrained || metrics.students,
+        placements: metrics.placements,
+        placementRate: metrics.placementRate,
+        highestPackage: metrics.highestPackage,
+        projects: metrics.projectsCompleted || metrics.projectsDone,
+        projectsCompleted: metrics.projectsCompleted || metrics.projectsDone || metrics.projects,
+        projectsDone: metrics.projectsCompleted || metrics.projectsDone || metrics.projects,
+        courses: metrics.coursesCount,
+        coursesCount: metrics.coursesCount || metrics.courses,
+        partners: metrics.hiringPartners,
+        hiringPartners: metrics.hiringPartners || metrics.partners,
+        employees: metrics.itProfessionals || metrics.employees,
+        itProfessionals: metrics.itProfessionals || metrics.employees,
+        rating: metrics.googleRating,
+        googleRating: metrics.googleRating || metrics.rating,
+        clients: metrics.clients || '30+',
+        industries: metrics.industries || '5+',
+        technologies: metrics.technologies || '15+'
+      };
+      return map[k];
+    }
+
     // 3. Render Dynamically / Handle API failure gracefully
     document.querySelectorAll('[data-metric]').forEach(el => {
       const key = el.dataset.metric;
+      const val = resolveMetric(key);
+
       if (key === 'currentYear') {
         el.textContent = now.getFullYear();
       } else if (key === 'currentMonthYear') {
         el.textContent = new Intl.DateTimeFormat('en', {month: 'long', year: 'numeric'}).format(now);
       } else if (key === 'foundingYear') {
         el.textContent = '2025';
-      } else if (metrics && metrics[key] !== undefined && metrics[key] !== null) {
-        el.textContent = metrics[key];
+      } else if (val !== undefined && val !== null) {
+        el.textContent = val;
       } else if (el.dataset.fallback && el.dataset.fallback !== '...') {
         el.textContent = el.dataset.fallback;
       }
@@ -73,23 +104,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('[data-metric-target]').forEach(el => {
       const key = el.dataset.metricTarget;
-      if (metrics && metrics[key] !== undefined && metrics[key] !== null) {
-        const num = String(metrics[key]).replace(/\D/g, '');
+      const rawVal = resolveMetric(key);
+      if (rawVal !== undefined && rawVal !== null) {
+        const num = String(rawVal).replace(/\D/g, '');
         el.dataset.target = num || '0';
+        // If element is already in viewport or counted, animate immediately
+        animateCounter(el);
       }
     });
 
     // 4. Animate numbers AFTER successful fetch (or fallback)
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.dataset.counted) {
-          entry.target.dataset.counted = 'true';
-          animateCounter(entry.target);
-        }
-      });
-    }, { threshold: 0.5 });
+    if ('IntersectionObserver' in window) {
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !entry.target.dataset.counted) {
+            entry.target.dataset.counted = 'true';
+            animateCounter(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '50px' });
 
-    document.querySelectorAll('.counter, [data-counter]').forEach(el => counterObserver.observe(el));
+      document.querySelectorAll('.counter, [data-counter]').forEach(el => counterObserver.observe(el));
+    } else {
+      document.querySelectorAll('.counter, [data-counter]').forEach(el => animateCounter(el));
+    }
   }
 
   /* ====== REUSABLE PROGRAMME CARD ====== */
@@ -568,7 +606,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const answer = item.querySelector('.faq-answer, .faq-a');
     const icon = item.querySelector('.faq-icon');
 
-    question?.addEventListener('click', () => {
+    if (item.classList.contains('open') && answer) {
+      answer.style.maxHeight = (answer.scrollHeight + 30) + 'px';
+      if (icon) icon.style.transform = 'rotate(180deg)';
+    }
+
+    question?.addEventListener('click', (e) => {
+      e.preventDefault();
       const isOpen = item.classList.contains('open');
       document.querySelectorAll('.faq-item.open').forEach(i => {
         i.classList.remove('open');
@@ -579,7 +623,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       if (!isOpen) {
         item.classList.add('open');
-        if (answer) answer.style.maxHeight = answer.scrollHeight + 'px';
+        if (answer) answer.style.maxHeight = (answer.scrollHeight + 30) + 'px';
         if (icon) icon.style.transform = 'rotate(180deg)';
       }
     });

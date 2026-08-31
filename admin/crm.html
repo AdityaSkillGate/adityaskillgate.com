@@ -154,8 +154,8 @@
 </div>
 
 <div id="toast-container"></div>
-<script src="../js/api.js?v=6"></script>
-<script src="../js/admin.js?v=6"></script>
+<script src="../js/api.js?t=1788169325160"></script>
+<script src="../js/admin.js?t=1788169325160"></script>
 <script>
 let allLeads=[];
 let currentLead = null;
@@ -226,16 +226,16 @@ document.getElementById('crm-form').addEventListener('submit', async(e) => {
     notes: document.getElementById('l-notes').value,
   };
 
-  const res = await apiPost('saveItem', { sheetName: 'Contacts', data: updateData });
+  const res = await API.adminUpdate('CRMLeads', currentLead.id, updateData);
   btn.innerHTML = orig;
   btn.disabled = false;
 
-  if (res?.success) {
-    showToast('Lead updated successfully');
+  if (res?.success !== false) {
+    showAdminToast('Lead updated successfully', 'success');
     closeAdminModal('crm-modal');
     loadLeads();
   } else {
-    showToast('Update failed', 'error');
+    showAdminToast('Update failed', 'error');
   }
 });
 

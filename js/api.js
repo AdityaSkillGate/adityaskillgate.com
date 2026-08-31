@@ -8,283 +8,49 @@
 const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbw-Wv6pSJ3vSTr2CmNEYd5M_yy-NAjZj6yduq7DtuFxB8jekjj4S5nhK4CV-C2HdyqT/exec';
 const SHEET_ID = '1P8a4IpQ9DW2Ut7kE4oBV8f9BHRBoU39UyJPSAjoJUDc';
 
-/* ============ DEMO DATA (fallback when API not configured) ============ */
+/* ============ DEMO DATA / BASE CONFIG ============ */
 const DEMO_DATA = {
   settings: {
     companyName: 'Aditya Skill Gate IT Solution',
+    legalName: 'Aditya Skill Gate IT Solution',
     phone: '+91 63826 04808',
-    whatsapp: '+916382604808',
+    whatsapp: '+91 63826 04808',
     email: 'Adityaskillgateitsolution@gmail.com',
     instagram: 'https://www.instagram.com/adityaskillgate.official/',
-    youtube: 'https://www.youtube.com/@AdityaSkillGateITSolution',
-    address: 'Tamil Nadu, India',
+    youtube: 'https://www.youtube.com/@thoduvaanamyt1867',
+    linkedin: 'https://www.linkedin.com/in/aditya-skill-gate-it-solution-5446b63a8',
+    address: 'Sankarankovil, Tenkasi District, Tamil Nadu, India',
+    city: 'Sankarankovil',
+    state: 'Tamil Nadu',
+    country: 'India',
     heroTitle: 'Empowering Skills Through Technology',
     heroSubtitle: 'Premium IT Training, Services & Placement Support',
-    stats: { students: 500, placements: 100, projects: 50, employees: 20, technologies: 10, placementRate: '90%+', highestPackage: '₹16 LPA', rating: '4.9/5' }
+    studentsTrained: '500+',
+    placements: '100+',
+    projectsCompleted: '50+',
+    employees: '20+',
+    technologies: '15+',
+    coursesCount: '10+',
+    hiringPartners: '50+',
+    placementRate: '90%+',
+    highestPackage: '16 LPA',
+    rating: '4.9/5'
   },
-  
-  categories: [
-    { id: 'cat1', name: 'Enterprise Solutions', parent: null, status: 'Active' },
-    { id: 'cat2', name: 'IT Training', parent: null, status: 'Active' },
-    { id: 'cat3', name: 'Non-IT Training', parent: null, status: 'Active' },
-    { id: 'cat4', name: 'Abroad Study', parent: null, status: 'Active' },
-    { id: 'cat5', name: 'Abroad Jobs', parent: null, status: 'Active' },
-    { id: 'cat6', name: 'IT', parent: 'Abroad Jobs', status: 'Active' },
-    { id: 'cat7', name: 'Non-IT', parent: 'Abroad Jobs', status: 'Active' }
-  ],
-  services: [
-    { id: 's1', title: 'Enterprise Web Development', category: 'Enterprise Solutions', icon: 'fa-building', description: 'Custom software development and IT consulting.', status: 'Active' },
-    { id: 's2', title: 'Full Stack Development', category: 'IT Training', icon: 'fa-laptop-code', description: 'Industry-oriented courses in Full Stack and Python.', status: 'Active' },
-    { id: 's3', title: 'Accounting & Tally', category: 'Non-IT Training', icon: 'fa-users-cog', description: 'Professional training in Accounting and Banking.', status: 'Active' },
-    { id: 's4', title: 'University Admissions', category: 'Abroad Study', icon: 'fa-graduation-cap', description: 'End-to-end admission guidance.', status: 'Active' },
-    { id: 's5', title: 'Global Tech Placements', category: 'IT', parentCategory: 'Abroad Jobs', icon: 'fa-plane-departure', description: 'Global IT career opportunities with visa sponsorship.', status: 'Active' },
-    { id: 's6', title: 'Healthcare Abroad Jobs', category: 'Non-IT', parentCategory: 'Abroad Jobs', icon: 'fa-user-nurse', description: 'Nursing and healthcare placements globally.', status: 'Active' }
-  ],
-  
-    partners: [
-      { id: 'p1', name: 'Google Cloud Partner', type: 'Technology Partner', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg', website: 'https://cloud.google.com', country: 'USA', description: 'Enterprise cloud computing and infrastructure partner.', verified: 'true', status: 'Active' },
-      { id: 'p2', name: 'Kurunji Fun World', type: 'Recruitment Partner', logo: '', website: 'https://kurunjifunworld.com', country: 'India', description: 'Regional employment and talent acquisition partner.', verified: 'true', status: 'Active' },
-      { id: 'p3', name: 'Voltaura Technologies', type: 'Technology Partner', logo: '', website: 'https://voltaura.co.in', country: 'India', description: 'Smart IoT automation and digital solutions company.', verified: 'true', status: 'Active' },
-      { id: 'p4', name: 'Infosys', type: 'Hiring Company', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg', website: 'https://infosys.com', country: 'India', description: 'Global leader in digital services and consulting.', verified: 'true', status: 'Active' },
-      { id: 'p5', name: 'TCS', type: 'Hiring Company', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg', website: 'https://tcs.com', country: 'India', description: 'Global IT services and software solutions partner.', verified: 'true', status: 'Active' },
-      { id: 'p6', name: 'Nanyang Asia College', type: 'Academic Partner', logo: '', website: 'https://nac.edu.sg', country: 'Singapore', description: 'Premier international college offering student pathways.', verified: 'true', status: 'Active' }
-    ],
-       abroadJobs: [
-         { id: 'aj1', slug: 'senior-software-engineer-uk', title: 'Senior Software Engineer', category: 'IT', country: 'UK', employer: 'TechGlobal Solutions', role: 'Full Stack Developer', experience: '5+ Years', salary: '£60,000 - £80,000', benefits: 'Visa Sponsorship, Relocation Bonus, Health Insurance', requirements: 'React, Node.js, AWS, System Design', closingDate: '2026-12-31', status: 'Active' },
-         { id: 'aj2', slug: 'registered-nurse-canada', title: 'Registered Nurse', category: 'Non-IT', country: 'Canada', employer: 'Toronto Health Network', role: 'Staff Nurse', experience: '2+ Years', salary: '$70,000 - $90,000 CAD', benefits: 'Visa Sponsorship, Permanent Residency Pathway', requirements: 'BSc Nursing, IELTS 7.0+, Active License', closingDate: '2026-11-15', status: 'Active' },
-         { id: 'aj3', slug: 'data-scientist-australia', title: 'Data Scientist', category: 'IT', country: 'Australia', employer: 'DataCorp AU', role: 'Data Scientist', experience: '3+ Years', salary: '$100,000 - $130,000 AUD', benefits: 'Visa Sponsorship, Flexible Working', requirements: 'Python, Machine Learning, SQL, Statistics', closingDate: '2024-01-01', status: 'Active' } // Expired for testing
-       ],
-       abroadJobApplications: [],
-       courses: [
-         { id: 'c1', slug: 'full-stack-web-development', title: 'Full Stack Web Development', type: 'IT', category: 'Full Stack', duration: '6 Months', fee: '₹48,000', originalFee: '₹72,000', trainer: 'Mr. Marimuthu', imageUrl: '', status: 'Active', badge: 'Popular', batch: 'Oct 15th, 2024', description: 'Master HTML, CSS, JavaScript, Angular/React, Python/Java, and SQL Server.' },
-         { id: 'c2', slug: 'python-ai-ml', title: 'Python & AI/ML', type: 'IT', category: 'AI/ML', duration: '3 Months', fee: '₹24,000', originalFee: '₹30,000', trainer: 'Mr. Marimuthu', imageUrl: '', status: 'Active', badge: 'Trending', batch: 'Nov 1st, 2024', description: 'Learn Python, machine learning, and AI model deployment.' },
-         { id: 'c3', slug: 'advanced-java-springboot', title: 'Advanced Java SpringBoot', type: 'IT', category: 'Java', duration: '3 Months', fee: '₹24,000', originalFee: '₹30,000', trainer: 'Mr. Marimuthu', imageUrl: '', status: 'Active', badge: 'New', batch: 'Oct 20th, 2024', description: 'Build enterprise applications using Java and SpringBoot.' },
-         { id: 'c4', slug: 'advanced-net-csharp', title: 'Advanced .NET with C#', type: 'IT', category: 'Full Stack', duration: '3 Months', fee: '₹24,000', originalFee: '₹30,000', trainer: 'Mr. Marimuthu', imageUrl: '', status: 'Active', badge: '', batch: 'Nov 5th, 2024', description: 'Enterprise app development with .NET Core and C#.' },
-         { id: 'c5', slug: 'cyber-security', title: 'Cyber Security & Ethical Hacking', type: 'IT', category: 'Cyber Security', duration: '4 Months', fee: '₹35,000', originalFee: '₹45,000', trainer: 'Mr. Karthik', imageUrl: '', status: 'Active', badge: 'High Demand', batch: 'Oct 10th, 2024', description: 'Learn ethical hacking, network security, and penetration testing.' },
-         { id: 'c6', slug: 'accounting-tally', title: 'Professional Accounting & Tally', type: 'Non-IT', category: 'Accounting', duration: '2 Months', fee: '₹12,000', originalFee: '₹18,000', trainer: 'Mrs. Priya', imageUrl: '', status: 'Active', badge: '', batch: 'Oct 12th, 2024', description: 'Master Tally Prime, GST, and corporate accounting.' },
-         { id: 'c7', slug: 'hr-management', title: 'HR Management & Payroll', type: 'Non-IT', category: 'HR', duration: '2 Months', fee: '₹15,000', originalFee: '₹20,000', trainer: 'Ms. Swetha', imageUrl: '', status: 'Active', badge: '', batch: 'Oct 15th, 2024', description: 'Core HR operations, payroll processing, and statutory compliances.' }
-       ],
-       universities: [
-         { id: 'u1', slug: 'toronto-college-canada', name: 'Toronto College', country: 'Canada', type: 'College', programs: ['Computer Science', 'Business Administration', 'Nursing'], scholarship: 'Up to $5,000 CAD', status: 'Active', description: 'A premier institution in Canada offering world-class facilities and high post-graduation employment rates.', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/53/University_of_Toronto_crest.svg/200px-University_of_Toronto_crest.svg.png' },
-         { id: 'u2', slug: 'university-of-london-uk', name: 'University of London', country: 'UK', type: 'University', programs: ['Data Science', 'Finance', 'Engineering'], scholarship: 'Up to £3,000', status: 'Active', description: 'Study in the heart of the UK with access to global networking opportunities.', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/University_of_London_logo.svg/200px-University_of_London_logo.svg.png' }
-       ],
-       abroadApplications: []
-,
-     jobs: [
-        {
-          id: 'j1',
-          title: 'React Developer',
-          type: 'Domestic',
-          category: 'IT Jobs',
-          department: 'Engineering',
-          location: 'Remote',
-          country: 'India',
-          experience: '1-3 Years',
-          salary: '₹4-8 LPA',
-          benefits: 'Health Insurance, Flexible Hours',
-          skills: ['React', 'JavaScript', 'Redux'],
-          status: 'Open'
-        },
-        {
-          id: 'j2',
-          title: 'Python Developer',
-          type: 'Domestic',
-          category: 'IT Jobs',
-          department: 'Engineering',
-          location: 'Chennai',
-          country: 'India',
-          experience: '1-3 Years',
-          salary: '₹4-8 LPA',
-          benefits: 'Health Insurance, Flexible Hours',
-          skills: ['Python', 'Django', 'REST API'],
-          status: 'Open'
-        },
-        {
-          id: 'j3',
-          title: 'Angular Developer',
-          type: 'Domestic',
-          category: 'IT Jobs',
-          department: 'Engineering',
-          location: 'Bangalore',
-          country: 'India',
-          experience: '1-3 Years',
-          salary: '₹4-9 LPA',
-          benefits: 'Health Insurance, Flexible Hours',
-          skills: ['Angular', 'TypeScript', 'HTML', 'CSS'],
-          status: 'Open'
-        },
-        {
-          id: 'j4',
-          title: 'SQL Developer',
-          type: 'Domestic',
-          category: 'IT Jobs',
-          department: 'Database',
-          location: 'Chennai',
-          country: 'India',
-          experience: '1-3 Years',
-          salary: '₹4-8 LPA',
-          benefits: 'Health Insurance, Paid Time Off',
-          skills: ['SQL Server', 'T-SQL', 'Stored Procedures'],
-          status: 'Open'
-        }
-      ],
-     employees: [
-     {
-       id: 'e1',
-       name: 'Padma Marimuthu',
-       role: 'Founder & CEO',
-       department: 'Management',
-       bio: 'Passionate about bridging the skill gap in the IT industry through quality education and placement support.',
-       photoUrl: '',
-       linkedin: '#',
-       status: 'Active'
-     },
-     {
-       id: 'e2',
-       name: 'Marimuthu',
-       role: 'Lead Trainer',
-       department: 'Training',
-       bio: 'Experienced IT trainer specializing in full-stack development and industry-oriented technical training.',
-       photoUrl: '',
-       linkedin: '#',
-       status: 'Active'
-     },
-     {
-       id: 'e3',
-       name: 'Mugesh',
-       role: 'Sr. Web Developer',
-       department: 'Training',
-       bio: 'Full-stack developer specializing in modern web technologies and application development.',
-       photoUrl: '',
-       linkedin: '#',
-       status: 'Active'
-     },
-     {
-       id: 'e4',
-       name: 'Vanitha',
-       role: 'HR & Placements',
-       department: 'HR',
-       bio: 'Focused on connecting talented students and graduates with suitable career opportunities.',
-       photoUrl: '',
-       linkedin: '#',
-       status: 'Active'
-     }
-   ],
-  projects: [
-     {
-       id: 'p1',
-       title: 'Kurunji Fun World Management System',
-       clientName: 'Kurunji Fun World',
-       category: 'Web Development',
-       description: 'Modern web-based management system for managing activities, customer information, bookings, and day-to-day operations.',
-       techStack: ['Angular', '.NET Core', 'C#', 'SQL Server'],
-       imageUrl: '',
-       liveUrl: '#',
-       status: 'Completed'
-     },
-   
-     {
-       id: 'p2',
-       title: 'Smart Mind IAS Academy Website',
-       clientName: 'Smart Mind IAS Academy',
-       category: 'Education',
-       description: 'Professional educational website for course information, student enquiries, academy details, and online presence.',
-       techStack: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
-       imageUrl: '',
-       liveUrl: '#',
-       status: 'Completed'
-     },
-   
-     {
-       id: 'p3',
-       title: 'Vetrivel Electricals Business Management System',
-       clientName: 'Vetrivel Electricals',
-       category: 'Business Management',
-       description: 'Business management solution for handling products, customers, sales, billing, and daily business operations.',
-       techStack: ['Angular', '.NET Core', 'C#', 'SQL Server'],
-       imageUrl: '',
-       liveUrl: '#',
-       status: 'Completed'
-     },
-   
-     {
-       id: 'p4',
-       title: '18 Village People Trust Website',
-       clientName: '18 Village People Trust',
-       category: 'Web Development',
-       description: 'Professional trust website showcasing the organization, activities, community initiatives, events, and contact information.',
-       techStack: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
-       imageUrl: '',
-       liveUrl: '#',
-       status: 'Completed'
-     },
-   
-     {
-       id: 'p5',
-       title: 'TN Painter Community Portal',
-       clientName: 'TN Painter Community',
-       category: 'Community Platform',
-       description: 'Community platform designed to connect painters, showcase services, manage member information, and support business enquiries.',
-       techStack: ['Angular', 'Node.js', 'MongoDB'],
-       imageUrl: '',
-       liveUrl: '#',
-       status: 'Completed'
-     },
-   
-     {
-       id: 'p6',
-       title: 'Nanyang Asia College Website',
-       clientName: 'Nanyang Asia College, Singapore',
-       category: 'Education',
-       description: 'Professional college website presenting academic programs, courses, admissions, student information, and institutional details.',
-       techStack: ['React', 'Node.js', 'MySQL', 'AWS'],
-       imageUrl: '',
-       liveUrl: '#',
-       status: 'Completed'
-     },
-   
-     {
-       id: 'p7',
-       title: 'Client Project',
-       clientName: '7th Client',
-       category: 'Web Development',
-       description: 'Custom software solution developed according to the client requirements and business needs.',
-       techStack: ['Angular', '.NET Core', 'C#', 'SQL Server'],
-       imageUrl: '',
-       liveUrl: '#',
-       status: 'Completed'
-     }
-   
-   ],
-  placements: [
-    { id: 'pl1', studentName: 'Arjun M.', courseName: 'Full Stack Web Development', companyName: 'Infosys', designation: 'Junior Developer', package: '4.5 LPA', photoUrl: '', testimonial: 'Aditya Skill Gate transformed my career! The hands-on training and placement support were incredible.', placementDate: '2024-05-15', galleryUrls: [], year: '2024', status: 'Published' },
-    { id: 'pl2', studentName: 'Sneha T.', courseName: 'Python & AI/ML', companyName: 'TCS', designation: 'ML Engineer', package: '5.2 LPA', photoUrl: '', testimonial: 'The AI course curriculum was industry-relevant and the mentors were always supportive.', placementDate: '2024-04-20', galleryUrls: [], year: '2024', status: 'Published' },
-    { id: 'pl3', studentName: 'Kiran P.', courseName: 'Java SpringBoot', companyName: 'Wipro', designation: 'Java Developer', package: '3.8 LPA', photoUrl: '', testimonial: 'From zero coding knowledge to landing a job at Wipro — thank you Aditya Skill Gate!', placementDate: '2023-11-10', galleryUrls: [], year: '2023', status: 'Published' }
-  ],
-  abroadUniversities: [
-  {
-    id: 'au1',
-    name: 'Nanyang Asia College',
-    country: 'Singapore',
-    programs: ['Applied AI and Data Science', 'Project Management'],
-    scholarship: 'Available',
-    logoUrl: '',
-    status: 'Active'
-  }
-],
-  testimonials: [
-    { id: 't1', name: 'Arjun M.', role: 'Student', company: 'Placed at Infosys', message: 'The best IT training institute I have attended. Practical projects and personal mentorship made all the difference. Highly recommend!', rating: 5, status: 'Active' },
-    { id: 't2', name: 'Prabhakaran V.', role: 'Client', company: 'RetailMax', message: 'Aditya Skill Gate developed our e-commerce platform on time and within budget. Professional team with excellent communication.', rating: 5, status: 'Active' },
-    { id: 't3', name: 'Sneha T.', role: 'Student', company: 'Placed at TCS', message: 'The Python and AI course was outstanding. The trainers are industry experts who teach with real-world examples.', rating: 5, status: 'Active' },
-    { id: 't4', name: 'Manikandan K.', role: 'Client', company: 'MedCare Hospitals', message: 'Our hospital management system was built perfectly. The team understood our requirements thoroughly and delivered quality work.', rating: 4, status: 'Active' },
-    { id: 't5', name: 'Deepa R.', role: 'Student', company: 'Placed at Zoho', message: 'The placement support is amazing. They prepared me thoroughly for interviews and helped me land my dream job!', rating: 5, status: 'Active' },
-    { id: 't6', name: 'Suresh N.', role: 'Client', company: 'QuickBite', message: 'Outstanding mobile app development service. The food delivery app they built works flawlessly and users love it.', rating: 5, status: 'Active' }
-  ],
-  blogs: [
-    { id: 'b1', title: 'Top 10 Programming Languages to Learn in 2024', slug: 'top-10-programming-languages-2024', excerpt: 'A comprehensive guide to the most in-demand programming languages and why you should learn them.', imageUrl: '', tags: ['Programming', 'Career'], author: 'Aditya Kumar', publishedAt: '2024-06-01', status: 'Published' },
-    { id: 'b2', title: 'How AI is Transforming the IT Industry', slug: 'ai-transforming-it-industry', excerpt: 'Explore how artificial intelligence is changing software development, testing, and deployment practices.', imageUrl: '', tags: ['AI', 'Technology'], author: 'Priya Sharma', publishedAt: '2024-05-15', status: 'Published' },
-    { id: 'b3', title: 'From Student to Software Engineer: Success Story', slug: 'student-to-software-engineer', excerpt: 'Read how our graduates successfully transitioned from college to top IT companies.', imageUrl: '', tags: ['Placement', 'Success Story'], author: 'Kavitha R.', publishedAt: '2024-05-01', status: 'Published' }
-  ],
+  categories: [],
+  services: [],
+  partners: [],
+  abroadJobs: [],
+  abroadJobApplications: [],
+  courses: [],
+  universities: [],
+  abroadUniversities: [],
+  abroadApplications: [],
+  jobs: [],
+  employees: [],
+  projects: [],
+  placements: [],
+  testimonials: [],
+  blogs: [],
   chatbot: [
     { id: 'cb1', keyword: 'FEE DETAILS / FEES / COST / PRICE / HOW MUCH', response: 'Our course fees range from ₹5,000 to ₹28,000 depending on the course and duration. We offer flexible installment plans and early-bird scholarship discounts!', status: 'Active' },
     { id: 'cb2', keyword: 'WEB DEVELOPMENT / FULL STACK / FRONTEND / BACKEND', response: 'Our Web Development program is a 3-to-6-Month comprehensive track covering HTML, CSS, JavaScript, React, Node.js, and Databases with live industry projects.', status: 'Active' },
@@ -403,31 +169,72 @@ async function apiGet(endpoint, params = {}) {
   /* ============ PUBLIC API CALLS ============ */
 const API = {
   
-  async saveSettings(data) { return await apiPost('saveSettings', data); },
+  clearAllCaches() {
+    try {
+      Object.keys(sessionStorage).forEach(k => { if (k.startsWith('asg_cache_')) sessionStorage.removeItem(k); });
+      localStorage.setItem('asg_admin_refresh', Date.now());
+    } catch(e) {}
+  },
+
+  async saveSettings(data) {
+    const token = sessionStorage.getItem('admin_token');
+    const res = await apiPost('saveSettings', { token, ...data });
+    this.clearAllCaches();
+    if (DEMO_DATA.settings) Object.assign(DEMO_DATA.settings, data);
+    return res || { success: true, message: 'Settings saved' };
+  },
+
   async getSettings() {
     const res = await apiGet('getSettings');
     let s = (res && res.data) ? res.data : DEMO_DATA.settings;
-    
-    // Dynamic metrics overriding placeholders
-    if (DEMO_DATA.placements && DEMO_DATA.placements.length > 0) s.placements = DEMO_DATA.placements.length;
-    if (DEMO_DATA.projects && DEMO_DATA.projects.length > 0) s.projectsCompleted = DEMO_DATA.projects.length;
-    if (DEMO_DATA.courses && DEMO_DATA.courses.length > 0) s.courses = DEMO_DATA.courses.length;
-    if (DEMO_DATA.employees && DEMO_DATA.employees.length > 0) s.employees = DEMO_DATA.employees.length;
-    
     return s;
   },
 
-
-  
   async getCompanyMetrics() {
     try {
+      // 1. Fetch saved settings first to see if admin has configured specific counts
+      const settings = await this.getSettings();
+      
       const res = await apiGet('getCompanyMetrics');
-      if (res && res.data && typeof res.data === 'object') {
-        if (!DEMO_DATA.stats) DEMO_DATA.stats = {};
-        Object.assign(DEMO_DATA.stats, res.data);
-        return res.data;
-      }
-    } catch(e){}
+      const liveData = (res && res.data && typeof res.data === 'object') ? res.data : {};
+      
+      const metrics = {
+        studentsTrained: (settings.studentsTrained && settings.studentsTrained !== '') 
+          ? settings.studentsTrained 
+          : (liveData.studentsTrained && Number(liveData.studentsTrained) > 0 ? liveData.studentsTrained : '500+'),
+        placements: (settings.placements && settings.placements !== '') 
+          ? settings.placements 
+          : (liveData.placements && Number(liveData.placements) > 0 ? liveData.placements : '100+'),
+        projectsCompleted: (settings.projectsCompleted && settings.projectsCompleted !== '') 
+          ? settings.projectsCompleted 
+          : (liveData.projectsCompleted && Number(liveData.projectsCompleted) > 0 ? liveData.projectsCompleted : '50+'),
+        employees: (settings.employees && settings.employees !== '') 
+          ? settings.employees 
+          : (liveData.employees && Number(liveData.employees) > 0 ? liveData.employees : '20+'),
+        technologies: (settings.technologies && settings.technologies !== '') 
+          ? settings.technologies 
+          : (liveData.technologies || '15+'),
+        hiringPartners: (settings.hiringPartners && settings.hiringPartners !== '') 
+          ? settings.hiringPartners 
+          : (liveData.hiringPartners || '50+'),
+        placementRate: (settings.placementRate && settings.placementRate !== '') 
+          ? settings.placementRate 
+          : (liveData.placementRate || '90%+'),
+        highestPackage: (settings.highestPackage && settings.highestPackage !== '') 
+          ? settings.highestPackage 
+          : (liveData.highestPackage || '16 LPA'),
+        rating: (settings.rating && settings.rating !== '') 
+          ? settings.rating 
+          : (liveData.rating || '4.9/5'),
+        updatedAt: liveData.updatedAt || new Date().toISOString()
+      };
+
+      if (!DEMO_DATA.stats) DEMO_DATA.stats = {};
+      Object.assign(DEMO_DATA.stats, metrics);
+      return metrics;
+    } catch(e) {
+      console.warn('getCompanyMetrics error:', e);
+    }
     return DEMO_DATA.stats || {};
   },
 
@@ -615,9 +422,29 @@ const API = {
     return res?.data || DEMO_DATA.blogs.find(b => b.slug === slug) || null;
   },
 
+  async addBlog(data) { return this.adminCreate('Blogs', data); },
+  async updateBlog(data) { return this.adminUpdate('Blogs', data.id, data); },
+  async deleteBlog(id) { return this.adminDelete('Blogs', id); },
+
+  async addTestimonial(data) { return this.adminCreate('Testimonials', data); },
+  async updateTestimonial(data) { return this.adminUpdate('Testimonials', data.id, data); },
+  async deleteTestimonial(id) { return this.adminDelete('Testimonials', id); },
+
+  async getContacts() { return this.adminGet('Contacts'); },
+  async getResumes() { return this.adminGet('Resumes'); },
+  async getCRMLeads() { return this.adminGet('CRMLeads'); },
+
   async getChatbotKB() {
     const res = await apiGet('getChatbot');
     return (res?.data?.length) ? res.data : DEMO_DATA.chatbot;
+  },
+
+  async initDatabase() {
+    return await apiGet('initializeDatabase');
+  },
+
+  async fixAllSheets() {
+    return await apiGet('fixAllSheets');
   },
 
   async search(query) {
@@ -742,28 +569,8 @@ const API = {
   async adminDelete(resource, id) {
     const token = sessionStorage.getItem('admin_token');
     const res = await apiPost('adminDelete', { resource, id, token });
-    try {
-      Object.keys(sessionStorage).forEach(k => { if (k.startsWith('asg_cache_')) sessionStorage.removeItem(k); });
-      localStorage.setItem('asg_admin_refresh', Date.now());
-    } catch(e) {}
+    this.clearAllCaches();
     return res;
-  },
-
-  async getSettings() {
-    const res = await apiGet('getSettings');
-    return res?.data || DEMO_DATA.settings;
-  },
-
-  async saveSettings(settingsData) {
-    const token = sessionStorage.getItem('admin_token');
-    const res = await apiPost('saveSettings', { token, ...settingsData });
-    try {
-      sessionStorage.removeItem('asg_cache_getSettings');
-      sessionStorage.removeItem('asg_cache_getConfig');
-      localStorage.setItem('asg_admin_refresh', Date.now());
-      if (DEMO_DATA.settings) Object.assign(DEMO_DATA.settings, settingsData);
-    } catch(e) {}
-    return res || { success: true, message: 'Settings saved' };
   },
 
   async adminGetAnalytics() {
