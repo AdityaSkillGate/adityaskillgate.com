@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Reviews & Testimonials | Aditya Skill Gate IT Solution</title>
-  <meta name="description" content="Read what our students and clients say about Aditya Skill Gate IT Solution. 4.9/5 rating with authentic student reviews and placement success stories.">
+  <title>Student &amp; Client Reviews | Aditya Skill Gate IT Solution</title>
+  <meta name="description" content="Read authentic reviews and testimonials from students and clients of Aditya Skill Gate IT Solution. 4.9/5 rating with 500+ satisfied learners and successful placements.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,17 +14,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/responsive.css">
   <style>
-    .testimonials-masonry{columns:3;gap:24px;margin-bottom:40px}
-    .testimonial-full-card{break-inside:avoid;background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-xl);padding:28px;margin-bottom:24px;transition:var(--transition);position:relative;overflow:hidden}
-    .testimonial-full-card::before{content:'"';position:absolute;top:10px;right:18px;font-size:5rem;font-family:'Outfit',sans-serif;color:var(--tech-blue);opacity:0.08;line-height:1}
-    .testimonial-full-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-    .rating-stars{color:#f59e0b;font-size:1rem;letter-spacing:2px}
-    .review-form-card{background:white;border:1px solid var(--gray-200);border-radius:24px;padding:40px;max-width:600px;margin:0 auto}
-    .star-rating-input{display:flex;gap:6px;margin-bottom:8px}
-    .star-rating-input span{font-size:1.8rem;cursor:pointer;transition:transform 0.15s}
-    .star-rating-input span:hover,.star-rating-input span.active{transform:scale(1.2)}
-    @media(max-width:991px){.testimonials-masonry{columns:2}}
-    @media(max-width:576px){.testimonials-masonry{columns:1}}
+    .testimonials-masonry{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .testimonial-card-full{background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-xl);padding:28px;transition:var(--transition);display:flex;flex-direction:column}
+    .testimonial-card-full:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent}
+    .review-form-card{background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-xl);padding:36px;max-width:640px;margin:0 auto}
+    .star-picker{display:flex;gap:8px;font-size:1.8rem;cursor:pointer}
+    .star-picker .star{color:var(--gray-300);transition:color 0.2s}
+    .star-picker .star.active{color:#f59e0b}
+    @media(max-width:991px){.testimonials-masonry{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:576px){.testimonials-masonry{grid-template-columns:1fr}}
   </style>
 
   <link rel="canonical" href="https://adityaskillgate.com/testimonials.html">
@@ -55,7 +53,7 @@
   <link rel="alternate" hreflang="ms" href="https://adityaskillgate.com/ms/testimonials.html">
   <link rel="alternate" hreflang="ta" href="https://adityaskillgate.com/ta/testimonials.html">
   <link rel="alternate" hreflang="x-default" href="https://adityaskillgate.com/testimonials.html">
-  </head>
+</head>
 <body>
 <div id="page-loader"><img src="assets/logos/logo-icon.png" class="loader-logo" alt="Aditya Skill Gate IT Solution Logo"><div class="loader-bar"><div class="loader-progress"></div></div></div>
 
@@ -77,7 +75,6 @@
           <li role="none"><a href="contact.html" class="nav-link" role="menuitem" data-i18n="nav.contact">Contact</a></li>
         </ul>
         <div class="navbar-actions">
-          
           <a href="contact.html" class="btn btn-outline btn-sm hidden-mobile">Enquire</a>
           <a href="resume.html" class="btn btn-primary btn-sm hidden-mobile"><i class="fas fa-paper-plane"></i> Apply Now</a>
           <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -101,173 +98,222 @@
     <div class="mobile-menu-footer">
       <a href="resume.html" class="btn btn-primary" style="width:100%;margin-bottom:10px;"><i class="fas fa-paper-plane"></i> Apply Now</a>
       <a href="contact.html" class="btn btn-outline" style="width:100%;margin-bottom:20px;text-align:center;"><i class="fas fa-headset"></i> Enquire</a>
-      
     </div>
   </div>
-    <h1>Testimonials & Reviews</h1>
-    <p>Don't just take our word for it — read what our students and clients have to say about us.</p>
-  </div>
-</section>
 
-<!-- Overall Stats -->
-<section style="background:var(--gradient-primary);padding:50px 0">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">⭐</div><div class="stat-number" style="color:white;font-size:2.5rem;font-weight:900">4.9/5</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Average Rating</div></div>
-      <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">💬</div><div class="stat-number counter" data-target="500">0</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Total Reviews</div></div>
-      <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">🤝</div><div class="stat-number counter" data-target="100">0</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Happy Clients</div></div>
-      <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">👍</div><div class="stat-number" style="color:white;font-size:2.5rem;font-weight:900">95%</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Would Recommend</div></div>
+  <section class="page-hero">
+    <div class="container">
+      <div class="section-badge"><i class="fas fa-star"></i> Real Feedback</div>
+      <h1>Testimonials &amp; Reviews</h1>
+      <p>Don't just take our word for it — read what our students and clients have to say about us.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section section-light">
-  <div class="container">
-    <div class="filter-chips" id="test-filters" style="margin-bottom:32px">
-      <div class="chip active" data-filter="All">All Reviews</div>
-      <div class="chip" data-filter="Student">Students</div>
-      <div class="chip" data-filter="Client">Clients</div>
+  <!-- Overall Stats -->
+  <section style="background:var(--gradient-primary);padding:50px 0">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">⭐</div><div class="stat-number" data-metric="googleRating" style="color:white;font-size:2.5rem;font-weight:900">4.9/5</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Average Rating</div></div>
+        <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">💬</div><div class="stat-number counter" data-target="500" data-metric-target="studentsTrained">0</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Total Reviews</div></div>
+        <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">🤝</div><div class="stat-number counter" data-target="100" data-metric-target="placements">0</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Happy Placements</div></div>
+        <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">👍</div><div class="stat-number" style="color:white;font-size:2.5rem;font-weight:900">95%</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Would Recommend</div></div>
+      </div>
     </div>
-    <div class="testimonials-masonry" id="testimonials-masonry"><!-- JS --></div>
-  </div>
-</section>
+  </section>
 
-<!-- Leave a Review -->
-<section class="section section-gray">
-  <div class="container">
-    <div class="section-header" data-animate><div class="section-badge"><i class="fas fa-edit"></i> Share Your Experience</div><h2 class="section-title">Leave a <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Review</span></h2></div>
-    <div class="review-form-card" data-animate>
-      <form id="review-form">
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Your Name *</label><input type="text" class="form-control" name="name" placeholder="Full name" required><span class="form-error"></span></div>
-          <div class="form-group"><label class="form-label">Your Role</label><input type="text" class="form-control" name="role" placeholder="e.g. Student, Web Developer, Client"></div>
-        </div>
-        <div class="form-group"><label class="form-label">Your Review *</label><textarea class="form-control" name="message" rows="4" placeholder="Tell us about your experience with Aditya Skill Gate..." required></textarea><span class="form-error"></span></div>
-        <div class="form-group">
-          <label class="form-label">Rating</label>
-          <div class="star-rating-input" id="star-input">
-            <span data-val="1">⭐</span><span data-val="2">⭐</span><span data-val="3">⭐</span><span data-val="4">⭐</span><span data-val="5">⭐</span>
+  <section class="section section-light">
+    <div class="container">
+      <div class="filter-chips" id="test-filters" style="margin-bottom:32px">
+        <div class="chip active" data-filter="All">All Reviews</div>
+        <div class="chip" data-filter="Student">Students</div>
+        <div class="chip" data-filter="Client">Clients</div>
+      </div>
+      <div class="testimonials-masonry" id="testimonials-grid"><!-- JS --></div>
+    </div>
+  </section>
+
+  <!-- Leave Review -->
+  <section class="section section-gray">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <div class="section-badge"><i class="fas fa-pen"></i> Your Feedback</div>
+        <h2 class="section-title">Share Your <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Experience</span></h2>
+        <p class="section-subtitle">Trained with us or worked on a project? We'd love to hear from you.</p>
+      </div>
+      <div class="review-form-card" data-animate>
+        <form id="review-form">
+          <div class="form-group">
+            <label class="form-label">Your Name <span style="color:#ef4444">*</span></label>
+            <input type="text" class="form-control" name="name" placeholder="e.g. Priya Sharma" required>
+            <span class="form-error"></span>
           </div>
-          <input type="hidden" name="rating" id="rating-hidden" value="5">
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center"><i class="fas fa-paper-plane"></i> Submit Review</button>
-      </form>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Role / Designation <span style="color:#ef4444">*</span></label>
+              <input type="text" class="form-control" name="role" placeholder="e.g. Student / Software Engineer" required>
+              <span class="form-error"></span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Company / Course</label>
+              <input type="text" class="form-control" name="company" placeholder="e.g. TCS / Full Stack Web Dev">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Rating <span style="color:#ef4444">*</span></label>
+            <div class="star-picker" id="star-picker">
+              <span class="star active" data-val="1">★</span>
+              <span class="star active" data-val="2">★</span>
+              <span class="star active" data-val="3">★</span>
+              <span class="star active" data-val="4">★</span>
+              <span class="star active" data-val="5">★</span>
+            </div>
+            <input type="hidden" name="rating" id="rating-val" value="5">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your Review <span style="color:#ef4444">*</span></label>
+            <textarea class="form-control" name="message" rows="4" placeholder="Tell us about your experience with training, placement, or project delivery..." required></textarea>
+            <span class="form-error"></span>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%"><i class="fas fa-paper-plane"></i> Submit Review</button>
+        </form>
+      </div>
     </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate IT Solution Logo">
+            <div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2;text-align:center">ADITYA SKILL GATE<br><span style="color:#6CCB2F">IT SOLUTION</span></div>
+          </div>
+          <p><span data-config="description">Empowering careers through premium IT training, services, and guaranteed placement support.</span></p>
+          <div class="footer-socials">
+            <a href="https://www.linkedin.com/in/aditya-skill-gate-it-solution-5446b63a8" data-config-href="linkedin" target="_blank" class="footer-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/adityaskillgate.official/" data-config-href="instagram" target="_blank" class="footer-social" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@AdityaSkillGateITSolution" data-config-href="youtube" target="_blank" class="footer-social" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://wa.me/916382604808" data-config="whatsapp" target="_blank" class="footer-social" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="mailto:Adityaskillgateitsolution@gmail.com" data-config="email" class="footer-social" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <div class="footer-links">
+            <a href="index.html" data-i18n="nav.home">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="services.html" data-i18n="nav.services">Services</a>
+            <a href="courses.html">Courses</a>
+            <a href="jobs.html">Careers</a>
+            <a href="contact.html" data-i18n="nav.contact">Contact</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <div class="footer-links">
+            <a href="placements.html">Placements</a>
+            <a href="projects.html">Projects</a>
+            <a href="faq.html">FAQ</a>
+            <a href="resume.html">Upload Resume</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Local Hubs</h4>
+          <div class="footer-links">
+            <a href="it-training-sankarankovil.html">IT Training Sankarankovil</a>
+            <a href="software-company-sankarankovil.html">Software Company Sankarankovil</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span class="current-year" data-metric="currentYear"></span> Aditya Skill Gate IT Solution.</p>
+        <p>
+          <a href="privacy.html" style="color:rgba(255,255,255,0.5)">Privacy</a> &nbsp;&middot;&nbsp; 
+          <a href="terms.html" style="color:rgba(255,255,255,0.5)">Terms</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="mobile-sticky-cta" id="mobileStickyCta">
+    <a href="tel:+916382604808" class="sticky-cta-btn bg-navy text-white"><i class="fas fa-phone-alt"></i> Call</a>
+    <a href="https://wa.me/916382604808?text=Hi!%20I'm%20interested%20in%20Aditya%20Skill%20Gate%20courses%20and%20services" target="_blank" class="sticky-cta-btn bg-green text-white"><i class="fab fa-whatsapp"></i> Chat</a>
+    <a href="resume.html" class="sticky-cta-btn bg-blue text-white"><i class="fas fa-paper-plane"></i> Apply</a>
   </div>
-</section>
 
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate IT Solution Logo">
-          <div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2;text-align:center">ADITYA SKILL GATE<br><span style="color:#6CCB2F">IT SOLUTION</span></div>
-        </div>
-        <p><span data-config="description">Empowering careers through premium IT training, services, and guaranteed placement support.</span></p>
-        <div class="footer-socials">
-          <a href="https://www.linkedin.com/in/aditya-skill-gate-it-solution-5446b63a8" data-config-href="linkedin" target="_blank" class="footer-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://www.instagram.com/adityaskillgate.official/" data-config-href="instagram" target="_blank" class="footer-social" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.youtube.com/@AdityaSkillGateITSolution" data-config-href="youtube" target="_blank" class="footer-social" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-          <a href="https://wa.me/916382604808" data-config="whatsapp" target="_blank" class="footer-social" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          <a href="mailto:Adityaskillgateitsolution@gmail.com" data-config="email" class="footer-social" aria-label="Email"><i class="fas fa-envelope"></i></a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <div class="footer-links">
-          <a href="index.html" data-i18n="nav.home">Home</a>
-          <a href="about.html">About Us</a>
-          <a href="services.html" data-i18n="nav.services">Services</a>
-          <a href="courses.html">Courses</a>
-          <a href="jobs.html">Careers</a>
-          <a href="contact.html" data-i18n="nav.contact">Contact</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Resources</h4>
-        <div class="footer-links">
-          <a href="placements.html">Placements</a>
-          <a href="projects.html">Projects</a>
-          <a href="faq.html">FAQ</a>
-          <a href="resume.html">Upload Resume</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Local Hubs</h4>
-        <div class="footer-links">
-          <a href="it-training-sankarankovil.html">IT Training Sankarankovil</a>
-          <a href="software-company-sankarankovil.html">Software Company Sankarankovil</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; <span class="current-year" data-metric="currentYear"></span> Aditya Skill Gate IT Solution.</p>
-      <p>
-        <a href="privacy.html" style="color:rgba(255,255,255,0.5)">Privacy</a> &nbsp;&middot;&nbsp; 
-        <a href="terms.html" style="color:rgba(255,255,255,0.5)">Terms</a>
-      </p>
-    </div>
-  </div>
-</footer>
+  <div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808?text=Hi!%20I%20want%20to%20know%20more" target="_blank" class="whatsapp-option">💬 Chat Now</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
+  <div id="back-to-top"><i class="fas fa-arrow-up"></i></div><div id="toast-container"></div>
+  <script src="js/api.js?v=7"></script><script src="js/main.js?v=7"></script>
+  <script>
+  const COLORS=['#0096D6','#0D1B4C','#6CCB2F','#f59e0b','#8b5cf6','#ef4444'];
+  let allTestimonials=[];
 
-<div class="mobile-sticky-cta" id="mobileStickyCta">
-  <a href="tel:+916382604808" class="sticky-cta-btn bg-navy text-white"><i class="fas fa-phone-alt"></i> Call</a>
-  <a href="https://wa.me/916382604808?text=Hi!%20I'm%20interested%20in%20Aditya%20Skill%20Gate%20courses%20and%20services" target="_blank" class="sticky-cta-btn bg-green text-white"><i class="fab fa-whatsapp"></i> Chat</a>
-  <a href="resume.html" class="sticky-cta-btn bg-blue text-white"><i class="fas fa-paper-plane"></i> Apply</a>
-</div>
+  function initials(n){return(n||'S').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase()}
 
-<div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808" data-config="whatsapp" target="_blank" class="whatsapp-option">💬 Chat Now</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
-<div id="back-to-top"><i class="fas fa-arrow-up"></i></div><div id="toast-container"></div>
-<script src="js/api.js?v=4"></script><script src="js/main.js"></script>
-<script>
-const COLORS=['#0096D6','#0D1B4C','#6CCB2F','#f59e0b','#8b5cf6','#ef4444'];
-function initials(n){return(n||'S').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase()}
-function renderTestimonials(list){
-  const g=document.getElementById('testimonials-masonry');if(!g)return;
-  g.innerHTML=list.map((t,i)=>`
-    <div class="testimonial-full-card" data-type="${t.type||'Student'}">
-      <div class="rating-stars">${'★'.repeat(parseInt(t.rating)||5)}</div>
-      <p style="color:var(--gray-600);line-height:1.8;margin:12px 0;font-style:italic">"${t.message}"</p>
-      <div style="display:flex;gap:12px;align-items:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-100)">
-        <div style="width:44px;height:44px;border-radius:50%;background:${COLORS[i%COLORS.length]};display:flex;align-items:center;justify-content:center;color:white;font-weight:700;flex-shrink:0">${initials(t.name)}</div>
-        <div><div style="font-weight:700;color:var(--navy);font-size:0.9rem">${t.name}</div><div style="font-size:0.775rem;color:var(--gray-400)">${t.role} · ${t.company}</div></div>
-        <div style="margin-left:auto"><span style="padding:4px 10px;background:${t.type==='Client'?'rgba(0,150,214,0.08)':'rgba(108,203,47,0.08)'};border-radius:100px;font-size:0.7rem;font-weight:600;color:${t.type==='Client'?'var(--tech-blue)':'var(--accent-green-dark)'}">${t.type||'Student'}</span></div>
-      </div>
-    </div>`).join('');
-}
+  function renderTestimonials(list){
+    const g=document.getElementById('testimonials-grid');if(!g)return;
+    if (!list.length) {
+      g.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 48px 24px; background: white; border-radius: 16px; border: 1.5px dashed var(--gray-200);"><div style="font-size: 3rem; margin-bottom: 12px;">⭐</div><h3 style="color: var(--navy); margin-bottom: 8px;">Reviews Updating</h3><p style="color: var(--gray-500); max-width: 480px; margin: 0 auto 20px; font-size: 0.9rem;">Student and client reviews are updated directly from our verified review submissions.</p></div>';
+      return;
+    }
+    g.innerHTML=list.map((t,i)=>{
+      const stars='★'.repeat(t.rating||5)+'☆'.repeat(5-(t.rating||5));
+      const bg=COLORS[i%COLORS.length];
+      return `
+      <div class="testimonial-card-full" data-animate data-delay="${(i%3+1)*80}" data-type="${t.type||'Student'}">
+        <div style="color:#f59e0b;font-size:1.1rem;margin-bottom:12px">${stars}</div>
+        <p style="font-size:0.875rem;color:var(--gray-600);line-height:1.8;flex:1;margin-bottom:20px;font-style:italic">"${t.message}"</p>
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="width:44px;height:44px;border-radius:50%;background:${bg};display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:0.95rem;flex-shrink:0">${initials(t.name)}</div>
+          <div><div style="font-weight:700;color:var(--navy);font-size:0.9rem">${t.name}</div><div style="font-size:0.775rem;color:var(--gray-400)">${t.role}${t.company?' · '+t.company:''}</div></div>
+        </div>
+      </div>`;
+    }).join('');
+    document.querySelectorAll('[data-animate]').forEach(el=>{const obs=new IntersectionObserver(e=>{e.forEach(e=>e.isIntersecting&&(e.target.classList.add('animated'),obs.unobserve(e.target)))},{threshold:0.1});obs.observe(el);});
+  }
 
-// Star rating input
-let selectedRating=5;
-document.getElementById('star-input')?.querySelectorAll('span').forEach(s=>{
-  s.addEventListener('click',()=>{
-    selectedRating=parseInt(s.dataset.val);
-    document.getElementById('rating-hidden').value=selectedRating;
-    document.querySelectorAll('#star-input span').forEach((sp,j)=>sp.classList.toggle('active',j<selectedRating));
+  // Star Picker
+  let selectedRating=5;
+  document.querySelectorAll('.star-picker .star').forEach(star=>{
+    star.addEventListener('click',()=>{
+      selectedRating=parseInt(star.dataset.val);
+      document.getElementById('rating-val').value=selectedRating;
+      document.querySelectorAll('.star-picker .star').forEach(s=>{
+        s.classList.toggle('active',parseInt(s.dataset.val)<=selectedRating);
+      });
+    });
   });
-});
-document.querySelectorAll('#star-input span').forEach(s=>s.classList.add('active'));
 
-document.getElementById('test-filters')?.addEventListener('filterChange',e=>{
-  const val=e.detail.value;
-  document.querySelectorAll('.testimonial-full-card').forEach(card=>{
-    card.style.display=(val==='All'||card.dataset.type===val)?'':'none';
+  // Filter
+  document.querySelectorAll('#test-filters .chip').forEach(chip=>{
+    chip.addEventListener('click',()=>{
+      document.querySelectorAll('#test-filters .chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      const f=chip.dataset.filter;
+      renderTestimonials(f==='All'?allTestimonials:allTestimonials.filter(t=>(t.type||'Student').toLowerCase()===f.toLowerCase()));
+    });
   });
-});
 
-document.getElementById('review-form')?.addEventListener('submit',async(e)=>{
-  e.preventDefault();if(!validateForm(e.target))return;
-  const btn=e.target.querySelector('[type=submit]');const orig=btn.innerHTML;
-  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Submitting...';btn.disabled=true;
-  const data={...Object.fromEntries(new FormData(e.target)),subject:'New Review/Testimonial'};
-  const res=await API.submitContact(data);
-  btn.innerHTML=orig;btn.disabled=false;
-  if(res?.success!==false){showToast('Thank you for your review! We\'ll publish it soon.','success');e.target.reset();}
-  else showToast(res?.message||'Error. Please try again.','error');
-});
+  // Form Submit
+  document.getElementById('review-form')?.addEventListener('submit',async(e)=>{
+    e.preventDefault();
+    const btn=e.target.querySelector('button[type="submit"]');
+    btn.disabled=true;btn.textContent='Submitting...';
+    const data=Object.fromEntries(new FormData(e.target));
+    data.subject='testimonial';
+    const res=await API.submitContact(data);
+    btn.disabled=false;btn.textContent='Submit Review';
+    if(res.success){
+      showToast('Thank you! Your review has been submitted.','success');
+      e.target.reset();
+    }else{
+      showToast(res.message||'Failed to submit review.','error');
+    }
+  });
 
-API.getTestimonials().then(renderTestimonials);
-</script>
+  API.getTestimonials().then(data=>{allTestimonials=data;renderTestimonials(data);});
+  </script>
   <script src="js/motion.js"></script>
   <script src="js/i18n.js"></script>
-</body></html>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Our Projects | Aditya Skill Gate IT Solution</title>
-  <meta name="description" content="Explore our completed IT projects: web apps, mobile apps, AI solutions, e-commerce platforms, and more. Aditya Skill Gate IT Solution, Tamil Nadu.">
+  <meta name="description" content="Explore the portfolio of successful IT projects delivered by Aditya Skill Gate IT Solution. Web applications, mobile apps, AI solutions, and digital transformation for clients across industries.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +12,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/style.css?v=8"><link rel="stylesheet" href="css/responsive.css?v=8">
+  <style>
+    .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+    .project-card{background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-xl);overflow:hidden;transition:var(--transition);display:flex;flex-direction:column}
+    .project-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-xl);border-color:transparent}
+    .project-card-thumb{height:180px;position:relative;display:flex;align-items:center;justify-content:center;font-size:3.5rem;overflow:hidden}
+    .project-card-thumb img{width:100%;height:100%;object-fit:cover}
+    .project-card-body{padding:24px;flex:1;display:flex;flex-direction:column}
+    .project-card-cat{display:inline-block;padding:4px 12px;background:rgba(0,150,214,0.1);color:var(--tech-blue);border-radius:100px;font-size:0.75rem;font-weight:700;margin-bottom:10px}
+    .project-card-title{font-size:1.15rem;font-weight:800;color:var(--navy);margin-bottom:8px}
+    .project-card-client{font-size:0.8rem;color:var(--gray-400);margin-bottom:12px}
+    .project-card-desc{font-size:0.875rem;color:var(--gray-500);line-height:1.7;flex:1;margin-bottom:16px}
+    .project-tech-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+    .project-tech-tag{padding:3px 10px;background:var(--light-gray);border-radius:4px;font-size:0.75rem;font-weight:600;color:var(--gray-600)}
+    @media(max-width:991px){.projects-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:576px){.projects-grid{grid-template-columns:1fr}}
+  </style>
 
   <link rel="canonical" href="https://adityaskillgate.com/projects.html">
   <meta property="og:url" content="https://adityaskillgate.com/projects.html">
@@ -42,7 +58,7 @@
   <link rel="alternate" hreflang="ms" href="https://adityaskillgate.com/ms/projects.html">
   <link rel="alternate" hreflang="ta" href="https://adityaskillgate.com/ta/projects.html">
   <link rel="alternate" hreflang="x-default" href="https://adityaskillgate.com/projects.html">
-  </head>
+</head>
 <body>
 <div id="page-loader"><img src="assets/logos/logo-icon.png" class="loader-logo" alt="Aditya Skill Gate IT Solution Logo"><div class="loader-bar"><div class="loader-progress"></div></div></div>
 
@@ -59,12 +75,11 @@
           <li role="none"><a href="services.html" class="nav-link" role="menuitem" data-i18n="nav.services">Services</a></li>
           <li role="none"><a href="courses.html" class="nav-link" role="menuitem">Courses</a></li>
           <li role="none"><a href="jobs.html" class="nav-link" role="menuitem">Careers</a></li>
-          <li role="none"><a href="projects.html" class="nav-link" role="menuitem">Projects</a></li>
+          <li role="none"><a href="projects.html" class="nav-link active" role="menuitem">Projects</a></li>
           <li role="none"><a href="placements.html" class="nav-link" role="menuitem">Placements</a></li>
           <li role="none"><a href="contact.html" class="nav-link" role="menuitem" data-i18n="nav.contact">Contact</a></li>
         </ul>
         <div class="navbar-actions">
-          
           <a href="contact.html" class="btn btn-outline btn-sm hidden-mobile">Enquire</a>
           <a href="resume.html" class="btn btn-primary btn-sm hidden-mobile"><i class="fas fa-paper-plane"></i> Apply Now</a>
           <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -81,14 +96,13 @@
       <a href="services.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-concierge-bell" style="width:20px;"></i> Services</a>
       <a href="courses.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-laptop-code" style="width:20px;"></i> Courses</a>
       <a href="jobs.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-briefcase" style="width:20px;"></i> Careers</a>
-      <a href="projects.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-project-diagram" style="width:20px;"></i> Projects</a>
+      <a href="projects.html" class="mobile-nav-link active" role="menuitem"><i class="fas fa-project-diagram" style="width:20px;"></i> Projects</a>
       <a href="placements.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-user-graduate" style="width:20px;"></i> Placements</a>
       <a href="contact.html" class="mobile-nav-link" role="menuitem"><i class="fas fa-envelope" style="width:20px;"></i> Contact Us</a>
     </nav>
     <div class="mobile-menu-footer">
       <a href="resume.html" class="btn btn-primary" style="width:100%;margin-bottom:10px;"><i class="fas fa-paper-plane"></i> Apply Now</a>
       <a href="contact.html" class="btn btn-outline" style="width:100%;margin-bottom:20px;text-align:center;"><i class="fas fa-headset"></i> Enquire</a>
-      
     </div>
   </div>
 
@@ -104,9 +118,9 @@
 <section style="background:var(--gradient-primary);padding:50px 0">
   <div class="container">
     <div class="stats-grid">
-      <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">💼</div><div class="stat-number counter" data-target="50">0</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Projects Done</div></div>
-      <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">😊</div><div class="stat-number counter" data-target="30">0</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Happy Clients</div></div>
-      <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">🌐</div><div class="stat-number counter" data-target="5">0</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Industries</div></div>
+      <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">💼</div><div class="stat-number counter" data-target="50" data-metric-target="projectsCompleted">0</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Projects Done</div></div>
+      <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">😊</div><div class="stat-number counter" data-target="30" data-metric-target="clients">0</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Happy Clients</div></div>
+      <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">🌐</div><div class="stat-number counter" data-target="5" data-metric-target="industries">0</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">Industries</div></div>
       <div class="stat-card" style="background:rgba(255,255,255,0.08)"><div class="stat-icon" style="background:rgba(108,203,47,0.2)">⏰</div><div class="stat-number" style="color:white;font-size:2.5rem;font-weight:900">100%</div><div class="stat-label" style="color:rgba(255,255,255,0.7)">On-Time Delivery</div></div>
     </div>
   </div>
@@ -131,13 +145,11 @@
   <div class="modal" style="max-width:640px">
     <div class="modal-header"><div class="modal-title" id="proj-modal-title">Project Details</div><button class="modal-close" onclick="closeModal('project-modal')"><i class="fas fa-times"></i></button></div>
     <div class="modal-body">
-      
-        <div id="proj-modal-img-wrap" style="width:100%;height:300px;border-radius:var(--border-radius);margin-bottom:20px;overflow:hidden;">
-          <img id="proj-modal-img" src="" style="width:100%;height:100%;object-fit:cover;display:none;">
-          <div id="proj-modal-placeholder" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;background:var(--a-border);">💻</div>
-        </div>
-        <div id="proj-modal-gallery" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;"></div>
-
+      <div id="proj-modal-img-wrap" style="width:100%;height:300px;border-radius:var(--border-radius);margin-bottom:20px;overflow:hidden;">
+        <img id="proj-modal-img" src="" style="width:100%;height:100%;object-fit:cover;display:none;">
+        <div id="proj-modal-placeholder" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;background:var(--a-border);">💻</div>
+      </div>
+      <div id="proj-modal-gallery" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;"></div>
       <p id="proj-modal-desc" style="color:var(--gray-600);line-height:1.8;margin-bottom:16px"></p>
       <div style="margin-bottom:16px"><strong style="color:var(--navy)">Client:</strong> <span id="proj-modal-client" style="color:var(--gray-500)"></span></div>
       <div style="margin-bottom:16px"><strong style="color:var(--navy)">Tech Stack:</strong><div id="proj-modal-tech" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"></div></div>
@@ -216,81 +228,76 @@
   <a href="resume.html" class="sticky-cta-btn bg-blue text-white"><i class="fas fa-paper-plane"></i> Apply</a>
 </div>
 
-<div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808?text=Hi!%20I%20have%20a%20project" target="_blank" class="whatsapp-option">🛠️ Project Enquiry</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
+<div class="whatsapp-float"><div class="whatsapp-menu" id="wa-menu"><a href="https://wa.me/916382604808?text=Hi!%20I%20have%20a%20project%20enquiry" target="_blank" class="whatsapp-option">💻 Discuss Project</a></div><div class="whatsapp-btn" id="wa-btn"><i class="fab fa-whatsapp"></i></div></div>
 <div id="back-to-top"><i class="fas fa-arrow-up"></i></div><div id="toast-container"></div>
-<script src="js/api.js?v=4"></script><script src="js/main.js"></script>
+<script src="js/api.js?v=8"></script><script src="js/main.js?v=8"></script>
 <script>
 const COLORS=['#0096D6','#0D1B4C','#6CCB2F','#f59e0b','#8b5cf6','#ef4444'];
-const ICONS={'Web Development':'🌐','Enterprise Software':'🏢','Mobile App':'📱','AI/ML':'🤖','EdTech':'🎓','Real Estate':'🏠'};
+const ICONS={'Web Development':'🌐','Enterprise Software':'🏢','Mobile App':'📱','AI/ML':'🤖','EdTech':'🎓'};
 let allProjects=[];
 
-function renderProjects(projects){
-    const g=document.getElementById('all-projects-grid');if(!g)return;
-    g.innerHTML=projects.map((p,i)=>{
-      const tStack = p.techStack || p.screenshots || p.technology || '';
-      const imgUrl = p.screenshotUrl || p.imageUrl || p.results || '';
-      return `
-      <div class="project-card" data-animate data-delay="${(i%3+1)*80}" data-category="${p.category}">
-        <div class="project-img" style="${imgUrl ? `background:url('${imgUrl}') center/cover;` : `background:linear-gradient(135deg,${COLORS[i%COLORS.length]}cc,${COLORS[(i+2)%COLORS.length]}cc)`}">
-          ${imgUrl ? '' : `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:5rem">${ICONS[p.category]||'🌐'}</div>`}
-          <div class="project-overlay"><button class="btn btn-primary btn-sm" onclick="viewProject('${p.id}')">View Details</button></div>
-        </div>
-        <div class="project-body">
-          <div class="project-category">${p.category}</div>
-          <h3>${p.title}</h3>
-          <p style="font-size:0.85rem;color:var(--gray-500);margin-bottom:12px">${(p.description||'').substring(0,90)}...</p>
-          <div class="project-tech">${(Array.isArray(tStack)?tStack:String(tStack).split(',')).slice(0,4).map(t=>`<span class="tech-tag">${t.trim()}</span>`).join('')}</div>
-        </div>
-      </div>`}).join('');
-    document.querySelectorAll('[data-animate]').forEach(el=>{const obs=new IntersectionObserver(e=>{e.forEach(e=>e.isIntersecting&&(e.target.classList.add('animated'),obs.unobserve(e.target)))} ,{threshold:0.1});obs.observe(el);});
+function renderProjects(list){
+  const g=document.getElementById('all-projects-grid');if(!g)return;
+  if (!list.length) {
+    g.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 48px 24px; background: white; border-radius: 16px; border: 1.5px dashed var(--gray-200);"><div style="font-size: 3rem; margin-bottom: 12px;">💻</div><h3 style="color: var(--navy); margin-bottom: 8px;">Projects Updating</h3><p style="color: var(--gray-500); max-width: 480px; margin: 0 auto 20px; font-size: 0.9rem;">We are regularly showcasing client deliveries and student capstone projects.</p></div>';
+    return;
   }
-  
-  
+  g.innerHTML=list.map((p,i)=>{
+    const icon=ICONS[p.category]||'💻';
+    const bg=COLORS[i%COLORS.length];
+    const techTags=(p.technologies||p.techStack||'').split(',').filter(Boolean).map(t=>`<span class="project-tech-tag">${t.trim()}</span>`).join('');
+    return `
+    <div class="project-card" data-animate data-delay="${(i%3+1)*80}" data-cat="${p.category}">
+      <div class="project-card-thumb" style="background:${bg}">
+        ${p.featuredImage ? `<img src="${p.featuredImage}" alt="${p.title}">` : `<span>${icon}</span>`}
+      </div>
+      <div class="project-card-body">
+        <div><span class="project-card-cat">${p.category||'Project'}</span></div>
+        <div class="project-card-title">${p.title}</div>
+        <div class="project-card-client"><i class="fas fa-building" style="margin-right:4px"></i>${p.clientName||'Client Project'}</div>
+        <p class="project-card-desc">${(p.description||'').substring(0,100)}...</p>
+        <div class="project-tech-tags">${techTags}</div>
+        <button class="btn btn-outline btn-sm" onclick="showProjectModal(${i})"><i class="fas fa-eye"></i> View Details</button>
+      </div>
+    </div>`;
+  }).join('');
+  document.querySelectorAll('[data-animate]').forEach(el=>{const obs=new IntersectionObserver(e=>{e.forEach(e=>e.isIntersecting&&(e.target.classList.add('animated'),obs.unobserve(e.target)))},{threshold:0.1});obs.observe(el);});
+}
 
-window.viewProject=function(id){
-    const p=allProjects.find(x=>x.id===id);if(!p)return;
-    document.getElementById('proj-modal-title').textContent=p.title;
-    document.getElementById('proj-modal-desc').textContent=p.description||'';
-    document.getElementById('proj-modal-client').textContent=p.clientName||'Confidential';
-    
-    const imgEl = document.getElementById('proj-modal-img');
-    const placeholder = document.getElementById('proj-modal-placeholder');
-    if (p.image || p.screenshotUrl || p.imageUrl) {
-      imgEl.src = p.image || p.screenshotUrl || p.imageUrl;
-      imgEl.style.display = 'block';
-      placeholder.style.display = 'none';
-    } else {
-      imgEl.style.display = 'none';
-      placeholder.style.display = 'flex';
-      const i = allProjects.indexOf(p);
-      placeholder.style.background = `linear-gradient(135deg,${COLORS[i%COLORS.length]},${COLORS[(i+2)%COLORS.length]})`;
-    }
-    
-    const galleryHtml = p.gallery ? String(p.gallery).split(',').filter(u=>u.trim()).map(url => `<img src="${url.trim()}" style="width:100%;height:120px;object-fit:cover;border-radius:8px;">`).join('') : '';
-    document.getElementById('proj-modal-gallery').innerHTML = galleryHtml;
+function showProjectModal(index){
+  const p=allProjects[index];if(!p)return;
+  document.getElementById('proj-modal-title').textContent=p.title;
+  document.getElementById('proj-modal-desc').textContent=p.description;
+  document.getElementById('proj-modal-client').textContent=p.clientName||'Aditya Skill Gate';
+  const imgWrap = document.getElementById('proj-modal-img');
+  const phWrap = document.getElementById('proj-modal-placeholder');
+  if (p.featuredImage) {
+    imgWrap.src = p.featuredImage;
+    imgWrap.style.display = 'block';
+    if(phWrap) phWrap.style.display = 'none';
+  } else {
+    imgWrap.style.display = 'none';
+    if(phWrap) phWrap.style.display = 'flex';
+  }
+  const techDiv=document.getElementById('proj-modal-tech');
+  techDiv.innerHTML=(p.technologies||p.techStack||'').split(',').filter(Boolean).map(t=>`<span class="project-tech-tag" style="background:var(--tech-blue);color:white">${t.trim()}</span>`).join('');
+  const link=document.getElementById('proj-modal-link');
+  if(p.liveUrl){link.href=p.liveUrl;link.style.display='inline-flex'}else{link.style.display='none'}
+  openModal('project-modal');
+}
 
-    const tStack = p.technologies || p.techStack || p.screenshots || p.technology || '';
-    document.getElementById('proj-modal-tech').innerHTML=String(tStack).split(',').filter(t=>t.trim()).map(t=>`<span class="tech-tag">${t.trim()}</span>`).join('');
-    
-    const link=document.getElementById('proj-modal-link');
-    if(p.liveUrl && p.liveUrl !== '#') {
-      link.href=p.liveUrl;
-      link.style.display='inline-flex';
-    } else {
-      link.style.display='none';
-    }
-    openModal('project-modal');
-  };
-
-  document.getElementById('project-filters')?.addEventListener('filterChange',e=>{
-  const val=e.detail.value;
-  document.querySelectorAll('.project-card').forEach(card=>{
-    card.style.display=(val==='All'||card.dataset.category===val)?'':'none';
+document.querySelectorAll('#project-filters .chip').forEach(chip=>{
+  chip.addEventListener('click',()=>{
+    document.querySelectorAll('#project-filters .chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    const f=chip.dataset.filter;
+    renderProjects(f==='All'?allProjects:allProjects.filter(p=>p.category===f));
   });
 });
 
-API.getProjects().then(p=>{allProjects=p;renderProjects(p);});
+API.getProjects().then(data=>{allProjects=data;renderProjects(data);});
 </script>
-  <script src="js/motion.js"></script>
-  <script src="js/i18n.js"></script>
-</body></html>
+<script src="js/motion.js"></script>
+<script src="js/i18n.js"></script>
+</body>
+</html>
