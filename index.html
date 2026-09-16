@@ -137,8 +137,8 @@
         <li><a href="services.html" class="nav-link">Services</a></li>
         <li><a href="courses.html" class="nav-link">Courses</a></li>
         <li><a href="jobs.html" class="nav-link">Careers</a></li>
-        <li><a href="projects.html" class="nav-link">Projects</a></li>
-        <li><a href="placements.html" class="nav-link">Placements</a></li>
+        <li><a href="projects.html" class="nav-link">Clients</a></li>
+        <!-- <li> <a href="placements.html" class="nav-link">Placements</a> --></li> 
         <li><a href="contact.html" class="nav-link">Contact</a></li>
       </ul>
       <div class="navbar-actions">
@@ -157,8 +157,8 @@
     <a href="services.html" class="mobile-nav-link">⚙️ Services</a>
     <a href="courses.html" class="mobile-nav-link">🎓 Courses</a>
     <a href="jobs.html" class="mobile-nav-link">💼 Careers</a>
-    <a href="projects.html" class="mobile-nav-link">🎨 Projects</a>
-    <a href="placements.html" class="mobile-nav-link">🎯 Placements</a>
+    <a href="projects.html" class="mobile-nav-link">🎨 Client Project</a>
+    <!-- <a href="placements.html" class="mobile-nav-link">🎯 Placements</a> -->
     <a href="contact.html" class="mobile-nav-link">📞 Contact Us</a>
   </nav>
   <div class="mobile-menu-footer">
@@ -361,7 +361,7 @@
       <button class="slider-btn slider-next" id="placement-next"><i class="fas fa-chevron-right"></i></button>
     </div>
     <div style="text-align:center;margin-top:40px">
-      <a href="placements.html" class="btn btn-secondary btn-lg"><i class="fas fa-trophy"></i> View All Placements</a>
+      <!-- <a href="placements.html" class="btn btn-secondary btn-lg"><i class="fas fa-trophy"></i> View All Placements</a> -->
     </div>
   </div>
 </section>
@@ -515,7 +515,7 @@
       <div class="footer-col">
         <h4>Resources</h4>
         <div class="footer-links">
-          <a href="placements.html">Placements</a>
+          <!-- <a href="placements.html">Placements</a> -->
           <a href="projects.html">Projects</a>
           <a href="faq.html">FAQ</a>
           <a href="resume.html">Upload Resume</a>
@@ -595,7 +595,8 @@ function renderCourses(courses){
     else displayList = courses; // show all on courses.html
     
     g.innerHTML=displayList.map((c,i)=>{
-      const img = c.image || c.imageUrl || '';
+      const rawImg = c.image || c.imageUrl || '';
+      const img = rawImg ? (typeof API !== 'undefined' && API.getOptimizedImageUrl ? API.getOptimizedImageUrl(rawImg, { width: 480, height: 300, quality: 80, format: 'auto' }) : rawImg) : '';
       let badge = '';
       if (c.startDate && new Date(c.startDate) > new Date()) badge = `<div class="course-badge" style="background:var(--accent-green-dark)">Starts ${new Date(c.startDate).toLocaleDateString()}</div>`;
       else if (c.category) badge = `<div class="course-badge">${c.category}</div>`;
@@ -620,7 +621,7 @@ function renderCourses(courses){
             <div><div style="font-size:0.8rem;color:var(--gray-500)">Trainer</div><div style="font-size:0.875rem;font-weight:600;color:var(--navy)">${c.trainer||'Expert Trainer'}</div></div>
           </div>
           <div class="course-footer">
-            <div class="course-fee">${c.fee ? (/^\\d/.test(c.fee.toString().trim()) ? '&#8377; ' + c.fee : c.fee) : 'Free'}</div>
+            <div class="course-fee">${c.fee ? (/^\d/.test(c.fee.toString().trim()) ? '&#8377; ' + c.fee : c.fee) : 'Free'}</div>
             <a href="contact.html?course=${encodeURIComponent(c.title)}" class="btn btn-primary btn-sm">Enroll Now</a>
           </div>
         </div>
@@ -659,7 +660,8 @@ function renderPartners(partners){
     }
     
     track.innerHTML = active.map(p => {
-      const logo = p.logo || p.logoUrl || '';
+      const rawLogo = p.logo || p.logoUrl || '';
+      const logo = rawLogo ? (typeof API !== 'undefined' && API.getOptimizedImageUrl ? API.getOptimizedImageUrl(rawLogo, { width: 140, height: 60, quality: 85, format: 'auto' }) : rawLogo) : '';
       return `
       <div class="partner-item" style="display:flex;align-items:center;gap:12px;background:white;padding:12px 22px;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 10px rgba(0,0,0,0.03);transition:var(--transition);cursor:pointer;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 20px rgba(13,27,76,0.08)';" onmouseout="this.style.transform='none';this.style.boxShadow='0 2px 10px rgba(0,0,0,0.03)';" title="${p.name} - ${p.type||'Partner'}">
         ${logo ? `<img src="${logo}" alt="${p.name}" style="max-height:36px;max-width:110px;object-fit:contain;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
@@ -702,7 +704,8 @@ function renderPartners(partners){
   const nonFeatured = placements.filter(p => p.featured !== 'true' && p.featured !== true);
   const sorted = [...featured, ...nonFeatured];
   track.innerHTML=sorted.map(p=>{
-    const photo = p.studentPhoto || p.photoUrl || p.imageUrl || '';
+    const rawPhoto = p.studentPhoto || p.photoUrl || p.imageUrl || p.photo || '';
+    const photo = rawPhoto ? (typeof API !== 'undefined' && API.getOptimizedImageUrl ? API.getOptimizedImageUrl(rawPhoto, { width: 120, height: 120, quality: 80, format: 'auto' }) : rawPhoto) : '';
     return `
     <div class="placement-card">
       <div class="placement-card-header">
@@ -740,11 +743,14 @@ function renderPartners(partners){
 }
 function renderTestimonials(testimonials){
   const track=document.getElementById('testimonials-track');if(!track)return;
-  track.innerHTML=testimonials.map(t=>`
+  track.innerHTML=testimonials.map(t=>{
+    const rawPhoto = t.photo || t.photoUrl || t.avatar || t.image || '';
+    const photo = rawPhoto ? (typeof API !== 'undefined' && API.getOptimizedImageUrl ? API.getOptimizedImageUrl(rawPhoto, { width: 100, height: 100, quality: 80, format: 'auto' }) : rawPhoto) : '';
+    return `
     <div class="testimonial-card">
       <div class="testimonial-header">
-        <div class="testimonial-avatar" style="${t.photoUrl ? `background:url('${t.photoUrl}') center/cover;` : `background:${avatarBg(t.name||'S')};display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-size:1.2rem`}">
-          ${t.photoUrl ? '' : initials(t.name||'A')}
+        <div class="testimonial-avatar" style="${photo ? `background:url('${photo}') center/cover;` : `background:${avatarBg(t.name||'S')};display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-size:1.2rem`}">
+          ${photo ? '' : initials(t.name||'A')}
         </div>
         <div class="testimonial-info">
           <div class="testimonial-name">${t.name}</div>
@@ -755,7 +761,7 @@ function renderTestimonials(testimonials){
         ${Array.from({length:5},(_,i)=>i<(t.rating||5)?'<i class="fas fa-star" style="color:var(--a-yellow)"></i>':'<i class="far fa-star" style="color:var(--a-yellow)"></i>').join('')}
       </div>
       <p class="testimonial-text">"${t.message}"</p>
-    </div>`).join('');
+    </div>`}).join('');
     
   setTimeout(()=>{
     const prev=document.getElementById('test-prev'),next=document.getElementById('test-next'),dots=document.getElementById('test-dots');
@@ -777,7 +783,8 @@ function renderTeam(employees){
     if (window.location.pathname.includes('index.html') || window.location.pathname === '/') displayList = displayList.slice(0,4);
     
     g.innerHTML=displayList.map((e,i)=>{
-      const photo = e.photo || e.photoUrl || e.imageUrl || '';
+      const rawPhoto = e.photo || e.photoUrl || e.imageUrl || '';
+      const photo = rawPhoto ? (typeof API !== 'undefined' && API.getOptimizedImageUrl ? API.getOptimizedImageUrl(rawPhoto, { width: 400, height: 400, quality: 80, format: 'auto' }) : rawPhoto) : '';
       return `
       <div class="team-card" data-animate data-delay="${(i%4+1)*80}">
         <div class="team-img" style="${photo ? `background:url('${photo}') center/cover;` : `background:linear-gradient(135deg,${COLORS[i%COLORS.length]},${COLORS[(i+2)%COLORS.length]})`}">
@@ -800,14 +807,18 @@ function renderTeam(employees){
     const featured = projects.filter(p => p.featured === 'true' || p.featured === true);
     const displayProjects = featured.length > 0 ? featured.slice(0,3) : projects.slice(0,3);
     g.innerHTML=displayProjects.map((p,i)=>{
-      const imgUrl = p.image || p.imageUrl || p.screenshotUrl || p.featuredImage || '';
+      let rawImg = p.coverImage || p.image || p.imageUrl || p.screenshotUrl || p.featuredImage || '';
+      if (rawImg && rawImg.includes('Kurunji-fun-world') && rawImg.includes('cloudinary')) {
+        rawImg = 'assets/images/kurunjifunworld.png';
+      }
+      const imgUrl = rawImg ? (typeof API !== 'undefined' && API.getOptimizedImageUrl ? API.getOptimizedImageUrl(rawImg, { width: 600, height: 380, quality: 80, format: 'auto' }) : rawImg) : '';
       const desc = p.description || (p.title + ' - Custom development and live deployment by Aditya Skill Gate.');
       const icon = PROJECT_ICONS[p.category] || '🌐';
       const bg = `linear-gradient(135deg,${COLORS[i%COLORS.length]}cc,${COLORS[(i+2)%COLORS.length]}cc)`;
       return `
       <div class="project-card" data-animate data-delay="${(i+1)*100}">
         <div class="project-img" style="background:${bg};position:relative;overflow:hidden;">
-          ${imgUrl ? `<img src="${imgUrl}" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.style.display='flex';">` : ''}
+          ${imgUrl ? `<img src="${imgUrl}" alt="${(p.title||'').replace(/"/g, '&quot;')}" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.style.display='flex';">` : ''}
           <div style="display:${imgUrl ? 'none' : 'flex'};align-items:center;justify-content:center;height:100%;font-size:4.5rem;color:white;">
             <span>${icon}</span>
           </div>

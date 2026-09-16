@@ -39,6 +39,7 @@ function doGet(e) {
       case 'getCourses': return jsonResponse({ success: true, data: getActiveCourses() });
       case 'getServices': return jsonResponse({ success: true, data: getActiveServices() });
       case 'getPartners': return jsonResponse({ success: true, data: getActivePartners() });
+      case 'getClients': return jsonResponse({ success: true, data: getActivePartners() });
       case 'getChatbot': return jsonResponse({ success: true, data: getSheetData('Chatbot').filter(r => (r.status||'Active').trim().toLowerCase() === 'active') });
       case 'getAbroadUniversities': 
       case 'getUniversities': return jsonResponse({ success: true, data: getActiveAbroadUniversities() });
@@ -46,6 +47,12 @@ function doGet(e) {
       case 'getAbroadJobs': return jsonResponse({ success: true, data: getActiveAbroadJobs() });
       case 'getEmployees': return jsonResponse({ success: true, data: getActiveEmployees() });
       case 'getProjects': return jsonResponse({ success: true, data: getCompletedProjects() });
+      case 'getClientProjects': {
+        const cId = e?.parameter?.clientId || '';
+        const cName = (e?.parameter?.clientName || '').toLowerCase();
+        const projs = getCompletedProjects().filter(p => (cId && p.clientId === cId) || (cName && (p.clientName||'').toLowerCase().includes(cName)));
+        return jsonResponse({ success: true, data: projs });
+      }
       case 'getPlacements': return jsonResponse({ success: true, data: getPublishedPlacements() });
       case 'getTimeline': return jsonResponse({ success: true, data: getSheetData('Timeline').filter(t => (t.status||'').trim().toLowerCase() === 'active').sort((a,b) => parseInt(a.sortOrder||0) - parseInt(b.sortOrder||0)) });
         case 'getTestimonials': return jsonResponse({ success: true, data: getActiveTestimonials() });
@@ -118,6 +125,10 @@ function doPost(e) {
       case 'deletePartner': return jsonResponse({ success: true, data: deleteRecord('Partners', body.id) });
       case 'deleteUniversity': return jsonResponse({ success: true, data: deleteRecord('AbroadUniversities', body.id) });
       case 'deleteAbroadJob': return jsonResponse({ success: true, data: deleteRecord('AbroadJobs', body.id) });
+      /* ===== MEDIA UPLOAD (IMAGEKIT) ===== */
+      case 'uploadMedia': return handleUploadMedia(body);
+      case 'deleteMedia': return jsonResponse({ success: deleteFromImageKit(body.fileId) });
+      case 'migrateMedia': return handleMigrateMedia(body);
 
       default: return jsonResponse({ success: false, message: 'Unknown action: ' + action }, 400);
     }
@@ -206,13 +217,37 @@ function handleAdminLogin(body) {
 }
 
 function processImageData(data, id) {
+  if (!data.imageBase64 && data.coverImage && String(data.coverImage).indexOf('data:image/') === 0) {
+    data.imageBase64 = data.coverImage;
+  }
+  if (!data.imageBase64 && data.image && String(data.image).indexOf('data:image/') === 0) {
+    data.imageBase64 = data.image;
+  }
+  if (!data.imageBase64 && data.imageUrl && String(data.imageUrl).indexOf('data:image/') === 0) {
+    data.imageBase64 = data.imageUrl;
+  }
+
   if (data.imageBase64) {
     try {
-      const filename = data.imageFilename || 'img_' + id;
-      const mimeType = data.imageMimeType || 'image/jpeg';
-      data.imageUrl = uploadFileToDrive(filename, mimeType, data.imageBase64, id);
-    } catch (e) { Logger.log('Admin image upload failed: ' + e.message); }
+      const filename = data.imageFilename || 'img_' + id + '.jpg';
+      const folder = '/aditya-skill-gate/projects/' + id + '/cover';
+      const ikResult = uploadToImageKit(data.imageBase64, filename, folder);
+      if (ikResult && ikResult.url) {
+        data.image = ikResult.url;
+        data.imageUrl = ikResult.url;
+        data.coverImage = ikResult.url;
+        data.imageKitFileId = ikResult.fileId;
+        data.imageKitFolder = ikResult.filePath;
+      }
+    } catch (e) { Logger.log('ImageKit upload error: ' + e.message); }
     delete data.imageBase64; delete data.imageFilename; delete data.imageMimeType;
+  } else {
+    const finalImg = data.coverImage || data.image || data.imageUrl || '';
+    if (finalImg) {
+      data.image = finalImg;
+      data.coverImage = finalImg;
+      data.imageUrl = finalImg;
+    }
   }
 }
 
@@ -638,7 +673,7 @@ const SHEET_HEADERS = {
   Jobs: ['id', 'title', 'category', 'type', 'company', 'location', 'country', 'salary', 'experience', 'skills', 'description', 'deadline', 'status', 'featured', 'createdAt', 'updatedAt'],
   AbroadJobs: ['id', 'title', 'company', 'location', 'type', 'experience', 'salary', 'benefits', 'requirements', 'closingDate', 'applyLink', 'status', 'featured', 'createdAt', 'updatedAt'],
   Employees: ['id', 'name', 'designation', 'department', 'photo', 'bio', 'skills', 'email', 'linkedin', 'joinDate', 'status', 'featured', 'createdAt', 'updatedAt'],
-  Projects: ['id', 'title', 'category', 'clientName', 'clientType', 'description', 'technologies', 'image', 'gallery', 'liveUrl', 'status', 'featured', 'completedDate', 'createdAt', 'updatedAt'],
+  Projects: ['id', 'title', 'category', 'clientName', 'clientType', 'description', 'technologies', 'image', 'gallery', 'liveUrl', 'status', 'featured', 'completedDate', 'clientId', 'coverImage', 'imageKitFileId', 'imageKitFolder', 'imageAlt', 'challenge', 'solution', 'features', 'results', 'createdAt', 'updatedAt'],
   Placements: ['id', 'studentName', 'courseId', 'courseName', 'companyName', 'designation', 'package', 'placementDate', 'year', 'studentPhoto', 'testimonial', 'status', 'featured', 'createdAt', 'updatedAt'],
   Testimonials: ['id', 'name', 'role', 'company', 'message', 'photoUrl', 'rating', 'status', 'featured', 'createdAt', 'updatedAt'],
   Blogs: ['id', 'title', 'slug', 'excerpt', 'content', 'imageUrl', 'tags', 'author', 'publishedAt', 'status', 'featured', 'createdAt', 'updatedAt'],
@@ -661,9 +696,12 @@ const FIELD_ALIASES = {
   'designation': ['designation', 'role'],
   'photo': ['photo', 'photoUrl', 'image', 'imageUrl'],
   'photoUrl': ['photoUrl', 'photo', 'image', 'imageUrl'],
-  'image': ['image', 'imageUrl', 'photo', 'screenshotUrl'],
-  'imageUrl': ['imageUrl', 'image', 'photo', 'screenshotUrl'],
-  'screenshotUrl': ['screenshotUrl', 'image', 'imageUrl'],
+  'image': ['image', 'coverImage', 'imageUrl', 'photo', 'screenshotUrl'],
+  'coverImage': ['coverImage', 'image', 'imageUrl', 'screenshotUrl'],
+  'imageUrl': ['imageUrl', 'coverImage', 'image', 'photo', 'screenshotUrl'],
+  'screenshotUrl': ['screenshotUrl', 'coverImage', 'image', 'imageUrl'],
+  'gallery': ['gallery', 'galleryImages', 'screenshots'],
+  'imageAlt': ['imageAlt', 'alt', 'altText'],
   'logo': ['logo', 'logoUrl'],
   'logoUrl': ['logoUrl', 'logo'],
   'technologies': ['technologies', 'techStack', 'technology'],
@@ -675,6 +713,8 @@ const FIELD_ALIASES = {
   'company': ['company', 'companyName'],
   'clientName': ['clientName', 'client'],
   'client': ['client', 'clientName'],
+  'clientType': ['clientType', 'industry', 'domain'],
+  'clientId': ['clientId', 'partnerId'],
   'studentName': ['studentName', 'name', 'student'],
   'name': ['name', 'studentName', 'partnerName', 'title'],
   'courseName': ['courseName', 'course', 'title']
@@ -971,8 +1011,156 @@ function uploadFileToDrive(filename, mimeType, base64Data, prefix) {
     const blob = Utilities.newBlob(Utilities.base64Decode(base64Data), mimeType, prefix + '_' + filename);
     const file = folder.createFile(blob);
     file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
-    return 'https://drive.google.com/uc?export=view&id=' + file.getId();
+    return 'https://lh3.googleusercontent.com/d/' + file.getId();
   } catch (err) { Logger.log(err.message); throw err; }
+}
+
+/* ========================================= */
+/* IMAGEKIT MEDIA MANAGEMENT SERVICE         */
+/* ========================================= */
+
+const IMAGEKIT_CONFIG = {
+  publicKey: 'public_y/7Pkr+DslsJPzA7TRUQVwol+fY=',
+  privateKey: 'private_+swOgjTHVKt7zTRVz9c844w2x2M=', // Kept strictly on server
+  urlEndpoint: 'https://ik.imagekit.io/hakeuvjtj',
+  defaultFolder: '/aditya-skill-gate'
+};
+
+function getImageKitPrivateKey() {
+  try {
+    const sp = PropertiesService.getScriptProperties().getProperty('IMAGEKIT_PRIVATE_KEY');
+    if (sp) return sp;
+  } catch(e) {}
+  return IMAGEKIT_CONFIG.privateKey;
+}
+
+function getImageKitUrlEndpoint() {
+  try {
+    const sp = PropertiesService.getScriptProperties().getProperty('IMAGEKIT_URL_ENDPOINT');
+    if (sp) return sp;
+  } catch(e) {}
+  return IMAGEKIT_CONFIG.urlEndpoint;
+}
+
+function uploadToImageKit(base64Data, fileName, folder = '/aditya-skill-gate/projects', customTags = 'portfolio,aditya-skill-gate') {
+  const privateKey = getImageKitPrivateKey();
+  if (!privateKey || privateKey.includes('YOUR_') || privateKey === 'private_adityaskillgate') {
+    Logger.log('ImageKit private key not configured; using Drive fallback.');
+    return null;
+  }
+
+  const cleanBase64 = base64Data.includes(',') ? base64Data.split(',')[1] : base64Data;
+  const authHeader = 'Basic ' + Utilities.base64Encode(privateKey + ':');
+
+  const payload = {
+    file: cleanBase64,
+    fileName: fileName || ('media_' + Date.now() + '.jpg'),
+    folder: folder,
+    useUniqueFileName: 'true',
+    tags: customTags
+  };
+
+  const options = {
+    method: 'post',
+    headers: {
+      'Authorization': authHeader
+    },
+    payload: payload,
+    muteHttpExceptions: true
+  };
+
+  try {
+    const res = UrlFetchApp.fetch('https://upload.imagekit.io/api/v1/files/upload', options);
+    const resCode = res.getResponseCode();
+    const resText = res.getContentText();
+    const json = JSON.parse(resText);
+
+    if (resCode >= 200 && resCode < 300 && json.url) {
+      return {
+        success: true,
+        url: json.url,
+        fileId: json.fileId,
+        filePath: json.filePath,
+        thumbnailUrl: json.thumbnailUrl || (json.url + '?tr=w-300,q-80'),
+        name: json.name
+      };
+    } else {
+      Logger.log('ImageKit upload error (' + resCode + '): ' + resText);
+      return null;
+    }
+  } catch(e) {
+    Logger.log('ImageKit exception: ' + e.message);
+    return null;
+  }
+}
+
+function deleteFromImageKit(fileId) {
+  if (!fileId) return false;
+  const privateKey = getImageKitPrivateKey();
+  if (!privateKey || privateKey.includes('YOUR_') || privateKey === 'private_adityaskillgate') return false;
+
+  const authHeader = 'Basic ' + Utilities.base64Encode(privateKey + ':');
+  const options = {
+    method: 'delete',
+    headers: { 'Authorization': authHeader },
+    muteHttpExceptions: true
+  };
+
+  try {
+    const res = UrlFetchApp.fetch('https://api.imagekit.io/v1/files/' + encodeURIComponent(fileId), options);
+    return res.getResponseCode() === 204 || res.getResponseCode() === 200;
+  } catch(e) {
+    return false;
+  }
+}
+
+function handleUploadMedia(body) {
+  const { fileData, fileName, folder, projectId, clientId, tags } = body;
+  if (!fileData) {
+    return jsonResponse({ success: false, message: 'Missing fileData' }, 400);
+  }
+
+  const targetFolder = folder || (projectId ? ('/aditya-skill-gate/projects/' + projectId + '/cover') : (clientId ? ('/aditya-skill-gate/clients/' + clientId + '/logo') : '/aditya-skill-gate/media'));
+  const safeName = fileName || ('upload_' + Date.now() + '.jpg');
+
+  // 1. ImageKit Upload
+  const ikResult = uploadToImageKit(fileData, safeName, targetFolder, tags || 'portfolio,aditya-skill-gate');
+  if (ikResult && ikResult.url) {
+    return jsonResponse({
+      success: true,
+      url: ikResult.url,
+      thumbnailUrl: ikResult.thumbnailUrl,
+      fileId: ikResult.fileId,
+      filePath: ikResult.filePath,
+      storage: 'ImageKit'
+    });
+  }
+
+  return jsonResponse({ success: false, message: 'ImageKit upload failed. Please check credentials or network.' }, 500);
+}
+
+function handleMigrateMedia(body) {
+  const { imageUrl, fileName, folder, projectId } = body;
+  if (!imageUrl) return jsonResponse({ success: false, message: 'Missing imageUrl' }, 400);
+  
+  try {
+    const imgRes = UrlFetchApp.fetch(imageUrl, { muteHttpExceptions: true });
+    if (imgRes.getResponseCode() !== 200) {
+      return jsonResponse({ success: false, message: 'Could not fetch original image' }, 400);
+    }
+    const blob = imgRes.getBlob();
+    const base64 = Utilities.base64Encode(blob.getBytes());
+    const targetFolder = folder || (projectId ? ('/aditya-skill-gate/projects/' + projectId + '/cover') : '/aditya-skill-gate/migrated');
+    const safeName = fileName || blob.getName() || ('migrated_' + Date.now() + '.jpg');
+
+    const ikResult = uploadToImageKit(base64, safeName, targetFolder);
+    if (ikResult && ikResult.url) {
+      return jsonResponse({ success: true, oldUrl: imageUrl, newUrl: ikResult.url, fileId: ikResult.fileId });
+    }
+    return jsonResponse({ success: false, message: 'ImageKit upload failed during migration' }, 500);
+  } catch(e) {
+    return jsonResponse({ success: false, message: 'Migration failed: ' + e.message }, 500);
+  }
 }
 
 function sheetName(resource) {

@@ -24,8 +24,8 @@
     <a href="partners.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-handshake"></i></div><span class="sidebar-link-text">Partners</span></a>
     <a href="jobs.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-briefcase"></i></div><span class="sidebar-link-text">Job Openings</span></a>
     <a href="employees.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-users"></i></div><span class="sidebar-link-text">Team / Employees</span></a>
-    <a href="projects.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-laptop-code"></i></div><span class="sidebar-link-text">Projects</span></a>
-    <a href="placements.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-trophy"></i></div><span class="sidebar-link-text">Placements</span></a>
+    <a href="projects.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-laptop-code"></i></div><span class="sidebar-link-text">Clients</span></a>
+    <!-- <a href="placements.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-trophy"></i></div><span class="sidebar-link-text">Placements</span></a> -->
     <a href="testimonials.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-star"></i></div><span class="sidebar-link-text">Testimonials</span></a>
     <a href="timeline.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-history"></i></div><span class="sidebar-link-text">Company Journey</span></a>
     <a href="blog.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-blog"></i></div><span class="sidebar-link-text">Blog Posts</span></a>
@@ -86,15 +86,41 @@
             <div class="form-group"><label class="form-label">URL Slug</label><input type="text" class="form-control" name="slug" placeholder="e.g. university-of-london"></div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label class="form-label">Top Programs (comma separated)</label><input type="text" class="form-control" name="programs" placeholder="e.g. Computer Science, MBA"></div>
-            <div class="form-group"><label class="form-label">Scholarship Info</label><input type="text" class="form-control" name="scholarship" placeholder="e.g. Up to £5000"></div>
+            <div class="form-group" style="flex:1"><label class="form-label">Top Programs (comma separated)</label><input type="text" class="form-control" name="programs" placeholder="e.g. Computer Science, MBA"></div>
+            <div class="form-group" style="flex:1"><label class="form-label">Scholarship Info</label><input type="text" class="form-control" name="scholarship" placeholder="e.g. Up to £5000"></div>
           </div>
-          <div class="form-row">
-            <div class="form-group"><label class="form-label">Logo / Image URL</label><input type="text" class="form-control" name="logoUrl" placeholder="https://..."></div>
-            <div class="form-group"><label class="form-label">Website URL</label><input type="text" class="form-control" name="website" placeholder="https://..."></div>
+
+          <!-- ImageKit Institution Logo / Cover Uploader -->
+          <div class="form-group" style="background:var(--a-light);padding:14px;border-radius:10px;border:1px solid var(--a-border);margin-bottom:16px">
+            <label class="form-label" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+              <span><i class="fas fa-university" style="color:var(--a-primary);margin-right:6px"></i> Institution Logo / Cover</span>
+              <span style="font-size:0.75rem;color:var(--a-primary);font-weight:600">⚡ Powered by ImageKit CDN</span>
+            </label>
+            <div id="abroad-drop-zone" style="border:2px dashed #cbd5e1;border-radius:8px;padding:16px;text-align:center;cursor:pointer;background:white;transition:border-color 0.2s">
+              <i class="fas fa-cloud-upload-alt" style="font-size:1.8rem;color:var(--a-primary);margin-bottom:6px"></i>
+              <div style="font-weight:600;font-size:0.85rem;color:var(--a-navy)">Drag & drop institution logo/image or <span style="color:var(--a-primary)">click to browse</span></div>
+              <div style="font-size:0.75rem;color:var(--a-gray4);margin-top:2px">Supports JPG, PNG, WebP (Auto-optimized to ImageKit CDN)</div>
+              <input type="file" id="abroad-file-input" accept="image/*" style="display:none">
+            </div>
+            <div id="abroad-preview-box" style="display:none;margin-top:10px;align-items:center;gap:12px;background:white;padding:8px 12px;border-radius:8px;border:1px solid #e2e8f0">
+              <div style="width:70px;height:45px;border-radius:6px;overflow:hidden;background:#f8fafc;border:1px solid #e2e8f0;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <img id="abroad-preview-img" src="" style="max-width:100%;max-height:100%;object-fit:contain">
+              </div>
+              <div style="flex:1;overflow:hidden">
+                <div id="abroad-preview-name" style="font-weight:600;font-size:0.85rem;color:var(--a-navy);white-space:nowrap;text-overflow:ellipsis;overflow:hidden">logo.png</div>
+                <div id="abroad-upload-status" style="font-size:0.75rem;color:#16a34a"><i class="fas fa-check-circle"></i> Ready</div>
+              </div>
+              <button type="button" class="btn-admin-outline" id="remove-abroad-photo-btn" style="padding:4px 8px;font-size:0.75rem;color:var(--a-danger);border-color:#fecaca"><i class="fas fa-trash"></i></button>
+            </div>
+            <div style="margin-top:8px">
+              <label style="font-size:0.75rem;color:var(--a-gray4);display:block;margin-bottom:4px">Or enter direct Image/Logo URL:</label>
+              <input type="text" class="form-control" name="logoUrl" id="abroad-logo-input" placeholder="https://ik.imagekit.io/... or paste image URL" style="font-size:0.85rem">
+            </div>
           </div>
+
           <div class="form-row">
-            <div class="form-group"><label class="form-label">Status</label><select class="form-control" name="status"><option value="Active">Active</option><option value="Draft">Draft</option></select></div>
+            <div class="form-group" style="flex:1"><label class="form-label">Website URL</label><input type="text" class="form-control" name="website" placeholder="https://..."></div>
+            <div class="form-group" style="flex:1"><label class="form-label">Status</label><select class="form-control" name="status"><option value="Active">Active</option><option value="Draft">Draft</option></select></div>
           </div>
           <div class="form-group">
             <label class="form-label">Description</label>
@@ -125,21 +151,99 @@
 </div>
 
 <div id="toast-container"></div>
-<script src="../js/api.js?t=1788169325160"></script>
-<script src="../js/admin.js?t=1788169325160"></script>
+<script src="../js/api.js?v=12"></script>
+<script src="../js/admin.js?v=12"></script>
 <script>
 let allUnis = [];
 let deleteId = null;
 
+/* ImageKit Abroad Logo Upload Handlers */
+const abroadDropZone = document.getElementById('abroad-drop-zone');
+const abroadFileInput = document.getElementById('abroad-file-input');
+
+abroadDropZone.addEventListener('click', () => abroadFileInput.click());
+abroadDropZone.addEventListener('dragover', (e) => { e.preventDefault(); abroadDropZone.style.borderColor = 'var(--a-primary)'; });
+abroadDropZone.addEventListener('dragleave', () => { abroadDropZone.style.borderColor = '#cbd5e1'; });
+abroadDropZone.addEventListener('drop', (e) => {
+  e.preventDefault();
+  abroadDropZone.style.borderColor = '#cbd5e1';
+  if (e.dataTransfer.files[0]) handleAbroadLogoUpload(e.dataTransfer.files[0]);
+});
+abroadFileInput.addEventListener('change', () => {
+  if (abroadFileInput.files[0]) handleAbroadLogoUpload(abroadFileInput.files[0]);
+});
+
+async function handleAbroadLogoUpload(file) {
+  if (file.size > 5 * 1024 * 1024) {
+    showAdminToast('File is larger than 5MB', 'error');
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    const base64Data = e.target.result;
+    showAbroadLogoPreview(base64Data, file.name, 'Uploading to ImageKit...');
+    try {
+      const uploadRes = await API.uploadMedia(base64Data, {
+        fileName: file.name,
+        folder: '/aditya-skill-gate/abroad',
+        mimeType: file.type
+      });
+      if (uploadRes && uploadRes.url) {
+        document.getElementById('abroad-logo-input').value = uploadRes.url;
+        showAbroadLogoPreview(uploadRes.url, file.name, 'Uploaded to ImageKit CDN');
+        showAdminToast('Logo uploaded successfully to ImageKit!', 'success');
+      }
+    } catch(err) {
+      showAdminToast('Upload failed, please check network', 'error');
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function showAbroadLogoPreview(url, name, statusText) {
+  const box = document.getElementById('abroad-preview-box');
+  const img = document.getElementById('abroad-preview-img');
+  const nameEl = document.getElementById('abroad-preview-name');
+  const statusEl = document.getElementById('abroad-upload-status');
+  const optUrl = typeof API !== 'undefined' && API.getOptimizedImageUrl ? API.getOptimizedImageUrl(url, { width: 140, height: 90, quality: 80 }) : url;
+  img.src = optUrl;
+  nameEl.textContent = name || 'Institution Logo';
+  if (url && (url.includes('ik.imagekit.io') || url.includes('imagekit.io'))) {
+    statusEl.innerHTML = `<span style="color:#16a34a;font-weight:700;"><i class="fas fa-bolt"></i> ImageKit CDN Active</span>`;
+  } else {
+    statusEl.innerHTML = `<i class="fas fa-check-circle"></i> ${statusText || 'Ready'}`;
+  }
+  box.style.display = 'flex';
+}
+
+document.getElementById('remove-abroad-photo-btn').addEventListener('click', () => {
+  document.getElementById('abroad-logo-input').value = '';
+  document.getElementById('abroad-preview-box').style.display = 'none';
+  document.getElementById('abroad-file-input').value = '';
+});
+
+document.getElementById('abroad-logo-input').addEventListener('input', (e) => {
+  const val = e.target.value.trim();
+  if (val) showAbroadLogoPreview(val, 'Remote Logo', 'URL Configured');
+  else document.getElementById('abroad-preview-box').style.display = 'none';
+});
+
 function renderUnis(list) {
   const tb = document.getElementById('unis-tbody');
   if (!list.length) { tb.innerHTML = '<tr><td colspan="6" class="admin-table-empty">No institutions found. Add your first university or college!</td></tr>'; return; }
-  tb.innerHTML = list.map(u => `
-    <tr>
+  tb.innerHTML = list.map(u => {
+    const logo = u.logoUrl || u.logo || u.image || '';
+    const optLogo = logo ? (typeof API !== 'undefined' && API.getOptimizedImageUrl ? API.getOptimizedImageUrl(logo, { width: 80, height: 80, quality: 80 }) : logo) : '';
+
+    return `<tr>
       <td>
         <div style="display:flex;align-items:center;gap:10px">
-          ${u.logoUrl ? `<img src="${u.logoUrl}" style="width:36px;height:36px;border-radius:6px;object-fit:contain;background:#f8fafc;border:1px solid #e2e8f0;">` : '<div style="width:36px;height:36px;border-radius:6px;background:#e2e8f0;display:flex;align-items:center;justify-content:center"><i class="fas fa-university" style="color:#64748b"></i></div>'}
-          <div><div style="font-weight:600;color:var(--a-navy)">${u.name}</div>${u.website ? `<a href="${u.website}" target="_blank" style="font-size:0.75rem;color:var(--a-blue)">${u.website.replace(/^https?:\/\//,'')}</a>` : ''}</div>
+          ${optLogo ? `<img src="${optLogo}" style="width:36px;height:36px;border-radius:6px;object-fit:contain;background:#f8fafc;border:1px solid #e2e8f0;" onerror="this.style.display='none'">` : '<div style="width:36px;height:36px;border-radius:6px;background:#e2e8f0;display:flex;align-items:center;justify-content:center"><i class="fas fa-university" style="color:#64748b"></i></div>'}
+          <div>
+            <div style="font-weight:600;color:var(--a-navy)">${u.name}</div>
+            ${logo && logo.includes('imagekit.io') ? '<span style="font-size:0.7rem;color:#16a34a"><i class="fas fa-bolt"></i> ImageKit</span>' : ''}
+            ${u.website ? `<a href="${u.website}" target="_blank" style="font-size:0.75rem;color:var(--a-blue);display:block">${u.website.replace(/^https?:\/\//,'')}</a>` : ''}
+          </div>
         </div>
       </td>
       <td><strong>${u.type || 'University'}</strong><br><span style="font-size:0.8rem;color:var(--a-gray4)">${u.country || 'Global'}</span></td>
@@ -152,13 +256,15 @@ function renderUnis(list) {
           <button class="btn-icon btn-icon-delete" title="Delete" onclick="confirmDelete('${u.id}')"><i class="fas fa-trash"></i></button>
         </div>
       </td>
-    </tr>`).join('');
+    </tr>`;
+  }).join('');
 }
 
 function openUniModal() {
   document.getElementById('uni-form').reset();
   document.getElementById('uni-id').value = '';
   document.getElementById('modal-title').textContent = 'Add Institution';
+  document.getElementById('abroad-preview-box').style.display = 'none';
   openModal('uni-modal');
 }
 
@@ -171,6 +277,10 @@ window.editUni = function(id) {
   ['name', 'type', 'country', 'slug', 'programs', 'scholarship', 'logoUrl', 'website', 'status', 'description'].forEach(k => {
     if (form.elements[k]) form.elements[k].value = u[k] || '';
   });
+  const logo = u.logoUrl || u.logo || u.image || '';
+  if (logo) {
+    showAbroadLogoPreview(logo, u.name || 'Logo', 'Saved Logo');
+  } else {
   openModal('uni-modal');
 };
 

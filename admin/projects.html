@@ -22,8 +22,8 @@
     <a href="partners.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-handshake"></i></div><span class="sidebar-link-text">Partners</span></a>
     <a href="jobs.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-briefcase"></i></div><span class="sidebar-link-text">Job Openings</span></a>
     <a href="employees.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-users"></i></div><span class="sidebar-link-text">Team / Employees</span></a>
-    <a href="projects.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-laptop-code"></i></div><span class="sidebar-link-text">Projects</span></a>
-    <a href="placements.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-trophy"></i></div><span class="sidebar-link-text">Placements</span></a>
+    <a href="projects.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-laptop-code"></i></div><span class="sidebar-link-text">Clients</span></a>
+    <!-- <a href="placements.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-trophy"></i></div><span class="sidebar-link-text">Placements</span></a> -->
     <a href="testimonials.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-star"></i></div><span class="sidebar-link-text">Testimonials</span></a> 
     <a href="timeline.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-history"></i></div><span class="sidebar-link-text">Company Journey</span></a>
     <a href="blog.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-blog"></i></div><span class="sidebar-link-text">Blog Posts</span></a>
@@ -48,87 +48,450 @@
     </div>
     <div class="admin-table-wrap">
       <table class="admin-table">
-        <thead><tr><th>Project</th><th>Category</th><th>Client</th><th>Status</th><th>Featured</th><th>Actions</th></tr></thead>
+        <thead><tr><th>Cover & Title</th><th>Client & Industry</th><th>Category</th><th>Status</th><th>Featured</th><th>Actions</th></tr></thead>
         <tbody id="projects-tbody"><tr><td colspan="6" class="admin-table-empty">Loading projects...</td></tr></tbody>
       </table>
     </div>
   </div>
 </div>
 
+<!-- Add / Edit Project & Case Study Modal -->
 <div class="modal-overlay" id="proj-modal">
-  <div class="modal" style="max-width:650px">
-    <div class="modal-header"><div class="modal-title" id="proj-modal-title">Add Project</div><button class="modal-close" onclick="closeAdminModal('proj-modal')"><i class="fas fa-times"></i></button></div>
+  <div class="modal" style="max-width:760px;max-height:92vh;overflow-y:auto">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="proj-modal-title">Add Client Project</div>
+        <div style="font-size:0.8rem;color:var(--a-gray4)">Manage client relationship, media, and case study details</div>
+      </div>
+      <button class="modal-close" onclick="closeAdminModal('proj-modal')"><i class="fas fa-times"></i></button>
+    </div>
     <div class="modal-body">
       <form id="proj-form">
         <input type="hidden" name="id" id="proj-id">
+        <input type="hidden" name="clientId" id="proj-client-id">
+        <input type="hidden" name="coverImage" id="proj-cover-image">
+        <input type="hidden" name="imageKitFileId" id="proj-imagekit-id">
+        <input type="hidden" name="gallery" id="proj-gallery-field">
+
+        <!-- 1. Basic Project Meta -->
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Project Title *</label><input type="text" class="form-control" name="title" required></div>
-          <div class="form-group"><label class="form-label">Category</label>
-            <select class="form-control" name="category"><option>Web Development</option><option>Mobile App</option><option>AI/ML</option><option>EdTech</option><option>Enterprise Software</option><option>E-Commerce</option></select>
+          <div class="form-group" style="flex:2"><label class="form-label">Project Title *</label><input type="text" class="form-control" name="title" required placeholder="e.g. Voltaura Corporate Web Portal"></div>
+          <div class="form-group" style="flex:1"><label class="form-label">Category</label>
+            <select class="form-control" name="category" id="proj-category">
+              <option>Web Development</option>
+              <option>Mobile App</option>
+              <option>AI/ML</option>
+              <option>Enterprise Software</option>
+              <option>EdTech</option>
+              <option>E-Commerce</option>
+            </select>
           </div>
         </div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Client Name</label><input type="text" class="form-control" name="clientName" placeholder="e.g. XYZ Company"></div>
-          <div class="form-group"><label class="form-label">Client Type</label><input type="text" class="form-control" name="clientType" placeholder="e.g. B2B, Government, Retail"></div>
+
+        <!-- 2. Client Relationship -->
+        <div style="background:var(--a-border);padding:14px;border-radius:8px;margin-bottom:16px">
+          <div style="font-weight:700;font-size:0.85rem;color:var(--a-navy);margin-bottom:8px;display:flex;align-items:center;gap:6px">
+            <i class="fas fa-handshake" style="color:var(--a-primary)"></i> Client Relationship
+          </div>
+          <div class="form-row">
+            <div class="form-group" style="flex:1">
+              <label class="form-label">Select Registered Client / Partner</label>
+              <select class="form-control" id="proj-client-select">
+                <option value="">-- Choose Existing Client --</option>
+                <option value="__custom__">+ Enter Custom Client</option>
+              </select>
+            </div>
+            <div class="form-group" style="flex:1">
+              <label class="form-label">Client Name *</label>
+              <input type="text" class="form-control" name="clientName" id="proj-client-name" required placeholder="e.g. Voltaura Technologies">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group" style="flex:1">
+              <label class="form-label">Client Industry / Domain</label>
+              <input type="text" class="form-control" name="clientType" id="proj-client-type" placeholder="e.g. Renewable Energy, EdTech, Healthcare">
+            </div>
+            <div class="form-group" style="flex:1">
+              <label class="form-label">Delivery Date</label>
+              <input type="date" class="form-control" name="completedDate" id="proj-completed-date">
+            </div>
+          </div>
         </div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Live URL</label><input type="url" class="form-control" name="liveUrl" placeholder="https://..."></div>
-          <div class="form-group"><label class="form-label">Completed Date</label><input type="date" class="form-control" name="completedDate"></div>
+
+        <!-- 3. ImageKit Cover Image Uploader -->
+        <div class="form-group" style="background:#f8fafc;border:1px solid var(--a-border);padding:14px;border-radius:8px;margin-bottom:16px">
+          <label class="form-label" style="font-weight:700;color:var(--a-navy)">
+            <i class="fas fa-image" style="color:var(--a-primary);margin-right:4px"></i> Cover Media (ImageKit Integrated)
+          </label>
+          
+          <div id="cover-drop-zone" style="border:2px dashed #cbd5e1;padding:18px;text-align:center;border-radius:8px;background:white;cursor:pointer;transition:border-color 0.2s">
+            <i class="fas fa-cloud-upload-alt" style="font-size:2rem;color:var(--a-primary);margin-bottom:6px"></i>
+            <div style="font-weight:600;font-size:0.875rem;color:var(--a-navy)">Drag & drop cover image here or click to browse</div>
+            <div style="font-size:0.75rem;color:var(--a-gray4);margin-top:2px">Supports JPG, PNG, WebP (Max 5MB)</div>
+            <input type="file" id="cover-file-input" accept="image/*" style="display:none">
+          </div>
+
+          <div id="cover-preview-box" style="display:none;margin-top:12px;align-items:center;gap:12px;background:white;padding:10px;border-radius:8px;border:1px solid #e2e8f0">
+            <div id="cover-preview-img-wrap" style="width:70px;height:50px;border-radius:6px;overflow:hidden;background:#0D1B4C;display:flex;align-items:center;justify-content:center">
+              <img id="cover-preview-img" src="" style="width:100%;height:100%;object-fit:cover">
+            </div>
+            <div style="flex:1;overflow:hidden">
+              <div id="cover-preview-name" style="font-weight:600;font-size:0.85rem;color:var(--a-navy);white-space:nowrap;text-overflow:ellipsis;overflow:hidden">image.jpg</div>
+              <div id="cover-upload-status" style="font-size:0.75rem;color:#16a34a"><i class="fas fa-check-circle"></i> Ready</div>
+            </div>
+            <button type="button" class="btn-admin-outline" id="remove-cover-btn" style="padding:4px 8px;font-size:0.75rem;color:var(--a-danger);border-color:#fecaca"><i class="fas fa-trash"></i></button>
+          </div>
+
+          <div style="margin-top:10px">
+            <label style="font-size:0.75rem;color:var(--a-gray4);display:block;margin-bottom:4px">Or enter direct Image URL or local asset path:</label>
+            <input type="text" class="form-control" name="image" id="proj-image-input" placeholder="https://ik.imagekit.io/... or assets/images/...">
+          </div>
+
+          <div style="margin-top:10px">
+            <label class="form-label" style="font-size:0.75rem">Image Alt Text (SEO & Accessibility)</label>
+            <input type="text" class="form-control" name="imageAlt" id="proj-image-alt" placeholder="e.g. Voltaura company web application screenshot">
+          </div>
         </div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Tech Stack</label><input type="text" class="form-control" name="technologies" placeholder="Comma-separated: React, Node.js, MongoDB"></div>
-          <div class="form-group"><label class="form-label">Status</label><select class="form-control" name="status"><option value="Completed">Completed</option><option value="Published">Published</option><option value="Ongoing">Ongoing</option><option value="Draft">Draft</option><option value="Archived">Archived</option></select></div>
+
+        <!-- 4. Multi-Image Gallery -->
+        <div class="form-group" style="background:#f8fafc;border:1px solid var(--a-border);padding:14px;border-radius:8px;margin-bottom:16px">
+          <label class="form-label" style="font-weight:700;color:var(--a-navy)">
+            <i class="fas fa-images" style="color:var(--a-primary);margin-right:4px"></i> Multi-Image Showcase Gallery
+          </label>
+          <div style="display:flex;gap:8px;margin-bottom:10px">
+            <input type="file" id="gallery-file-input" accept="image/*" multiple style="display:none">
+            <button type="button" class="btn-admin-outline" onclick="document.getElementById('gallery-file-input').click()" style="padding:6px 12px;font-size:0.8rem">
+              <i class="fas fa-plus"></i> Upload Gallery Images
+            </button>
+            <input type="url" class="form-control" id="gallery-url-input" placeholder="Or paste image URL and press Add" style="flex:1">
+            <button type="button" class="btn-admin-primary" id="add-gallery-url-btn" style="padding:6px 12px;font-size:0.8rem">Add URL</button>
+          </div>
+          <div id="gallery-thumbnails-strip" style="display:flex;flex-wrap:wrap;gap:8px;min-height:40px;background:white;padding:8px;border-radius:6px;border:1px solid #e2e8f0">
+            <div style="font-size:0.75rem;color:var(--a-gray4);padding:8px;" id="gallery-empty-hint">No gallery images added yet.</div>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Project Image URL</label>
-          <input type="url" class="form-control" name="image" id="proj-image-input" placeholder="e.g. https://res.cloudinary.com/...">
-          <div id="proj-image-preview" style="margin-top:10px; max-height: 120px; overflow: hidden; border-radius: 8px;"></div>
+
+        <!-- 5. Case Study Details -->
+        <div style="border-top:1px solid var(--a-border);padding-top:14px;margin-top:10px">
+          <div style="font-weight:700;font-size:0.85rem;color:var(--a-navy);margin-bottom:12px">
+            <i class="fas fa-file-alt" style="color:var(--a-primary);margin-right:4px"></i> Case Study Breakdown
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="flex:1">
+              <label class="form-label">The Challenge / Business Problem</label>
+              <textarea class="form-control" name="challenge" id="proj-challenge" rows="2" placeholder="What problem was the client facing?"></textarea>
+            </div>
+            <div class="form-group" style="flex:1">
+              <label class="form-label">Solution Architecture & Delivery</label>
+              <textarea class="form-control" name="solution" id="proj-solution" rows="2" placeholder="How did Aditya Skill Gate solve it?"></textarea>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="flex:1">
+              <label class="form-label">Key Features (Comma-separated)</label>
+              <input type="text" class="form-control" name="features" id="proj-features" placeholder="e.g. Real-time Dashboard, Payment Gateway, Offline Sync">
+            </div>
+            <div class="form-group" style="flex:1">
+              <label class="form-label">Measurable Results & Impact</label>
+              <input type="text" class="form-control" name="results" id="proj-results" placeholder="e.g. 300% inquiry growth, 0.8s load time">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Project Overview / Description</label>
+            <textarea class="form-control" name="description" id="proj-desc" rows="2" placeholder="General description of the project..."></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="flex:1">
+              <label class="form-label">Tech Stack</label>
+              <input type="text" class="form-control" name="technologies" id="proj-tech" placeholder="e.g. React, Node.js, ImageKit, Google Cloud">
+            </div>
+            <div class="form-group" style="flex:1">
+              <label class="form-label">Live Project URL</label>
+              <input type="url" class="form-control" name="liveUrl" id="proj-live-url" placeholder="https://...">
+            </div>
+          </div>
+
+          <div class="form-row" style="align-items:center">
+            <div class="form-group" style="flex:1">
+              <label class="form-label">Status</label>
+              <select class="form-control" name="status" id="proj-status">
+                <option value="Completed">Completed</option>
+                <option value="Published">Published</option>
+                <option value="Ongoing">Ongoing</option>
+                <option value="Draft">Draft</option>
+                <option value="Archived">Archived</option>
+              </select>
+            </div>
+            <div class="form-group" style="flex:1;padding-top:20px">
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;font-size:0.875rem">
+                <input type="checkbox" name="featured" id="proj-featured" value="true"> Feature on Homepage
+              </label>
+            </div>
+          </div>
         </div>
-        <div class="form-group"><label class="form-label">Gallery URLs (Comma-separated)</label><input type="text" class="form-control" name="gallery" placeholder="Url1, Url2, Url3"></div>
-        <div class="form-group"><label class="form-label">Description</label><textarea class="form-control" name="description" rows="3"></textarea></div>
-        <div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" name="featured" id="proj-featured" value="true"> Feature on Homepage</label></div>
-        <div style="display:flex;gap:12px;margin-top:16px">
-          <button type="submit" class="btn-admin-primary" id="save-btn"><i class="fas fa-save"></i> Save Project</button>
+
+        <div style="display:flex;gap:12px;margin-top:20px;padding-top:14px;border-top:1px solid var(--a-border)">
+          <button type="submit" class="btn-admin-primary" id="save-btn"><i class="fas fa-save"></i> Save Project & Case Study</button>
           <button type="button" class="btn-admin-outline" onclick="closeAdminModal('proj-modal')">Cancel</button>
         </div>
       </form>
     </div>
   </div>
 </div>
-<div class="modal-overlay" id="delete-modal"><div class="modal" style="max-width:400px;text-align:center"><div class="modal-body" style="padding:40px"><div style="font-size:3rem;margin-bottom:16px">🗑️</div><h3 style="margin-bottom:10px;color:var(--a-navy)">Delete Project?</h3><p style="color:var(--a-gray4);margin-bottom:24px">This cannot be undone.</p><div style="display:flex;gap:12px;justify-content:center"><button class="btn-admin-danger" id="confirm-delete-btn">Delete</button><button class="btn-admin-outline" onclick="closeAdminModal('delete-modal')">Cancel</button></div></div></div></div>
-<div id="toast-container"></div>
-<script src="../js/api.js?t=1788169325160"></script><script src="../js/admin.js?t=1788169325160"></script>
-<script>
-let allProjects=[];let deleteId=null;
 
-document.getElementById('proj-image-input').addEventListener('input', function(e) {
-  const url = e.target.value;
-  const preview = document.getElementById('proj-image-preview');
-  if(url) preview.innerHTML = `<img src="${url}" style="width:100%;height:100%;object-fit:cover">`;
-  else preview.innerHTML = '';
+<div class="modal-overlay" id="delete-modal">
+  <div class="modal" style="max-width:400px;text-align:center">
+    <div class="modal-body" style="padding:40px">
+      <div style="font-size:3rem;margin-bottom:16px">🗑️</div>
+      <h3 style="margin-bottom:10px;color:var(--a-navy)">Delete Project?</h3>
+      <p style="color:var(--a-gray4);margin-bottom:24px">This will remove the project and its case study.</p>
+      <div style="display:flex;gap:12px;justify-content:center">
+        <button class="btn-admin-danger" id="confirm-delete-btn">Delete</button>
+        <button class="btn-admin-outline" onclick="closeAdminModal('delete-modal')">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+<script src="../js/api.js?t=1788169325160"></script>
+<script src="../js/admin.js?t=1788169325160"></script>
+<script>
+let allProjects = [];
+let registeredClients = [];
+let galleryList = [];
+let deleteId = null;
+
+/* Client Selection & Dropdown */
+async function loadClients() {
+  try {
+    const clients = await API.getClients();
+    registeredClients = Array.isArray(clients) ? clients : [];
+    const select = document.getElementById('proj-client-select');
+    if (!select) return;
+    select.innerHTML = '<option value="">-- Choose Existing Client --</option>' + 
+      registeredClients.map(c => `<option value="${c.id || c.name}" data-name="${c.name || ''}" data-type="${c.category || c.industry || ''}" data-id="${c.id || ''}">${c.name}</option>`).join('') +
+      '<option value="__custom__">+ Enter Custom Client</option>';
+  } catch(e) {
+    console.warn('Could not load clients dropdown:', e);
+  }
+}
+
+document.getElementById('proj-client-select').addEventListener('change', function(e) {
+  const val = e.target.value;
+  if (!val || val === '__custom__') {
+    if (val === '__custom__') {
+      document.getElementById('proj-client-name').value = '';
+      document.getElementById('proj-client-type').value = '';
+      document.getElementById('proj-client-id').value = '';
+      document.getElementById('proj-client-name').focus();
+    }
+    return;
+  }
+  const opt = e.target.selectedOptions[0];
+  if (opt) {
+    document.getElementById('proj-client-name').value = opt.getAttribute('data-name') || '';
+    document.getElementById('proj-client-type').value = opt.getAttribute('data-type') || '';
+    document.getElementById('proj-client-id').value = opt.getAttribute('data-id') || '';
+  }
 });
 
+/* ImageKit Cover Image Drag & Drop & Direct Upload */
+const coverDropZone = document.getElementById('cover-drop-zone');
+const coverFileInput = document.getElementById('cover-file-input');
+
+coverDropZone.addEventListener('click', () => coverFileInput.click());
+coverDropZone.addEventListener('dragover', (e) => { e.preventDefault(); coverDropZone.style.borderColor = 'var(--a-primary)'; });
+coverDropZone.addEventListener('dragleave', () => { coverDropZone.style.borderColor = '#cbd5e1'; });
+coverDropZone.addEventListener('drop', (e) => {
+  e.preventDefault();
+  coverDropZone.style.borderColor = '#cbd5e1';
+  if (e.dataTransfer.files[0]) handleCoverFileUpload(e.dataTransfer.files[0]);
+});
+coverFileInput.addEventListener('change', () => {
+  if (coverFileInput.files[0]) handleCoverFileUpload(coverFileInput.files[0]);
+});
+
+async function handleCoverFileUpload(file) {
+  if (file.size > 5 * 1024 * 1024) {
+    showAdminToast('File is larger than 5MB', 'error');
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    const base64Data = e.target.result;
+    showCoverPreview(base64Data, file.name, 'Processing & uploading...');
+    
+    // Attempt asynchronous ImageKit upload via API
+    try {
+      const projId = document.getElementById('proj-id').value || ('proj_' + Date.now());
+      const uploadRes = await API.uploadMedia(base64Data, {
+        fileName: file.name,
+        projectId: projId,
+        folder: '/aditya-skill-gate/projects',
+        mimeType: file.type
+      });
+
+      if (uploadRes && uploadRes.url) {
+        document.getElementById('proj-image-input').value = uploadRes.url;
+        document.getElementById('proj-cover-image').value = uploadRes.url;
+        if (uploadRes.fileId) document.getElementById('proj-imagekit-id').value = uploadRes.fileId;
+        showCoverPreview(uploadRes.url, file.name, 'Uploaded to ImageKit CDN');
+        showAdminToast('Cover image uploaded successfully to ImageKit!', 'success');
+      } else {
+        // Safe internal fallback without polluting visible URL text box with base64
+        document.getElementById('proj-cover-image').value = base64Data;
+        showCoverPreview(base64Data, file.name, 'Ready to save (Auto-converts on Submit)');
+        showAdminToast('Image selected. Click Save to store.', 'info');
+      }
+    } catch (err) {
+      document.getElementById('proj-cover-image').value = base64Data;
+      showCoverPreview(base64Data, file.name, 'Selected (Will upload on Save)');
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function showCoverPreview(url, name, statusText) {
+  const box = document.getElementById('cover-preview-box');
+  const img = document.getElementById('cover-preview-img');
+  const nameEl = document.getElementById('cover-preview-name');
+  const statusEl = document.getElementById('cover-upload-status');
+  
+  const isImageKit = url && (url.includes('ik.imagekit.io') || url.includes('imagekit.io'));
+  const optUrl = typeof API !== 'undefined' && API.getOptimizedImageUrl ? API.getOptimizedImageUrl(url, { width: 140, height: 100, quality: 80 }) : url;
+  img.src = optUrl;
+  nameEl.textContent = name || 'Cover Image';
+  
+  if (isImageKit) {
+    statusEl.innerHTML = `<span style="color:#16a34a;font-weight:700;"><i class="fas fa-bolt"></i> ImageKit CDN Active</span>`;
+  } else {
+    statusEl.innerHTML = `<i class="fas fa-check-circle"></i> ${statusText || 'Ready'}`;
+  }
+  box.style.display = 'flex';
+}
+
+document.getElementById('remove-cover-btn').addEventListener('click', () => {
+  document.getElementById('proj-image-input').value = '';
+  document.getElementById('proj-cover-image').value = '';
+  document.getElementById('proj-imagekit-id').value = '';
+  document.getElementById('cover-preview-box').style.display = 'none';
+  document.getElementById('cover-file-input').value = '';
+});
+
+document.getElementById('proj-image-input').addEventListener('input', function(e) {
+  const val = e.target.value.trim();
+  if (val) {
+    document.getElementById('proj-cover-image').value = val;
+    showCoverPreview(val, val.split('/').pop() || 'Remote Image', 'URL Configured');
+  } else {
+    document.getElementById('cover-preview-box').style.display = 'none';
+  }
+});
+
+/* Multi-Image Gallery Management */
+function renderGalleryStrip() {
+  const strip = document.getElementById('gallery-thumbnails-strip');
+  if (!strip) return;
+  if (!galleryList.length) {
+    strip.innerHTML = '<div style="font-size:0.75rem;color:var(--a-gray4);padding:8px;" id="gallery-empty-hint">No gallery images added yet.</div>';
+    document.getElementById('proj-gallery-field').value = '';
+    return;
+  }
+  strip.innerHTML = galleryList.map((url, idx) => {
+    const optThumb = typeof API !== 'undefined' && API.getOptimizedImageUrl ? API.getOptimizedImageUrl(url, { width: 120, height: 90, quality: 75 }) : url;
+    return `
+    <div style="position:relative;width:64px;height:50px;border-radius:6px;overflow:hidden;border:1px solid #cbd5e1;background:#0D1B4C;">
+      <img src="${optThumb}" style="width:100%;height:100%;object-fit:cover" onerror="this.src=''">
+      <button type="button" onclick="removeGalleryImage(${idx})" style="position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.9);color:white;border:none;font-size:10px;display:flex;align-items:center;justify-content:center;cursor:pointer">✕</button>
+    </div>`;
+  }).join('');
+  document.getElementById('proj-gallery-field').value = galleryList.join(',');
+}
+
+function removeGalleryImage(idx) {
+  galleryList.splice(idx, 1);
+  renderGalleryStrip();
+}
+
+document.getElementById('add-gallery-url-btn').addEventListener('click', () => {
+  const urlInput = document.getElementById('gallery-url-input');
+  const url = urlInput.value.trim();
+  if (url) {
+    galleryList.push(url);
+    urlInput.value = '';
+    renderGalleryStrip();
+  }
+});
+
+document.getElementById('gallery-file-input').addEventListener('change', async function() {
+  const files = Array.from(this.files || []);
+  for (const file of files) {
+    if (file.size > 5 * 1024 * 1024) continue;
+    const reader = new FileReader();
+    reader.onload = async function(e) {
+      const b64 = e.target.result;
+      try {
+        const uploadRes = await API.uploadMedia(b64, {
+          fileName: file.name,
+          folder: '/aditya-skill-gate/projects/gallery',
+          mimeType: file.type
+        });
+        if (uploadRes && uploadRes.url) {
+          galleryList.push(uploadRes.url);
+        } else {
+          galleryList.push(b64);
+        }
+      } catch(err) {
+        galleryList.push(b64);
+      }
+      renderGalleryStrip();
+    };
+    reader.readAsDataURL(file);
+  }
+  this.value = '';
+});
+
+/* Table Rendering */
 function renderProjects(projects) {
   const tbody = document.getElementById('projects-tbody');
-  if(!projects.length) { tbody.innerHTML='<tr><td colspan="6" class="admin-table-empty">No projects found. Add your first project!</td></tr>'; return; }
+  if (!projects.length) { 
+    tbody.innerHTML = '<tr><td colspan="6" class="admin-table-empty">No client projects found. Add your first project & case study!</td></tr>'; 
+    return; 
+  }
   tbody.innerHTML = projects.map(p => {
     let statClass = p.status === 'Completed' || p.status === 'Published' ? 'status-active' : p.status === 'Ongoing' ? 'status-pending' : 'status-draft';
+    let rawImg = p.coverImage || p.image || p.imageUrl || '';
+    if (rawImg && rawImg.includes('Kurunji-fun-world') && rawImg.includes('cloudinary')) {
+      rawImg = '../assets/images/kurunjifunworld.png';
+    }
+    const optThumb = rawImg ? (typeof API !== 'undefined' && API.getOptimizedImageUrl ? API.getOptimizedImageUrl(rawImg, { width: 80, height: 80, quality: 80 }) : rawImg) : '';
+    
     return `<tr>
       <td>
         <div style="display:flex;align-items:center;gap:12px">
-          <div style="width:40px;height:40px;border-radius:6px;background:var(--a-border);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">
-            ${p.image ? `<img src="${p.image}" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.style.display='inline';"><span style="display:none;">💻</span>` : '<span>💻</span>'}
+          <div style="width:48px;height:48px;border-radius:8px;background:var(--a-navy);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:white;flex-shrink:0;">
+            ${optThumb ? `<img src="${optThumb}" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.style.display='inline';"><span style="display:none;">💻</span>` : '<span>💻</span>'}
           </div>
-          <div><div style="font-weight:600;color:var(--a-navy)">${p.title}</div>
-          <div style="font-size:0.8rem;color:var(--a-gray4)">${p.technologies ? String(p.technologies).substring(0,30) + '...' : ''}</div></div>
+          <div>
+            <div style="font-weight:700;color:var(--a-navy)">${p.title}</div>
+            <div style="font-size:0.775rem;color:var(--a-gray4)">${p.technologies ? String(p.technologies).substring(0,35) + '...' : 'No tech listed'}</div>
+          </div>
         </div>
       </td>
-      <td>${p.category || '-'}</td>
-      <td>${p.clientName || '-'}</td>
+      <td>
+        <div style="font-weight:600;color:var(--a-navy)"><i class="fas fa-building" style="color:var(--a-primary);font-size:0.75rem;margin-right:4px"></i> ${p.clientName || '-'}</div>
+        <div style="font-size:0.75rem;color:var(--a-gray4)">${p.clientType || 'General Client'}</div>
+      </td>
+      <td><span class="status-badge status-pending" style="font-size:0.75rem">${p.category || 'Web Development'}</span></td>
       <td><span class="status-badge ${statClass}">${p.status || 'Draft'}</span></td>
       <td>${(p.featured==='true' || p.featured===true) ? '<i class="fas fa-star" style="color:#f59e0b"></i>' : '-'}</td>
       <td>
-        <button class="action-btn" onclick="editProject('${p.id}')" title="Edit"><i class="fas fa-pen"></i></button>
+        <button class="action-btn" onclick="editProject('${p.id}')" title="Edit Case Study"><i class="fas fa-pen"></i></button>
         <button class="action-btn" style="color:var(--a-danger)" onclick="confirmDelete('${p.id}')" title="Delete"><i class="fas fa-trash"></i></button>
       </td>
     </tr>`;
@@ -138,56 +501,113 @@ function renderProjects(projects) {
 function openProjModal() {
   document.getElementById('proj-form').reset();
   document.getElementById('proj-id').value = '';
-  document.getElementById('proj-modal-title').textContent = 'Add Project';
-  document.getElementById('proj-image-preview').innerHTML = '';
+  document.getElementById('proj-client-id').value = '';
+  document.getElementById('proj-cover-image').value = '';
+  document.getElementById('proj-imagekit-id').value = '';
+  document.getElementById('proj-modal-title').textContent = 'Add Client Project';
+  document.getElementById('cover-preview-box').style.display = 'none';
+  galleryList = [];
+  renderGalleryStrip();
   openModal('proj-modal');
 }
 
 function editProject(id) {
   const p = allProjects.find(x => x.id === id);
-  if(!p) return;
+  if (!p) return;
   document.getElementById('proj-id').value = p.id;
-  document.getElementById('proj-modal-title').textContent = 'Edit Project';
+  document.getElementById('proj-modal-title').textContent = 'Edit Client Project & Case Study';
   const form = document.getElementById('proj-form');
-  ['title','category','clientName','clientType','liveUrl','completedDate','technologies','status','image','gallery','description'].forEach(k => {
-    if(form.elements[k]) form.elements[k].value = p[k] || '';
+  
+  const fields = ['title','category','clientName','clientType','clientId','liveUrl','completedDate','technologies','status','image','coverImage','imageAlt','imageKitFileId','challenge','solution','features','results','description'];
+  fields.forEach(k => {
+    if (form.elements[k]) form.elements[k].value = p[k] || '';
   });
+
+  // Client select matcher
+  const clientSelect = document.getElementById('proj-client-select');
+  if (clientSelect) {
+    let matched = false;
+    for (let i = 0; i < clientSelect.options.length; i++) {
+      if (clientSelect.options[i].text === p.clientName || clientSelect.options[i].value === p.clientId) {
+        clientSelect.selectedIndex = i;
+        matched = true;
+        break;
+      }
+    }
+    if (!matched) clientSelect.value = '__custom__';
+  }
+
+  // Cover image preview
+  const rawImg = p.coverImage || p.image || p.imageUrl || '';
+  if (rawImg) {
+    if (!rawImg.startsWith('data:')) {
+      document.getElementById('proj-image-input').value = rawImg;
+    } else {
+      document.getElementById('proj-image-input').value = '';
+    }
+    document.getElementById('proj-cover-image').value = rawImg;
+    showCoverPreview(rawImg, p.imageAlt || 'Cover Image', rawImg.includes('ik.imagekit.io') ? 'ImageKit CDN Active' : 'Existing Media');
+  } else {
+    document.getElementById('cover-preview-box').style.display = 'none';
+  }
+
+  // Gallery
+  galleryList = [];
+  if (Array.isArray(p.gallery)) galleryList = [...p.gallery];
+  else if (typeof p.gallery === 'string' && p.gallery.trim()) galleryList = p.gallery.split(',').map(s=>s.trim()).filter(Boolean);
+  renderGalleryStrip();
+
   document.getElementById('proj-featured').checked = (p.featured === 'true' || p.featured === true);
-  document.getElementById('proj-image-input').dispatchEvent(new Event('input'));
   openModal('proj-modal');
 }
 
-document.getElementById('proj-form').addEventListener('submit', async(e) => {
+document.getElementById('proj-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = document.getElementById('save-btn');
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...'; btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...'; 
+  btn.disabled = true;
   
   const fd = new FormData(e.target);
   const data = Object.fromEntries(fd.entries());
   data.featured = document.getElementById('proj-featured').checked ? 'true' : 'false';
+  data.gallery = galleryList.join(',');
+  if (!data.coverImage && data.image) data.coverImage = data.image;
+  if (!data.image && data.coverImage) data.image = data.coverImage;
   
   const isEdit = !!data.id;
   const res = isEdit ? await API.adminUpdate('Projects', data.id, data) : await API.adminCreate('Projects', data);
-  btn.innerHTML = '<i class="fas fa-save"></i> Save Project'; btn.disabled = false;
-  if(res?.success !== false) {
+  btn.innerHTML = '<i class="fas fa-save"></i> Save Project & Case Study'; 
+  btn.disabled = false;
+  
+  if (res?.success !== false) {
     showAdminToast(`Project ${isEdit ? 'updated' : 'saved'} successfully!`, 'success');
     closeAdminModal('proj-modal');
     loadProjects();
-  } else showAdminToast(res?.message||'Error','error');
+  } else {
+    showAdminToast(res?.message || 'Error saving project', 'error');
+  }
 });
 
-function confirmDelete(id) { deleteId = id; openModal('delete-modal'); }
-document.getElementById('confirm-delete-btn').addEventListener('click', async() => {
-  if(!deleteId) return;
+function confirmDelete(id) { 
+  deleteId = id; 
+  openModal('delete-modal'); 
+}
+
+document.getElementById('confirm-delete-btn').addEventListener('click', async () => {
+  if (!deleteId) return;
   const btn = document.getElementById('confirm-delete-btn');
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...'; btn.disabled = true;
-  const res = await API.adminUpdate('Projects', deleteId, {status: 'Deleted'});
-  btn.innerHTML = 'Delete'; btn.disabled = false;
-  if(res?.success) {
-    showAdminToast('Project deleted', 'success');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...'; 
+  btn.disabled = true;
+  const res = await API.adminUpdate('Projects', deleteId, { status: 'Deleted' });
+  btn.innerHTML = 'Delete'; 
+  btn.disabled = false;
+  if (res?.success) {
+    showAdminToast('Project deleted successfully', 'success');
     closeAdminModal('delete-modal');
     loadProjects();
-  } else showAdminToast(res?.message||'Error','error');
+  } else {
+    showAdminToast(res?.message || 'Error deleting project', 'error');
+  }
 });
 
 window.openModal = function(id) { document.getElementById(id)?.classList.add('active'); };
@@ -195,12 +615,14 @@ window.closeAdminModal = function(id) { document.getElementById(id)?.classList.r
 
 function loadProjects() {
   API.adminGet('Projects').then(ps => {
-    allProjects = ps;
-    renderProjects(ps);
+    allProjects = Array.isArray(ps) ? ps : [];
+    renderProjects(allProjects);
   }).catch(e => {
-    document.getElementById('projects-tbody').innerHTML='<tr><td colspan="6" class="admin-table-empty">Failed to load projects.</td></tr>';
+    document.getElementById('projects-tbody').innerHTML = '<tr><td colspan="6" class="admin-table-empty">Failed to load projects.</td></tr>';
   });
 }
+
+loadClients();
 loadProjects();
 </script>
 </body>

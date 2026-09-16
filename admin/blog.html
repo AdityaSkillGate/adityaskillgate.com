@@ -23,8 +23,8 @@
     <a href="partners.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-handshake"></i></div><span class="sidebar-link-text">Partners</span></a>
     <a href="jobs.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-briefcase"></i></div><span class="sidebar-link-text">Job Openings</span></a>
     <a href="employees.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-users"></i></div><span class="sidebar-link-text">Team / Employees</span></a>
-    <a href="projects.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-laptop-code"></i></div><span class="sidebar-link-text">Projects</span></a>
-    <a href="placements.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-trophy"></i></div><span class="sidebar-link-text">Placements</span></a>
+    <a href="projects.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-laptop-code"></i></div><span class="sidebar-link-text">Clients</span></a>
+    <!-- <a href="placements.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-trophy"></i></div><span class="sidebar-link-text">Placements</span></a> -->
     <a href="testimonials.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-star"></i></div><span class="sidebar-link-text">Testimonials</span></a>
     <a href="timeline.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-history"></i></div><span class="sidebar-link-text">Company Journey</span></a>
     <a href="blog.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-blog"></i></div><span class="sidebar-link-text">Blog Posts</span></a>
@@ -49,7 +49,7 @@
     </div>
     <div class="admin-table-wrap">
       <table class="admin-table">
-        <thead><tr><th>Title</th><th>Category</th><th>Author</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+        <thead><tr><th>Post / Cover</th><th>Category</th><th>Author</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
         <tbody id="blog-tbody"><tr><td colspan="6" class="admin-table-empty">Loading posts...</td></tr></tbody>
       </table>
     </div>
@@ -57,12 +57,41 @@
 </div>
 
 <div class="modal-overlay" id="blog-modal">
-  <div class="modal" style="max-width:700px">
+  <div class="modal" style="max-width:720px">
     <div class="modal-header"><div class="modal-title" id="blog-modal-title">New Blog Post</div><button class="modal-close" onclick="closeAdminModal('blog-modal')"><i class="fas fa-times"></i></button></div>
     <div class="modal-body">
       <form id="blog-form">
         <input type="hidden" name="id" id="blog-id">
         <div class="form-group"><label class="form-label">Post Title *</label><input type="text" class="form-control" name="title" required></div>
+        
+        <!-- ImageKit Featured Image Uploader -->
+        <div class="form-group" style="background:var(--a-light);padding:14px;border-radius:10px;border:1px solid var(--a-border);margin-bottom:16px">
+          <label class="form-label" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <span><i class="fas fa-image" style="color:var(--a-primary);margin-right:6px"></i> Featured / Cover Image</span>
+            <span style="font-size:0.75rem;color:var(--a-primary);font-weight:600">⚡ Powered by ImageKit CDN</span>
+          </label>
+          <div id="blog-drop-zone" style="border:2px dashed #cbd5e1;border-radius:8px;padding:16px;text-align:center;cursor:pointer;background:white;transition:border-color 0.2s">
+            <i class="fas fa-cloud-upload-alt" style="font-size:1.8rem;color:var(--a-primary);margin-bottom:6px"></i>
+            <div style="font-weight:600;font-size:0.85rem;color:var(--a-navy)">Drag & drop blog cover or <span style="color:var(--a-primary)">click to browse</span></div>
+            <div style="font-size:0.75rem;color:var(--a-gray4);margin-top:2px">Supports JPG, PNG, WebP (Auto-optimized to ImageKit CDN)</div>
+            <input type="file" id="blog-file-input" accept="image/*" style="display:none">
+          </div>
+          <div id="blog-preview-box" style="display:none;margin-top:10px;align-items:center;gap:12px;background:white;padding:8px 12px;border-radius:8px;border:1px solid #e2e8f0">
+            <div style="width:70px;height:45px;border-radius:6px;overflow:hidden;background:#0D1B4C;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <img id="blog-preview-img" src="" style="width:100%;height:100%;object-fit:cover">
+            </div>
+            <div style="flex:1;overflow:hidden">
+              <div id="blog-preview-name" style="font-weight:600;font-size:0.85rem;color:var(--a-navy);white-space:nowrap;text-overflow:ellipsis;overflow:hidden">cover.jpg</div>
+              <div id="blog-upload-status" style="font-size:0.75rem;color:#16a34a"><i class="fas fa-check-circle"></i> Ready</div>
+            </div>
+            <button type="button" class="btn-admin-outline" id="remove-blog-photo-btn" style="padding:4px 8px;font-size:0.75rem;color:var(--a-danger);border-color:#fecaca"><i class="fas fa-trash"></i></button>
+          </div>
+          <div style="margin-top:8px">
+            <label style="font-size:0.75rem;color:var(--a-gray4);display:block;margin-bottom:4px">Or enter direct Image URL:</label>
+            <input type="text" class="form-control" name="image" id="blog-image-input" placeholder="https://ik.imagekit.io/... or paste image URL" style="font-size:0.85rem">
+          </div>
+        </div>
+
         <div class="form-row">
           <div class="form-group"><label class="form-label">Category</label>
             <select class="form-control" name="category"><option>Web Dev</option><option>AI/ML</option><option>Career</option><option>Placement</option><option>Technology</option><option>Company News</option></select>
@@ -78,7 +107,7 @@
           </div>
         </div>
         <div style="display:flex;gap:12px;margin-top:8px">
-          <button type="submit" class="btn-admin-primary"><i class="fas fa-save"></i> Publish Post</button>
+          <button type="submit" class="btn-admin-primary" id="save-btn"><i class="fas fa-save"></i> Publish Post</button>
           <button type="button" class="btn-admin-outline" onclick="closeAdminModal('blog-modal')">Cancel</button>
         </div>
       </form>
@@ -87,49 +116,158 @@
 </div>
 <div class="modal-overlay" id="delete-modal"><div class="modal" style="max-width:400px;text-align:center"><div class="modal-body" style="padding:40px"><div style="font-size:3rem;margin-bottom:16px">⚠️</div><h3 style="margin-bottom:10px;color:var(--a-navy)">Delete Post?</h3><p style="color:var(--a-gray4);margin-bottom:24px">This cannot be undone.</p><div style="display:flex;gap:12px;justify-content:center"><button class="btn-admin-danger" id="confirm-delete-btn">Delete</button><button class="btn-admin-outline" onclick="closeAdminModal('delete-modal')">Cancel</button></div></div></div></div>
 <div id="toast-container"></div>
-<script src="../js/api.js?t=1788169325160"></script><script src="../js/admin.js?t=1788169325160"></script>
+<script src="../js/api.js?v=12"></script><script src="../js/admin.js?v=12"></script>
 <script>
 let allPosts=[];let deleteId=null;
+
+/* ImageKit Blog Cover Upload Handlers */
+const blogDropZone = document.getElementById('blog-drop-zone');
+const blogFileInput = document.getElementById('blog-file-input');
+
+blogDropZone.addEventListener('click', () => blogFileInput.click());
+blogDropZone.addEventListener('dragover', (e) => { e.preventDefault(); blogDropZone.style.borderColor = 'var(--a-primary)'; });
+blogDropZone.addEventListener('dragleave', () => { blogDropZone.style.borderColor = '#cbd5e1'; });
+blogDropZone.addEventListener('drop', (e) => {
+  e.preventDefault();
+  blogDropZone.style.borderColor = '#cbd5e1';
+  if (e.dataTransfer.files[0]) handleBlogPhotoUpload(e.dataTransfer.files[0]);
+});
+blogFileInput.addEventListener('change', () => {
+  if (blogFileInput.files[0]) handleBlogPhotoUpload(blogFileInput.files[0]);
+});
+
+async function handleBlogPhotoUpload(file) {
+  if (file.size > 5 * 1024 * 1024) {
+    showAdminToast('File is larger than 5MB', 'error');
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    const base64Data = e.target.result;
+    showBlogPhotoPreview(base64Data, file.name, 'Uploading to ImageKit...');
+    try {
+      const uploadRes = await API.uploadMedia(base64Data, {
+        fileName: file.name,
+        folder: '/aditya-skill-gate/blog',
+        mimeType: file.type
+      });
+      if (uploadRes && uploadRes.url) {
+        document.getElementById('blog-image-input').value = uploadRes.url;
+        showBlogPhotoPreview(uploadRes.url, file.name, 'Uploaded to ImageKit CDN');
+        showAdminToast('Cover image uploaded successfully to ImageKit!', 'success');
+      }
+    } catch(err) {
+      showAdminToast('Upload failed, please check network', 'error');
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function showBlogPhotoPreview(url, name, statusText) {
+  const box = document.getElementById('blog-preview-box');
+  const img = document.getElementById('blog-preview-img');
+  const nameEl = document.getElementById('blog-preview-name');
+  const statusEl = document.getElementById('blog-upload-status');
+  const optUrl = typeof API !== 'undefined' && API.getOptimizedImageUrl ? API.getOptimizedImageUrl(url, { width: 140, height: 90, quality: 80 }) : url;
+  img.src = optUrl;
+  nameEl.textContent = name || 'Cover Image';
+  if (url && (url.includes('ik.imagekit.io') || url.includes('imagekit.io'))) {
+    statusEl.innerHTML = `<span style="color:#16a34a;font-weight:700;"><i class="fas fa-bolt"></i> ImageKit CDN Active</span>`;
+  } else {
+    statusEl.innerHTML = `<i class="fas fa-check-circle"></i> ${statusText || 'Ready'}`;
+  }
+  box.style.display = 'flex';
+}
+
+document.getElementById('remove-blog-photo-btn').addEventListener('click', () => {
+  document.getElementById('blog-image-input').value = '';
+  document.getElementById('blog-preview-box').style.display = 'none';
+  document.getElementById('blog-file-input').value = '';
+});
+
+document.getElementById('blog-image-input').addEventListener('input', (e) => {
+  const val = e.target.value.trim();
+  if (val) showBlogPhotoPreview(val, 'Remote Image', 'URL Configured');
+  else document.getElementById('blog-preview-box').style.display = 'none';
+});
+
 // Static seed for demo
 const STATIC_POSTS=[
   {id:'b1',title:'Getting Started with React in 2024',category:'Web Dev',author:'Priya Sharma',date:'Jun 10, 2024',status:'Published'},
   {id:'b2',title:'How to Break into AI/ML as a Fresher',category:'AI/ML',author:'Rahul Kumar',date:'Jun 5, 2024',status:'Published'},
   {id:'b3',title:'Top 5 Resume Mistakes IT Freshers Make',category:'Career',author:'Meena Raj',date:'Jun 1, 2024',status:'Published'},
 ];
+
 function renderPosts(list){
   const tb=document.getElementById('blog-tbody');
   if(!list.length){tb.innerHTML='<tr><td colspan="6" class="admin-table-empty">No posts yet.</td></tr>';return;}
-  tb.innerHTML=list.map(p=>`<tr>
-    <td style="font-weight:600;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.title}</td>
-    <td><span class="status-badge status-pending">${p.category}</span></td>
-    <td>${p.author||'Admin'}</td>
-    <td>${p.date||'—'}</td>
-    <td><span class="status-badge ${p.status==='Published'?'status-active':'status-inactive'}">${p.status||'Published'}</span></td>
-    <td><div class="action-btns"><button class="btn-icon btn-icon-edit" onclick="editPost('${p.id}')"><i class="fas fa-pencil"></i></button><button class="btn-icon btn-icon-delete" onclick="confirmDelete('${p.id}')"><i class="fas fa-trash"></i></button></div></td>
-  </tr>`).join('');
+  tb.innerHTML=list.map(p=>{
+    const cover = p.image || p.coverImage || p.photo || '';
+    const optThumb = cover ? (typeof API !== 'undefined' && API.getOptimizedImageUrl ? API.getOptimizedImageUrl(cover, { width: 90, height: 60, quality: 80 }) : cover) : '';
+
+    return `<tr>
+      <td>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:48px;height:36px;border-radius:6px;overflow:hidden;background:var(--a-navy);display:flex;align-items:center;justify-content:center;color:white;font-size:0.75rem;flex-shrink:0;">
+            ${optThumb ? `<img src="${optThumb}" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span style="display:none;"><i class="fas fa-file-alt"></i></span>` : `<span><i class="fas fa-file-alt"></i></span>`}
+          </div>
+          <div>
+            <div style="font-weight:600;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--a-navy)">${p.title}</div>
+            ${cover && cover.includes('imagekit.io') ? '<span style="font-size:0.7rem;color:#16a34a"><i class="fas fa-bolt"></i> ImageKit</span>' : ''}
+          </div>
+        </div>
+      </td>
+      <td><span class="status-badge status-pending">${p.category}</span></td>
+      <td>${p.author||'Admin'}</td>
+      <td>${p.date||'—'}</td>
+      <td><span class="status-badge ${p.status==='Published'?'status-active':'status-inactive'}">${p.status||'Published'}</span></td>
+      <td><div class="action-btns"><button class="btn-icon btn-icon-edit" onclick="editPost('${p.id}')"><i class="fas fa-pencil"></i></button><button class="btn-icon btn-icon-delete" onclick="confirmDelete('${p.id}')"><i class="fas fa-trash"></i></button></div></td>
+    </tr>`;
+  }).join('');
 }
+
 window.editPost=function(id){
   const p=allPosts.find(x=>x.id===id);if(!p)return;
   document.getElementById('blog-modal-title').textContent='Edit Post';
   const f=document.getElementById('blog-form');
   document.getElementById('blog-id').value=p.id;
-  ['title','category','author','excerpt','content','readTime','status'].forEach(k=>{if(f[k])f[k].value=p[k]||'';});
+  ['title','category','author','excerpt','content','readTime','status','image'].forEach(k=>{if(f[k])f[k].value=p[k]||'';});
+  const cover = p.image || p.coverImage || p.photo || '';
+  if (cover) {
+    showBlogPhotoPreview(cover, p.title || 'Cover', 'Saved Cover');
+  } else {
+    document.getElementById('blog-preview-box').style.display = 'none';
+  }
   openModal('blog-modal');
 };
+
 window.confirmDelete=function(id){deleteId=id;openModal('delete-modal');};
 document.getElementById('confirm-delete-btn')?.addEventListener('click',async()=>{
   const res=await API.deleteBlog(deleteId);closeAdminModal('delete-modal');
   showAdminToast('Post deleted','success');allPosts=allPosts.filter(p=>p.id!==deleteId);renderPosts(allPosts);deleteId=null;
 });
+
 document.getElementById('blog-form')?.addEventListener('submit',async(e)=>{
   e.preventDefault();
+  const btn=document.getElementById('save-btn');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...'; btn.disabled = true;
   const data=Object.fromEntries(new FormData(e.target));
   data.date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});
   const res=data.id?await API.updateBlog(data):await API.addBlog(data);
-  if(res?.success!==false){showAdminToast(`Post ${data.id?'updated':'published'}`,'success');closeAdminModal('blog-modal');e.target.reset();document.getElementById('blog-id').value='';API.adminGet('Blogs').then(ps=>{allPosts=ps.length?ps:STATIC_POSTS;renderPosts(allPosts);}).catch(()=>{allPosts=STATIC_POSTS;renderPosts(STATIC_POSTS);});}
+  btn.innerHTML = '<i class="fas fa-save"></i> Publish Post'; btn.disabled = false;
+  if(res?.success!==false){showAdminToast(`Post ${data.id?'updated':'published'}`,'success');closeAdminModal('blog-modal');e.target.reset();document.getElementById('blog-id').value='';document.getElementById('blog-preview-box').style.display='none';API.adminGet('Blogs').then(ps=>{allPosts=ps.length?ps:STATIC_POSTS;renderPosts(allPosts);}).catch(()=>{allPosts=STATIC_POSTS;renderPosts(STATIC_POSTS);});}
   else showAdminToast(res?.message||'Error','error');
 });
-window.openModal=function(id){document.getElementById(id)?.classList.add('active');};
+
+window.openModal=function(id){
+  if(id === 'blog-modal' && !document.getElementById('blog-id').value) {
+    document.getElementById('blog-modal-title').textContent='New Blog Post';
+    document.getElementById('blog-form').reset();
+    document.getElementById('blog-id').value = '';
+    document.getElementById('blog-preview-box').style.display = 'none';
+  }
+  document.getElementById(id)?.classList.add('active');
+};
 window.closeAdminModal=function(id){document.getElementById(id)?.classList.remove('active');};
 API.adminGet('Blogs').then(ps=>{allPosts=ps.length?ps:STATIC_POSTS;renderPosts(allPosts);}).catch(()=>{allPosts=STATIC_POSTS;renderPosts(STATIC_POSTS);});
 </script>

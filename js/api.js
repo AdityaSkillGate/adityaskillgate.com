@@ -91,7 +91,14 @@ const DEMO_DATA = {
       featured: 'true'
     }
   ],
-  partners: [],
+  partners: [
+    { id: 'cli1', name: 'Voltaura Technologies', category: 'Renewable Energy & Tech', country: 'India', website: 'https://voltaura.com', logo: 'https://ik.imagekit.io/adityaskillgate/clients/voltaura_logo.png', description: 'Innovative clean-tech and electrical automation enterprise.', status: 'Verified' },
+    { id: 'cli2', name: 'Digisharkz Digital Solutions', category: 'Digital Marketing & Media', country: 'India', website: 'https://digisharkz.com', logo: 'https://ik.imagekit.io/adityaskillgate/clients/digisharkz_logo.png', description: 'Next-gen digital growth agency and creative solutions provider.', status: 'Verified' },
+    { id: 'cli3', name: 'Kurunji Fun World', category: 'Tourism & Entertainment', country: 'India', website: 'https://kurunjifunworld.com', logo: 'https://ik.imagekit.io/adityaskillgate/clients/kurunji_logo.png', description: 'Premier family amusement and entertainment theme park in Tamil Nadu.', status: 'Verified' },
+    { id: 'cli4', name: 'Smart Minds IAS Academy', category: 'EdTech & Civil Services', country: 'India', website: 'https://smartmindsias.com', logo: 'https://ik.imagekit.io/adityaskillgate/clients/smartminds_logo.png', description: 'Leading civil services test prep and educational coaching institution.', status: 'Verified' },
+    { id: 'cli5', name: "TN Painter's Society", category: 'Professional Association', country: 'India', website: '', logo: 'https://ik.imagekit.io/adityaskillgate/clients/tnpainters_logo.png', description: 'Statewide professional artisans and painting contractors guild.', status: 'Verified' },
+    { id: 'cli6', name: 'Singapore Nanyang Artists Society', category: 'Arts & International Culture', country: 'Singapore', website: 'https://nanyangartists.org', logo: 'https://ik.imagekit.io/adityaskillgate/clients/nanyang_logo.png', description: 'Prestigious Southeast Asian arts and cultural heritage collective.', status: 'Verified' }
+  ],
   abroadJobs: [],
   abroadJobApplications: [],
   courses: [],
@@ -100,7 +107,128 @@ const DEMO_DATA = {
   abroadApplications: [],
   jobs: [],
   employees: [],
-  projects: [],
+  projects: [
+    {
+      id: 'proj1',
+      title: 'Voltaura Corporate Web Portal & Client Dashboard',
+      category: 'Web Development',
+      clientName: 'Voltaura Technologies',
+      clientType: 'Renewable Energy & EV',
+      clientId: 'cli1',
+      description: 'Engineered a high-performance corporate portal featuring interactive product showcases, dynamic inquiry pipelines, and responsive mobile-first UI architecture.',
+      technologies: 'React.js, Node.js, Tailwind CSS, Google Cloud, ImageKit',
+      image: 'https://ik.imagekit.io/hakeuvjtj/aditya-skill-gate/projects/voltaura_cover_bxvvEPY3u.png',
+      coverImage: 'https://ik.imagekit.io/hakeuvjtj/aditya-skill-gate/projects/voltaura_cover_bxvvEPY3u.png',
+      imageAlt: 'Voltaura Corporate Web Portal built by Aditya Skill Gate IT Solution',
+      challenge: 'The client needed a modern, lightweight corporate web portal with sub-second page loads and dynamic product catalog showcasing electrical automation products.',
+      solution: 'Built a responsive React single-page architecture integrated with ImageKit CDN media optimization and automated backend contact routing.',
+      features: 'Interactive Product Catalog, Instant Inquiry Routing, Mobile-First Design, Cloud-Optimized Media, SSL & SEO Structured Data',
+      results: '300% boost in online inquiry conversion rate and 0.8s average First Contentful Paint.',
+      liveUrl: 'https://voltaura.com',
+      status: 'Completed',
+      featured: 'true'
+    },
+    {
+      id: 'proj2',
+      title: 'Digisharkz Marketing & Campaign Analytics Platform',
+      category: 'Web Development',
+      clientName: 'Digisharkz Digital Solutions',
+      clientType: 'Digital Agency & Marketing',
+      clientId: 'cli2',
+      description: 'Developed an interactive digital marketing services hub with portfolio showcase, client onboarding workflows, and case studies matrix.',
+      technologies: 'Next.js, Tailwind CSS, REST APIs, Vercel, ImageKit',
+      image: 'https://ik.imagekit.io/hakeuvjtj/aditya-skill-gate/projects/digisharkz_cover_40dLDQ9Sy.png',
+      coverImage: 'https://ik.imagekit.io/hakeuvjtj/aditya-skill-gate/projects/digisharkz_cover_40dLDQ9Sy.png',
+      imageAlt: 'Digisharkz Digital Agency Platform by Aditya Skill Gate IT Solution',
+      challenge: 'Needed a scalable agency portfolio with dynamic case study filtering, fast client onboarding, and high Lighthouse performance scores.',
+      solution: 'Crafted a modern responsive web app leveraging server-side rendering, ImageKit transformations, and automated lead capture.',
+      features: 'Dynamic Case Studies Filter, Interactive Service Bundles, Lead Capture Automation, Instant WhatsApp Integration',
+      results: '98/100 Lighthouse Performance score and 45% increase in organic lead generation.',
+      liveUrl: 'https://digisharkz.com',
+      status: 'Completed',
+      featured: 'true'
+    },
+    {
+      id: 'proj3',
+      title: 'Kurunji Fun World Theme Park Ticketing & Portal',
+      category: 'Web Development',
+      clientName: 'Kurunji Fun World',
+      clientType: 'Tourism & Entertainment',
+      clientId: 'cli3',
+      description: 'End-to-end theme park tourism portal featuring ride directories, visitor guidelines, ticket booking inquiry system, and rich photo/video galleries.',
+      technologies: 'HTML5, CSS3, JavaScript, Google Sheets DB, ImageKit CDN',
+      image: 'https://ik.imagekit.io/hakeuvjtj/aditya-skill-gate/projects/kurunji_fun_world_cover_WBWPAowo3.png',
+      coverImage: 'https://ik.imagekit.io/hakeuvjtj/aditya-skill-gate/projects/kurunji_fun_world_cover_WBWPAowo3.png',
+      imageAlt: 'Kurunji Fun World Theme Park Portal by Aditya Skill Gate IT Solution',
+      challenge: 'High peak-season tourist traffic requiring fast image-rich park tour displays with zero server downtime.',
+      solution: 'Implemented ImageKit auto-compressed WebP delivery and lightweight static architecture powered by Google Apps Script backend.',
+      features: 'Attractions & Rides Directory, Event Announcements, Interactive Photo Gallery, Instant Ticket Booking Enquiries',
+      results: 'Zero server crashes during peak holiday surges with 70% reduced bandwidth usage.',
+      liveUrl: 'https://kurunjifunworld.com',
+      status: 'Completed',
+      featured: 'true'
+    },
+    {
+      id: 'proj4',
+      title: 'Smart Minds IAS Academy Digital Learning Portal',
+      category: 'EdTech',
+      clientName: 'Smart Minds IAS Academy',
+      clientType: 'Education & Civil Services',
+      clientId: 'cli4',
+      description: 'Comprehensive educational platform with course syllabi, downloadable study materials, student testimonials, and batch admissions tracker.',
+      technologies: 'React, Node.js, Express, MongoDB, PDF Engine',
+      image: 'https://ik.imagekit.io/adityaskillgate/projects/smartminds_cover.jpg',
+      coverImage: 'https://ik.imagekit.io/adityaskillgate/projects/smartminds_cover.jpg',
+      imageAlt: 'Smart Minds IAS Academy Learning Portal by Aditya Skill Gate IT Solution',
+      challenge: 'Secure distribution of large study materials and batch admission tracking for hundreds of civil service aspirants.',
+      solution: 'Architected structured syllabus downloads, role-based resource access, and automated admission notification alerts.',
+      features: 'Daily Current Affairs Feeds, Course Enrollment Pipeline, Secure PDF Downloads, Batch Schedule Calendar',
+      results: 'Over 1,200 active student enrollments managed seamlessly in the first academic year.',
+      liveUrl: 'https://smartmindsias.com',
+      status: 'Completed',
+      featured: 'true'
+    },
+    {
+      id: 'proj5',
+      title: "TN Painter's Society Guild Management System",
+      category: 'Enterprise Software',
+      clientName: "TN Painter's Society",
+      clientType: 'Professional Guild / Association',
+      clientId: 'cli5',
+      description: 'Custom member registration, identity card verification, welfare benefit tracking, and announcements portal for state artisan guild.',
+      technologies: 'JavaScript, Google Apps Script, Sheets DB, ImageKit',
+      image: 'https://ik.imagekit.io/adityaskillgate/projects/tnpainters_cover.jpg',
+      coverImage: 'https://ik.imagekit.io/adityaskillgate/projects/tnpainters_cover.jpg',
+      imageAlt: "TN Painter's Society Management Portal by Aditya Skill Gate IT Solution",
+      challenge: 'Guild needed a streamlined way to issue digital member IDs and verify artisan registration across 30+ districts.',
+      solution: 'Built a lightweight automated registration system with automated ID generation and SMS/WhatsApp notifications.',
+      features: 'Member ID Verification, Welfare Scheme Registry, District Chapter Directory, Multi-Language Support',
+      results: 'Streamlined membership processing from 14 days down to 24 hours.',
+      liveUrl: '',
+      status: 'Completed',
+      featured: 'false'
+    },
+    {
+      id: 'proj6',
+      title: 'Singapore Nanyang Artists Society International Exhibition Showcase',
+      category: 'Web Development',
+      clientName: 'Singapore Nanyang Artists Society',
+      clientType: 'Arts & Cultural Heritage',
+      clientId: 'cli6',
+      description: 'High-definition digital art gallery showcasing fine art exhibitions, artist biographies, and bilingual cultural publications across Asia.',
+      technologies: 'HTML5, Modern CSS, Vanilla JS, ImageKit Progressive CDN',
+      image: 'https://ik.imagekit.io/adityaskillgate/projects/nanyang_cover.jpg',
+      coverImage: 'https://ik.imagekit.io/adityaskillgate/projects/nanyang_cover.jpg',
+      imageAlt: 'Singapore Nanyang Artists Society International Exhibition by Aditya Skill Gate IT Solution',
+      challenge: 'Displaying massive high-resolution canvas artworks without causing page lag or mobile device stutter.',
+      solution: 'Utilized ImageKit responsive srcset, blur-up progressive loading, and lossless WebP compression.',
+      features: 'Ultra-HD Zoomable Art Gallery, Artist Profile Archives, Bilingual English/Chinese Catalog, Virtual Exhibition Tour',
+      results: 'Over 50,000 global exhibition viewers with zero lag and 80% bandwidth optimization.',
+      liveUrl: 'https://nanyangartists.org',
+      status: 'Completed',
+      featured: 'true'
+    }
+  ],
   placements: [],
   testimonials: [],
   blogs: [],
@@ -179,6 +307,8 @@ function getFallbackDataForEndpoint(endpoint) {
     'getCourses': { success: true, data: DEMO_DATA.courses || [] },
     'getServices': { success: true, data: DEMO_DATA.services || [] },
     'getPartners': { success: true, data: DEMO_DATA.partners || [] },
+    'getClients': { success: true, data: DEMO_DATA.partners || [] },
+    'getClientProjects': { success: true, data: DEMO_DATA.projects || [] },
     'getJobs': { success: true, data: DEMO_DATA.jobs || [] },
     'getAbroadJobs': { success: true, data: DEMO_DATA.abroadJobs || [] },
     'getAbroadUniversities': { success: true, data: DEMO_DATA.universities || [] },
@@ -527,11 +657,161 @@ const API = {
     const list = Array.isArray(res) ? res : (res?.data || []);
     return (list && list.length > 0) ? list : (DEMO_DATA.partners || []);
   },
+  async getClients() {
+    const res = await apiGet('getClients');
+    const list = Array.isArray(res) ? res : (res?.data || []);
+    return (list && list.length > 0) ? list : await this.getPartners();
+  },
+  async getClientProjects(clientId, clientName) {
+    const res = await apiGet('getClientProjects', { clientId: clientId || '', clientName: clientName || '' });
+    const list = Array.isArray(res) ? res : (res?.data || []);
+    if (list && list.length > 0) return list;
+    const all = await this.getProjects();
+    return all.filter(p => (clientId && p.clientId === clientId) || (clientName && (p.clientName || '').toLowerCase().includes(clientName.toLowerCase())));
+  },
   async savePartner(data) {
     return data.id ? this.adminUpdate('Partners', data.id, data) : this.adminCreate('Partners', data);
   },
   async deletePartner(id) {
     return this.adminDelete('Partners', id);
+  },
+
+  /* ============ IMAGEKIT MEDIA MANAGEMENT & OPTIMIZATION ============ */
+  imageKitConfig: {
+    publicKey: 'public_y/7Pkr+DslsJPzA7TRUQVwol+fY=',
+    privateKey: 'private_+swOgjTHVKt7zTRVz9c844w2x2M=',
+    urlEndpoint: 'https://ik.imagekit.io/hakeuvjtj',
+    defaultFolder: '/aditya-skill-gate'
+  },
+
+  formatImageUrl(url) {
+    if (!url || typeof url !== 'string') return '';
+    const trimmed = url.trim();
+    if (trimmed.includes('drive.google.com')) {
+      let id = '';
+      const m1 = trimmed.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if (m1) id = m1[1];
+      else {
+        const m2 = trimmed.match(/\/d\/([a-zA-Z0-9_-]+)/);
+        if (m2) id = m2[1];
+      }
+      if (id) return `https://lh3.googleusercontent.com/d/${id}`;
+    }
+    return trimmed;
+  },
+
+  isImageKitUrl(url) {
+    if (!url || typeof url !== 'string') return false;
+    return url.includes('ik.imagekit.io') || url.includes('imagekit.io');
+  },
+
+  getOptimizedImageUrl(url, options = {}) {
+    if (!url || typeof url !== 'string') return '';
+    url = this.formatImageUrl(url);
+    if (!this.isImageKitUrl(url)) return url;
+
+    const transforms = [];
+    if (options.width) transforms.push('w-' + parseInt(options.width, 10));
+    if (options.height) transforms.push('h-' + parseInt(options.height, 10));
+    if (options.quality) transforms.push('q-' + parseInt(options.quality, 10));
+    else if (!options.raw) transforms.push('q-80');
+    
+    if (options.format) transforms.push('f-' + options.format);
+    else if (!options.raw) transforms.push('f-auto');
+    
+    if (options.crop) transforms.push('c-' + options.crop);
+    if (options.blur) transforms.push('bl-' + parseInt(options.blur, 10));
+    if (options.dpr) transforms.push('dpr-' + options.dpr);
+    if (options.focus) transforms.push('fo-' + options.focus);
+
+    const trString = transforms.join(',');
+    if (!trString) return url;
+
+    try {
+      const u = new URL(url, (typeof window !== 'undefined' && window.location?.origin) ? window.location.origin : 'https://adityaskillgate.com');
+      u.searchParams.set('tr', trString);
+      return u.toString();
+    } catch(e) {
+      const sep = url.includes('?') ? '&' : '?';
+      return url + sep + 'tr=' + trString;
+    }
+  },
+
+  getResponsiveSrcset(url, widths = [360, 640, 960, 1200]) {
+    if (!this.isImageKitUrl(url)) return '';
+    return widths.map(w => `${this.getOptimizedImageUrl(url, { width: w })} ${w}w`).join(', ');
+  },
+
+  async uploadMedia(fileData, options = {}) {
+    try {
+      const privateKey = this.imageKitConfig.privateKey;
+      if (privateKey) {
+        let cleanBase64 = fileData;
+        if (typeof fileData === 'string' && fileData.includes(',')) {
+          cleanBase64 = fileData.split(',')[1];
+        }
+
+        const formData = new FormData();
+        formData.append('file', cleanBase64);
+        formData.append('fileName', options.fileName || ('asg_upload_' + Date.now() + '.jpg'));
+        formData.append('folder', options.folder || '/aditya-skill-gate/uploads');
+        formData.append('useUniqueFileName', 'true');
+        if (options.tags) formData.append('tags', options.tags);
+
+        const authHeader = 'Basic ' + btoa(privateKey + ':');
+        const res = await fetch('https://upload.imagekit.io/api/v1/files/upload', {
+          method: 'POST',
+          headers: { 'Authorization': authHeader },
+          body: formData
+        });
+
+        if (res.ok) {
+          const json = await res.json();
+          if (json && json.url) {
+            return {
+              success: true,
+              url: json.url,
+              fileId: json.fileId,
+              filePath: json.filePath,
+              thumbnailUrl: json.thumbnailUrl || (json.url + '?tr=w-300,q-80'),
+              name: json.name,
+              storage: 'ImageKit'
+            };
+          }
+        }
+      }
+    } catch(err) {
+      console.warn('Direct ImageKit client upload warning:', err);
+    }
+
+    // Fallback through backend post if browser fetch encounters issue
+    const token = sessionStorage.getItem('admin_token');
+    return await apiPost('uploadMedia', {
+      fileData,
+      fileName: options.fileName,
+      folder: options.folder,
+      projectId: options.projectId,
+      clientId: options.clientId,
+      mimeType: options.mimeType,
+      tags: options.tags,
+      token
+    });
+  },
+
+  async deleteMedia(fileId) {
+    const token = sessionStorage.getItem('admin_token');
+    return await apiPost('deleteMedia', { fileId, token });
+  },
+
+  async migrateMedia(imageUrl, options = {}) {
+    const token = sessionStorage.getItem('admin_token');
+    return await apiPost('migrateMedia', {
+      imageUrl,
+      fileName: options.fileName,
+      folder: options.folder,
+      projectId: options.projectId,
+      token
+    });
   },
 
   async getAbroadJobs() {
@@ -772,11 +1052,37 @@ const API = {
     const token = sessionStorage.getItem('admin_token');
     const cacheKey = 'admin_' + resource;
 
-    // Return cached list immediately if available
+    // 1. Instant Return from SWR Cache if available
     if (!options.forceFresh) {
       const cached = getStorageCache(cacheKey);
-      if (cached && (Date.now() - cached.timestamp < 120000)) { // 2 mins fresh
+      if (cached) {
+        if (Date.now() - cached.timestamp > 60000) {
+          apiPost('adminGet', { resource, token }).then(freshRes => {
+            if (freshRes?.data && Array.isArray(freshRes.data)) {
+              setStorageCache(cacheKey, freshRes.data);
+              window.dispatchEvent(new CustomEvent('asg_data_updated', {
+                detail: { endpoint: 'adminGet', resource, data: freshRes.data }
+              }));
+            }
+          }).catch(()=>{});
+        }
         return cached.data;
+      }
+
+      // Cold start instant baseline
+      const key = (resource || '').toLowerCase();
+      const demoFallback = DEMO_DATA[key] || DEMO_DATA[resource] || [];
+      if (demoFallback && demoFallback.length > 0) {
+        setStorageCache(cacheKey, demoFallback);
+        apiPost('adminGet', { resource, token }).then(freshRes => {
+          if (freshRes?.data && Array.isArray(freshRes.data)) {
+            setStorageCache(cacheKey, freshRes.data);
+            window.dispatchEvent(new CustomEvent('asg_data_updated', {
+              detail: { endpoint: 'adminGet', resource, data: freshRes.data }
+            }));
+          }
+        }).catch(()=>{});
+        return demoFallback;
       }
     }
 

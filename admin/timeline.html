@@ -22,8 +22,8 @@
     <a href="partners.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-handshake"></i></div><span class="sidebar-link-text">Partners</span></a>
     <a href="jobs.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-briefcase"></i></div><span class="sidebar-link-text">Job Openings</span></a>
     <a href="employees.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-users"></i></div><span class="sidebar-link-text">Team / Employees</span></a>
-    <a href="projects.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-laptop-code"></i></div><span class="sidebar-link-text">Projects</span></a>
-    <a href="placements.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-trophy"></i></div><span class="sidebar-link-text">Placements</span></a>
+    <a href="projects.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-laptop-code"></i></div><span class="sidebar-link-text">Clients</span></a>
+    <!-- <a href="placements.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-trophy"></i></div><span class="sidebar-link-text">Placements</span></a> -->
     <a href="testimonials.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-star"></i></div><span class="sidebar-link-text">Testimonials</span></a>
     <a href="timeline.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-history"></i></div><span class="sidebar-link-text">Company Journey</span></a>
     <a href="blog.html" class="sidebar-link"><div class="sidebar-icon"><i class="fas fa-blog"></i></div><span class="sidebar-link-text">Blog Posts</span></a>
@@ -69,12 +69,40 @@
         <div class="form-group"><label class="form-label">Description *</label><textarea class="form-control" name="description" rows="3" required placeholder="Description of the milestone..."></textarea></div>
         
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Icon Class (FontAwesome)</label><input type="text" class="form-control" name="icon" placeholder="fas fa-flag"></div>
-          <div class="form-group"><label class="form-label">Image URL</label><input type="url" class="form-control" name="image" placeholder="https://..."></div>
+          <div class="form-group" style="flex:1"><label class="form-label">Icon Class (FontAwesome)</label><input type="text" class="form-control" name="icon" placeholder="fas fa-flag"></div>
+          <div class="form-group" style="flex:1"><label class="form-label">Sort Order</label><input type="number" class="form-control" name="sortOrder" value="1"></div>
         </div>
+
+        <!-- ImageKit Milestone Image Uploader -->
+        <div class="form-group" style="background:var(--a-light);padding:14px;border-radius:10px;border:1px solid var(--a-border);margin-bottom:16px">
+          <label class="form-label" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <span><i class="fas fa-image" style="color:var(--a-primary);margin-right:6px"></i> Milestone Photo / Graphic</span>
+            <span style="font-size:0.75rem;color:var(--a-primary);font-weight:600">⚡ Powered by ImageKit CDN</span>
+          </label>
+          <div id="timeline-drop-zone" style="border:2px dashed #cbd5e1;border-radius:8px;padding:16px;text-align:center;cursor:pointer;background:white;transition:border-color 0.2s">
+            <i class="fas fa-cloud-upload-alt" style="font-size:1.8rem;color:var(--a-primary);margin-bottom:6px"></i>
+            <div style="font-weight:600;font-size:0.85rem;color:var(--a-navy)">Drag & drop milestone image or <span style="color:var(--a-primary)">click to browse</span></div>
+            <div style="font-size:0.75rem;color:var(--a-gray4);margin-top:2px">Supports JPG, PNG, WebP (Auto-optimized to ImageKit CDN)</div>
+            <input type="file" id="timeline-file-input" accept="image/*" style="display:none">
+          </div>
+          <div id="timeline-preview-box" style="display:none;margin-top:10px;align-items:center;gap:12px;background:white;padding:8px 12px;border-radius:8px;border:1px solid #e2e8f0">
+            <div style="width:70px;height:45px;border-radius:6px;overflow:hidden;background:#0D1B4C;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <img id="timeline-preview-img" src="" style="width:100%;height:100%;object-fit:cover">
+            </div>
+            <div style="flex:1;overflow:hidden">
+              <div id="timeline-preview-name" style="font-weight:600;font-size:0.85rem;color:var(--a-navy);white-space:nowrap;text-overflow:ellipsis;overflow:hidden">milestone.jpg</div>
+              <div id="timeline-upload-status" style="font-size:0.75rem;color:#16a34a"><i class="fas fa-check-circle"></i> Ready</div>
+            </div>
+            <button type="button" class="btn-admin-outline" id="remove-timeline-photo-btn" style="padding:4px 8px;font-size:0.75rem;color:var(--a-danger);border-color:#fecaca"><i class="fas fa-trash"></i></button>
+          </div>
+          <div style="margin-top:8px">
+            <label style="font-size:0.75rem;color:var(--a-gray4);display:block;margin-bottom:4px">Or enter direct Image URL:</label>
+            <input type="text" class="form-control" name="image" id="timeline-image-input" placeholder="https://ik.imagekit.io/... or paste image URL" style="font-size:0.85rem">
+          </div>
+        </div>
+
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Sort Order</label><input type="number" class="form-control" name="sortOrder" value="1"></div>
-          <div class="form-group"><label class="form-label">Status</label><select class="form-control" name="status"><option value="Active">Active</option><option value="Draft">Draft</option></select></div>
+          <div class="form-group" style="flex:1"><label class="form-label">Status</label><select class="form-control" name="status"><option value="Active">Active</option><option value="Draft">Draft</option></select></div>
         </div>
         
         <div style="display:flex;gap:12px;margin-top:24px">
@@ -87,19 +115,101 @@
 </div>
 <div class="modal-overlay" id="delete-modal"><div class="modal" style="max-width:400px;text-align:center"><div class="modal-body" style="padding:40px"><div style="font-size:3rem;margin-bottom:16px">🗑️</div><h3 style="margin-bottom:10px;color:var(--a-navy)">Delete Milestone?</h3><p style="color:var(--a-gray4);margin-bottom:24px">This will remove it from the timeline.</p><div style="display:flex;gap:12px;justify-content:center"><button class="btn-admin-danger" id="confirm-delete-btn">Delete</button><button class="btn-admin-outline" onclick="closeAdminModal('delete-modal')">Cancel</button></div></div></div></div>
 <div id="toast-container"></div>
-<script src="../js/api.js?t=1788169325160"></script><script src="../js/admin.js?t=1788169325160"></script>
+<script src="../js/api.js?v=12"></script><script src="../js/admin.js?v=12"></script>
 <script>
 let allTimeline=[];let deleteId=null;
+
+/* ImageKit Milestone Photo Upload Handlers */
+const timelineDropZone = document.getElementById('timeline-drop-zone');
+const timelineFileInput = document.getElementById('timeline-file-input');
+
+timelineDropZone.addEventListener('click', () => timelineFileInput.click());
+timelineDropZone.addEventListener('dragover', (e) => { e.preventDefault(); timelineDropZone.style.borderColor = 'var(--a-primary)'; });
+timelineDropZone.addEventListener('dragleave', () => { timelineDropZone.style.borderColor = '#cbd5e1'; });
+timelineDropZone.addEventListener('drop', (e) => {
+  e.preventDefault();
+  timelineDropZone.style.borderColor = '#cbd5e1';
+  if (e.dataTransfer.files[0]) handleTimelinePhotoUpload(e.dataTransfer.files[0]);
+});
+timelineFileInput.addEventListener('change', () => {
+  if (timelineFileInput.files[0]) handleTimelinePhotoUpload(timelineFileInput.files[0]);
+});
+
+async function handleTimelinePhotoUpload(file) {
+  if (file.size > 5 * 1024 * 1024) {
+    showAdminToast('File is larger than 5MB', 'error');
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    const base64Data = e.target.result;
+    showTimelinePhotoPreview(base64Data, file.name, 'Uploading to ImageKit...');
+    try {
+      const uploadRes = await API.uploadMedia(base64Data, {
+        fileName: file.name,
+        folder: '/aditya-skill-gate/timeline',
+        mimeType: file.type
+      });
+      if (uploadRes && uploadRes.url) {
+        document.getElementById('timeline-image-input').value = uploadRes.url;
+        showTimelinePhotoPreview(uploadRes.url, file.name, 'Uploaded to ImageKit CDN');
+        showAdminToast('Milestone image uploaded successfully to ImageKit!', 'success');
+      }
+    } catch(err) {
+      showAdminToast('Upload failed, please check network', 'error');
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function showTimelinePhotoPreview(url, name, statusText) {
+  const box = document.getElementById('timeline-preview-box');
+  const img = document.getElementById('timeline-preview-img');
+  const nameEl = document.getElementById('timeline-preview-name');
+  const statusEl = document.getElementById('timeline-upload-status');
+  const optUrl = typeof API !== 'undefined' && API.getOptimizedImageUrl ? API.getOptimizedImageUrl(url, { width: 140, height: 90, quality: 80 }) : url;
+  img.src = optUrl;
+  nameEl.textContent = name || 'Milestone Image';
+  if (url && (url.includes('ik.imagekit.io') || url.includes('imagekit.io'))) {
+    statusEl.innerHTML = `<span style="color:#16a34a;font-weight:700;"><i class="fas fa-bolt"></i> ImageKit CDN Active</span>`;
+  } else {
+    statusEl.innerHTML = `<i class="fas fa-check-circle"></i> ${statusText || 'Ready'}`;
+  }
+  box.style.display = 'flex';
+}
+
+document.getElementById('remove-timeline-photo-btn').addEventListener('click', () => {
+  document.getElementById('timeline-image-input').value = '';
+  document.getElementById('timeline-preview-box').style.display = 'none';
+  document.getElementById('timeline-file-input').value = '';
+});
+
+document.getElementById('timeline-image-input').addEventListener('input', (e) => {
+  const val = e.target.value.trim();
+  if (val) showTimelinePhotoPreview(val, 'Remote Image', 'URL Configured');
+  else document.getElementById('timeline-preview-box').style.display = 'none';
+});
 
 function renderTimeline(milestones) {
   const tbody = document.getElementById('timeline-tbody');
   if(!milestones.length) { tbody.innerHTML='<tr><td colspan="6" class="admin-table-empty">No milestones found.</td></tr>'; return; }
   tbody.innerHTML = milestones.map(m => {
     let statClass = m.status === 'Active' ? 'status-active' : 'status-draft';
+    const img = m.image || '';
+    const optImg = img ? (typeof API !== 'undefined' && API.getOptimizedImageUrl ? API.getOptimizedImageUrl(img, { width: 80, height: 60, quality: 80 }) : img) : '';
+
     return `<tr>
       <td><span style="font-weight:600;color:var(--a-gray4)">#${m.sortOrder||0}</span></td>
       <td>${m.date ? new Date(m.date).toLocaleDateString() : '-'}</td>
-      <td style="font-weight:600;color:var(--a-navy)">${m.title}</td>
+      <td>
+        <div style="display:flex;align-items:center;gap:10px">
+          ${optImg ? `<img src="${optImg}" style="width:36px;height:28px;border-radius:4px;object-fit:cover" onerror="this.style.display='none'">` : (m.icon ? `<i class="${m.icon}" style="color:var(--a-primary);font-size:1.1rem"></i>` : '')}
+          <div>
+            <div style="font-weight:600;color:var(--a-navy)">${m.title}</div>
+            ${img && img.includes('imagekit.io') ? '<span style="font-size:0.7rem;color:#16a34a"><i class="fas fa-bolt"></i> ImageKit</span>' : ''}
+          </div>
+        </div>
+      </td>
       <td style="font-size:0.85rem;color:var(--a-gray4)">${m.description?.substring(0,60)||''}...</td>
       <td><span class="status-badge ${statClass}">${m.status || 'Active'}</span></td>
       <td>
@@ -114,6 +224,7 @@ function openTimelineModal() {
   document.getElementById('timeline-form').reset();
   document.getElementById('timeline-id').value = '';
   document.getElementById('timeline-modal-title').textContent = 'Add Milestone';
+  document.getElementById('timeline-preview-box').style.display = 'none';
   document.getElementById('timeline-form').elements['sortOrder'].value = allTimeline.length + 1;
   openModal('timeline-modal');
 }
@@ -128,6 +239,13 @@ function editTimeline(id) {
   ['year','title','description','icon','image','sortOrder','status'].forEach(k => {
     if(form.elements[k]) form.elements[k].value = m[k] || '';
   });
+  
+  const img = m.image || '';
+  if (img) {
+    showTimelinePhotoPreview(img, m.title || 'Milestone', 'Saved Image');
+  } else {
+    document.getElementById('timeline-preview-box').style.display = 'none';
+  }
   
   if(m.date && form.elements['date']) form.elements['date'].value = new Date(m.date).toISOString().split('T')[0];
   
@@ -164,6 +282,7 @@ document.getElementById('confirm-delete-btn').addEventListener('click', async() 
     closeAdminModal('delete-modal');
     loadTimeline();
   } else showAdminToast(res?.message||'Error','error');
+  deleteId = null;
 });
 
 window.openModal = function(id) { document.getElementById(id)?.classList.add('active'); };
