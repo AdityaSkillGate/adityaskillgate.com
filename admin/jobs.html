@@ -165,10 +165,11 @@ document.getElementById('job-form').addEventListener('submit', async(e) => {
   const data = Object.fromEntries(fd.entries());
   data.featured = document.getElementById('job-featured').checked ? 'true' : 'false';
   
-  const res = await API.adminCreate('Jobs', data);
+  const isEdit = !!data.id;
+  const res = isEdit ? await API.adminUpdate('Jobs', data.id, data) : await API.adminCreate('Jobs', data);
   btn.innerHTML = '<i class="fas fa-save"></i> Save Job'; btn.disabled = false;
-  if(res?.success) {
-    showAdminToast('Job saved successfully!', 'success');
+  if(res?.success !== false) {
+    showAdminToast(`Job ${isEdit ? 'updated' : 'saved'} successfully!`, 'success');
     closeAdminModal('job-modal');
     loadJobs();
   } else showAdminToast(res?.message||'Error','error');

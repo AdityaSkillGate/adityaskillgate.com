@@ -32,7 +32,9 @@ function doGet(e) {
       case 'migrateEmployeeHeaders': return jsonResponse(fixAllSheetColumnsAndData());
       case 'migratePlacementHeaders': migratePlacementHeaders(); return jsonResponse({success:true});
       case 'migrateProjectHeaders': migrateProjectHeaders(); return jsonResponse({success:true});
-        case 'getConfig': return jsonResponse({ success: true, data: getSettings(true) });
+        case 'getBootstrap':
+      case 'getAllPublicData': return jsonResponse({ success: true, data: getBootstrapData() });
+      case 'getConfig': return jsonResponse({ success: true, data: getSettings(true) });
         case 'getSettings': return jsonResponse({ success: true, data: getSettings() });
       case 'getCourses': return jsonResponse({ success: true, data: getActiveCourses() });
       case 'getServices': return jsonResponse({ success: true, data: getActiveServices() });
@@ -77,7 +79,7 @@ function doPost(e) {
   const token = body.token;
 
   // --- SECURE ROUTE GUARD & XSS ---
-  const publicActions = ['submitContact', 'submitResume', 'submitEnquiry', 'submitJobApplication', 'adminLogin', 'submitAbroadApplication', 'submitAbroadJobApp', 'saveCRMLead', 'getCourses', 'getJobs', 'getProjects', 'getPlacements', 'getEmployees', 'getPartners', 'getCompanyMetrics', 'getSettings', 'getConfig', 'getTestimonials', 'getAbroadUniversities', 'getAbroadJobs', 'getBlog', 'getServices', 'searchAll', 'adminGetAnalytics'];
+  const publicActions = ['getBootstrap', 'getAllPublicData', 'submitContact', 'submitResume', 'submitEnquiry', 'submitJobApplication', 'adminLogin', 'submitAbroadApplication', 'submitAbroadJobApp', 'saveCRMLead', 'getCourses', 'getJobs', 'getProjects', 'getPlacements', 'getEmployees', 'getPartners', 'getCompanyMetrics', 'getSettings', 'getConfig', 'getTestimonials', 'getAbroadUniversities', 'getAbroadJobs', 'getBlog', 'getServices', 'searchAll', 'adminGetAnalytics'];
   if (!publicActions.includes(action)) {
     if (!validateToken(token)) return jsonResponse({ success: false, message: 'Unauthorized. Invalid or expired token.' }, 401);
     body = sanitizePayload(body); 
@@ -86,6 +88,8 @@ function doPost(e) {
   try {
     switch (action) {
       /* ===== PUBLIC FORM SUBMISSIONS ===== */
+      case 'getBootstrap':
+      case 'getAllPublicData': return jsonResponse({ success: true, data: getBootstrapData() });
       case 'submitContact': return handleSubmitContact(body);
       case 'submitResume': return handleSubmitResume(body);
       case 'submitEnquiry': return handleSubmitEnquiry(body);
@@ -219,15 +223,14 @@ function handleAdminGet(body) {
 function clearAllCaches(targetSheet) {
   try {
     const c = CacheService.getScriptCache();
-    if (targetSheet) {
-      c.remove('ASG_SHEET_' + targetSheet);
-      c.remove('ASG_SHEET_' + sheetName(targetSheet));
-    }
     const allSheets = ['Courses', 'Services', 'Partners', 'AbroadUniversities', 'AbroadJobs', 'Placements', 'Testimonials', 'Projects', 'Employees', 'Blogs', 'Chatbot', 'Settings', 'Analytics', 'Resumes', 'Contacts', 'CRMLeads', 'Timeline', 'Categories'];
-    allSheets.forEach(s => c.remove('ASG_SHEET_' + s));
-    c.remove('ASG_METRICS_V2');
-    c.remove('ASG_METRICS');
-    c.remove('ASG_ANALYTICS_SUMMARY');
+    const keys = ['ASG_METRICS_V2', 'ASG_METRICS', 'ASG_ADMIN_ANALYTICS_V2', 'ASG_ANALYTICS_SUMMARY', 'ASG_BOOTSTRAP_DATA', 'ASG_CONFIG_PUBLIC', 'ASG_SETTINGS'];
+    allSheets.forEach(s => keys.push('ASG_SHEET_' + s));
+    if (targetSheet) {
+      keys.push('ASG_SHEET_' + targetSheet);
+      keys.push('ASG_SHEET_' + sheetName(targetSheet));
+    }
+    c.removeAll(keys);
   } catch(e) {}
 }
 
@@ -235,22 +238,22 @@ function clearMetricsCache() { clearAllCaches(); }
 
 function handleAdminCreate(body) {
   const { resource, data } = body;
-  const id = generateId(); data.id = id; data.createdAt = now();
+  const id = data.id || generateId(); 
+  data.id = id; 
+  if (!data.createdAt) data.createdAt = now();
+  data.updatedAt = now();
   processImageData(data, id);
   createRecord(sheetName(resource), data);
-  clearAllCaches(resource);
   return jsonResponse({ success: true, message: 'Record created', id, updatedAt: now() });
 }
 function handleAdminUpdate(body) {
   const { resource, id, data } = body;
   processImageData(data, id);
   updateRecord(sheetName(resource), id, data);
-  clearAllCaches(resource);
   return jsonResponse({ success: true, message: 'Record updated', updatedAt: now() });
 }
 function handleAdminDelete(body) {
   const result = deleteRecord(sheetName(body.resource), body.id);
-  clearAllCaches(body.resource);
   return jsonResponse({ success: result, message: result ? 'Deleted' : 'Record not found', updatedAt: now() });
 }
 
@@ -315,7 +318,7 @@ function getCourseCount(courses) { return (courses || getActiveCourses()).length
 function getITCourseCount(courses) { return (courses || getActiveCourses()).filter(c => (c.category||'').toLowerCase().includes('it') && !(c.category||'').toLowerCase().includes('non')).length; }
 function getNonITCourseCount(courses) { return (courses || getActiveCourses()).filter(c => (c.category||'').toLowerCase().includes('non')).length; }
 function getOpenJobCount(jobs) { return (jobs || getOpenJobs()).filter(j => !(j.category||'').toLowerCase().includes('abroad')).length; }
-function getAbroadJobCount(jobs) { return (jobs || getOpenJobs()).filter(j => (j.category||'').toLowerCase().includes('abroad')).length; }
+function getAbroadJobCount(abroadJobs) { return (abroadJobs || getActiveAbroadJobs()).length; }
 function getPartnerCount(partners) { return (partners || getActivePartners()).length; }
 function getHiringPartnerCount(partners) { return (partners || getActivePartners()).filter(p => { const t=(p.type||'').toLowerCase(); return t.includes('hiring') || t.includes('recruitment'); }).length; }
 function getStudyPartnerCount(partners) { return (partners || getActivePartners()).filter(p => { const t=(p.type||'').toLowerCase(); return t.includes('university') || t.includes('college') || t.includes('study'); }).length; }
@@ -334,6 +337,7 @@ function getCompanyMetrics(bypassCache = false) {
   // Fetch base datasets once to avoid multiple Sheets API calls
   const courses = getActiveCourses();
   const jobs = getOpenJobs();
+  const abroadJobs = getActiveAbroadJobs();
   const projects = getCompletedProjects();
   const placements = getPublishedPlacements();
   const employees = getActiveEmployees();
@@ -362,7 +366,7 @@ function getCompanyMetrics(bypassCache = false) {
     itCourses: courses.length > 0 ? getITCourseCount(courses) : '7',
     nonItCourses: courses.length > 0 ? getNonITCourseCount(courses) : '3',
     openJobs: jobs.length > 0 ? getOpenJobCount(jobs) : '12+',
-    abroadJobs: abroadJobs ? getAbroadJobCount(abroadJobs) : '8+',
+    abroadJobs: abroadJobs.length > 0 ? getAbroadJobCount(abroadJobs) : '8+',
     partners: partners.length > 0 ? getPartnerCount(partners) : '50+',
     hiringPartners: manual.hiringPartners || (partners.length > 0 ? getHiringPartnerCount(partners) : '50+'),
     studyPartners: manual.studyPartners || (partners.length > 0 ? getStudyPartnerCount(partners) : '10+'),
@@ -488,6 +492,47 @@ function getAnalyticsSummary() {
   return result;
 }
 
+
+function getBootstrapData() {
+  const cacheKey = 'ASG_BOOTSTRAP_DATA';
+  let cache = null;
+  try {
+    cache = CacheService.getScriptCache();
+    const cached = cache.get(cacheKey);
+    if (cached) return JSON.parse(cached);
+  } catch(e) {}
+
+  const result = {
+    settings: getSettings(true),
+    metrics: getCompanyMetrics(),
+    courses: getActiveCourses(),
+    services: getActiveServices(),
+    partners: getActivePartners(),
+    jobs: getOpenJobs(),
+    abroadJobs: getActiveAbroadJobs(),
+    employees: getActiveEmployees(),
+    projects: getCompletedProjects(),
+    placements: getPublishedPlacements(),
+    testimonials: getActiveTestimonials(),
+    blogs: getPublishedBlogs(),
+    timeline: getSheetData('Timeline').filter(t => (t.status||'').trim().toLowerCase() === 'active').sort((a,b) => parseInt(a.sortOrder||0) - parseInt(b.sortOrder||0)),
+    chatbot: getSheetData('Chatbot').filter(r => (r.status||'Active').trim().toLowerCase() === 'active'),
+    categories: getSheetData('Categories'),
+    timestamp: Date.now()
+  };
+
+  if (cache) {
+    try {
+      const str = JSON.stringify(result);
+      if (str.length < 95000) {
+        cache.put(cacheKey, str, 900); // 15 mins cache
+      }
+    } catch(e) {}
+  }
+
+  return result;
+}
+
 function searchAll(query) {
   const q = (query || '').toLowerCase().trim();
   if (!q) return { botResponse: null, courses: [], jobs: [], blogs: [] };
@@ -580,7 +625,13 @@ function sanitizePayload(obj) {
 /* 6. GOOGLE SHEETS CRUD (Sheets.gs)         */
 /* ========================================= */
 
-const SS = () => SpreadsheetApp.openById(SPREADSHEET_ID);
+let _cachedSS = null;
+const SS = () => {
+  if (!_cachedSS) {
+    _cachedSS = SpreadsheetApp.openById(SPREADSHEET_ID);
+  }
+  return _cachedSS;
+};
 
 const SHEET_HEADERS = {
   Courses: ['id', 'title', 'category', 'subcategory', 'description', 'duration', 'mode', 'fee', 'trainer', 'image', 'syllabus', 'startDate', 'endDate', 'batchTiming', 'seats', 'availableSeats', 'status', 'featured', 'createdAt', 'updatedAt'],
@@ -711,24 +762,25 @@ function saveSettings(settingsObj) {
   let sheet = ss.getSheetByName('Settings');
   if (!sheet) {
     sheet = ss.insertSheet('Settings');
-    sheet.appendRow(['key', 'value']);
   }
   const data = sheet.getDataRange().getValues();
-  const map = {};
-  for(let i = 1; i < data.length; i++) {
-    map[data[i][0]] = i + 1;
+  const settingsMap = {};
+  for (let i = 1; i < data.length; i++) {
+    if (data[i][0]) settingsMap[String(data[i][0])] = data[i][1];
   }
   
-  for(let key in settingsObj) {
+  for (let key in settingsObj) {
     if (key === 'action' || key === 'token') continue;
-    const val = settingsObj[key];
-    if (map[key]) {
-      sheet.getRange(map[key], 2).setValue(val);
-    } else {
-      sheet.appendRow([key, val]);
-      map[key] = sheet.getLastRow();
-    }
+    settingsMap[key] = settingsObj[key];
   }
+  
+  const allRows = [['key', 'value']];
+  for (let k in settingsMap) {
+    allRows.push([k, settingsMap[k]]);
+  }
+  
+  sheet.clearContents();
+  sheet.getRange(1, 1, allRows.length, 2).setValues(allRows);
   clearAllCaches('Settings');
   return { success: true, message: 'Settings saved successfully', updatedAt: new Date().toISOString() };
 }
@@ -774,6 +826,7 @@ function updateRecord(sheetName, id, updates) {
   
   for (let i = 1; i < data.length; i++) {
     if (String(data[i][idCol]) === String(id)) {
+      const row = [...data[i]];
       Object.keys(updates).forEach(key => {
         let col = headers.indexOf(key);
         if (col === -1 && FIELD_ALIASES[key]) {
@@ -784,11 +837,13 @@ function updateRecord(sheetName, id, updates) {
         }
         if (col !== -1) {
           let val = updates[key];
-          sheet.getRange(i + 1, col + 1).setValue(typeof val === 'object' ? JSON.stringify(val) : val);
+          row[col] = (typeof val === 'object' && val !== null) ? JSON.stringify(val) : val;
         }
       });
       const updatedCol = headers.indexOf('updatedAt');
-      if (updatedCol !== -1) sheet.getRange(i + 1, updatedCol + 1).setValue(now());
+      if (updatedCol !== -1) row[updatedCol] = now();
+      
+      sheet.getRange(i + 1, 1, 1, headers.length).setValues([row]);
       clearAllCaches(sheetName);
       return true;
     }
@@ -826,7 +881,17 @@ function getSettings(isPublic = false) {
       instagram: settings.instagram || 'https://www.instagram.com/adityaskillgate.official/',
       youtube: settings.youtube || 'https://www.youtube.com/@AdityaSkillGateITSolution',
       mission: settings.mission || 'To make quality IT education accessible and to connect skilled talent with the right opportunities.',
-      vision: settings.vision || 'To become the leading IT training and services provider in Tamil Nadu.'
+      vision: settings.vision || 'To become the leading IT training and services provider in Tamil Nadu.',
+      studentsTrained: settings.studentsTrained || '100+',
+      placements: settings.placements || '10+',
+      projectsCompleted: settings.projectsCompleted || '22+',
+      coursesCount: settings.coursesCount || '10+',
+      technologies: settings.technologies || '15+',
+      employees: settings.employees || '7+',
+      hiringPartners: settings.hiringPartners || '5+',
+      highestPackage: settings.highestPackage || '5 LPA',
+      placementRate: settings.placementRate || '90%+',
+      rating: settings.rating || '4.9/5'
     };
     
     // If public request, DO NOT send private config (e.g. admin passwords, tokens if they exist)

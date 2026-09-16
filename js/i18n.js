@@ -1,14 +1,29 @@
 /* ========================================================================= */
-/* PHASE 11 : MULTILINGUAL ENGINE (i18n)                                     */
+/* ADITYA SKILL GATE IT SOLUTION — MULTILINGUAL ENGINE (i18n)                */
 /* ========================================================================= */
 
-// Default Fallback Dictionary (UI Strings only - Official College Info stays English unless translated in Sheets)
+// Strict page language detection (en is default for root pages)
+function getPageLang() {
+  if (typeof window.ASG_LANG === 'string' && window.ASG_LANG) {
+    return window.ASG_LANG;
+  }
+  const path = (window.location.pathname || '').toLowerCase();
+  if (path.includes('/ta/') || path.startsWith('/ta/')) return 'ta';
+  if (path.includes('/zh/') || path.startsWith('/zh/')) return 'zh';
+  if (path.includes('/ms/') || path.startsWith('/ms/')) return 'ms';
+  return 'en'; // Strict default for all main root pages
+}
+
+// Default Fallback Dictionary
 const DEFAULT_DICT = {
   en: {
     "nav.home": "Home",
-    "nav.courses": "Programmes",
+    "nav.about": "About",
     "nav.services": "Services",
-    "nav.about": "About Us",
+    "nav.courses": "Courses",
+    "nav.careers": "Careers",
+    "nav.projects": "Projects",
+    "nav.placements": "Placements",
     "nav.contact": "Contact",
     "nav.apply": "Apply Now",
     "btn.explore": "Explore Courses",
@@ -21,9 +36,12 @@ const DEFAULT_DICT = {
   },
   zh: {
     "nav.home": "首页",
-    "nav.courses": "课程",
-    "nav.services": "服务",
     "nav.about": "关于我们",
+    "nav.services": "服务",
+    "nav.courses": "课程",
+    "nav.careers": "招聘",
+    "nav.projects": "项目案例",
+    "nav.placements": "就业成果",
     "nav.contact": "联系我们",
     "nav.apply": "立即申请",
     "btn.explore": "探索课程",
@@ -36,9 +54,12 @@ const DEFAULT_DICT = {
   },
   ms: {
     "nav.home": "Utama",
-    "nav.courses": "Program",
-    "nav.services": "Perkhidmatan",
     "nav.about": "Tentang Kami",
+    "nav.services": "Perkhidmatan",
+    "nav.courses": "Program",
+    "nav.careers": "Kerjaya",
+    "nav.projects": "Projek",
+    "nav.placements": "Penempatan",
     "nav.contact": "Hubungi",
     "nav.apply": "Mohon Sekarang",
     "btn.explore": "Terokai Program",
@@ -51,9 +72,12 @@ const DEFAULT_DICT = {
   },
   ta: {
     "nav.home": "முகப்பு",
-    "nav.courses": "படிப்புகள்",
-    "nav.services": "சேவைகள்",
     "nav.about": "எங்களை பற்றி",
+    "nav.services": "சேவைகள்",
+    "nav.courses": "படிப்புகள்",
+    "nav.careers": "வேலைவாய்ப்புகள்",
+    "nav.projects": "திட்டங்கள்",
+    "nav.placements": "வேலைவாய்ப்பு பெற்றோர்",
     "nav.contact": "தொடர்புக்கு",
     "nav.apply": "இப்போதே விண்ணப்பிக்கவும்",
     "btn.explore": "படிப்புகளை ஆராய்க",
@@ -67,10 +91,12 @@ const DEFAULT_DICT = {
 };
 
 window.I18N = {
-  lang: window.ASG_LANG || localStorage.getItem('asg_lang') || 'en',
+  lang: getPageLang(),
   dict: {},
 
   init: async function() {
+    this.lang = getPageLang();
+
     // 1. Load merged dictionary (Default + localStorage cache)
     const cachedDict = JSON.parse(localStorage.getItem('asg_i18n_dict') || '{}');
     this.dict = this.mergeDicts(DEFAULT_DICT, cachedDict);
@@ -78,20 +104,22 @@ window.I18N = {
     // 2. Persist language choice
     localStorage.setItem('asg_lang', this.lang);
     
-    // 3. Apply translations instantly to prevent layout shift
-    this.applyTranslations();
+    // 3. Apply translations only if not English
+    if (this.lang !== 'en') {
+      this.applyTranslations();
+    }
     this.setupSelectors();
 
-    // 4. Async fetch updates from Google Sheets (Phase 9 API)
-    if(window.API) {
+    // 4. Async fetch updates from Google Sheets if configured
+    if (window.API && typeof window.API.post === 'function') {
       try {
-        const res = (window.API && window.API.post) ? await window.API.post({ action: 'getTranslations' }) : null;
+        const res = await window.API.post({ action: 'getTranslations' });
         if (res?.success && res.data) {
           this.dict = this.mergeDicts(this.dict, res.data);
           localStorage.setItem('asg_i18n_dict', JSON.stringify(res.data));
-          this.applyTranslations(); // Re-apply if updates found
+          if (this.lang !== 'en') this.applyTranslations();
         }
-      } catch(e) { console.warn("Failed to fetch live translations", e); }
+      } catch(e) { /* silent catch */ }
     }
   },
 
@@ -107,7 +135,6 @@ window.I18N = {
   },
 
   t: function(key) {
-    // Fallback logic: Requested Language -> English Fallback -> Raw Key
     if (this.dict[this.lang] && this.dict[this.lang][key]) return this.dict[this.lang][key];
     if (this.dict['en'] && this.dict['en'][key]) return this.dict['en'][key];
     return key;
@@ -130,7 +157,7 @@ window.I18N = {
     if (this.lang === newLang) return;
     localStorage.setItem('asg_lang', newLang);
     
-    // Redirect to localized SEO path if not English
+    // Redirect to localized SEO path
     const currentPath = window.location.pathname;
     const filename = currentPath.split('/').pop() || 'index.html';
     
@@ -142,7 +169,6 @@ window.I18N = {
   },
 
   setupSelectors: function() {
-    // Ensure selector reflects current lang
     document.querySelectorAll('.lang-selector').forEach(sel => {
       sel.value = this.lang;
       sel.addEventListener('change', (e) => this.changeLanguage(e.target.value));
@@ -150,5 +176,5 @@ window.I18N = {
   }
 };
 
-// Initialize early
+// Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', () => window.I18N.init());

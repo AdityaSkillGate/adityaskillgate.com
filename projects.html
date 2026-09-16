@@ -243,21 +243,30 @@ function renderProjects(list){
     return;
   }
   g.innerHTML=list.map((p,i)=>{
-    const icon=ICONS[p.category]||'💻';
+    const icon=ICONS[p.category]||'🌐';
     const bg=COLORS[i%COLORS.length];
     const techTags=(p.technologies||p.techStack||'').split(',').filter(Boolean).map(t=>`<span class="project-tech-tag">${t.trim()}</span>`).join('');
+    const img = p.image || p.imageUrl || p.featuredImage || '';
+    const desc = p.description || (p.title + ' - Custom development and live deployment by Aditya Skill Gate IT Solution.');
+    const client = p.clientName || p.client || 'Client Project';
     return `
     <div class="project-card" data-animate data-delay="${(i%3+1)*80}" data-cat="${p.category}">
-      <div class="project-card-thumb" style="background:${bg}">
-        ${p.featuredImage ? `<img src="${p.featuredImage}" alt="${p.title}">` : `<span>${icon}</span>`}
+      <div class="project-card-thumb" style="position:relative;overflow:hidden;background:${bg}">
+        ${img ? `<img src="${img}" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.style.display='flex';">` : ''}
+        <div class="project-thumb-fallback" style="display:${img ? 'none' : 'flex'};width:100%;height:100%;align-items:center;justify-content:center;font-size:3.5rem;color:white;">
+          <span>${icon}</span>
+        </div>
       </div>
       <div class="project-card-body">
-        <div><span class="project-card-cat">${p.category||'Project'}</span></div>
+        <div><span class="project-card-cat">${p.category||'Web Development'}</span></div>
         <div class="project-card-title">${p.title}</div>
-        <div class="project-card-client"><i class="fas fa-building" style="margin-right:4px"></i>${p.clientName||'Client Project'}</div>
-        <p class="project-card-desc">${(p.description||'').substring(0,100)}...</p>
+        <div class="project-card-client"><i class="fas fa-building" style="margin-right:4px"></i>${client}</div>
+        <p class="project-card-desc">${desc.substring(0,105)}...</p>
         <div class="project-tech-tags">${techTags}</div>
-        <button class="btn btn-outline btn-sm" onclick="showProjectModal(${i})"><i class="fas fa-eye"></i> View Details</button>
+        <div style="display:flex;gap:10px;margin-top:auto;">
+          <button class="btn btn-outline btn-sm" style="flex:1;" onclick="showProjectModal(${i})"><i class="fas fa-eye"></i> Details</button>
+          ${p.liveUrl ? `<a href="${p.liveUrl}" target="_blank" class="btn btn-primary btn-sm" style="padding:6px 12px;"><i class="fas fa-external-link-alt"></i></a>` : ''}
+        </div>
       </div>
     </div>`;
   }).join('');
@@ -267,14 +276,20 @@ function renderProjects(list){
 function showProjectModal(index){
   const p=allProjects[index];if(!p)return;
   document.getElementById('proj-modal-title').textContent=p.title;
-  document.getElementById('proj-modal-desc').textContent=p.description;
-  document.getElementById('proj-modal-client').textContent=p.clientName||'Aditya Skill Gate';
+  document.getElementById('proj-modal-desc').textContent=p.description || (p.title + ' - Real-world client delivery by Aditya Skill Gate IT Solution.');
+  document.getElementById('proj-modal-client').textContent=p.clientName||p.client||'Aditya Skill Gate';
   const imgWrap = document.getElementById('proj-modal-img');
   const phWrap = document.getElementById('proj-modal-placeholder');
-  if (p.featuredImage) {
-    imgWrap.src = p.featuredImage;
+  const img = p.image || p.imageUrl || p.featuredImage || '';
+  if (img) {
+    imgWrap.src = img;
+    imgWrap.alt = '';
     imgWrap.style.display = 'block';
     if(phWrap) phWrap.style.display = 'none';
+    imgWrap.onerror = function() {
+      this.style.display = 'none';
+      if(phWrap) phWrap.style.display = 'flex';
+    };
   } else {
     imgWrap.style.display = 'none';
     if(phWrap) phWrap.style.display = 'flex';

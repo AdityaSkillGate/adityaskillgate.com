@@ -203,10 +203,11 @@ document.getElementById('course-form').addEventListener('submit', async(e) => {
   const data = Object.fromEntries(fd.entries());
   data.featured = document.getElementById('course-featured').checked ? 'true' : 'false';
   
-  const res = await API.adminCreate('Courses', data);
+  const isEdit = !!data.id;
+  const res = isEdit ? await API.adminUpdate('Courses', data.id, data) : await API.adminCreate('Courses', data);
   btn.innerHTML = '<i class="fas fa-save"></i> Save Course'; btn.disabled = false;
-  if(res?.success) {
-    showAdminToast('Course saved successfully!', 'success');
+  if(res?.success !== false) {
+    showAdminToast(`Course ${isEdit ? 'updated' : 'saved'} successfully!`, 'success');
     closeAdminModal('course-modal');
     loadCourses();
   } else showAdminToast(res?.message||'Error','error');

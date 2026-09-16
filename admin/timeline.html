@@ -142,10 +142,11 @@ document.getElementById('timeline-form').addEventListener('submit', async(e) => 
   const fd = new FormData(e.target);
   const data = Object.fromEntries(fd.entries());
   
-  const res = await API.adminCreate('Timeline', data);
+  const isEdit = !!data.id;
+  const res = isEdit ? await API.adminUpdate('Timeline', data.id, data) : await API.adminCreate('Timeline', data);
   btn.innerHTML = '<i class="fas fa-save"></i> Save Milestone'; btn.disabled = false;
-  if(res?.success) {
-    showAdminToast('Milestone saved successfully!', 'success');
+  if(res?.success !== false) {
+    showAdminToast(`Milestone ${isEdit ? 'updated' : 'saved'} successfully!`, 'success');
     closeAdminModal('timeline-modal');
     loadTimeline();
   } else showAdminToast(res?.message||'Error','error');

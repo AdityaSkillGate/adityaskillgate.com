@@ -167,10 +167,11 @@ document.getElementById('place-form').addEventListener('submit', async(e) => {
   const data = Object.fromEntries(fd.entries());
   data.featured = document.getElementById('place-featured').checked ? 'true' : 'false';
   
-  const res = await API.adminCreate('Placements', data);
+  const isEdit = !!data.id;
+  const res = isEdit ? await API.adminUpdate('Placements', data.id, data) : await API.adminCreate('Placements', data);
   btn.innerHTML = '<i class="fas fa-save"></i> Save Placement'; btn.disabled = false;
-  if(res?.success) {
-    showAdminToast('Placement saved successfully!', 'success');
+  if(res?.success !== false) {
+    showAdminToast(`Placement ${isEdit ? 'updated' : 'saved'} successfully!`, 'success');
     closeAdminModal('place-modal');
     loadPlacements();
   } else showAdminToast(res?.message||'Error','error');

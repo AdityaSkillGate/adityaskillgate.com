@@ -27,89 +27,74 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function initMetricsAndCounters() {
     const now = new Date();
-    // 1. Safe Fallback Preparation (skip date and year computed tokens)
-    document.querySelectorAll('[data-metric]').forEach(el => {
-      const key = el.dataset.metric;
-      if (key === 'currentYear') {
-        el.textContent = now.getFullYear();
-        return;
+    // 1. Fetch & Render Metrics with Instant SWR Cache
+    async function renderCompanyMetrics() {
+      let metrics = null;
+      try {
+        if (window.API && window.API.getCompanyMetrics) {
+          metrics = await window.API.getCompanyMetrics();
+        }
+      } catch (e) {
+        console.warn('API metrics failed, using safe fallback.', e);
       }
-      if (key === 'currentMonthYear') {
-        el.textContent = new Intl.DateTimeFormat('en', {month: 'long', year: 'numeric'}).format(now);
-        return;
-      }
-      if (key === 'foundingYear') {
-        el.textContent = '2025';
-        return;
-      }
-      el.dataset.fallback = el.textContent; // Store original HTML as safe fallback
-      el.innerHTML = '<span style="opacity:0.5">...</span>'; // Show loading state
-    });
 
-    // 2. Fetch Latest Values from Apps Script
-    let metrics = null;
-    try {
-      if (window.API && window.API.getCompanyMetrics) {
-        metrics = await window.API.getCompanyMetrics();
+      function resolveMetric(k) {
+        if (!metrics) return undefined;
+        if (metrics[k] !== undefined && metrics[k] !== null) return metrics[k];
+        const map = {
+          students: metrics.studentsTrained,
+          studentsTrained: metrics.studentsTrained || metrics.students,
+          placements: metrics.placements,
+          placementRate: metrics.placementRate,
+          highestPackage: metrics.highestPackage,
+          projects: metrics.projectsCompleted || metrics.projectsDone,
+          projectsCompleted: metrics.projectsCompleted || metrics.projectsDone || metrics.projects,
+          projectsDone: metrics.projectsCompleted || metrics.projectsDone || metrics.projects,
+          courses: metrics.coursesCount,
+          coursesCount: metrics.coursesCount || metrics.courses,
+          partners: metrics.hiringPartners,
+          hiringPartners: metrics.hiringPartners || metrics.partners,
+          employees: metrics.itProfessionals || metrics.employees,
+          itProfessionals: metrics.itProfessionals || metrics.employees,
+          rating: metrics.googleRating,
+          googleRating: metrics.googleRating || metrics.rating,
+          clients: metrics.clients || '30+',
+          industries: metrics.industries || '5+',
+          technologies: metrics.technologies || '15+'
+        };
+        return map[k];
       }
-    } catch (e) {
-      console.warn('API metrics failed, using safe fallback.', e);
+
+      document.querySelectorAll('[data-metric]').forEach(el => {
+        const key = el.dataset.metric;
+        const val = resolveMetric(key);
+
+        if (key === 'currentYear') {
+          el.textContent = now.getFullYear();
+        } else if (key === 'currentMonthYear') {
+          el.textContent = new Intl.DateTimeFormat('en', {month: 'long', year: 'numeric'}).format(now);
+        } else if (key === 'foundingYear') {
+          el.textContent = '2025';
+        } else if (val !== undefined && val !== null) {
+          el.textContent = val;
+        }
+      });
+
+      document.querySelectorAll('[data-metric-target]').forEach(el => {
+        const key = el.dataset.metricTarget;
+        const rawVal = resolveMetric(key);
+        if (rawVal !== undefined && rawVal !== null) {
+          const num = String(rawVal).replace(/\D/g, '');
+          el.dataset.target = num || '0';
+          animateCounter(el);
+        }
+      });
     }
 
-    // Helper to resolve metric value across all naming variations
-    function resolveMetric(k) {
-      if (!metrics) return undefined;
-      if (metrics[k] !== undefined && metrics[k] !== null) return metrics[k];
-      const map = {
-        students: metrics.studentsTrained,
-        studentsTrained: metrics.studentsTrained || metrics.students,
-        placements: metrics.placements,
-        placementRate: metrics.placementRate,
-        highestPackage: metrics.highestPackage,
-        projects: metrics.projectsCompleted || metrics.projectsDone,
-        projectsCompleted: metrics.projectsCompleted || metrics.projectsDone || metrics.projects,
-        projectsDone: metrics.projectsCompleted || metrics.projectsDone || metrics.projects,
-        courses: metrics.coursesCount,
-        coursesCount: metrics.coursesCount || metrics.courses,
-        partners: metrics.hiringPartners,
-        hiringPartners: metrics.hiringPartners || metrics.partners,
-        employees: metrics.itProfessionals || metrics.employees,
-        itProfessionals: metrics.itProfessionals || metrics.employees,
-        rating: metrics.googleRating,
-        googleRating: metrics.googleRating || metrics.rating,
-        clients: metrics.clients || '30+',
-        industries: metrics.industries || '5+',
-        technologies: metrics.technologies || '15+'
-      };
-      return map[k];
-    }
-
-    // 3. Render Dynamically / Handle API failure gracefully
-    document.querySelectorAll('[data-metric]').forEach(el => {
-      const key = el.dataset.metric;
-      const val = resolveMetric(key);
-
-      if (key === 'currentYear') {
-        el.textContent = now.getFullYear();
-      } else if (key === 'currentMonthYear') {
-        el.textContent = new Intl.DateTimeFormat('en', {month: 'long', year: 'numeric'}).format(now);
-      } else if (key === 'foundingYear') {
-        el.textContent = '2025';
-      } else if (val !== undefined && val !== null) {
-        el.textContent = val;
-      } else if (el.dataset.fallback && el.dataset.fallback !== '...') {
-        el.textContent = el.dataset.fallback;
-      }
-    });
-
-    document.querySelectorAll('[data-metric-target]').forEach(el => {
-      const key = el.dataset.metricTarget;
-      const rawVal = resolveMetric(key);
-      if (rawVal !== undefined && rawVal !== null) {
-        const num = String(rawVal).replace(/\D/g, '');
-        el.dataset.target = num || '0';
-        // If element is already in viewport or counted, animate immediately
-        animateCounter(el);
+    renderCompanyMetrics();
+    window.addEventListener('asg_data_updated', (e) => {
+      if (e.detail && (e.detail.endpoint === 'getCompanyMetrics' || e.detail.endpoint === 'getSettings' || e.detail.endpoint === 'getBootstrap')) {
+        renderCompanyMetrics();
       }
     });
 

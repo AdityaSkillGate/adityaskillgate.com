@@ -271,49 +271,31 @@
 <script>
 (async()=>{
   const services = await API.getServices();
-  const categories = await API.getCategories();
   const container = document.getElementById('services-page-grid');
+  if (!container) return;
   
-  if(container && services && categories) {
-    container.innerHTML = '';
-    container.style.display = 'block';
-    
-    // Group services
-    const grouped = {};
-    categories.forEach(c => grouped[c.name] = []);
-    
-    services.forEach(s => {
-      if (s.category && grouped[s.category]) {
-         grouped[s.category].push(s);
-      } else {
-         if (!grouped['Other']) grouped['Other'] = [];
-         grouped['Other'].push(s);
-      }
-    });
+  const displayServices = (services && services.length > 0) ? services : [
+    { title: 'Web Development', category: 'Development', description: 'Custom responsive websites, full stack web apps, and e-commerce platforms built with modern frameworks like React, Node.js, and Next.js.', icon: 'fa-globe' },
+    { title: 'Mobile App Development', category: 'Development', description: 'Native and cross-platform mobile apps for iOS and Android using Flutter and React Native with seamless user experience.', icon: 'fa-mobile-alt' },
+    { title: 'AI & Machine Learning', category: 'Intelligence', description: 'Custom AI solutions, automated chatbots, data processing, and predictive analytics models to transform business operations.', icon: 'fa-robot' },
+    { title: 'Cloud & DevOps Services', category: 'Infrastructure', description: 'Cloud deployment, server architecture, CI/CD pipelines, Docker containerization, and 24/7 cloud infrastructure management on AWS and GCP.', icon: 'fa-cloud' },
+    { title: 'Digital Marketing & SEO', category: 'Marketing', description: 'Performance-driven digital marketing, Google Ads management, social media growth, and top-ranking SEO optimization.', icon: 'fa-bullhorn' },
+    { title: 'IT Consulting & Training', category: 'Consulting', description: 'Enterprise IT consulting, custom software architecture guidance, and specialized corporate training for tech teams.', icon: 'fa-user-tie' }
+  ];
 
-    let html = '';
-    for (const [catName, catServices] of Object.entries(grouped)) {
-      if (catServices.length === 0) continue;
-      
-      html += '<div style="margin-bottom: 50px;">' +
-        '<h3 style="color:var(--gray-900); font-size:1.8rem; margin-bottom:20px; border-bottom:2px solid var(--gray-200); padding-bottom:10px;">' + catName + '</h3>' +
-        '<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:30px;">' +
-          catServices.map((s,i) => `
-            <div class="service-detail-card" data-animate data-delay="${(i%3+1)*100}">
-              <div class="service-detail-icon" style="background:rgba(0,150,214,0.1); color:var(--tech-blue);"><i class="fas ${s.icon || 'fa-cog'}"></i></div>
-              <h4 style="color:var(--gray-900);margin-bottom:8px;font-size:1.15rem;font-weight:700;">${s.title}</h4>
-              ${s.parentCategory ? `<span style="display:inline-block; margin-bottom:10px; font-size:0.75rem; background:var(--gray-200); padding:2px 8px; border-radius:4px; font-weight:600; color:var(--gray-600);">${s.parentCategory}</span>` : ''}
-              <p style="color:var(--gray-600);font-size:0.875rem;margin-bottom:16px;flex:1;">${s.description}</p>
-              <a href="contact.html?service=${encodeURIComponent(s.title)}" class="btn btn-outline btn-sm" style="margin-top:auto">Get Quote <i class="fas fa-arrow-right"></i></a>
-            </div>
-          `).join('') +
-        '</div>' +
-      '</div>';
-    }
-    container.innerHTML = html;
+  container.innerHTML = '<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:30px;">' +
+    displayServices.map((s,i) => `
+      <div class="service-detail-card" data-animate data-delay="${(i%3+1)*100}">
+        <div class="service-detail-icon" style="background:rgba(0,150,214,0.1); color:var(--tech-blue);"><i class="fas ${s.icon || 'fa-laptop-code'}"></i></div>
+        <h4 style="color:var(--gray-900);margin-bottom:8px;font-size:1.15rem;font-weight:700;">${s.title}</h4>
+        <span style="display:inline-block; margin-bottom:10px; font-size:0.75rem; background:var(--gray-200); padding:2px 8px; border-radius:4px; font-weight:600; color:var(--gray-600);">${s.category || 'IT Service'}</span>
+        <p style="color:var(--gray-600);font-size:0.875rem;margin-bottom:16px;flex:1;">${s.description}</p>
+        <a href="contact.html?service=${encodeURIComponent(s.title)}" class="btn btn-outline btn-sm" style="margin-top:auto">Get Quote <i class="fas fa-arrow-right"></i></a>
+      </div>
+    `).join('') +
+  '</div>';
 
-    if(window.observeAnimations) window.observeAnimations();
-  }
+  if(window.observeAnimations) window.observeAnimations();
 })();
 
 document.getElementById('quote-form')?.addEventListener('submit',async(e)=>{

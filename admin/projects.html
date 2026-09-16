@@ -116,7 +116,9 @@ function renderProjects(projects) {
     return `<tr>
       <td>
         <div style="display:flex;align-items:center;gap:12px">
-          <div style="width:40px;height:40px;border-radius:6px;background:${p.image ? 'url('+p.image+') center/cover' : 'var(--a-border)'}"></div>
+          <div style="width:40px;height:40px;border-radius:6px;background:var(--a-border);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">
+            ${p.image ? `<img src="${p.image}" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.style.display='inline';"><span style="display:none;">💻</span>` : '<span>💻</span>'}
+          </div>
           <div><div style="font-weight:600;color:var(--a-navy)">${p.title}</div>
           <div style="font-size:0.8rem;color:var(--a-gray4)">${p.technologies ? String(p.technologies).substring(0,30) + '...' : ''}</div></div>
         </div>
@@ -164,10 +166,11 @@ document.getElementById('proj-form').addEventListener('submit', async(e) => {
   const data = Object.fromEntries(fd.entries());
   data.featured = document.getElementById('proj-featured').checked ? 'true' : 'false';
   
-  const res = await API.adminCreate('Projects', data);
+  const isEdit = !!data.id;
+  const res = isEdit ? await API.adminUpdate('Projects', data.id, data) : await API.adminCreate('Projects', data);
   btn.innerHTML = '<i class="fas fa-save"></i> Save Project'; btn.disabled = false;
-  if(res?.success) {
-    showAdminToast('Project saved successfully!', 'success');
+  if(res?.success !== false) {
+    showAdminToast(`Project ${isEdit ? 'updated' : 'saved'} successfully!`, 'success');
     closeAdminModal('proj-modal');
     loadProjects();
   } else showAdminToast(res?.message||'Error','error');
