@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Completed website and software projects by Aditya Skill Gate IT Solution." />
+  <title>Aditya Skill Gate IT Solution's Projects</title>
+  <link rel="stylesheet" href="projects.css" />
+</head>
+<body>
+  <div class="page-glow glow-one"></div>
+  <div class="page-glow glow-two"></div>
+
+  <header class="site-header">
+    <a class="brand" href="https://adityaskillgate.com/" target="_blank" rel="noopener">
+      <span class="brand-mark">ASG</span>
+      <span>Aditya Skill Gate <small>IT Solution</small></span>
+    </a>
+    <a class="contact-link" href="https://adityaskillgate.com/Contact-Card" target="_blank" rel="noopener">Contact us <span>↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow"><span></span> Selected work · 2025–2026</div>
+      <h1>Aditya Skill Gate<br /><em>IT Solution's Projects</em></h1>
+      <p class="hero-copy">A collection of websites, digital experiences and business solutions crafted for ambitious organisations.</p>
+      <div class="hero-stats">
+        <div><strong id="projectCount">22</strong><span>Completed projects</span></div>
+        <div><strong id="categoryCount">10</strong><span>Project categories</span></div>
+        <div><strong>100%</strong><span>Commitment to quality</span></div>
+      </div>
+    </section>
+
+    <section class="showcase" aria-label="Completed projects">
+      <div class="section-heading">
+        <div><span class="section-kicker">Our showcase</span><h2>Built to make an impression.</h2></div>
+        <p>Explore the work by industry or project type.</p>
+      </div>
+      <div class="filters" id="filters" role="tablist" aria-label="Filter projects"></div>
+      <div class="project-grid" id="projectGrid"></div>
+    </section>
+
+    <section class="cta">
+      <div><span class="section-kicker">Have a project in mind?</span><h2>Let’s build something<br /><em>remarkable together.</em></h2></div>
+      <a class="cta-button" href="https://adityaskillgate.com/Contact-Card" target="_blank" rel="noopener">Start a conversation <span>↗</span></a>
+    </section>
+  </main>
+
+  <footer><span>© 2026 Aditya Skill Gate IT Solution</span><span>Web · Software · Digital Growth</span></footer>
+
+  <script>
+    const projects = [
+      ['RK Photography — Visual Portfolio','Commercial','https://rk-visual-photography.vercel.app/','RK','01'],
+      ['RK Photography — Kodaikanal Adventure','Commercial','https://kodaikanal-adventure.vercel.app/','RK','02'],
+      ['Rider Call Taxi','Commercial','https://rider-car-taxi-poc.vercel.app/','RC','03'],
+      ['AC Care','Commercial / Service','https://ac-care.vercel.app/','AC','04'],
+      ['Shri Bharath Kanna','School / Education','https://bharath-kannaa-school.vercel.app/','SB','05'],
+      ['Nanyang Artist Society','Education','https://nanyang-artist-society.vercel.app/','NA','06'],
+      ["Doctor's Portfolio",'Portfolio','https://doctor-portfolio-lake.vercel.app/','DP','07'],
+      ['Advocate Portfolio','Portfolio','https://periyasamy-advocate.vercel.app/','AP','08'],
+      ['Nanyang Asia College','Education / College','https://nanyang-asia-college.vercel.app/','NC','09'],
+      ['AAR Royal Residency','Hotel Booking / Commercial','https://aar-royal-regidency.vercel.app/','AR','10'],
+      ['Smart Minds IAS Academy','Education / Institute','https://smartminds-ias-academy.vercel.app/','SM','11'],
+      ["TN-Painter's Society",'Society','https://project-tn-paint.vercel.app/','TN','12'],
+      ['Vetrivel Electronics And Hardware','Commercial','https://vetrivel-electronics.vercel.app/','VE','13'],
+      ['18 Village People Trust','Trust / Society','https://18-village-people-trust.vercel.app/','18','14'],
+      ['Hospital Information System','Healthcare','https://hospital-information-system-woad.vercel.app/','HI','15'],
+      ['Voltaura Smart Home Automation','Commercial','https://voltaura.co.in','VS','16'],
+      ['Digisharkz Digital Marketing','Commercial / Service','https://digisharkz.com','DD','17'],
+      ['Kurunji Fun World','Entertainment','https://kurunjifunworld.com','KF','18'],
+      ['A1 Divya Palace','Hotel Booking / Commercial','https://ai-divya-palace-sankrankovil.vercel.app/','A1','19'],
+      ['NMS Titan Vault','Gym','https://nms-titan-vault.vercel.app/','NT','20'],
+      ['NMS Hospital','Healthcare','https://nms-hospital.vercel.app/','NH','21'],
+      ['Aditya Jewellery','Commercial','https://adityajewellery.netlify.app/','AJ','22']
+    ];
+
+    const grid = document.getElementById('projectGrid');
+    const filters = document.getElementById('filters');
+    const categories = ['All', ...new Set(projects.map(p => p[1]))];
+    document.getElementById('projectCount').textContent = projects.length;
+    document.getElementById('categoryCount').textContent = categories.length - 1;
+
+    function renderFilters() {
+      filters.innerHTML = categories.map((category, index) => `<button class="filter ${index === 0 ? 'active' : ''}" data-filter="${category}" role="tab" aria-selected="${index === 0}">${category}</button>`).join('');
+      filters.querySelectorAll('.filter').forEach(button => button.addEventListener('click', () => {
+        filters.querySelector('.active').classList.remove('active');
+        filters.querySelector('.active')?.setAttribute('aria-selected', 'false');
+        button.classList.add('active'); button.setAttribute('aria-selected', 'true');
+        renderProjects(button.dataset.filter);
+      }));
+    }
+    function renderProjects(filter = 'All') {
+      const visible = filter === 'All' ? projects : projects.filter(p => p[1] === filter);
+      grid.innerHTML = visible.map((p, i) => `<article class="project-card" style="--delay:${i * 35}ms"><div class="card-art art-${(i % 6) + 1}"><span>${p[3]}</span><b>${p[4]}</b></div><div class="card-body"><div class="card-meta"><span>${p[1]}</span><span>↗</span></div><h3>${p[0]}</h3><a href="${p[2]}" target="_blank" rel="noopener">View live project <span>↗</span></a></div></article>`).join('');
+    }
+    renderFilters(); renderProjects();
+  </script>
+</body>
+</html>
