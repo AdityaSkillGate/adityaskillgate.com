@@ -230,7 +230,68 @@ const DEMO_DATA = {
     }
   ],
   placements: [],
-  testimonials: [],
+  testimonials: [
+    {
+      id: 'rec_01',
+      name: 'Thangavel S',
+      role: 'Business Client',
+      company: 'Kurunji Fun World, Kodaikanal',
+      type: 'Client',
+      rating: 5,
+      message: 'We are very happy with the website and application developed for Kurunji Fun World, Kodaikanal by Aditya Skill Gate IT Solution, Sankarankovil. The team did a really great job in developing a modern, high-quality and professional digital portal. The responsive design works smoothly and makes it much easier for our visitors to explore attractions, rides, and ticketing.',
+      status: 'Active'
+    },
+    {
+      id: 'rec_02',
+      name: 'Vanitha Perumalsamy',
+      role: 'Full-Stack Python Developer',
+      company: 'Placed Alumni',
+      type: 'Student',
+      rating: 5,
+      message: 'I completed my Python Full Stack Development training at Aditya Skill Gate IT Solution. They explain concepts with great clarity and provide solid hands-on project exposure. I gained valuable technical confidence and practical problem-solving skills.',
+      status: 'Active'
+    },
+    {
+      id: 'rec_03',
+      name: 'Dhana Shri',
+      role: 'Web Developer',
+      company: 'Graduate',
+      type: 'Student',
+      rating: 5,
+      message: 'The intensive teaching was very structured and easy to understand. Complex programming topics were broken down into simple, practical exercises. The mentors are patient and supportive throughout the learning journey.',
+      status: 'Active'
+    },
+    {
+      id: 'rec_04',
+      name: 'Sivarathi C',
+      role: 'Software Development Intern',
+      company: 'Alumni',
+      type: 'Student',
+      rating: 5,
+      message: 'I had an exceptional learning experience during my internship at Aditya Skill Gate IT Solution. I gained real-world project knowledge, sharpened my coding standards, and learned how enterprise software teams collaborate.',
+      status: 'Active'
+    },
+    {
+      id: 'rec_05',
+      name: 'Subala Ramar',
+      role: 'IT Professional',
+      company: 'Alumni',
+      type: 'Student',
+      rating: 5,
+      message: 'The trainers are exceptionally knowledgeable, friendly, and always ready to clarify doubts. Practical hands-on assignments and career guidance prepared me thoroughly for technical recruitment interviews.',
+      status: 'Active'
+    },
+    {
+      id: 'rec_06',
+      name: 'Bharath M',
+      role: 'Frontend Developer',
+      company: 'Alumni',
+      type: 'Student',
+      rating: 5,
+      message: 'The best place to learn modern Web Development in Sankarankovil. Practical projects, supportive mentors, and interview coaching helped me elevate my skillset rapidly.',
+      status: 'Active'
+    }
+  ],
   blogs: [],
   chatbot: [
     { id: 'cb1', keyword: 'FEE DETAILS / FEES / COST / PRICE / HOW MUCH', response: 'Our course fees range from ₹5,000 to ₹28,000 depending on the course and duration. We offer flexible installment plans and early-bird scholarship discounts!', status: 'Active' },

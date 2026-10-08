@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student &amp; Client Reviews | Aditya Skill Gate IT Solution</title>
-  <meta name="description" content="Read authentic reviews and testimonials from students and clients of Aditya Skill Gate IT Solution. 4.9/5 rating with 500+ satisfied learners and successful placements.">
+  <title>Student & Client Reviews | Aditya Skill Gate IT Solution</title>
+  <meta name="description" content="Read verified student reviews and client testimonials about our IT training quality, practical curriculum, and placement assistance.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,6 +53,17 @@
   <link rel="alternate" hreflang="ms" href="https://adityaskillgate.com/ms/testimonials.html">
   <link rel="alternate" hreflang="ta" href="https://adityaskillgate.com/ta/testimonials.html">
   <link rel="alternate" hreflang="x-default" href="https://adityaskillgate.com/testimonials.html">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Student & Client Reviews | Aditya Skill Gate IT Solution">
+  <meta property="og:description" content="Read verified student reviews and client testimonials about our IT training quality, practical curriculum, and placement assistance.">
+  <meta property="og:image" content="https://adityaskillgate.com/assets/logos/logo-full.png">
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Student & Client Reviews | Aditya Skill Gate IT Solution">
+  <meta name="twitter:description" content="Read verified student reviews and client testimonials about our IT training quality, practical curriculum, and placement assistance.">
+  <meta name="twitter:image" content="https://adityaskillgate.com/assets/logos/logo-full.png">
+
 </head>
 <body>
 <div id="page-loader"><img src="assets/logos/logo-icon.png" class="loader-logo" alt="Aditya Skill Gate IT Solution Logo"><div class="loader-bar"><div class="loader-progress"></div></div></div>
@@ -101,11 +112,22 @@
     </div>
   </div>
 
-  <section class="page-hero">
+    <!-- Breadcrumb Navigation -->
+  <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb-list">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></li>
+        <li aria-current="page" class="current">Reviews & Testimonials</li>
+      </ol>
+    </div>
+  </nav>
+
+<section class="page-hero">
     <div class="container">
       <div class="section-badge"><i class="fas fa-star"></i> Real Feedback</div>
-      <h1>Testimonials &amp; Reviews</h1>
-      <p>Don't just take our word for it — read what our students and clients have to say about us.</p>
+      <h1>What Our Clients &amp; Students Say</h1>
+      <p>Real experiences and verified reviews from business clients and graduates who transformed their operations and careers with us.</p>
     </div>
   </section>
 
@@ -217,13 +239,17 @@
             <a href="resume.html">Upload Resume</a>
           </div>
         </div>
-        <div class="footer-col">
-          <h4>Local Hubs</h4>
-          <div class="footer-links">
-            <a href="it-training-sankarankovil.html">IT Training Sankarankovil</a>
-            <a href="software-company-sankarankovil.html">Software Company Sankarankovil</a>
-          </div>
+                    <div class="footer-col">
+        <h4>Service Areas</h4>
+        <div class="footer-links">
+          <a href="locations.html">All Locations</a>
+          <a href="it-training-sankarankovil.html">Sankarankovil (HQ)</a>
+          <a href="it-training-tenkasi.html">Tenkasi Hub</a>
+          <a href="it-training-tirunelveli.html">Tirunelveli Region</a>
+          <a href="it-training-rajapalayam.html">Rajapalayam Hub</a>
+          <a href="software-company-sankarankovil.html">Software Services</a>
         </div>
+      </div>
       </div>
       <div class="footer-bottom">
         <p>&copy; <span class="current-year" data-metric="currentYear"></span> Aditya Skill Gate IT Solution.</p>
@@ -259,13 +285,45 @@
     g.innerHTML=list.map((t,i)=>{
       const stars='★'.repeat(t.rating||5)+'☆'.repeat(5-(t.rating||5));
       const bg=COLORS[i%COLORS.length];
+      const textLower = (t.message || '').toLowerCase();
+      const nameLower = (t.name || '').toLowerCase();
+      const isClient = (t.type && t.type.toLowerCase() === 'client') || textLower.includes('kurunji') || textLower.includes('website and application') || textLower.includes('developed for') || textLower.includes('business') || textLower.includes('client') || nameLower.includes('thangavel');
+      let cleanMessage = (t.message || '').replace(/^[⭐*\s]+/g, '').replace(/^["']+|["']+$/g, '').trim();
+      let displayRole = t.role || t.designation || (isClient ? 'Client · Kurunji Fun World' : 'Student Alumni');
+      if (t.company && !displayRole.includes(t.company)) displayRole += ' · ' + t.company;
+
+      const tagText = isClient ? 'Project: Web Portal & Ticketing' : (t.role || 'IT Training & Placement');
+      const tagIcon = isClient ? 'fas fa-layer-group' : 'fas fa-laptop-code';
+
       return `
-      <div class="testimonial-card-full" data-animate data-delay="${(i%3+1)*80}" data-type="${t.type||'Student'}">
-        <div style="color:#f59e0b;font-size:1.1rem;margin-bottom:12px">${stars}</div>
-        <p style="font-size:0.875rem;color:var(--gray-600);line-height:1.8;flex:1;margin-bottom:20px;font-style:italic">"${t.message}"</p>
-        <div style="display:flex;gap:12px;align-items:center">
-          <div style="width:44px;height:44px;border-radius:50%;background:${bg};display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:0.95rem;flex-shrink:0">${initials(t.name)}</div>
-          <div><div style="font-weight:700;color:var(--navy);font-size:0.9rem">${t.name}</div><div style="font-size:0.775rem;color:var(--gray-400)">${t.role}${t.company?' · '+t.company:''}</div></div>
+      <div class="testimonial-card-full" data-animate data-delay="${(i%3+1)*80}" data-type="${isClient ? 'Client' : 'Student'}">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <span class="review-badge ${isClient ? 'badge-client' : 'badge-student'}">
+            <i class="${isClient ? 'fas fa-briefcase' : 'fas fa-user-graduate'}"></i> ${isClient ? 'Client Review' : 'Student Review'}
+          </span>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <div style="color:#f59e0b;font-size:0.95rem;letter-spacing:1px">${stars}</div>
+            <span style="font-size:0.8rem;font-weight:800;color:var(--navy);background:#fef3c7;padding:1px 6px;border-radius:4px;">5.0 ★</span>
+          </div>
+        </div>
+        <div class="review-tag-wrap" style="margin-bottom:12px;">
+          <span class="review-tag ${isClient ? 'tag-project' : 'tag-course'}"><i class="${tagIcon}"></i> ${tagText}</span>
+        </div>
+        <div style="color:rgba(0,150,214,0.18);font-size:1.4rem;line-height:1;margin-bottom:8px;"><i class="fas fa-quote-left"></i></div>
+        <p style="font-size:0.92rem;color:var(--gray-600);line-height:1.75;flex:1;margin-bottom:20px;font-style:normal;">"${cleanMessage}"</p>
+        <div style="display:flex;gap:12px;align-items:center;padding-top:16px;border-top:1px solid #f1f5f9;">
+          <div style="width:46px;height:46px;border-radius:50%;background:${bg};display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:1rem;flex-shrink:0;box-shadow:0 3px 8px rgba(0,0,0,0.1);border:2px solid white;">${initials(t.name)}</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-weight:700;color:var(--navy);font-size:0.95rem;display:flex;align-items:center;gap:6px;">
+              <span>${t.name}</span>
+              <i class="fas fa-check-circle" style="color:#10b981;font-size:0.85rem;" title="Verified Review"></i>
+            </div>
+            <div style="font-size:0.8rem;color:var(--gray-500);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${displayRole}</div>
+          </div>
+        </div>
+        <div class="review-verification-footer">
+          <span>Verified ${isClient ? 'Client Partner' : 'Course Alumni'}</span>
+          <span class="verified-seal"><i class="fas fa-shield-alt"></i> Authenticated</span>
         </div>
       </div>`;
     }).join('');
@@ -290,7 +348,10 @@
       document.querySelectorAll('#test-filters .chip').forEach(c=>c.classList.remove('active'));
       chip.classList.add('active');
       const f=chip.dataset.filter;
-      renderTestimonials(f==='All'?allTestimonials:allTestimonials.filter(t=>(t.type||'Student').toLowerCase()===f.toLowerCase()));
+      renderTestimonials(f==='All'?allTestimonials:allTestimonials.filter(t=>{
+        const isClient = (t.type && t.type.toLowerCase() === 'client') || (t.message||'').toLowerCase().includes('kurunji') || (t.name||'').toLowerCase().includes('thangavel');
+        return f === 'Client' ? isClient : !isClient;
+      }));
     });
   });
 

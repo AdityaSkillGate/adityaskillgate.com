@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Team | Aditya Skill Gate IT Solution</title>
-  <meta name="description" content="Meet the expert team at Aditya Skill Gate IT Solution - passionate trainers, developers, and HR professionals dedicated to your success.">
+  <title>Our Expert Team | Aditya Skill Gate IT Solution</title>
+  <meta name="description" content="Meet the passionate IT professionals, software engineers, trainers, and career mentors behind Aditya Skill Gate IT Solution.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +48,18 @@
   <link rel="alternate" hreflang="ms" href="https://adityaskillgate.com/ms/team.html">
   <link rel="alternate" hreflang="ta" href="https://adityaskillgate.com/ta/team.html">
   <link rel="alternate" hreflang="x-default" href="https://adityaskillgate.com/team.html">
-  </head>
+    <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Our Expert Team | Aditya Skill Gate IT Solution">
+  <meta property="og:description" content="Meet the passionate IT professionals, software engineers, trainers, and career mentors behind Aditya Skill Gate IT Solution.">
+  <meta property="og:image" content="https://adityaskillgate.com/assets/logos/logo-full.png">
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Our Expert Team | Aditya Skill Gate IT Solution">
+  <meta name="twitter:description" content="Meet the passionate IT professionals, software engineers, trainers, and career mentors behind Aditya Skill Gate IT Solution.">
+  <meta name="twitter:image" content="https://adityaskillgate.com/assets/logos/logo-full.png">
+
+</head>
 <body>
 <div id="page-loader"><img src="assets/logos/logo-icon.png" class="loader-logo" alt="Aditya Skill Gate IT Solution Logo"><div class="loader-bar"><div class="loader-progress"></div></div></div>
 
@@ -183,11 +194,15 @@
           <a href="resume.html">Upload Resume</a>
         </div>
       </div>
-      <div class="footer-col">
-        <h4>Local Hubs</h4>
+                  <div class="footer-col">
+        <h4>Service Areas</h4>
         <div class="footer-links">
-          <a href="it-training-sankarankovil.html">IT Training Sankarankovil</a>
-          <a href="software-company-sankarankovil.html">Software Company Sankarankovil</a>
+          <a href="locations.html">All Locations</a>
+          <a href="it-training-sankarankovil.html">Sankarankovil (HQ)</a>
+          <a href="it-training-tenkasi.html">Tenkasi Hub</a>
+          <a href="it-training-tirunelveli.html">Tirunelveli Region</a>
+          <a href="it-training-rajapalayam.html">Rajapalayam Hub</a>
+          <a href="software-company-sankarankovil.html">Software Services</a>
         </div>
       </div>
     </div>
@@ -211,8 +226,53 @@
 <div id="back-to-top"><i class="fas fa-arrow-up"></i></div><div id="toast-container"></div>
 <script src="js/api.js?v=8"></script><script src="js/main.js?v=8"></script>
 <script>
-const COLORS=['#0096D6','#0D1B4C','#6CCB2F','#f59e0b','#8b5cf6','#ef4444'];
 function initials(n){return(n||'T').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase()}
+
+const BANNER_GRADIENTS = [
+  'linear-gradient(135deg, #0D1B4C 0%, #172B70 60%, #0096D6 100%)',
+  'linear-gradient(135deg, #0D1B4C 0%, #065F46 60%, #10B981 100%)',
+  'linear-gradient(135deg, #0D1B4C 0%, #4338CA 60%, #8B5CF6 100%)',
+  'linear-gradient(135deg, #0D1B4C 0%, #9A3412 60%, #F59E0B 100%)'
+];
+const AVATAR_GRADIENTS = [
+  'linear-gradient(135deg, #0096D6, #0D1B4C)',
+  'linear-gradient(135deg, #10B981, #065F46)',
+  'linear-gradient(135deg, #8B5CF6, #4338CA)',
+  'linear-gradient(135deg, #F59E0B, #B45309)'
+];
+
+function getDeptInfo(emp) {
+  const d = (emp.department || '').trim();
+  const r = (emp.designation || emp.role || '').trim();
+  const clean = (d + ' ' + r).toLowerCase();
+  
+  if (clean.includes('hr') || clean.includes('human') || clean.includes('talent')) {
+    return { name: 'HR', icon: 'fas fa-user-tie' };
+  }
+  if (clean.includes('angular') || clean.includes('react') || clean.includes('front')) {
+    return { name: 'Frontend', icon: 'fas fa-code' };
+  }
+  if (clean.includes('developer') || clean.includes('develop') || clean.includes('eng')) {
+    return { name: 'Development', icon: 'fas fa-laptop-code' };
+  }
+  if (clean.includes('train') || clean.includes('mentor')) {
+    return { name: 'Training', icon: 'fas fa-chalkboard-teacher' };
+  }
+  if (clean.includes('market') || clean.includes('seo')) {
+    return { name: 'Marketing', icon: 'fas fa-bullhorn' };
+  }
+  return { name: d || 'Engineering', icon: 'fas fa-id-badge' };
+}
+
+function getFallbackBio(emp) {
+  const r = (emp.designation || emp.role || '').toLowerCase();
+  if (r.includes('hr')) return 'Dedicated HR Specialist connecting student talent with leading industry career opportunities.';
+  if (r.includes('angular')) return 'Frontend specialist building interactive, responsive, and performant web experiences.';
+  if (r.includes('junior')) return 'Software developer crafting modern UI components and scalable web architectures.';
+  if (r.includes('developer') || r.includes('eng')) return 'Full-stack developer committed to delivering modern and scalable software solutions.';
+  return 'Experienced technology professional dedicated to mentoring and delivering top-tier solutions.';
+}
+
 function renderTeam(employees){
     const g=document.getElementById('team-grid');if(!g)return;
     const activeList = Array.isArray(employees) ? employees.filter(e => !e.status || ['active', 'published'].includes(String(e.status).toLowerCase())) : [];
@@ -223,22 +283,44 @@ function renderTeam(employees){
     }
     
     g.innerHTML=displayList.map((e,i)=>{
-      const photo = e.photo || e.photoUrl || e.imageUrl || '';
+      const rawPhoto = e.photo || e.photoUrl || e.imageUrl || '';
+      const photo = rawPhoto ? (typeof API !== 'undefined' && API.getOptimizedImageUrl ? API.getOptimizedImageUrl(rawPhoto, { width: 300, height: 300, quality: 85, format: 'auto' }) : rawPhoto) : '';
+      const dept = getDeptInfo(e);
+      const bio = (e.bio && e.bio.trim().length > 0) ? e.bio : getFallbackBio(e);
+      const bgBanner = BANNER_GRADIENTS[i % BANNER_GRADIENTS.length];
+      const bgAvatar = AVATAR_GRADIENTS[i % AVATAR_GRADIENTS.length];
+      
+      const hasLinkedin = e.linkedin && e.linkedin !== '#' && e.linkedin.trim().length > 0;
+      const hasEmail = e.email && e.email.trim().length > 0 && e.email !== '-';
+      
       return `
       <div class="team-card" data-animate data-delay="${(i%4+1)*80}">
-        <div class="team-img" style="${photo ? `background:url('${photo}') center/cover;` : `background:linear-gradient(135deg,${COLORS[i%COLORS.length]},${COLORS[(i+2)%COLORS.length]})`}">
-          ${photo ? '' : `<div class="team-img-placeholder" style="font-size:4rem;font-weight:900;color:white;display:flex;align-items:center;justify-content:center;height:100%;">${initials(e.name)}</div>`}
+        <div class="team-card-banner" style="background:${bgBanner};">
+          <div class="team-banner-pattern"></div>
+          <span class="team-dept-badge"><i class="${dept.icon}"></i> ${dept.name}</span>
+        </div>
+        <div class="team-avatar-wrap">
+          <div class="team-avatar" style="${photo ? '' : `background:${bgAvatar};`}">
+            ${photo 
+              ? `<img src="${photo}" alt="${(e.name||'').replace(/"/g, '&quot;')}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                 <div class="team-avatar-initials" style="display:none;background:${bgAvatar};">${initials(e.name)}</div>`
+              : `<div class="team-avatar-initials">${initials(e.name)}</div>`
+            }
+          </div>
+          <div class="team-avatar-ring"></div>
         </div>
         <div class="team-card-body">
           <div class="team-name">${e.name}</div>
-          <div class="team-role">${e.designation || e.role || 'IT Specialist'}</div>
-          <div class="team-bio" style="font-size:0.825rem;color:var(--gray-500);margin-bottom:16px">${e.bio?.substring(0,90)||'Expert team member committed to training and technical excellence.'}</div>
+          <div class="team-role-wrap"><span class="team-role">${e.designation || e.role || 'IT Specialist'}</span></div>
+          <p class="team-bio" title="${bio.replace(/"/g, '&quot;')}">${bio}</p>
           <div class="team-socials">
-            ${e.linkedin&&e.linkedin!='#'?`<a href="${e.linkedin}" target="_blank" class="social-btn social-btn-linkedin"><i class="fab fa-linkedin-in"></i></a>`:``}
-            ${e.email?`<a href="mailto:${e.email}" class="social-btn" style="background:rgba(0,150,214,0.1);color:var(--tech-blue)"><i class="fas fa-envelope"></i></a>`:``}
+            ${hasLinkedin ? `<a href="${e.linkedin}" target="_blank" rel="noopener noreferrer" class="social-btn social-btn-linkedin" title="LinkedIn Profile" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>` : ''}
+            ${hasEmail ? `<a href="mailto:${e.email}" class="social-btn social-btn-email" title="Email ${e.name}" aria-label="Email"><i class="fas fa-envelope"></i></a>` : ''}
+            ${!hasLinkedin && !hasEmail ? `<a href="contact.html?member=${encodeURIComponent(e.name)}" class="social-btn social-btn-connect" title="Connect with ${e.name}" aria-label="Connect"><i class="fas fa-paper-plane"></i></a>` : ''}
           </div>
         </div>
-      </div>`}).join('');
+      </div>`;
+    }).join('');
     if(window.observeAnimations) window.observeAnimations();
   }
   API.getEmployees().then(renderTeam);

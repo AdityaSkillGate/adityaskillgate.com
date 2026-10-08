@@ -589,26 +589,27 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.faq-item').forEach(item => {
     const question = item.querySelector('.faq-question, .faq-q');
     const answer = item.querySelector('.faq-answer, .faq-a');
-    const icon = item.querySelector('.faq-icon');
+    const icon = item.querySelector('.faq-icon, .faq-question i, .faq-q i, i.fa-chevron-down');
 
     if (item.classList.contains('open') && answer) {
-      answer.style.maxHeight = (answer.scrollHeight + 30) + 'px';
+      answer.style.maxHeight = (answer.scrollHeight + 50) + 'px';
       if (icon) icon.style.transform = 'rotate(180deg)';
     }
 
     question?.addEventListener('click', (e) => {
       e.preventDefault();
       const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(i => {
+      const parentContainer = item.closest('.faq-accordion, .faq-grid, .faq-container') || document;
+      parentContainer.querySelectorAll('.faq-item.open').forEach(i => {
         i.classList.remove('open');
         const ans = i.querySelector('.faq-answer, .faq-a');
         if (ans) ans.style.maxHeight = '0';
-        const icn = i.querySelector('.faq-icon');
+        const icn = i.querySelector('.faq-icon, .faq-question i, .faq-q i, i.fa-chevron-down');
         if (icn) icn.style.transform = '';
       });
       if (!isOpen) {
         item.classList.add('open');
-        if (answer) answer.style.maxHeight = (answer.scrollHeight + 30) + 'px';
+        if (answer) answer.style.maxHeight = (answer.scrollHeight + 50) + 'px';
         if (icon) icon.style.transform = 'rotate(180deg)';
       }
     });

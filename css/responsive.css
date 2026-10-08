@@ -145,7 +145,7 @@ body.no-scroll {
   .courses-grid { grid-template-columns: 1fr; }
   .projects-grid { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-  .team-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
   .testimonial-card { min-width: 100%; }
   
   /* Placement slider on mobile - seamless 100% card width with zero overflow */
@@ -199,6 +199,7 @@ body.no-scroll {
   .container { padding: 0 16px; }
 
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .team-grid { grid-template-columns: 1fr; }
   .stat-card { padding: 16px 12px; }
   .stat-number { font-size: 1.8rem; }
 
@@ -273,4 +274,96 @@ body.no-scroll {
   /* Ensure footer background extends behind sticky CTA with zero white gap */
   body { padding-bottom: 0 !important; }
   .footer { padding-bottom: calc(40px + 65px) !important; }
+}
+
+/* ============================================================
+   SEO V2 LANDING PAGES & UI/UX ENHANCEMENTS
+   ============================================================ */
+
+/* Intro Split Grid (Location & Regional Service Hubs) */
+.intro-split-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (max-width: 991px) {
+  .intro-split-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+}
+
+/* Modal Boxes UX & Mobile Scroll Lock Safety */
+.demo-modal-box {
+  max-height: 90vh !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Comparison Table Horizontal Scroll UX */
+.comparison-table-wrapper {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 16px;
+  position: relative;
+}
+.comparison-table {
+  min-width: 620px;
+}
+.table-scroll-hint {
+  display: none;
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-bottom: 10px;
+  align-items: center;
+  gap: 6px;
+}
+@media (max-width: 768px) {
+  .table-scroll-hint {
+    display: flex !important;
+  }
+}
+
+/* Restaurant POS Live Floor Preview Grid */
+@media (max-width: 440px) {
+  .restaurant-table-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+}
+
+/* Responsive Breadcrumb & Hero clearance */
+@media (max-width: 991px) {
+  nav.breadcrumb-nav,
+  .breadcrumb-nav:not(.breadcrumb-content .breadcrumb-nav) {
+    margin-top: 0 !important;
+    padding-top: 78px !important;
+    padding-bottom: 12px !important;
+  }
+  nav.breadcrumb-nav + .page-hero,
+  nav.breadcrumb-nav + header.page-hero,
+  nav.breadcrumb-nav + section.page-hero {
+    padding-top: 36px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  nav.breadcrumb-nav .breadcrumb-list,
+  nav.breadcrumb-nav ol {
+    padding: 6px 12px !important;
+    gap: 6px !important;
+    font-size: 0.8rem !important;
+    border-radius: 8px !important;
+  }
+  nav.breadcrumb-nav .breadcrumb-list li,
+  nav.breadcrumb-nav ol li {
+    font-size: 0.8rem !important;
+    gap: 6px !important;
+  }
+  .testimonial-card {
+    padding: 24px 20px !important;
+    border-radius: 16px !important;
+  }
 }

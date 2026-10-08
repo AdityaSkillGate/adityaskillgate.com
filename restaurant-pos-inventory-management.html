@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant POS & Inventory System | Aditya Skill Gate</title>
+  <meta name="description" content="Integrated restaurant POS & inventory software for dine-in, cafes & cloud kitchens. Fast table billing, KOT printing, ingredient stock & sales reports.">
+  <link rel="canonical" href="https://adityaskillgate.com/restaurant-pos-inventory-management.html">
+  <meta property="og:url" content="https://adityaskillgate.com/restaurant-pos-inventory-management.html">
+  <meta property="og:title" content="Restaurant POS & Inventory Management System | Aditya Skill Gate">
+  <meta property="og:description" content="Integrated restaurant POS & inventory software for dine-in, cafes & cloud kitchens. Fast table billing, KOT printing, ingredient stock & sales reports.">
+  <meta property="og:image" content="https://adityaskillgate.com/assets/logos/logo-full.png">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://script.google.com">
+  <link rel="icon" href="assets/logos/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css?v=8">
+  <link rel="stylesheet" href="css/responsive.css?v=8">
+  <link rel="stylesheet" href="css/motion.css">
+
+  <link rel="alternate" hreflang="en" href="https://adityaskillgate.com/restaurant-pos-inventory-management.html">
+  <link rel="alternate" hreflang="x-default" href="https://adityaskillgate.com/restaurant-pos-inventory-management.html">
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://adityaskillgate.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Services",
+        "item": "https://adityaskillgate.com/services.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Restaurant POS & Inventory Management",
+        "item": "https://adityaskillgate.com/restaurant-pos-inventory-management.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- SoftwareApplication Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Aditya Skill Gate Restaurant POS & Inventory System",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Windows 10, Windows 11, Web-based, Android Tablet",
+    "description": "Comprehensive Point of Sale (POS), Kitchen Order Ticket (KOT) printing, table management, raw material inventory, and sales analytics system for restaurants, cafes, and cloud kitchens.",
+    "creator": {
+      "@type": "Organization",
+      "name": "Aditya Skill Gate IT Solution",
+      "url": "https://adityaskillgate.com/"
+    },
+    "featureList": [
+      "Table & Dine-In Order Management",
+      "Direct Kitchen Order Ticket (KOT) Printing",
+      "Multi-Mode Billing (Dine-In, Takeaway, Delivery)",
+      "Raw Ingredient Inventory Tracking",
+      "Low Stock Reorder Notifications",
+      "Menu & Recipe Customization",
+      "Daily Cash & Shift Closing Reports",
+      "Role-Based Waiter & Cashier Permissions"
+    ]
+  }
+  </script>
+
+  <!-- FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does the software support Kitchen Order Ticket (KOT) printing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. As soon as a waiter or cashier punches an order, the system instantly transmits a Kitchen Order Ticket (KOT) to the designated kitchen printer with table number, item modifiers, timestamps, and special cooking instructions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can the restaurant POS operate offline during internet interruptions?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Our restaurant POS is designed with dedicated offline local network capability. Order taking, table switching, KOT printing, and customer bill settlements continue uninterrupted without an active internet connection."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does ingredient-level raw material inventory tracking work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can link menu recipes to raw ingredient items (e.g., 1 Chicken Biryani consumes 200g chicken, 150g basmati rice, 30ml oil). Each time a dish is billed, the corresponding raw ingredient quantities are automatically deducted from your live inventory."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What hardware devices are compatible with the software?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The system works seamlessly with standard Windows desktop PCs, touch-screen POS all-in-one terminals, Android tablets, 2-inch and 3-inch ESC/POS thermal receipt printers, electronic cash drawers, and network LAN/Wi-Fi kitchen printers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can waiters take orders on tablets or mobile phones?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The system supports mobile/tablet order taking. Captains and service staff can take table-side orders directly on handheld devices, which instantly route KOTs to the kitchen and update the central cashier screen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I manage both Dine-In and Takeaway orders in the same system?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The POS dashboard provides dedicated workflows for Dine-In table billing (with split bills and table transfers), Fast-Checkout Takeaway counters, and Online Delivery aggregator order tracking."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to install the software and train our staff?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Standard setup, menu configuration, and printer integration take just 1 to 2 days. Our team provides complete on-site or guided remote training for your cashiers, managers, and kitchen staff."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* Breadcrumb nav styled globally by style.css */
+    .breadcrumb-list {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .breadcrumb-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #64748b;
+    }
+    .breadcrumb-list a {
+      color: var(--navy);
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .breadcrumb-list a:hover {
+      color: var(--tech-blue);
+      text-decoration: underline;
+    }
+    .breadcrumb-separator {
+      color: #94a3b8;
+      font-size: 0.8rem;
+    }
+
+    /* Core Modules Grid */
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 36px;
+    }
+    .module-card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 26px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .module-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 20px -3px rgba(0,0,0,0.08);
+      border-color: #cbd5e1;
+    }
+    .module-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(37,99,235,0.1);
+      color: var(--tech-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+
+    /* Interactive Interface Preview */
+    .restaurant-ui-preview {
+      background: #0f172a;
+      border-radius: 18px;
+      border: 1px solid #334155;
+      padding: 24px;
+      color: white;
+      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.3);
+      max-width: 960px;
+      margin: 36px auto 0;
+    }
+    .restaurant-ui-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #1e293b;
+      margin-bottom: 20px;
+    }
+    .restaurant-table-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .table-badge-card {
+      border-radius: 8px;
+      padding: 12px 8px;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+    .table-occupied {
+      background: #1e293b;
+      border: 2px solid #ef4444;
+      color: #fca5a5;
+    }
+    .table-billed {
+      background: #1e293b;
+      border: 2px solid #f59e0b;
+      color: #fcd34d;
+    }
+    .table-vacant {
+      background: #1e293b;
+      border: 2px solid #10b981;
+      color: #86efac;
+    }
+
+    .pos-split-view {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media(max-width: 768px) {
+      .pos-split-view {
+        grid-template-columns: 1fr;
+      }
+    }
+    .pos-kot-box {
+      background: #1e293b;
+      border-radius: 10px;
+      padding: 16px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      border-left: 4px solid #38bdf8;
+    }
+
+    /* Use Cases Grid */
+    .use-case-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 32px;
+    }
+    .use-case-card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
+    .use-case-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      margin: 0 auto 16px;
+    }
+
+    /* Workflow Horizontal Grid */
+    .workflow-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 20px;
+      margin-top: 36px;
+    }
+    .workflow-step {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 24px 18px;
+      text-align: center;
+      position: relative;
+    }
+    .workflow-step-num {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--gradient-primary);
+      color: white;
+      font-weight: 800;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+    }
+
+    /* Benefits Grid */
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+      margin-top: 32px;
+    }
+    .benefit-card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 26px;
+    }
+
+    /* FAQ Accordion */
+    .faq-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 860px;
+      margin: 32px auto 0;
+    }
+    .faq-item {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .faq-question {
+      padding: 18px 24px;
+      font-weight: 700;
+      color: var(--navy);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .faq-question i {
+      transition: transform 0.3s ease;
+      color: var(--tech-blue);
+    }
+    /* FAQ styling handled globally by style.css */
+
+    /* Related Links */
+    .related-links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .related-link-card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 16px 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, transform 0.2s;
+      display: block;
+    }
+    .related-link-card:hover {
+      border-color: var(--tech-blue);
+      transform: translateY(-2px);
+    }
+    .related-link-title {
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 0.98rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .related-link-desc {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    /* Modal Form */
+    .demo-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(13,27,76,0.7);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 16px;
+    }
+    .demo-modal-overlay.open {
+      display: flex;
+    }
+    .demo-modal-box {
+      background: white;
+      border-radius: 16px;
+      max-width: 520px;
+      width: 100%;
+      padding: 30px;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+  </style>
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Restaurant POS & Inventory System | Aditya Skill Gate">
+  <meta name="twitter:description" content="Integrated restaurant POS & inventory software for dine-in, cafes & cloud kitchens. Fast table billing, KOT printing, ingredient stock & sales reports.">
+  <meta name="twitter:image" content="https://adityaskillgate.com/assets/logos/logo-full.png">
+
+</head>
+<body>
+<div id="page-loader"><img src="assets/logos/logo-icon.png" class="loader-logo" alt="Aditya Skill Gate IT Solution Logo"><div class="loader-bar"><div class="loader-progress"></div></div></div>
+
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="index.html" class="navbar-logo" aria-label="Aditya Skill Gate Home">
+          <img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate Logo">
+          <div class="navbar-logo-text" style="text-align: center;">ADITYA SKILL GATE<br><span>IT SOLUTION</span></div>
+        </a>
+        <ul class="navbar-nav" role="menubar">
+          <li role="none"><a href="index.html" class="nav-link" role="menuitem" data-i18n="Home">Home</a></li>
+          <li role="none"><a href="about.html" class="nav-link" role="menuitem" data-i18n="about">About</a></li>
+          <li role="none"><a href="services.html" class="nav-link" role="menuitem" data-i18n="services">Services</a></li>
+          <li role="none"><a href="courses.html" class="nav-link" role="menuitem">Courses</a></li>
+          <li role="none"><a href="jobs.html" class="nav-link" role="menuitem">Careers</a></li>
+          <li role="none"><a href="projects.html" class="nav-link" role="menuitem">Clients</a></li>
+          <li role="none"><a href="contact.html" class="nav-link" role="menuitem" data-i18n="contact">Contact</a></li>
+        </ul>
+        <div class="navbar-actions">
+          <a href="contact.html" class="btn btn-outline btn-sm hidden-mobile">Enquire</a>
+          <a href="resume.html" class="btn btn-primary btn-sm hidden-mobile"><i class="fas fa-paper-plane"></i> Apply Now</a>
+          <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb Navigation -->
+  <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb-list">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></li>
+        <li><a href="services.html">Services</a></li>
+        <li class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></li>
+        <li aria-current="page" class="current">Restaurant POS & Inventory Management</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="page-hero">
+    <div class="container text-center">
+      <div class="section-badge"><i class="fas fa-utensils"></i> Complete F&B Restaurant Solution</div>
+      <h1 class="hero-title" style="font-size:clamp(1.8rem, 4.5vw, 2.9rem); margin-bottom:1rem;">Restaurant POS & Inventory Management System</h1>
+      <p style="color:rgba(255,255,255,0.9);font-size:1.15rem;max-width:780px;margin:0 auto;line-height:1.65;">
+        Manage restaurant billing, orders, inventory and operational data from one system.
+      </p>
+      <div style="margin-top:28px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="openDemoModal()"><i class="fas fa-desktop"></i> Request a Free Demo</button>
+        <a href="contact.html" class="btn btn-outline-white"><i class="fas fa-headset"></i> Talk to Our Team</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION: What Is Restaurant POS & Inventory? -->
+  <section class="section bg-white">
+    <div class="container">
+      <div style="max-width:860px; margin:0 auto; text-align:center;">
+        <div class="section-badge"><i class="fas fa-info-circle"></i> Integrated Food Operations</div>
+        <h2 class="section-title" style="margin-bottom:16px;">Unified Control for <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Modern Food Outlets</span></h2>
+        <p style="color:#475569; font-size:1.05rem; line-height:1.8; margin-bottom:16px;">
+          Running a successful food and beverage business requires seamless synchronization between front-of-house service, kitchen staff, stock rooms, and accounting.
+        </p>
+        <p style="color:#64748b; font-size:0.98rem; line-height:1.75;">
+          Our Restaurant POS and Inventory platform unifies table management, instant Kitchen Order Ticket (KOT) routing, ingredient-level consumption tracking, and daily cash drawer reconciliation into one unified system with full offline capability.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Core System Modules -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="section-badge"><i class="fas fa-layer-group"></i> Architecture</div>
+        <h2 class="section-title">Built-In <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Operational Modules</span></h2>
+        <p class="section-subtitle">Real, tested capabilities designed to handle high-speed service during peak dining rushes.</p>
+      </div>
+
+      <div class="module-grid">
+        <!-- 1. Restaurant Billing -->
+        <div class="module-card">
+          <div class="module-icon"><i class="fas fa-receipt"></i></div>
+          <h3 style="font-size:1.2rem; color:var(--navy); margin-bottom:8px;">Restaurant Billing</h3>
+          <p style="color:#64748b; font-size:0.9rem; line-height:1.6; margin:0;">Handle Dine-In table bills, quick takeaway counters, and delivery orders with split payments (Cash, UPI, Card), service charges, and GST invoice printing.</p>
+        </div>
+
+        <!-- 2. Order Management -->
+        <div class="module-card">
+          <div class="module-icon"><i class="fas fa-concierge-bell"></i></div>
+          <h3 style="font-size:1.2rem; color:var(--navy); margin-bottom:8px;">Order & Table Management</h3>
+          <p style="color:#64748b; font-size:0.9rem; line-height:1.6; margin:0;">Visual floor table layout indicating Vacant, Occupied, and Billed tables with running order tracking, table merging, and transfer capabilities.</p>
+        </div>
+
+        <!-- 3. Menu Management -->
+        <div class="module-card">
+          <div class="module-icon"><i class="fas fa-book-open"></i></div>
+          <h3 style="font-size:1.2rem; color:var(--navy); margin-bottom:8px;">Menu & Recipe Management</h3>
+          <p style="color:#64748b; font-size:0.9rem; line-height:1.6; margin:0;">Categorize menu items (Starters, Main Course, Beverages), customize portion sizes (Full/Half), and add custom cooking modifiers (e.g., Less Spicy, No Onion).</p>
+        </div>
+
+        <!-- 4. Inventory -->
+        <div class="module-card">
+          <div class="module-icon"><i class="fas fa-boxes"></i></div>
+          <h3 style="font-size:1.2rem; color:var(--navy); margin-bottom:8px;">Raw Ingredient Inventory</h3>
+          <p style="color:#64748b; font-size:0.9rem; line-height:1.6; margin:0;">Maintain complete master records of raw pantry ingredients (Rice, Meats, Dairy, Spices, Vegetables) separate from finished menu sale items.</p>
+        </div>
+
+        <!-- 5. Stock Tracking -->
+        <div class="module-card">
+          <div class="module-icon"><i class="fas fa-warehouse"></i></div>
+          <h3 style="font-size:1.2rem; color:var(--navy); margin-bottom:8px;">Live Stock Consumption</h3>
+          <p style="color:#64748b; font-size:0.9rem; line-height:1.6; margin:0;">Automatic deduction of raw ingredients based on recipe bills. Receive instant alerts when high-value kitchen stock hits minimum reorder levels.</p>
+        </div>
+
+        <!-- 6. Purchase Management -->
+        <div class="module-card">
+          <div class="module-icon"><i class="fas fa-truck-loading"></i></div>
+          <h3 style="font-size:1.2rem; color:var(--navy); margin-bottom:8px;">Purchase & Vendor Records</h3>
+          <p style="color:#64748b; font-size:0.9rem; line-height:1.6; margin:0;">Log daily wholesale market and distributor purchases, compare fluctuating food supply prices, track vendor returns, and manage outstanding balances.</p>
+        </div>
+
+        <!-- 7. Customer Management -->
+        <div class="module-card">
+          <div class="module-icon"><i class="fas fa-user-tag"></i></div>
+          <h3 style="font-size:1.2rem; color:var(--navy); margin-bottom:8px;">Customer Profiles & History</h3>
+          <p style="color:#64748b; font-size:0.9rem; line-height:1.6; margin:0;">Store customer phone numbers, view past order favorites for personalized recommendations, and manage credit khata balances for regular patrons.</p>
+        </div>
+
+        <!-- 8. Reports -->
+        <div class="module-card">
+          <div class="module-icon"><i class="fas fa-chart-pie"></i></div>
+          <h3 style="font-size:1.2rem; color:var(--navy); margin-bottom:8px;">Daily Sales & Food Cost Reports</h3>
+          <p style="color:#64748b; font-size:0.9rem; line-height:1.6; margin:0;">Comprehensive cashier shift closing audits, category-wise revenue breakdowns, item profitability analysis, and food cost vs. sales ratio tracking.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Interactive POS & Kitchen Interface Preview -->
+  <section class="section bg-white">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="section-badge"><i class="fas fa-desktop"></i> Interface Preview</div>
+        <h2 class="section-title">Live Floor & <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Kitchen Order Terminal</span></h2>
+        <p class="section-subtitle">Real-time synchronization between dining room captains, cashier desk, and the kitchen.</p>
+      </div>
+
+      <div class="restaurant-ui-preview">
+        <div class="restaurant-ui-topbar">
+          <div style="font-weight:700; font-size:0.95rem; color:#38bdf8;"><i class="fas fa-utensils"></i> Aditya Skill Gate Restaurant POS — Main Dining Floor</div>
+          <div style="font-size:0.8rem; color:#94a3b8;"><span style="color:#10b981;">● Online/LAN Connected</span> &bull; Active Tables: 8/12</div>
+        </div>
+
+        <!-- Table Floor Grid -->
+        <div style="font-size:0.8rem; color:#94a3b8; margin-bottom:10px; font-weight:600;">LIVE TABLE STATUS:</div>
+        <div class="restaurant-table-grid">
+          <div class="table-badge-card table-occupied">T1 &bull; 4 Pax<br><span style="font-size:0.75rem; font-weight:normal;">Running</span></div>
+          <div class="table-badge-card table-occupied">T2 &bull; 2 Pax<br><span style="font-size:0.75rem; font-weight:normal;">Running</span></div>
+          <div class="table-badge-card table-vacant">T3 &bull; 4 Pax<br><span style="font-size:0.75rem; font-weight:normal;">Vacant</span></div>
+          <div class="table-badge-card table-billed">T4 &bull; 6 Pax<br><span style="font-size:0.75rem; font-weight:normal;">Billed</span></div>
+          <div class="table-badge-card table-vacant">T5 &bull; 2 Pax<br><span style="font-size:0.75rem; font-weight:normal;">Vacant</span></div>
+          <div class="table-badge-card table-occupied">T6 &bull; 8 Pax<br><span style="font-size:0.75rem; font-weight:normal;">Running</span></div>
+        </div>
+
+        <!-- Split View: Kitchen KOT + Final Bill -->
+        <div class="pos-split-view">
+          <div class="pos-kot-box">
+            <div style="color:#38bdf8; font-weight:bold; margin-bottom:6px;">=== KITCHEN ORDER TICKET (KOT #104) ===</div>
+            <div>Table: <strong>T-01</strong> &bull; Captain: <strong>Kumar</strong> &bull; 19:42 PM</div>
+            <div style="border-top:1px dashed #475569; margin:8px 0; padding-top:6px;">
+              <div>[2] Special Chicken Biryani (Full)</div>
+              <div style="color:#94a3b8; font-size:0.75rem; margin-left:14px;">→ Modifier: Extra Raita, Mild Spice</div>
+              <div>[1] Paneer Butter Masala (Full)</div>
+              <div>[4] Butter Naan</div>
+              <div>[2] Fresh Lime Soda (Sweet)</div>
+            </div>
+            <div style="color:#10b981; font-size:0.8rem; margin-top:8px;">✓ Transmitted to Kitchen Thermal Printer</div>
+          </div>
+
+          <div style="background:#1e293b; border-radius:10px; padding:16px; font-size:0.88rem; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="color:white; font-weight:700; margin-bottom:8px;">Table T-01 Bill Summary</div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:0.85rem; color:#cbd5e1;"><span>Food Subtotal:</span> <span>₹780.00</span></div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:0.85rem; color:#cbd5e1;"><span>GST (5% Restaurant):</span> <span>₹39.00</span></div>
+              <div style="border-top:1px solid #334155; margin-top:8px; padding-top:8px; display:flex; justify-content:space-between; font-size:1.15rem; font-weight:800; color:white;">
+                <span>Total Amount:</span>
+                <span style="color:#38bdf8;">₹819.00</span>
+              </div>
+            </div>
+            <button class="btn btn-primary" style="margin-top:14px; justify-content:center; padding:8px; background:#10b981; border-color:#10b981;"><i class="fas fa-print"></i> Settle Bill & Print Receipt</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Use Cases -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="section-badge"><i class="fas fa-store-alt"></i> Adaptability</div>
+        <h2 class="section-title">Built for Every <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Food & Beverage Model</span></h2>
+        <p class="section-subtitle">Configurable feature sets tailored for your exact service style.</p>
+      </div>
+
+      <div class="use-case-grid">
+        <div class="use-case-card">
+          <div class="use-case-icon"><i class="fas fa-utensils"></i></div>
+          <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:8px;">Dine-In Restaurants</h3>
+          <p style="color:#64748b; font-size:0.88rem; line-height:1.55; margin:0;">Table layout maps, split bills, multi-course KOTs, and waiter mobile ordering.</p>
+        </div>
+
+        <div class="use-case-card">
+          <div class="use-case-icon"><i class="fas fa-coffee"></i></div>
+          <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:8px;">Cafes & Coffee Shops</h3>
+          <p style="color:#64748b; font-size:0.88rem; line-height:1.55; margin:0;">Fast counter checkout, drink customizations (sugar/milk options), and pastry inventory.</p>
+        </div>
+
+        <div class="use-case-card">
+          <div class="use-case-icon"><i class="fas fa-hamburger"></i></div>
+          <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:8px;">Fast Food & QSRs</h3>
+          <p style="color:#64748b; font-size:0.88rem; line-height:1.55; margin:0;">Sub-10 second takeaway billing, token order calling displays, and combo meal items.</p>
+        </div>
+
+        <div class="use-case-card">
+          <div class="use-case-icon"><i class="fas fa-cloud"></i></div>
+          <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:8px;">Cloud Kitchens</h3>
+          <p style="color:#64748b; font-size:0.88rem; line-height:1.55; margin:0;">Centralized food prep logs, online delivery management, and bulk ingredient consumption.</p>
+        </div>
+
+        <div class="use-case-card">
+          <div class="use-case-icon"><i class="fas fa-birthday-cake"></i></div>
+          <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:8px;">Bakeries & Sweet Stalls</h3>
+          <p style="color:#64748b; font-size:0.88rem; line-height:1.55; margin:0;">Loose item weighing scale integration, advance custom cake booking, and shelf-life tracking.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: 4-Step Operational Workflow -->
+  <section class="section bg-white">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="section-badge"><i class="fas fa-sync-alt"></i> Systematic Workflow</div>
+        <h2 class="section-title">The Complete <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">4-Stage Flow</span></h2>
+        <p class="section-subtitle">How orders flow smoothly from customer arrival to final business intelligence.</p>
+      </div>
+
+      <div class="workflow-steps">
+        <div class="workflow-step">
+          <div class="workflow-step-num">1</div>
+          <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:8px;">Order</h3>
+          <p style="color:#64748b; font-size:0.88rem; line-height:1.55; margin:0;">Waiters or cashiers take table orders; instant Kitchen Order Tickets (KOT) print directly in the food preparation area.</p>
+        </div>
+
+        <div class="workflow-step">
+          <div class="workflow-step-num">2</div>
+          <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:8px;">Billing</h3>
+          <p style="color:#64748b; font-size:0.88rem; line-height:1.55; margin:0;">Generate GST-compliant receipts with split payments (Cash/UPI/Card), discounts, and thermal printer output.</p>
+        </div>
+
+        <div class="workflow-step">
+          <div class="workflow-step-num">3</div>
+          <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:8px;">Inventory</h3>
+          <p style="color:#64748b; font-size:0.88rem; line-height:1.55; margin:0;">Raw kitchen ingredients are automatically deducted based on configured recipes with instant low-stock alerts.</p>
+        </div>
+
+        <div class="workflow-step">
+          <div class="workflow-step-num">4</div>
+          <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:8px;">Reports</h3>
+          <p style="color:#64748b; font-size:0.88rem; line-height:1.55; margin:0;">Review daily revenue, shift cash closing, best-selling dishes, and accurate food cost profit margins.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Business Benefits -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="section-badge"><i class="fas fa-trophy"></i> Business Impact</div>
+        <h2 class="section-title">Measurable <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Operational Benefits</span></h2>
+        <p class="section-subtitle">Maximize food revenue while keeping ingredient waste and service delays to a minimum.</p>
+      </div>
+
+      <div class="benefit-grid">
+        <div class="benefit-card">
+          <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:10px;"><i class="fas fa-hands-helping" style="color:var(--tech-blue); margin-right:8px;"></i> Reduce Manual Work</h3>
+          <p style="color:#64748b; font-size:0.9rem; line-height:1.6; margin:0;">Eliminate paper KOT mix-ups, hand calculations, and manual register tallying. Save hours every evening reconciling cash drawer balances.</p>
+        </div>
+
+        <div class="benefit-card">
+          <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:10px;"><i class="fas fa-check-circle" style="color:#16a34a; margin-right:8px;"></i> Improve Order Accuracy</h3>
+          <p style="color:#64748b; font-size:0.9rem; line-height:1.6; margin:0;">Clear digital KOT printouts with customer cooking instructions prevent kitchen mistakes and reduce wasted food preparation.</p>
+        </div>
+
+        <div class="benefit-card">
+          <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:10px;"><i class="fas fa-clipboard-check" style="color:#f59e0b; margin-right:8px;"></i> Track Stock & Cut Wastage</h3>
+          <p style="color:#64748b; font-size:0.9rem; line-height:1.6; margin:0;">Know exactly how much raw material was consumed versus billed revenue. Detect kitchen pilferage and control food portion costs.</p>
+        </div>
+
+        <div class="benefit-card">
+          <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:10px;"><i class="fas fa-chart-line" style="color:#8b5cf6; margin-right:8px;"></i> Understand Sales & Margins</h3>
+          <p style="color:#64748b; font-size:0.9rem; line-height:1.6; margin:0;">Identify high-margin star items and slow-moving dishes. Make menu pricing decisions based on hard sales velocity data.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Why Choose Aditya Skill Gate -->
+  <section class="section bg-white">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="section-badge"><i class="fas fa-handshake"></i> Our Promise</div>
+        <h2 class="section-title">Why Choose <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Aditya Skill Gate?</span></h2>
+        <p class="section-subtitle">Dedicated local engineering, hands-on hardware integration, and reliable ongoing support.</p>
+      </div>
+
+      <div class="benefit-grid">
+        <div class="benefit-card">
+          <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:8px;"><i class="fas fa-map-marker-alt" style="color:var(--tech-blue); margin-right:8px;"></i> Local Tamil Nadu Presence</h3>
+          <p style="color:#64748b; font-size:0.9rem; line-height:1.6; margin:0;">Headquartered in Sankarankovil with active service across Tenkasi, Tirunelveli, and Rajapalayam. Direct local support in Tamil and English.</p>
+        </div>
+
+        <div class="benefit-card">
+          <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:8px;"><i class="fas fa-tools" style="color:#16a34a; margin-right:8px;"></i> On-Site Hardware Setup</h3>
+          <p style="color:#64748b; font-size:0.9rem; line-height:1.6; margin:0;">We configure your thermal receipt printers, kitchen LAN printers, and cash drawers on-site and train your staff thoroughly.</p>
+        </div>
+
+        <div class="benefit-card">
+          <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:8px;"><i class="fas fa-wifi-slash" style="color:#f59e0b; margin-right:8px;"></i> Reliable Offline Architecture</h3>
+          <p style="color:#64748b; font-size:0.9rem; line-height:1.6; margin:0;">Billing and kitchen KOT printing continue smoothly even when internet service is completely unavailable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: FAQ -->
+  <section class="section bg-light" id="faq-section">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="section-badge"><i class="fas fa-question-circle"></i> Frequently Asked Questions</div>
+        <h2 class="section-title">Restaurant POS <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">FAQs</span></h2>
+        <p class="section-subtitle">Common questions from restaurant owners, cafe operators, and cloud kitchen managers.</p>
+      </div>
+
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <div class="faq-question">Does the software support Kitchen Order Ticket (KOT) printing? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">Yes. As soon as a waiter or cashier punches an order, the system instantly transmits a Kitchen Order Ticket (KOT) to the designated kitchen printer with table number, item modifiers, timestamps, and special cooking instructions.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Can the restaurant POS operate offline during internet interruptions? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">Yes. Our restaurant POS is designed with dedicated offline local network capability. Order taking, table switching, KOT printing, and customer bill settlements continue uninterrupted without an active internet connection.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">How does ingredient-level raw material inventory tracking work? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">You can link menu recipes to raw ingredient items (e.g., 1 Chicken Biryani consumes 200g chicken, 150g basmati rice, 30ml oil). Each time a dish is billed, the corresponding raw ingredient quantities are automatically deducted from your live inventory.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">What hardware devices are compatible with the software? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">The system works seamlessly with standard Windows desktop PCs, touch-screen POS all-in-one terminals, Android tablets, 2-inch and 3-inch ESC/POS thermal receipt printers, electronic cash drawers, and network LAN/Wi-Fi kitchen printers.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Can waiters take orders on tablets or mobile phones? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">Yes. The system supports mobile/tablet order taking. Captains and service staff can take table-side orders directly on handheld devices, which instantly route KOTs to the kitchen and update the central cashier screen.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Can I manage both Dine-In and Takeaway orders in the same system? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">Yes. The POS dashboard provides dedicated workflows for Dine-In table billing (with split bills and table transfers), Fast-Checkout Takeaway counters, and Online Delivery aggregator order tracking.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">How long does it take to install the software and train our staff? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">Standard setup, menu configuration, and printer integration take just 1 to 2 days. Our team provides complete on-site or guided remote training for your cashiers, managers, and kitchen staff.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Regional & Service Internal Links -->
+  <section class="section bg-white">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="section-badge"><i class="fas fa-network-wired"></i> Navigation</div>
+        <h2 class="section-title">Explore Related <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Software Solutions</span></h2>
+        <p class="section-subtitle">Discover our comprehensive software services and regional technology centers.</p>
+      </div>
+
+      <div class="related-links-grid">
+        
+        <a href="ecommerce-website-development.html" class="related-link-card">
+          <div class="related-link-title">E-commerce & Online Ordering <i class="fas fa-arrow-right" style="color:var(--tech-blue);font-size:0.85rem;"></i></div>
+          <p class="related-link-desc">Integrated online food ordering websites with direct UPI payment gateways.</p>
+        </a>
+        <a href="ui-ux-wireframing-app-prototyping.html" class="related-link-card">
+          <div class="related-link-title">POS UI/UX Wireframing <i class="fas fa-arrow-right" style="color:var(--tech-blue);font-size:0.85rem;"></i></div>
+          <p class="related-link-desc">Intuitive touchscreen touch-flow design for quick cashier checkout.</p>
+        </a>
+        <a href="retail-supermarket-billing-software.html" class="related-link-card">
+          <div class="related-link-title">Retail Billing Software <i class="fas fa-arrow-right" style="color:var(--tech-blue);font-size:0.85rem;"></i></div>
+          <p class="related-link-desc">Barcode POS & inventory management for supermarkets and retail stores.</p>
+        </a>
+        <a href="services.html" class="related-link-card">
+          <div class="related-link-title">All Software Services <i class="fas fa-arrow-right" style="color:var(--tech-blue);font-size:0.85rem;"></i></div>
+          <p class="related-link-desc">Custom web, mobile application, cloud and digital automation services.</p>
+        </a>
+        <a href="projects.html" class="related-link-card">
+          <div class="related-link-title">Client Portfolio <i class="fas fa-arrow-right" style="color:var(--tech-blue);font-size:0.85rem;"></i></div>
+          <p class="related-link-desc">Explore verified production applications delivered by our engineering team.</p>
+        </a>
+        <a href="contact.html" class="related-link-card">
+          <div class="related-link-title">Contact & Consulting <i class="fas fa-arrow-right" style="color:var(--tech-blue);font-size:0.85rem;"></i></div>
+          <p class="related-link-desc">Get in touch for on-site software demonstrations and tailored quotes.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA STRIP -->
+  <section style="background:var(--gradient-hero); padding:65px 0; color:white; text-align:center;">
+    <div class="container">
+      <h2 style="color:white; font-size:clamp(1.7rem, 4vw, 2.4rem); margin-bottom:14px;">Streamline Your Restaurant Operations Today</h2>
+      <p style="color:rgba(255,255,255,0.9); font-size:1.05rem; max-width:650px; margin:0 auto 28px; line-height:1.65;">
+        Schedule a free demonstration for your restaurant, cafe, or cloud kitchen and experience fast billing firsthand.
+      </p>
+      <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="openDemoModal()" style="background:#16a34a; border-color:#16a34a;"><i class="fas fa-desktop"></i> Request a Free Demo</button>
+        <a href="https://wa.me/916382604808" target="_blank" class="btn btn-outline-white"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo Request Modal -->
+  <div class="demo-modal-overlay" id="demoModal">
+    <div class="demo-modal-box">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <h3 style="margin:0; color:var(--navy); font-size:1.3rem;"><i class="fas fa-utensils" style="color:var(--tech-blue);"></i> Request a Restaurant POS Demo</h3>
+        <button onclick="closeDemoModal()" aria-label="Close modal" style="background:none; border:none; font-size:1.4rem; cursor:pointer; color:#64748b;">&times;</button>
+      </div>
+      <form id="restaurantDemoForm" onsubmit="handleDemoSubmit(event)">
+        <div style="margin-bottom:14px;">
+          <label for="restName" style="display:block; font-size:0.85rem; font-weight:600; color:#334155; margin-bottom:6px;">Your Name / Restaurant Name *</label>
+          <input type="text" id="restName" name="name" required placeholder="e.g. Annapoorna Restaurant" autocomplete="name" style="width:100%; padding:10px 14px; border:1px solid #cbd5e1; border-radius:8px; font-size:0.95rem;">
+        </div>
+        <div style="margin-bottom:14px;">
+          <label for="restPhone" style="display:block; font-size:0.85rem; font-weight:600; color:#334155; margin-bottom:6px;">Phone Number (WhatsApp) *</label>
+          <input type="tel" id="restPhone" name="phone" required placeholder="10-digit mobile number" autocomplete="tel" style="width:100%; padding:10px 14px; border:1px solid #cbd5e1; border-radius:8px; font-size:0.95rem;">
+        </div>
+        <div style="margin-bottom:14px;">
+          <label for="restOutletType" style="display:block; font-size:0.85rem; font-weight:600; color:#334155; margin-bottom:6px;">Outlet Type *</label>
+          <select id="restOutletType" name="outletType" style="width:100%; padding:10px 14px; border:1px solid #cbd5e1; border-radius:8px; font-size:0.95rem; background:white;">
+            <option value="Dine-In Restaurant">Dine-In Restaurant</option>
+            <option value="Cafe / Coffee Shop">Cafe / Coffee Shop</option>
+            <option value="Fast Food / QSR">Fast Food / QSR</option>
+            <option value="Cloud Kitchen">Cloud Kitchen / Delivery Center</option>
+            <option value="Bakery / Sweet Stall">Bakery / Sweet Stall</option>
+          </select>
+        </div>
+        <div style="margin-bottom:20px;">
+          <label for="restCity" style="display:block; font-size:0.85rem; font-weight:600; color:#334155; margin-bottom:6px;">Location / City *</label>
+          <input type="text" id="restCity" name="city" required placeholder="e.g. Sankarankovil, Tenkasi, Tirunelveli, Rajapalayam" autocomplete="address-level2" style="width:100%; padding:10px 14px; border:1px solid #cbd5e1; border-radius:8px; font-size:0.95rem;">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding:12px;"><i class="fas fa-paper-plane"></i> Book Free Demo Now</button>
+      </form>
+    </div>
+  </div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="assets/logos/logo-icon.png" alt="Aditya Skill Gate IT Solution Logo">
+          <div style="color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;line-height:1.2;text-align:center">ADITYA SKILL GATE<br><span style="color:#6CCB2F">IT SOLUTION</span></div>
+        </div>
+        <p><span data-config="description">Empowering food & retail businesses through premium software development and enterprise POS solutions.</span></p>
+        <div class="footer-socials">
+          <a href="https://www.linkedin.com/in/aditya-skill-gate-it-solution-5446b63a8" data-config-href="linkedin" target="_blank" class="footer-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/adityaskillgate.official/" data-config-href="instagram" target="_blank" class="footer-social" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@AdityaSkillGateITSolution" data-config-href="youtube" target="_blank" class="footer-social" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://wa.me/916382604808" data-config="whatsapp" target="_blank" class="footer-social" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="mailto:Adityaskillgateitsolution@gmail.com" data-config-href="email" class="footer-social" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <div class="footer-links">
+          <a href="index.html" data-i18n="Home">Home</a>
+          <a href="about.html">About Us</a>
+          <a href="services.html" data-i18n="services">Services</a>
+          <a href="courses.html">Courses</a>
+          <a href="jobs.html">Careers</a>
+          <a href="contact.html" data-i18n="contact">Contact</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <div class="footer-links">
+          <a href="projects.html">Projects</a>
+          <a href="faq.html">FAQ</a>
+          <a href="resume.html">Upload Resume</a>
+          <a href="locations.html">Service Areas</a>
+        </div>
+      </div>
+            <div class="footer-col">
+        <h4>Service Areas</h4>
+        <div class="footer-links">
+          <a href="locations.html">All Locations</a>
+          <a href="it-training-sankarankovil.html">Sankarankovil (HQ)</a>
+          <a href="it-training-tenkasi.html">Tenkasi Hub</a>
+          <a href="it-training-tirunelveli.html">Tirunelveli Region</a>
+          <a href="it-training-rajapalayam.html">Rajapalayam Hub</a>
+          <a href="software-company-sankarankovil.html">Software Services</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Aditya Skill Gate IT Solution. All rights reserved.</div>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="sitemap.xml">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="whatsapp-float">
+  <div class="whatsapp-menu" id="wa-menu">
+    <a href="https://wa.me/916382604808?text=Hi!%20I'm%20interested%20in%20your%20services" target="_blank" class="whatsapp-option">🛠️ IT Services</a>
+    <a href="https://wa.me/916382604808" data-config="whatsapp" target="_blank" class="whatsapp-option">💬 Quick Chat</a>
+  </div>
+  <div class="whatsapp-btn" id="wa-btn" aria-label="WhatsApp Chat"><i class="fab fa-whatsapp"></i></div>
+</div>
+
+<div id="back-to-top" aria-label="Back to Top"><i class="fas fa-arrow-up"></i></div>
+
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // FAQ Accordion handled globally by main.js
+
+  // Modal functions
+  function openDemoModal() {
+    document.getElementById('demoModal').classList.add('open');
+  }
+  function closeDemoModal() {
+    document.getElementById('demoModal').classList.remove('open');
+  }
+  async function handleDemoSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type=submit]');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+    btn.disabled = true;
+
+    const data = Object.fromEntries(new FormData(e.target));
+    try {
+      if (window.API && window.API.submitContact) {
+        await window.API.submitContact({
+          name: data.name,
+          phone: data.phone,
+          email: '',
+          subject: 'Restaurant POS Demo - ' + data.outletType + ' (' + data.city + ')',
+          message: 'Demo request for ' + data.outletType + ' located in ' + data.city
+        });
+      }
+      alert('Thank you! Our restaurant software specialist will contact you shortly to schedule your demo.');
+      e.target.reset();
+      closeDemoModal();
+    } catch (err) {
+      alert('Demo request recorded. Our team will reach out soon!');
+      closeDemoModal();
+    } finally {
+      btn.innerHTML = orig;
+      btn.disabled = false;
+    }
+  }
+</script>
+</body>
+</html>
