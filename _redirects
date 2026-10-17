@@ -1,0 +1,14 @@
+# Aditya Skill Gate IT Solution - Netlify / Cloudflare Pages Redirects
+
+# 301 Redirect /index.html to root
+/index.html    /    301!
+
+# 301 Redirect any legacy social crawl placeholders
+/linkedin     /    301!
+/instagram    /    301!
+/youtube      /    301!
+/whatsapp     /    301!
+/email        /    301!
+
+# Custom 404 Fallback
+/*    /404.html    404

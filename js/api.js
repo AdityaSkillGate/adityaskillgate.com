@@ -913,7 +913,18 @@ const API = {
   
   async getServices() {
     const res = await apiGet('getServices');
-    return (res?.data?.length) ? res.data : DEMO_DATA.services;
+    const items = (res?.data?.length) ? res.data : DEMO_DATA.services;
+    if (Array.isArray(items) && items.length < 6 && DEMO_DATA.services) {
+      const existingTitles = new Set(items.map(s => (s.title || '').toLowerCase().trim()));
+      const combined = [...items];
+      DEMO_DATA.services.forEach(demoS => {
+        if (!existingTitles.has((demoS.title || '').toLowerCase().trim())) {
+          combined.push(demoS);
+        }
+      });
+      return combined;
+    }
+    return items;
   },
 
   async getTimeline() { return await apiGet('getTimeline'); },

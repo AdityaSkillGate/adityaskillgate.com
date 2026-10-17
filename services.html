@@ -13,21 +13,80 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css?v=8"><link rel="stylesheet" href="css/responsive.css?v=8">
   <style>
-    .services-detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
-    .service-detail-card{padding:36px 30px;background:white;border:1px solid var(--gray-200);border-radius:var(--border-radius-xl);transition:var(--transition);display:flex;flex-direction:column}
-    .service-detail-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-xl);border-color:transparent}
-    .service-detail-icon{width:68px;height:68px;border-radius:var(--border-radius);display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:20px}
-    .service-sub-list{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:8px}
-    .service-sub-list li{display:flex;gap:10px;font-size:0.875rem;color:var(--gray-600);align-items:center}
-    .service-sub-list li::before{content:'→';color:var(--tech-blue);font-weight:700;flex-shrink:0}
-    .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative}
-    .process-steps::before{content:'';position:absolute;top:36px;left:12%;right:12%;height:2px;background:var(--gradient-accent);z-index:0}
-    .process-step{text-align:center;padding:20px;position:relative;z-index:1;background:white;border-radius:16px;border:1px solid var(--gray-200)}
-    .process-step-num{width:64px;height:64px;border-radius:50%;background:var(--gradient-primary);color:white;font-size:1.5rem;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:4px solid white;box-shadow:var(--shadow-md)}
-    .tech-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-    .tech-chip{padding:10px 20px;background:white;border:1px solid var(--gray-200);border-radius:100px;font-size:0.875rem;font-weight:600;color:var(--navy);transition:var(--transition)}
-    .tech-chip:hover{background:var(--gradient-primary);color:white;border-color:transparent;transform:translateY(-2px)}
-    @media(max-width:768px){.services-detail-grid{grid-template-columns:1fr}.process-steps{grid-template-columns:1fr}.process-steps::before{display:none}}
+    .services-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    @media(max-width: 991px) {
+      .services-detail-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+    }
+    @media(max-width: 640px) {
+      .services-detail-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+    .service-detail-card {
+      padding: 36px 28px;
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--border-radius-xl);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .service-detail-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--tech-blue);
+    }
+    .service-detail-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: var(--border-radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    .service-sub-list {
+      list-style: none;
+      margin: 16px 0 24px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .service-sub-list li {
+      display: flex;
+      gap: 10px;
+      font-size: 0.875rem;
+      color: var(--gray-600);
+      align-items: center;
+    }
+    .service-sub-list li::before {
+      content: '✓';
+      color: var(--tech-blue);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; }
+    .process-steps::before { content: ''; position: absolute; top: 36px; left: 12%; right: 12%; height: 2px; background: var(--gradient-accent); z-index: 0; }
+    .process-step { text-align: center; padding: 20px; position: relative; z-index: 1; background: white; border-radius: 16px; border: 1px solid var(--gray-200); }
+    .process-step-num { width: 64px; height: 64px; border-radius: 50%; background: var(--gradient-primary); color: white; font-size: 1.5rem; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 4px solid white; box-shadow: var(--shadow-md); }
+    .tech-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .tech-chip { padding: 10px 20px; background: white; border: 1px solid var(--gray-200); border-radius: 100px; font-size: 0.875rem; font-weight: 600; color: var(--navy); transition: var(--transition); }
+    .tech-chip:hover { background: var(--gradient-primary); color: white; border-color: transparent; transform: translateY(-2px); }
+    @media(max-width: 768px) {
+      .process-steps { grid-template-columns: 1fr; }
+      .process-steps::before { display: none; }
+    }
     .solutions-cluster-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 32px; }
     .solution-cluster-card { background: white; border: 1px solid var(--gray-200); border-radius: 16px; padding: 28px; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; color: inherit; }
     .solution-cluster-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-xl); border-color: var(--tech-blue); }
@@ -226,7 +285,95 @@
   <div class="container">
     <div class="section-header" data-animate><h2 class="section-title">What We <span style="background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Offer</span></h2><p class="section-subtitle">Comprehensive IT solutions tailored to your business needs, delivered by experienced professionals.</p></div>
     <div class="services-detail-grid" id="services-page-grid">
-      <!-- Loaded dynamically via API -->
+      <!-- 1. Web Application Development -->
+      <div class="service-detail-card" data-animate data-delay="100">
+        <div class="service-detail-icon" style="background:rgba(0,150,214,0.1); color:var(--tech-blue);"><i class="fas fa-globe"></i></div>
+        <h3 style="color:var(--gray-900);margin-bottom:8px;font-size:1.25rem;font-weight:700;">Web Application Development</h3>
+        <span style="display:inline-block; margin-bottom:12px; font-size:0.75rem; background:rgba(0,150,214,0.1); color:var(--tech-blue); padding:3px 10px; border-radius:20px; font-weight:600;">Enterprise Development</span>
+        <p style="color:var(--gray-600);font-size:0.9rem;line-height:1.6;margin-bottom:16px;">Custom responsive websites, enterprise portals, high-speed single page applications (SPA), and scalable cloud architectures built with React, Next.js, Node.js, and modern databases.</p>
+        <ul class="service-sub-list">
+          <li>Custom Business & Corporate Portals</li>
+          <li>Progressive Web Apps (PWA) & SPAs</li>
+          <li>RESTful & GraphQL API Integration</li>
+          <li>High-Performance Cloud Architecture</li>
+        </ul>
+        <a href="contact.html?service=Web%20Application%20Development" class="btn btn-outline btn-sm" style="margin-top:auto">Get Quote <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <!-- 2. Mobile App Development -->
+      <div class="service-detail-card" data-animate data-delay="200">
+        <div class="service-detail-icon" style="background:rgba(16,185,129,0.1); color:#10b981;"><i class="fas fa-mobile-alt"></i></div>
+        <h3 style="color:var(--gray-900);margin-bottom:8px;font-size:1.25rem;font-weight:700;">Mobile App Development</h3>
+        <span style="display:inline-block; margin-bottom:12px; font-size:0.75rem; background:rgba(16,185,129,0.1); color:#10b981; padding:3px 10px; border-radius:20px; font-weight:600;">iOS & Android</span>
+        <p style="color:var(--gray-600);font-size:0.9rem;line-height:1.6;margin-bottom:16px;">High-performance native and cross-platform mobile apps for Android & iOS built with Flutter and React Native featuring fluid UI, offline-first sync, and secure payment integrations.</p>
+        <ul class="service-sub-list">
+          <li>Cross-Platform Flutter & React Native</li>
+          <li>Native Android (Kotlin) & iOS Apps</li>
+          <li>Offline Data Storage & Push Notifications</li>
+          <li>App Store & Google Play Deployment</li>
+        </ul>
+        <a href="contact.html?service=Mobile%20App%20Development" class="btn btn-outline btn-sm" style="margin-top:auto">Get Quote <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <!-- 3. AI & Machine Learning Solutions -->
+      <div class="service-detail-card" data-animate data-delay="300">
+        <div class="service-detail-icon" style="background:rgba(139,92,246,0.1); color:#8b5cf6;"><i class="fas fa-robot"></i></div>
+        <h3 style="color:var(--gray-900);margin-bottom:8px;font-size:1.25rem;font-weight:700;">AI & Machine Learning Solutions</h3>
+        <span style="display:inline-block; margin-bottom:12px; font-size:0.75rem; background:rgba(139,92,246,0.1); color:#8b5cf6; padding:3px 10px; border-radius:20px; font-weight:600;">AI & Automation</span>
+        <p style="color:var(--gray-600);font-size:0.9rem;line-height:1.6;margin-bottom:16px;">Intelligent business automation, custom conversational AI chatbots, predictive analytics, and tailored machine learning workflows designed to supercharge operational productivity.</p>
+        <ul class="service-sub-list">
+          <li>AI Customer Support Chatbots & Agents</li>
+          <li>Predictive Analytics & Data Modeling</li>
+          <li>Business Process Automation (RPA)</li>
+          <li>Natural Language Processing & LLMs</li>
+        </ul>
+        <a href="contact.html?service=AI%20%26%20Machine%20Learning%20Solutions" class="btn btn-outline btn-sm" style="margin-top:auto">Get Quote <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <!-- 4. Cloud & DevOps Services -->
+      <div class="service-detail-card" data-animate data-delay="100">
+        <div class="service-detail-icon" style="background:rgba(245,158,11,0.1); color:#f59e0b;"><i class="fas fa-cloud"></i></div>
+        <h3 style="color:var(--gray-900);margin-bottom:8px;font-size:1.25rem;font-weight:700;">Cloud & DevOps Services</h3>
+        <span style="display:inline-block; margin-bottom:12px; font-size:0.75rem; background:rgba(245,158,11,0.1); color:#f59e0b; padding:3px 10px; border-radius:20px; font-weight:600;">Cloud Infrastructure</span>
+        <p style="color:var(--gray-600);font-size:0.9rem;line-height:1.6;margin-bottom:16px;">Enterprise cloud setup, automated continuous integration/deployment (CI/CD) pipelines, Docker containerization, and 24/7 server infrastructure monitoring on AWS, Azure, and Google Cloud.</p>
+        <ul class="service-sub-list">
+          <li>AWS, Azure & Google Cloud Architecture</li>
+          <li>Automated CI/CD Release Pipelines</li>
+          <li>Docker Containerization & Kubernetes</li>
+          <li>Server Hardening & 99.9% Uptime Support</li>
+        </ul>
+        <a href="contact.html?service=Cloud%20%26%20DevOps%20Services" class="btn btn-outline btn-sm" style="margin-top:auto">Get Quote <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <!-- 5. Digital Marketing & SEO -->
+      <div class="service-detail-card" data-animate data-delay="200">
+        <div class="service-detail-icon" style="background:rgba(236,72,153,0.1); color:#ec4899;"><i class="fas fa-bullhorn"></i></div>
+        <h3 style="color:var(--gray-900);margin-bottom:8px;font-size:1.25rem;font-weight:700;">Digital Marketing & SEO</h3>
+        <span style="display:inline-block; margin-bottom:12px; font-size:0.75rem; background:rgba(236,72,153,0.1); color:#ec4899; padding:3px 10px; border-radius:20px; font-weight:600;">Performance Marketing</span>
+        <p style="color:var(--gray-600);font-size:0.9rem;line-height:1.6;margin-bottom:16px;">Comprehensive digital marketing strategies, targeted Google Ads PPC campaigns, social media management, and technical SEO designed to secure first-page rankings and verified leads.</p>
+        <ul class="service-sub-list">
+          <li>Technical, On-Page & Local SEO</li>
+          <li>Google Ads (Search & Display) & Meta Ads</li>
+          <li>Social Media Content & Community Growth</li>
+          <li>Conversion Rate Optimization (CRO)</li>
+        </ul>
+        <a href="contact.html?service=Digital%20Marketing%20%26%20SEO" class="btn btn-outline btn-sm" style="margin-top:auto">Get Quote <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <!-- 6. IT Training & Placement Support -->
+      <div class="service-detail-card" data-animate data-delay="300">
+        <div class="service-detail-icon" style="background:rgba(6,182,212,0.1); color:#06b6d4;"><i class="fas fa-graduation-cap"></i></div>
+        <h3 style="color:var(--gray-900);margin-bottom:8px;font-size:1.25rem;font-weight:700;">IT Training & Placement Support</h3>
+        <span style="display:inline-block; margin-bottom:12px; font-size:0.75rem; background:rgba(6,182,212,0.1); color:#06b6d4; padding:3px 10px; border-radius:20px; font-weight:600;">Career Acceleration</span>
+        <p style="color:var(--gray-600);font-size:0.9rem;line-height:1.6;margin-bottom:16px;">Job-oriented software courses in Full Stack, Python, Java, and Cloud technologies featuring real industry projects, 1-on-1 mentorship, resume reviews, and dedicated placement assistance.</p>
+        <ul class="service-sub-list">
+          <li>Hands-On Real-World Project Training</li>
+          <li>1-on-1 Mentorship from Senior Engineers</li>
+          <li>Resume Workshops & Mock Interviews</li>
+          <li>Direct Placement Ties with Top Tech Firms</li>
+        </ul>
+        <a href="courses.html" class="btn btn-outline btn-sm" style="margin-top:auto">Explore Courses <i class="fas fa-arrow-right"></i></a>
+      </div>
     </div>
   </div>
 </section>
@@ -405,9 +552,9 @@
         </div>
         <p><span data-config="description">Empowering careers through premium IT training, services, and guaranteed placement support.</span></p>
         <div class="footer-socials">
-          <a href="https://www.linkedin.com/in/aditya-skill-gate-it-solution-5446b63a8" data-config-href="linkedin" target="_blank" class="footer-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://www.instagram.com/adityaskillgate.official/" data-config-href="instagram" target="_blank" class="footer-social" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.youtube.com/@AdityaSkillGateITSolution" data-config-href="youtube" target="_blank" class="footer-social" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.linkedin.com/in/aditya-skill-gate-it-solution-5446b63a8" data-config-href="https://www.linkedin.com/in/aditya-skill-gate-it-solution-5446b63a8" target="_blank" class="footer-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/adityaskillgate.official/" data-config-href="https://www.instagram.com/adityaskillgate.official/" target="_blank" class="footer-social" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@AdityaSkillGateITSolution" data-config-href="https://www.youtube.com/@AdityaSkillGateITSolution" target="_blank" class="footer-social" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
           <a href="https://wa.me/916382604808" data-config="whatsapp" target="_blank" class="footer-social" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
           <a href="mailto:Adityaskillgateitsolution@gmail.com" data-config="email" class="footer-social" aria-label="Email"><i class="fas fa-envelope"></i></a>
         </div>
@@ -466,43 +613,28 @@
 <script src="js/api.js?v=8"></script><script src="js/main.js?v=8"></script>
 <script>
 (async()=>{
-  const services = await API.getServices();
-  const container = document.getElementById('services-page-grid');
-  if (!container) return;
-  
-  const displayServices = (services && services.length > 0) ? services : [
-    { title: 'Web Development', category: 'Development', description: 'Custom responsive websites, full stack web apps, and e-commerce platforms built with modern frameworks like React, Node.js, and Next.js.', icon: 'fa-globe' },
-    { title: 'Mobile App Development', category: 'Development', description: 'Native and cross-platform mobile apps for iOS and Android using Flutter and React Native with seamless user experience.', icon: 'fa-mobile-alt' },
-    { title: 'AI & Machine Learning', category: 'Intelligence', description: 'Custom AI solutions, automated chatbots, data processing, and predictive analytics models to transform business operations.', icon: 'fa-robot' },
-    { title: 'Cloud & DevOps Services', category: 'Infrastructure', description: 'Cloud deployment, server architecture, CI/CD pipelines, Docker containerization, and 24/7 cloud infrastructure management on AWS and GCP.', icon: 'fa-cloud' },
-    { title: 'Digital Marketing & SEO', category: 'Marketing', description: 'Performance-driven digital marketing, Google Ads management, social media growth, and top-ranking SEO optimization.', icon: 'fa-bullhorn' },
-    { title: 'IT Consulting & Training', category: 'Consulting', description: 'Enterprise IT consulting, custom software architecture guidance, and specialized corporate training for tech teams.', icon: 'fa-user-tie' }
-  ];
-
-  container.innerHTML = '<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:30px;">' +
-    displayServices.map((s,i) => `
-      <div class="service-detail-card" data-animate data-delay="${(i%3+1)*100}">
-        <div class="service-detail-icon" style="background:rgba(0,150,214,0.1); color:var(--tech-blue);"><i class="fas ${s.icon || 'fa-laptop-code'}"></i></div>
-        <h4 style="color:var(--gray-900);margin-bottom:8px;font-size:1.15rem;font-weight:700;">${s.title}</h4>
-        <span style="display:inline-block; margin-bottom:10px; font-size:0.75rem; background:var(--gray-200); padding:2px 8px; border-radius:4px; font-weight:600; color:var(--gray-600);">${s.category || 'IT Service'}</span>
-        <p style="color:var(--gray-600);font-size:0.875rem;margin-bottom:16px;flex:1;">${s.description}</p>
-        <a href="contact.html?service=${encodeURIComponent(s.title)}" class="btn btn-outline btn-sm" style="margin-top:auto">Get Quote <i class="fas fa-arrow-right"></i></a>
-      </div>
-    `).join('') +
-  '</div>';
-
-  if(window.observeAnimations) window.observeAnimations();
+  try {
+    const services = await API.getServices();
+    const container = document.getElementById('services-page-grid');
+    if (!container) return;
+    
+    // Only re-render if the API returns 6 or more items
+    if (Array.isArray(services) && services.length >= 6) {
+      container.innerHTML = services.map((s, i) => `
+        <div class="service-detail-card" data-animate data-delay="${(i % 3 + 1) * 100}">
+          <div class="service-detail-icon" style="background:rgba(0,150,214,0.1); color:var(--tech-blue);"><i class="fas ${s.icon || 'fa-laptop-code'}"></i></div>
+          <h3 style="color:var(--gray-900);margin-bottom:8px;font-size:1.25rem;font-weight:700;">${s.title}</h3>
+          <span style="display:inline-block; margin-bottom:12px; font-size:0.75rem; background:rgba(0,150,214,0.1); color:var(--tech-blue); padding:3px 10px; border-radius:20px; font-weight:600;">${s.category || 'IT Service'}</span>
+          <p style="color:var(--gray-600);font-size:0.9rem;line-height:1.6;margin-bottom:16px;flex:1;">${s.description}</p>
+          <a href="contact.html?service=${encodeURIComponent(s.title)}" class="btn btn-outline btn-sm" style="margin-top:auto">Get Quote <i class="fas fa-arrow-right"></i></a>
+        </div>
+      `).join('');
+    }
+    if (window.observeAnimations) window.observeAnimations();
+  } catch(e) {
+    console.warn('API services load error:', e);
+  }
 })();
-
-document.getElementById('quote-form')?.addEventListener('submit',async(e)=>{
-  e.preventDefault();
-  const btn=e.target.querySelector('[type=submit]');const orig=btn.innerHTML;
-  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending...';btn.disabled=true;
-  const res=await API.submitContact(Object.fromEntries(new FormData(e.target)));
-  btn.innerHTML=orig;btn.disabled=false;
-  if(res?.success!==false){showToast('Quote request sent! We\'ll contact you within 24 hours.','success');e.target.reset();}
-  else showToast(res?.message||'Error. Please try again.','error');
-});
 </script>
   <script src="js/motion.js"></script>
   <script src="js/i18n.js"></script>
